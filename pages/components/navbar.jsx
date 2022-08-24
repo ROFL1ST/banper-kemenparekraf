@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -15,9 +15,12 @@ export default function Navbar() {
                 Home
               </p>
             </Link>
-            <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-              Mekanisme Pendaftaran
-            </p>
+            <div className="cursor-pointer flex items-center space-x-1">
+              <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+                Mekanisme Pendaftaran
+              </p>
+              <ChevronDownIcon className="h-4 w-4" />
+            </div>
             <Link href={"/home"}>
               <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
                 Berita
