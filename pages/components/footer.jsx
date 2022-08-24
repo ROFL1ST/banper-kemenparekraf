@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <>
       {" "}
-      <footer className="flex justify-between w-full items-center px-10 pt-10 text-base">
+      <footer className="flex justify-between w-full items-center px-16 pt-10 text-base">
         <div className="w-1/4 text-left">
           <h1 className="mb-5 font-bold">Tentang</h1>
           <p>
@@ -29,12 +29,12 @@ export default function Footer() {
             Kreatif / Badan Pariwisata dan Ekonomi Kreatif
           </p>
         </div>
-        <div className="flex w-1/4 space-x-4">
-          <img className="h-26" src="../assets/kemenparekraf.png" alt="" />
-          <img className="h-26" src="../assets/wonderful.png" alt="" />
+        <div className="flex w-1/4 space-x-4 justify-between">
+          <img className="h-28" src="../assets/kemenparekraf.png" alt="" />
+          <img className="h-28" src="../assets/wonderful.png" alt="" />
         </div>
       </footer>
-      <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg">
+      <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-white">
         <a className="text-white rounded-full bg-[#142b51] p-2">
           <svg
             fill="currentColor"
