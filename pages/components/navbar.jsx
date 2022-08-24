@@ -73,7 +73,7 @@ export default function Navbar() {
       {/* Mobile */}
       <div
         className={
-          "flex fixed flex-grow items-center w-full sm:hidden pt-28 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5" +
+          "z-30 rounded-b-2xl flex fixed flex-grow items-center w-full sm:hidden pt-28 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5" +
           (navbarOpen ? " flex" : " hidden")
         }
         id="example-navbar-danger"
