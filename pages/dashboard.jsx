@@ -1,8 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Footer from "./components/footer";
+import Modals from "./components/modal";
 import Navbar from "./components/navbar";
+import React from "react";
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 
 export default function Dashboard() {
+  const [open, setOpen] = React.useState(false);
+  const cancelButtonRef = React.useRef(null);
   return (
     <>
       <Navbar />
@@ -26,9 +31,15 @@ export default function Dashboard() {
         </div>
       </div>
       <div>
-        <button className="flex mx-auto 2xl:-mt-9 lg:-mt-10 text-white bg-red-500 border-0 focus:outline-none hover:bg-red-600 rounded-xl text-lg py-6 px-24">
+        <Button
+          onClick={() => {
+            setOpen(!open);
+            console.log(open);
+          }}
+          className="flex mx-auto 2xl:-mt-9 lg:-mt-10 text-white bg-red-500 border-0 focus:outline-none hover:bg-red-600 rounded-xl text-lg py-6 px-24"
+        >
           Daftar Sekarang
-        </button>
+        </Button>
       </div>
 
       <div className="flex flex-col text-center w-full mb-20 mt-40">
@@ -383,6 +394,11 @@ export default function Dashboard() {
       {/* Footer */}
       <Footer />
       {/* Footer */}
+      <Modals
+        open={open}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+      ></Modals>
     </>
   );
 }
