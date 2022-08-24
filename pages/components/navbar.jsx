@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Navbar() {
   return (
     <>
-      <div className="fixed w-full z-50">
+      <div className="fixed w-full z-40">
         <div className="bg-blue-900 h-6"></div>
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-8 lg:px-16">
           <img src={"assets/banper.png"} alt="logo" className="h-36" />

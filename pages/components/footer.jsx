@@ -29,9 +29,17 @@ export default function Footer() {
             Kreatif / Badan Pariwisata dan Ekonomi Kreatif
           </p>
         </div>
-        <div className="flex w-1/4 space-x-4 justify-between">
-          <img className="h-28" src="../assets/kemenparekraf.png" alt="" />
-          <img className="h-28" src="../assets/wonderful.png" alt="" />
+        <div className="flex w-1/4">
+          <img
+            className="2xl:h-32 lg:h-20"
+            src="assets/kemenparekraf.png"
+            alt=""
+          />
+          <img
+            className="2xl:h-32 lg:h-20"
+            src="assets/wonderful.png"
+            alt=""
+          />
         </div>
       </footer>
       <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-white">

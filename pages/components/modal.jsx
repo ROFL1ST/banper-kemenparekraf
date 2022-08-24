@@ -8,7 +8,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
       <Transition.Root show={open} as={React.Fragment}>
         <Dialog
           as="div"
-          className="relative z-10"
+          className="relative z-50"
           initialFocus={cancelButtonRef}
           onClose={setOpen}
         >
@@ -21,7 +21,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+            <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
           <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -75,16 +75,16 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
                   <div className="bg-gray-50 gap-x-10 px-4 py-5 lg:px-2 lg:py-3 sm:px-6 sm:flex justify-center ">
                     <button
                       type="button"
-                      className="mt-3 w-full inline-flex justify-center rounded-[30px] border border-gray-300 shadow-sm px-7 lg:px-4 py-2  bg-white text-base font-medium  text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0  sm:w-auto lg:text-sm"
+                      className="close w-full inline-flex justify-center rounded-[30px] border border-gray-300 shadow-sm px-7 lg:px-6 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto lg:text-sm"
                       onClick={() => setOpen(false)}
                       ref={cancelButtonRef}
                     >
                       Decline
                     </button>
                     <button
-                      type="button"
-                      className="w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500  sm:w-auto lg:text-sm"
                       onClick={() => setOpen(false)}
+                      type="button"
+                      className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
                     >
                       Accept
                     </button>
