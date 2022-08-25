@@ -1,4 +1,5 @@
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronUpIcon } from "@heroicons/react/24/solid";
+import { Disclosure } from '@headlessui/react'
 import Footer from "./components/footer";
 import Modal from "./components/modal";
 import Navbar from "./components/navbar";
@@ -78,21 +79,20 @@ export default function Dashboard() {
       </div>
 
       {/* faq */}
-
-      <div
+<div
         className="h-full w-full bg-gray-200 bg-cover bg-bottom "
         style={{
           backgroundImage:
             "url(https://cdn.pixabay.com/photo/2018/03/04/09/51/space-3197611_960_720.jpg)",
         }}
       >
-        <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-md drop-shadow-lg py-16 px-20">
+        <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-md drop-shadow-lg py-16 px-56">
           <Section
             text={"Pertanyaan yang sering diajukan (F.A.Q)"}
             color="bg-blue-900"
           />
           <div className="flex w-full h-full justify-between mt-10">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col w-2/4 space-y-4">
               <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
               <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
               <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
@@ -115,6 +115,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      
       {/* faq */}
       <Footer />
       <Modal
@@ -129,9 +130,32 @@ export default function Dashboard() {
 function Question({ text }) {
   return (
     <>
-      <div className="w-full px-5 py-2 bg-gray-100 text-sm border border-white bg-opacity-50 rounded-md flex space-x-2">
+      {/* <div className="w-full px-5 py-2 bg-gray-100 text-sm border border-white bg-opacity-50 rounded-md flex space-x-2">
         <p>{text}</p> <ChevronDownIcon className="h-5 w-5 text-blue-900" />{" "}
+      </div> */}
+         
+      <div className="mx-auto w-full  rounded-md  bg-white ">
+        <Disclosure>
+          {({ open }) => (
+            <>
+              <Disclosure.Button className="flex w-full justify-between  px-4 py-2 text-left text-sm font-medium  ">
+                <span>{text}</span>
+                <ChevronUpIcon
+                  className={`${
+                    open ? 'rotate-180 transform' : ''
+                  } h-5 w-5 text-blue-900 `}
+                />
+              </Disclosure.Button>
+              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                If you're unhappy with your purchase for any reason, email us
+                within 90 days and we'll refund you in full, no questions asked.
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+        
       </div>
+
     </>
   );
 }
