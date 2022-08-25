@@ -7,13 +7,13 @@ export default function Video() {
   return (
     <>
       <div
-        className="w-full h-3/4 bg-no-repeat bg-cover bg-center"
+        className="w-full h-3/4 bg-no-repeat bg-cover bg-center rounded-b-3xl"
         style={{
           backgroundImage:
             "url(https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80)",
         }}
       >
-        <div className="bg-white h-full w-full bg-opacity-40 pl-7 py-36">
+        <div className="bg-white h-full w-full bg-opacity-40 pl-7 py-36 rounded-b-3xl">
           <h1 className="lg:text-5xl 2xl:text-8xl font-semibold text-center text-white">
             Video
           </h1>
@@ -100,6 +100,11 @@ export default function Video() {
               ></iframe>
             </SwiperSlide>
           </Swiper>
+          <div className="flex justify-center mt-16">
+            <button className="bg-blue-500 text-white px-5 py-2 rounded-full">
+              Selengkapnya
+            </button>
+          </div>
         </div>
       </div>
     </>
