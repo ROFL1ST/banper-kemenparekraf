@@ -1,5 +1,5 @@
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
-import { Disclosure } from '@headlessui/react'
+import { Disclosure } from "@headlessui/react";
 import Footer from "./components/footer";
 import Modal from "./components/modal";
 import Navbar from "./components/navbar";
@@ -11,118 +11,131 @@ export default function Dashboard() {
   const cancelButtonRef = React.useRef(null);
   return (
     <>
-      <Navbar />
-      <div
-        className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white px-20 capitalize rounded-b-2xl"
-        style={{ backgroundImage: "url(assets/building.png)" }}
-      >
-        <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
-          <h1 className="xl:text-4xl lg:text-4xl md:text-2xl text-3xl font-bold">
-            Banper Infrastruktur Ekraf
-          </h1>
-          <p className="mt-7 mb-3">
-            {" "}
-            Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan Sarana
-            Ruang Kreatif.
+      <div className="mx-auto">
+        {" "}
+        <Navbar />
+        <div
+          className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white px-20 capitalize rounded-b-2xl"
+          style={{ backgroundImage: "url(assets/building.png)" }}
+        >
+          <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
+            <h1 className="xl:text-4xl lg:text-4xl md:text-2xl text-3xl font-bold">
+              Banper Infrastruktur Ekraf
+            </h1>
+            <p className="mt-7 mb-3">
+              {" "}
+              Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan
+              Sarana Ruang Kreatif.
+            </p>
+            <p>
+              Pengajuan dan penerimaan proposal mulai tanggal 08 November sampai
+              dengan 08 Desember 2021 jam 23.59
+            </p>
+          </div>
+        </div>
+        <button
+          onClick={() => {
+            setOpen(true);
+          }}
+          className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white px-28 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 bottom-36"
+        >
+          daftar sekarang
+        </button>
+        <div className="xl:px-20 lg:px-20 px-5">
+          <Section text={"mekasnime pendaftaran"} />
+          <p className="text-center xl:px-24 lg:px-24 px-14 lg:text-sm my-10">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
+            voluptatibus rem illo accusamus, earum adipisci aliquam dolorem
+            dolor assumenda aperiam sed vel molestiae eos quibusdam explicabo
+            consequatur libero. Necessitatibus, consequatur?
           </p>
-          <p>
-            Pengajuan dan penerimaan proposal mulai tanggal 08 November sampai
-            dengan 08 Desember 2021 jam 23.59
-          </p>
-        </div>
-      </div>
-      <button
-        onClick={() => {
-          setOpen(true);
-        }}
-        className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white px-28 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 bottom-36"
-      >
-        daftar sekarang
-      </button>
-      <div className="xl:px-20 lg:px-20 px-5">
-        <Section text={"mekasnime pendaftaran"} />
-        <p className="text-center xl:px-24 lg:px-24 px-14 lg:text-sm my-10">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-          voluptatibus rem illo accusamus, earum adipisci aliquam dolorem dolor
-          assumenda aperiam sed vel molestiae eos quibusdam explicabo
-          consequatur libero. Necessitatibus, consequatur?
-        </p>
-        <Section text={"Berita"} />
-        <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10">
-          <CardBerita />
-          <CardBerita />
-        </div>
-        <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
-          <a href="#">see more</a>
-        </div>
-        <Section text={"Galeri"} />
-        <div className="grid grid-cols-4 mb-10 gap-4 mt-10">
-          <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold">lorem ipsum</p>
+          <Section text={"Berita"} />
+          <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full xl:w-1/2 lg:w-1/2">
+            <CardBerita />
+            <CardBerita />
           </div>
-          <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold">lorem ipsum</p>
+          <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
+            <a href="#">see more</a>
           </div>
-          <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold">lorem ipsum</p>
-          </div>
-          <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold">lorem ipsum</p>
-          </div>
-          <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold">lorem ipsum</p>
-          </div>
-          <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold">lorem ipsum</p>
-          </div>
-        </div>
-      </div>
-
-      {/* faq */}
-<div
-        className="h-full w-full bg-gray-200 bg-cover bg-bottom "
-        style={{
-          backgroundImage:
-            "url(https://cdn.pixabay.com/photo/2018/03/04/09/51/space-3197611_960_720.jpg)",
-        }}
-      >
-        <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-md drop-shadow-lg py-16 px-56">
-          <Section
-            text={"Pertanyaan yang sering diajukan (F.A.Q)"}
-            color="bg-blue-900"
-          />
-          <div className="flex w-full h-full justify-between mt-10">
-            <div className="flex flex-col w-2/4 space-y-4">
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-              <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+          <Section text={"Galeri"} />
+          <div className="grid grid-cols-4 mb-10 gap-4 mt-10">
+            <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
+              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
+                lorem ipsum
+              </p>
             </div>
-            <div className="w-96 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
-          </div>
-          <div className="flex justify-center space-x-5 mt-10">
-            <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
-              Unduh Juknis
-            </button>
-            <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
-              Unduh Template
-            </button>
+            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
+              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
+                lorem ipsum
+              </p>
+            </div>
+            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
+              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
+                lorem ipsum
+              </p>
+            </div>
+            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
+              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
+                lorem ipsum
+              </p>
+            </div>
+            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
+              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate ">
+                lorem ipsum
+              </p>
+            </div>
+            <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
+              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
+                lorem ipsum
+              </p>
+            </div>
           </div>
         </div>
+        {/* faq */}
+        <div
+          className="h-full w-full bg-gray-200 bg-cover bg-bottom "
+          style={{
+            backgroundImage:
+              "url(https://cdn.pixabay.com/photo/2018/03/04/09/51/space-3197611_960_720.jpg)",
+          }}
+        >
+          <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-md drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3">
+            <Section
+              text={"Pertanyaan yang sering diajukan (F.A.Q)"}
+              color="bg-blue-900"
+            />
+            <div className="gap-y-7 flex xl:flex-row lg:flex-row md:flex-col flex-col items-center w-full h-full justify-between mt-10">
+              <div className="flex flex-col xl:w-1/2 lg:w-1/2 md:w-3/4 w-3/4 space-y-4">
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+              </div>
+              <div className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
+            </div>
+            <div className="flex justify-center space-x-5 mt-10">
+              <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
+                Unduh Juknis
+              </button>
+              <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
+                Unduh Template
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* faq */}
+        <Footer />
+        <Modal
+          open={open}
+          setOpen={setOpen}
+          cancelButtonRef={cancelButtonRef}
+        ></Modal>
       </div>
-      
-      {/* faq */}
-      <Footer />
-      <Modal
-        open={open}
-        setOpen={setOpen}
-        cancelButtonRef={cancelButtonRef}
-      ></Modal>
     </>
   );
 }
@@ -133,7 +146,7 @@ function Question({ text }) {
       {/* <div className="w-full px-5 py-2 bg-gray-100 text-sm border border-white bg-opacity-50 rounded-md flex space-x-2">
         <p>{text}</p> <ChevronDownIcon className="h-5 w-5 text-blue-900" />{" "}
       </div> */}
-         
+
       <div className="mx-auto w-full  rounded-md  bg-white ">
         <Disclosure>
           {({ open }) => (
@@ -142,7 +155,7 @@ function Question({ text }) {
                 <span>{text}</span>
                 <ChevronUpIcon
                   className={`${
-                    open ? 'rotate-180 transform' : ''
+                    open ? "rotate-180 transform" : ""
                   } h-5 w-5 text-blue-900 `}
                 />
               </Disclosure.Button>
@@ -153,9 +166,7 @@ function Question({ text }) {
             </>
           )}
         </Disclosure>
-        
       </div>
-
     </>
   );
 }

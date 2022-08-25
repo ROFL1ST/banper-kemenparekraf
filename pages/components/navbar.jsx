@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <>
       {/* Dekstop */}
-      <div className="fixed w-full z-40">
+      <div className="fixed w-screen z-40">
         <div className="bg-blue-900 h-6"></div>
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
           <img src={"assets/banper.png"} alt="logo" className="h-36" />
@@ -19,7 +19,7 @@ export default function Navbar() {
             href="javascript:void(0);"
             // onclick="openNav()"
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 xl:hidden lg:hidden "
+            className="h-6 w-6 xl:hidden lg:hidden md:hidden "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -31,7 +31,7 @@ export default function Navbar() {
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-          <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
+          <nav className="xl:flex lg:flex md:flex  hidden space-x-7 text-black items-center">
             <Link href={"/home"}>
               <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
                 Home
@@ -121,7 +121,7 @@ export default function Navbar() {
       {/* Mobile */}
       <div
         className={
-          "z-30 rounded-b-2xl flex fixed flex-grow items-center w-full sm:hidden pt-28 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5" +
+          "z-30 rounded-b-2xl flex fixed flex-grow items-center w-full pt-28 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5" +
           (navbarOpen ? " flex" : " hidden")
         }
         id="example-navbar-danger"
