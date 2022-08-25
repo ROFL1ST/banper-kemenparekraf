@@ -77,15 +77,14 @@ export default function Dashboard() {
       </div>
 
       {/* faq */}
-
-      <div
+<div
         className="h-full w-full bg-gray-200 bg-cover bg-bottom "
         style={{
           backgroundImage:
             "url(https://cdn.pixabay.com/photo/2018/03/04/09/51/space-3197611_960_720.jpg)",
         }}
       >
-        <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-md drop-shadow-lg py-16 px-20">
+        <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-md drop-shadow-lg py-16 px-56">
           <Section
             text={"Pertanyaan yang sering diajukan (F.A.Q)"}
             color="bg-blue-900"
@@ -114,6 +113,7 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      
       {/* faq */}
       <Footer />
       <Modal
