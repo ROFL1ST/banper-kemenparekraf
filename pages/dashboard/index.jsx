@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { Disclosure } from "@headlessui/react";
-import Footer from "./components/footer";
-import Modal from "./components/modal";
-import Navbar from "./components/navbar";
+import Footer from "../components/footer";
+import Modal from "../components/modal";
+import Navbar from "../components/navbar";
 import React, { useEffect } from "react";
 
 export default function Dashboard() {
