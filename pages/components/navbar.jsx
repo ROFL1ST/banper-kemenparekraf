@@ -6,7 +6,11 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-
+  const [path, setPath] = React.useState();
+  React.useEffect(() => {
+    setPath(window.location);
+  }, []);
+  // console.log(path.pathname);
   return (
     <>
       {/* Dekstop */}
@@ -20,7 +24,11 @@ export default function Navbar() {
           />
           <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
             <Link href={"/dashboard"}>
-              <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+              <p
+                className={
+                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
+                }
+              >
                 Home
               </p>
             </Link>
@@ -28,12 +36,20 @@ export default function Navbar() {
               <Dropdown />
             </div>
             <Link href={"/berita?type=berita&sort=terbaru"}>
-              <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+              <p
+                className={
+                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
+                }
+              >
                 Berita
               </p>
             </Link>
             <Link href={"/galeri"}>
-              <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+              <p
+                className={
+                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
+                }
+              >
                 Galeri
               </p>
             </Link>
@@ -65,7 +81,7 @@ export default function Navbar() {
         }
       >
         <Link href={"/dashboard"}>
-          <p className="cursor-pointer">Dashboard</p>
+          <p className={"cursor-pointer"}>Dashboard</p>
         </Link>
         <div className="flex space-x-3">
           <p>Mekanisme dan Pendaftaran</p>
