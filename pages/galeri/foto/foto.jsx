@@ -13,13 +13,13 @@ export default function Foto() {
   return (
     <>
       <div
-        className="w-full 2xl:h-[90vh] xl:h-[84vh] bg-no-repeat bg-cover bg-bottom"
+        className="w-full 2xl:h-[80vh] xl:h-[84vh] bg-no-repeat bg-cover bg-bottom"
         style={{
           backgroundImage:
             "url(https://cdn.pixabay.com/photo/2018/04/02/21/33/building-3285254_960_720.jpg)",
         }}
       >
-        <div className="bg-black h-full w-full bg-opacity-25 pl-7 2-xl:py-52 lg:py-32">
+        <div className="bg-black h-full w-full bg-opacity-25 pl-7 2-xl:py-52 lg:py-10">
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
