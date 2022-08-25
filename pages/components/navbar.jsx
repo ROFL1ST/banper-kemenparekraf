@@ -1,93 +1,54 @@
 /* eslint-disable @next/next/no-img-element */
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  Bars3Icon,
-} from "@heroicons/react/24/solid";
-import { Disclosure } from "@headlessui/react";
+import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-
+  const [path, setPath] = React.useState();
+  React.useEffect(() => {
+    setPath(window.location);
+  }, []);
+  // console.log(path.pathname);
   return (
     <>
       {/* Dekstop */}
-      <div className="fixed w-full z-40">
+      <div className="fixed w-screen z-40">
         <div className="bg-blue-900 h-6"></div>
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
           <img src={"assets/banper.png"} alt="logo" className="h-36" />
-          <Bars3Icon
-            className="h-6 w-6 xl:hidden"
-            onClick={() => setNavbarOpen(!navbarOpen)}
-          />
-          <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black ">
+          <button onClick={() => setNavbarOpen(!navbarOpen)}>
+            <Bars3Icon className="h-6 w-6 xl:hidden" />
+          </button>
+          <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
             <Link href={"/dashboard"}>
-              <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+              <p
+                className={
+                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
+                }
+              >
                 Home
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1">
-              <Menu as="div" className="relative inline-block text-left">
-                <div>
-                  <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                    Mekanisme Pendaftaran
-                    <ChevronDownIcon
-                      className="ml-2 -mr-1 h-5 w-5 "
-                      aria-hidden="true"
-                    />
-                  </Menu.Button>
-                </div>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                    <div className="px-1 py-1 ">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                            F.A.Q
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </div>
-                    <div className="px-1 py-1 ">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                            Unduh Juknis
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </div>
-                    <div className="px-1 py-1">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                            Unduh Template
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
+              <Dropdown />
             </div>
-            <Link href={"/home"}>
-              <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+            <Link href={"/berita?type=berita&sort=terbaru"}>
+              <p
+                className={
+                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
+                }
+              >
                 Berita
               </p>
             </Link>
-            <Link href={"/home"}>
-              <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+            <Link href={"/galeri"}>
+              <p
+                className={
+                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
+                }
+              >
                 Galeri
               </p>
             </Link>
@@ -100,7 +61,7 @@ export default function Navbar() {
               <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
                 /
               </span>
-              <Link href={"/auth/login"}>
+              <Link href={"/auth/register"}>
                 <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
                   Daftar
                 </span>
@@ -110,106 +71,151 @@ export default function Navbar() {
         </div>
       </div>
       {/* Dekstop */}
+
       {/* Mobile */}
       <div
         className={
-          "z-30 rounded-b-2xl flex fixed flex-grow items-center w-full sm:hidden pt-28 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5" +
+          "z-30 rounded-b-2xl flex flex-col fixed xl:hidden lg:hidden w-full pt-32 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5 text-sm space-y-3 px-10" +
           (navbarOpen ? " flex" : " hidden")
         }
-        id="example-navbar-danger"
       >
-        <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-          <li className="nav-item">
-            <a
-              className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
-              href="#home"
-            >
-              <i className="fab fa-facebook-square  leading-lg text-black opacity-75"></i>
-              <Link href={"/home"}>
-                <span className="ml-2">Home</span>
-              </Link>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
-              href="#skills"
-            >
-              <div className="mx-auto w-full max-w-md rounded-2xl ">
-                <Disclosure>
-                  {({ open }) => (
-                    <>
-                      <Disclosure.Button className="flex  justify-between   text-left text-xs  ">
-                        <span>Mekanisme Pendaftaran</span>
-                        <ChevronUpIcon
-                          className={`${
-                            open ? "rotate-180 transform" : ""
-                          } h-5 w-5 text-blue-500`}
-                        />
-                      </Disclosure.Button>
-
-                      <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
-                        F.A.Q
-                      </Disclosure.Panel>
-                      <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
-                        Unduh Juknis
-                      </Disclosure.Panel>
-                      <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
-                        Unduh Template
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
+        <Link href={"/dashboard"}>
+          <p className={"cursor-pointer"}>Dashboard</p>
+        </Link>
+        <div className="flex space-x-3">
+          <div className="cursor-pointer flex items-center space-x-1">
+            <Menu as="div" className="relative inline-block text-left">
+              <div>
+                <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                  Mekanisme Pendaftaran
+                  <ChevronDownIcon
+                    className="ml-2 -mr-1 h-5 w-5 "
+                    aria-hidden="true"
+                  />
+                </Menu.Button>
               </div>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
-              href="#services"
-            >
-              <i className="fab fa-pinterest  leading-lg text-black opacity-75"></i>
-              <Link href={"/home"}>
-                <span className="ml-2">Berita</span>
-              </Link>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
-              href="#project"
-            >
-              <i className="fab fa-pinterest  leading-lg text-black opacity-75"></i>
-              <Link href={"/home"}>
-                <span className="ml-2">Galeri</span>
-              </Link>
-            </a>
-          </li>
-          <li className="nav-item">
-            <a
-              className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
-              href="#project"
-            >
-              <div className="flex space-x-2 pl-2">
-                <Link href={"/auth/login"}>
-                  <span className="hover:text-gray-900  outline-2 cursor-pointer">
-                    Login
-                  </span>
-                </Link>
-                <span className="hover:text-gray-900  outline-2 cursor-pointer">
-                  |
-                </span>
-                <Link href={"/auth/login"}>
-                  <span className="hover:text-gray-900  outline-2 cursor-pointer">
-                    Daftar
-                  </span>
-                </Link>
-              </div>
-            </a>
-          </li>
-        </ul>
+              <Transition
+                as={Fragment}
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="px-1 py-1 ">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          F.A.Q
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                  <div className="px-1 py-1 ">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          Unduh Juknis
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                  <div className="px-1 py-1">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          Unduh Template
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          </div>
+        </div>
+        <Link href={"/berita?type=berita&sort=terbaru"}>
+          <p className="cursor-pointer">Berita</p>
+        </Link>
+        <Link href={"/galeri"}>
+          <p className="cursor-pointer">Galeri</p>
+        </Link>
+        <div className="flex space-x-1">
+          <Link href={"/auth/login"}>
+            <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+              Login
+            </span>
+          </Link>
+          <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+            |
+          </span>
+          <Link href={"/auth/register"}>
+            <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
+              Daftar
+            </span>
+          </Link>
+        </div>
       </div>
       {/* Mobile */}
+    </>
+  );
+}
+
+function Dropdown() {
+  return (
+    <>
+      <Menu as="div" className="relative inline-block text-left">
+        <div>
+          <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            Mekanisme Pendaftaran
+            <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 "
+              aria-hidden="true"
+            />
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 ">
+              <Menu.Item>
+                {({ active }) => (
+                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                    F.A.Q
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+            <div className="px-1 py-1 ">
+              <Menu.Item>
+                {({ active }) => (
+                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                    Unduh Juknis
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+            <div className="px-1 py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                    Unduh Template
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
     </>
   );
 }
