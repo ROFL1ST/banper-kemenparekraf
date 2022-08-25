@@ -158,7 +158,7 @@ export default function Navbar() {
                     {({ open }) => (
                       <>
                         <Disclosure.Button className="flex  justify-between   text-left text-xs  ">
-                          <span>What is your refund policy?</span>
+                          <span>Mekanisme Pendaftaran</span>
                           <ChevronUpIcon
                             className={`${open ? 'rotate-180 transform' : ''
                               } h-5 w-5 text-blue-500`}
