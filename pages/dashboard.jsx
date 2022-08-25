@@ -137,7 +137,7 @@ function Question({ text }) {
           {({ open }) => (
             <>
               <Disclosure.Button className="flex w-full justify-between  px-4 py-2 text-left text-sm font-medium  ">
-                <span>What is your refund policy?</span>
+                <span>{text}</span>
                 <ChevronUpIcon
                   className={`${
                     open ? 'rotate-180 transform' : ''
