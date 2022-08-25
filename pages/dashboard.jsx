@@ -15,7 +15,7 @@ export default function Dashboard() {
         {" "}
         <Navbar />
         <div
-          className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white px-20 capitalize rounded-b-2xl"
+          className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
           style={{ backgroundImage: "url(assets/building.png)" }}
         >
           <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
@@ -37,13 +37,13 @@ export default function Dashboard() {
           onClick={() => {
             setOpen(true);
           }}
-          className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white px-28 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 bottom-36"
+          className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
         >
           daftar sekarang
         </button>
         <div className="xl:px-20 lg:px-20 px-5">
           <Section text={"mekasnime pendaftaran"} />
-          <p className="text-center xl:px-24 lg:px-24 px-14 lg:text-sm my-10">
+          <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. In
             voluptatibus rem illo accusamus, earum adipisci aliquam dolorem
             dolor assumenda aperiam sed vel molestiae eos quibusdam explicabo
@@ -118,7 +118,7 @@ export default function Dashboard() {
               </div>
               <div className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
             </div>
-            <div className="flex justify-center space-x-5 mt-10">
+            <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
               <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
                 Unduh Juknis
               </button>
