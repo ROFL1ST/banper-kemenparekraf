@@ -12,11 +12,13 @@ export default function Dashboard() {
     <>
       <Navbar />
       <div
-        className="pt-48 w-full h-[90vh] bg-cover text-white px-20 capitalize"
+        className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white px-20 capitalize rounded-b-2xl"
         style={{ backgroundImage: "url(assets/building.png)" }}
       >
-        <div className="w-1/2">
-          <h1 className="text-4xl font-bold">Banper Infrastruktur Ekraf</h1>
+        <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
+          <h1 className="xl:text-4xl lg:text-4xl md:text-2xl text-3xl font-bold">
+            Banper Infrastruktur Ekraf
+          </h1>
           <p className="mt-7 mb-3">
             {" "}
             Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan Sarana
@@ -32,20 +34,20 @@ export default function Dashboard() {
         onClick={() => {
           setOpen(true);
         }}
-        className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white px-28 rounded-xl text-xl py-6 relative bottom-11"
+        className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white px-28 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 bottom-36"
       >
         daftar sekarang
       </button>
-      <div className="px-20">
+      <div className="xl:px-20 lg:px-20 px-5">
         <Section text={"mekasnime pendaftaran"} />
-        <p className="text-center px-24 lg:text-sm my-10">
+        <p className="text-center xl:px-24 lg:px-24 px-14 lg:text-sm my-10">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. In
           voluptatibus rem illo accusamus, earum adipisci aliquam dolorem dolor
           assumenda aperiam sed vel molestiae eos quibusdam explicabo
           consequatur libero. Necessitatibus, consequatur?
         </p>
         <Section text={"Berita"} />
-        <div className="flex space-x-5 mt-10">
+        <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10">
           <CardBerita />
           <CardBerita />
         </div>
@@ -156,14 +158,14 @@ function CardBerita() {
         <div className="bg-gray-200 w-1/2 rounded-xl h-full"></div>
         <div className="py-4 w-1/2 px-5 flex flex-col justify-between h-full">
           <div>
-            <small className="font-semibold text-gray-500">
+            <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">
               23 Desember 2021
             </small>
-            <h3 className="text-md my-3 font-bold capitalize">
+            <h3 className="xl:text-base lg:text-base max-h-16 truncate  text-sm my-3 font-bold capitalize">
               Menkeparekraf dorong pengembangan potensi ekonomi Kreatif kuliner
               magelang
             </h3>
-            <small>
+            <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem
               laudantium culpa ullam minima alias quis mollitia praesentium
               sunt!

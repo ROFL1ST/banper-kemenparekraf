@@ -2,8 +2,8 @@
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import React from "react";
-import { Menu, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Menu, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useRef, useState } from "react";
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
@@ -19,7 +19,7 @@ export default function Navbar() {
             href="javascript:void(0);"
             // onclick="openNav()"
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 xl:hidden"
+            className="h-6 w-6 xl:hidden lg:hidden "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -31,7 +31,7 @@ export default function Navbar() {
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-          <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black ">
+          <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
             <Link href={"/home"}>
               <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
                 Home
@@ -61,22 +61,16 @@ export default function Navbar() {
                     <div className="px-1 py-1 ">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white"
-                          >
-
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                             F.A.Q
                           </button>
                         )}
                       </Menu.Item>
-                      </div>
-                      <div className="px-1 py-1 ">
+                    </div>
+                    <div className="px-1 py-1 ">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white"
-                          >
-
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                             Unduh Juknis
                           </button>
                         )}
@@ -85,10 +79,7 @@ export default function Navbar() {
                     <div className="px-1 py-1">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white"
-                          >
-
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                             Unduh Template
                           </button>
                         )}

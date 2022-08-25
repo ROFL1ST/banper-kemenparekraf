@@ -35,7 +35,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg lg:max-w-3xl sm:w-1/6 lg:w-1/5 p-3">
+                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3">
                   <div className="bg-white px-4 lg:px-1  pt-5 pb-4 ">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
@@ -68,7 +68,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
                       value=""
                       className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-green-600 checked:border-green-600 focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
                     />
-                    <p className="font-normal text-sm lg:text-xs text-red-600">
+                    <p className="font-normal  text-xs text-red-600">
                       Unduh Juknis dan Template
                     </p>
                   </div>
