@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import React from "react";
 
 export default function Footer() {
@@ -13,9 +14,11 @@ export default function Footer() {
             bertujuan untuk menumbuhkan sentra-sentra ekonomi baru yang mampu
             memberikan nilai tambah bagi daerah-daerah di seluruh penjuru tanah
             air.
-            <span className="text-red-500 underline underline-offset-2 decoration-red-500">
-              Read more
-            </span>
+            <Link href={"/tentang"}>
+              <span className="text-red-500 underline underline-offset-2 decoration-red-500 cursor-pointer">
+                Read more
+              </span>
+            </Link>
           </p>
           <p className="text-gray-500 pt-10">
             Gedung Sapta Pesona Jalan Medan Merdeka Barat No.17 Jakarta 10110
