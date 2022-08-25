@@ -1,16 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import { useRouter } from "next/router";
+
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment } from "react";
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-  const [path, setPath] = React.useState();
-  React.useEffect(() => {
-    setPath(window.location);
-  }, []);
-  // console.log(path.pathname);
+  const { pathname } = useRouter();
   return (
     <>
       {/* Dekstop */}
@@ -24,9 +22,7 @@ export default function Navbar() {
           <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
             <Link href={"/dashboard"}>
               <p
-                className={
-                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
-                }
+                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${pathname === "/dashboard"&& "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"} `}
               >
                 Home
               </p>
@@ -36,18 +32,14 @@ export default function Navbar() {
             </div>
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
-                className={
-                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
-                }
+               className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${pathname === "/berita"&& "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"} `}
               >
                 Berita
               </p>
             </Link>
             <Link href={"/galeri"}>
               <p
-                className={
-                  "hover:text-gray-900 text-sm outline-2 cursor-pointer"
-                }
+               className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${pathname === "/galeri"&& "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"} `}
               >
                 Galeri
               </p>
@@ -59,7 +51,7 @@ export default function Navbar() {
                 </span>
               </Link>
               <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-                /
+                |
               </span>
               <Link href={"/auth/register"}>
                 <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
