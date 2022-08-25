@@ -5,8 +5,8 @@ export default function Footer() {
   return (
     <>
       {" "}
-      <footer className="flex justify-between w-full items-center px-16 pt-10 text-base">
-        <div className="w-1/4 text-left">
+      <footer className="flex xl:flex-row lg:flex-row md:flex-col flex-col justify-between w-full items-center xl:px-16 lg:px-16 md:px-10 sm:px-10 px-5 pt-10 text-base">
+        <div className="xl:w-1/4 lg:w-1/4  text-left">
           <h1 className="mb-5 font-bold">Tentang</h1>
           <p>
             Presiden Joko Widodo mengatakan bahwa “Pembangunan Infrastruktur
@@ -22,21 +22,21 @@ export default function Footer() {
             Email : info@kotakreatif.id
           </p>
         </div>
-        <div className="text-left w-1/4 mb-10">
+        <div className="text-left xl:w-1/4 lg:w-1/4 xl:mt-0 lg:mt-0 mt-10  mb-10">
           <p className="text-[#242424] font-semibold">
             Direktorat Infrastruktur Ekonomi Kreatif Deputi Bidang Pengembangan
             Destinasi dan Infrastruktur Kementerian Pariwisata dan Ekonomi
             Kreatif / Badan Pariwisata dan Ekonomi Kreatif
           </p>
         </div>
-        <div className="flex w-1/4">
+        <div className="flex xl:w-1/4 lg:w-1/4 w-1/2 justify-center gap-x-4 xl:my-0 lg:my-0 my-5 mx-auto items-center">
           <img
-            className="2xl:h-32 lg:h-20"
+            className="2xl:h-32 lg:h-20 h-20"
             src="assets/kemenparekraf.png"
             alt=""
           />
           <img
-            className="2xl:h-32 lg:h-20"
+            className="2xl:h-32 lg:h-20 h-20"
             src="assets/wonderful.png"
             alt=""
           />
@@ -68,7 +68,7 @@ export default function Footer() {
             fill="none"
             stroke="currentColor"
             strokeLinejoin="round"
-            className="w-5 h-5"
+            className="w-5 h-5 font-bold"
             viewBox="0 0 24 24"
           >
             <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
