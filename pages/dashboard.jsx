@@ -2,12 +2,16 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import Footer from "./components/footer";
 import Modal from "./components/modal";
 import Navbar from "./components/navbar";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
-
   const cancelButtonRef = React.useRef(null);
+
+  useEffect(()=>{
+    document.title = "Dashboard"
+  })
+
   return (
     <>
       <Navbar />
