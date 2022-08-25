@@ -1,4 +1,5 @@
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronUpIcon } from "@heroicons/react/24/solid";
+import { Disclosure } from '@headlessui/react'
 import Footer from "./components/footer";
 import Modal from "./components/modal";
 import Navbar from "./components/navbar";
@@ -127,9 +128,32 @@ export default function Dashboard() {
 function Question({ text }) {
   return (
     <>
-      <div className="w-full px-5 py-2 bg-gray-100 text-sm border border-white bg-opacity-50 rounded-md flex space-x-2">
+      {/* <div className="w-full px-5 py-2 bg-gray-100 text-sm border border-white bg-opacity-50 rounded-md flex space-x-2">
         <p>{text}</p> <ChevronDownIcon className="h-5 w-5 text-blue-900" />{" "}
+      </div> */}
+         
+      <div className="mx-auto w-full  rounded-md  bg-white ">
+        <Disclosure>
+          {({ open }) => (
+            <>
+              <Disclosure.Button className="flex w-full justify-between  px-4 py-2 text-left text-sm font-medium  ">
+                <span>What is your refund policy?</span>
+                <ChevronUpIcon
+                  className={`${
+                    open ? 'rotate-180 transform' : ''
+                  } h-5 w-5 text-blue-900 `}
+                />
+              </Disclosure.Button>
+              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                If you're unhappy with your purchase for any reason, email us
+                within 90 days and we'll refund you in full, no questions asked.
+              </Disclosure.Panel>
+            </>
+          )}
+        </Disclosure>
+        
       </div>
+
     </>
   );
 }
