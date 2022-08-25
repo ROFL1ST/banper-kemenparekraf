@@ -10,19 +10,19 @@ export default function Berita() {
   return (
     <>
       <Navbar />
-      <div className="py-24">
-        <Menu />
-        <div className="grid grid-cols-4 gap-3">
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+      <Menu />
+      <div className="pb-20 xl:px-20 px-10">
+        <div className="grid xl:grid-cols-4 gap-3 mt-10">
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </div>
       </div>
     </>

@@ -16,6 +16,7 @@ export default function Dashboard() {
 
   return (
     <>
+      <div className="overflow-x-hidden">
       <Navbar />
       <div
         className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
@@ -139,6 +140,7 @@ export default function Dashboard() {
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
       ></Modal>
+      </div>
     </>
   );
 }
