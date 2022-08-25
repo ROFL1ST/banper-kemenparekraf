@@ -1,10 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+import {
+  ChevronDownIcon,
+  ChevronUpIcon,
+  Bars3Icon,
+} from "@heroicons/react/24/solid";
 import { Disclosure } from "@headlessui/react";
 import Link from "next/link";
 import React from "react";
-import { Menu, Transition } from '@headlessui/react'
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Menu, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useRef, useState } from "react";
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
@@ -15,25 +19,12 @@ export default function Navbar() {
         <div className="bg-blue-900 h-6"></div>
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
           <img src={"assets/banper.png"} alt="logo" className="h-36" />
-          <svg
-            onClick={() => setNavbarOpen(!navbarOpen)}
-            href="javascript:void(0);"
-            // onclick="openNav()"
-            xmlns="http://www.w3.org/2000/svg"
+          <Bars3Icon
             className="h-6 w-6 xl:hidden"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={"2"}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+            onClick={() => setNavbarOpen(!navbarOpen)}
+          />
           <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black ">
-            <Link href={"/home"}>
+            <Link href={"/dashboard"}>
               <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
                 Home
               </p>
@@ -62,10 +53,7 @@ export default function Navbar() {
                     <div className="px-1 py-1 ">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white"
-                          >
-
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                             F.A.Q
                           </button>
                         )}
@@ -74,10 +62,7 @@ export default function Navbar() {
                     <div className="px-1 py-1 ">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white"
-                          >
-
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                             Unduh Juknis
                           </button>
                         )}
@@ -86,10 +71,7 @@ export default function Navbar() {
                     <div className="px-1 py-1">
                       <Menu.Item>
                         {({ active }) => (
-                          <button
-                            className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white"
-                          >
-
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                             Unduh Template
                           </button>
                         )}
@@ -153,31 +135,32 @@ export default function Navbar() {
               className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
               href="#skills"
             >
-                <div className="mx-auto w-full max-w-md rounded-2xl ">
-                  <Disclosure>
-                    {({ open }) => (
-                      <>
-                        <Disclosure.Button className="flex  justify-between   text-left text-xs  ">
-                          <span>Mekanisme Pendaftaran</span>
-                          <ChevronUpIcon
-                            className={`${open ? 'rotate-180 transform' : ''
-                              } h-5 w-5 text-blue-500`}
-                          />
-                        </Disclosure.Button>
-                        
-                        <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
-                         F.A.Q
-                        </Disclosure.Panel>
-                        <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
-                         Unduh Juknis
-                        </Disclosure.Panel>
-                        <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
-                         Unduh Template
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                </div>
+              <div className="mx-auto w-full max-w-md rounded-2xl ">
+                <Disclosure>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className="flex  justify-between   text-left text-xs  ">
+                        <span>Mekanisme Pendaftaran</span>
+                        <ChevronUpIcon
+                          className={`${
+                            open ? "rotate-180 transform" : ""
+                          } h-5 w-5 text-blue-500`}
+                        />
+                      </Disclosure.Button>
+
+                      <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
+                        F.A.Q
+                      </Disclosure.Panel>
+                      <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
+                        Unduh Juknis
+                      </Disclosure.Panel>
+                      <Disclosure.Panel className="px-4 pt-4 pb-2 text-xs ">
+                        Unduh Template
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              </div>
             </a>
           </li>
           <li className="nav-item">

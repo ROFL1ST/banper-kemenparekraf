@@ -201,7 +201,7 @@ function CardBerita() {
             <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">
               23 Desember 2021
             </small>
-            <h3 className="xl:text-base lg:text-base max-h-16 truncate  text-sm my-3 font-bold capitalize">
+            <h3 className="xl:text-base lg:text-base max-h-16 truncate text-sm my-3 font-bold capitalize">
               Menkeparekraf dorong pengembangan potensi ekonomi Kreatif kuliner
               magelang
             </h3>
