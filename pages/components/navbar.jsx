@@ -19,7 +19,7 @@ export default function Navbar() {
             href="javascript:void(0);"
             // onclick="openNav()"
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 xl:hidden lg:hidden md:hidden "
+            className="h-6 w-6 xl:hidden lg:hidden  "
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -31,7 +31,7 @@ export default function Navbar() {
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-          <nav className="xl:flex lg:flex md:flex  hidden space-x-7 text-black items-center">
+          <nav className="xl:flex lg:flex md:hidden  hidden space-x-7 text-black items-center">
             <Link href={"/home"}>
               <p className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
                 Home
@@ -121,7 +121,7 @@ export default function Navbar() {
       {/* Mobile */}
       <div
         className={
-          "z-30 rounded-b-2xl flex fixed flex-grow items-center w-full pt-28 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5" +
+          "z-30 rounded-b-2xl flex fixed flex-grow xl:hidden lg:hidden  items-center w-full pt-28 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5" +
           (navbarOpen ? " flex" : " hidden")
         }
         id="example-navbar-danger"
@@ -129,6 +129,7 @@ export default function Navbar() {
         <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
           <li className="nav-item">
             <a
+              onClick={() => setNavbarOpen(false)}
               className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
               href="#home"
             >
@@ -140,6 +141,7 @@ export default function Navbar() {
           </li>
           <li className="nav-item">
             <a
+              onClick={() => setNavbarOpen(false)}
               className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
               href="#skills"
             >
@@ -149,6 +151,7 @@ export default function Navbar() {
           </li>
           <li className="nav-item">
             <a
+              onClick={() => setNavbarOpen(false)}
               className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
               href="#services"
             >
@@ -160,6 +163,7 @@ export default function Navbar() {
           </li>
           <li className="nav-item">
             <a
+              onClick={() => setNavbarOpen(false)}
               className="px-3 py-2 flex items-center text-xs   leading-snug text-black hover:opacity-75"
               href="#project"
             >
@@ -175,7 +179,7 @@ export default function Navbar() {
               href="#project"
             >
               <div className="flex space-x-2 pl-2">
-                <Link href={"/auth/login"}>
+                <Link onClick={() => setNavbarOpen(false)} href={"/auth/login"}>
                   <span className="hover:text-gray-900  outline-2 cursor-pointer">
                     Login
                   </span>
@@ -183,7 +187,7 @@ export default function Navbar() {
                 <span className="hover:text-gray-900  outline-2 cursor-pointer">
                   |
                 </span>
-                <Link href={"/auth/login"}>
+                <Link onClick={() => setNavbarOpen(false)} href={"/auth/login"}>
                   <span className="hover:text-gray-900  outline-2 cursor-pointer">
                     Daftar
                   </span>
