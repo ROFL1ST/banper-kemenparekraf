@@ -91,7 +91,7 @@ export default function Dashboard() {
             color="bg-blue-900"
           />
           <div className="flex w-full h-full justify-between mt-10">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col w-2/4 space-y-4">
               <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
               <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
               <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
