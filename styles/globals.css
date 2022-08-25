@@ -10,3 +10,15 @@ body {
   font-family: "Open Sans", sans-serif;
   
 }
+.swiper-title{
+  padding-left: 40px;
+  padding-right: 40px;
+  width: 35% !important;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.swiper-image{
+  width: 18% !important;
+  height: 500px !important;
+}
