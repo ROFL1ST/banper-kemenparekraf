@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-const MAX_LENGTH = 95;
+const MAX_LENGTH = 60;
 
 export default function Card({ data }) {
   const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -21,14 +21,14 @@ export default function Card({ data }) {
             {formatter.format(Date.parse(data.publishedAt))}
           </small>
           {data.title.length > MAX_LENGTH ? (
-            <h3 className="my-3 font-bold capitalize text-ellipsis">
-              {`${data.title.substring(0, MAX_LENGTH)}    ....`}
-              <a href="" className="text-blue-600">
+            <h3 className="my-3 font-bold capitalize h-16 ">
+              {`${data.title.substring(0, MAX_LENGTH)}    ...`}
+              <a href="" className="text-blue-600 font-medium">
                 Read more
               </a>
             </h3>
           ) : (
-            <h3 className="my-3 font-bold capitalize text-ellipsis">
+            <h3 className="my-3 font-bold capitalize h-16 text-ellipsis">
               {data.title}
             </h3>
           )}
