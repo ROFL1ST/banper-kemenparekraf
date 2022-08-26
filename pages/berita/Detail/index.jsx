@@ -4,12 +4,14 @@ import React from "react";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Card from "../card";
+import CardLoading from "../cardLoading";
+import DetailCardLoading from "./detailCardLoading";
 import News_small_card from "./News_small_card";
 import Small_Card_Loading from "./Small_Card_Loading";
 
 export default function DetailPage() {
   const [loading, setLoading] = React.useState(true);
-  const loadingLength = [1, 2, 3];
+  const loadingLength = [1, 2, 3, 4];
   const [items, setItem] = React.useState([]);
 
   const getData = async () => {
@@ -36,7 +38,7 @@ export default function DetailPage() {
     return () => {
       ac.abort();
     };
-  });
+  }, []);
   // console.log(items[0]["title"]);
   const [more, setMore] = React.useState(false);
 
@@ -155,48 +157,37 @@ export default function DetailPage() {
           <h1 className="font-bold text-blue-900 text-3xl underline underline-offset-8 decoration-yellow-500">
             Berita Terkait
           </h1>
-          {more === false ? (
-            <>
-              <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 gap-x-4 pb-16">
-                {" "}
-                {items?.slice(0, 4).map((data, index) => (
-                  <Card data={data} key={index}></Card>
-                ))}
-              </div>
-              <div
-                onClick={() => {
-                  if (items.length < 9) {
-                    alert("Content is max");
-                  } else {
-                    setMore(true);
-                    return;
-                  }
-                }}
-              >
-                {" "}
-                <h1 className="flex justify-center items-center text-blue-900 underline  cursor-pointer">
-                  More
-                </h1>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="pt-16 grid grid-cols-4 lg:gap-x-1 gap-x-4 gap-y-5 pb-16">
-                {" "}
-                {items?.map((data, index) => (
-                  <Card data={data} key={index}></Card>
-                ))}
-              </div>
-              <h1
-                className="flex justify-center items-center cursor-pointer text-blue-900 underline "
-                onClick={() => {
-                  setMore(false);
-                }}
-              >
-                Less
-              </h1>
-            </>
-          )}
+
+          <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 gap-x-4 pb-16">
+            {" "}
+            {loading ? (
+              <>
+                <DetailCardLoading />
+                <DetailCardLoading />
+
+                <DetailCardLoading />
+
+                <DetailCardLoading />
+              </>
+            ) : (
+              items.slice(0, 4).map((i, key) => <Card data={i} key={key} />)
+            )}
+          </div>
+          <div
+            onClick={() => {
+              if (items.length < 9) {
+                alert("Content is max");
+              } else {
+                setMore(true);
+                return;
+              }
+            }}
+          >
+            {" "}
+            <h1 className="flex justify-center items-center text-blue-900 underline  cursor-pointer">
+              More
+            </h1>
+          </div>
         </div>
         {/* bottom content */}
       </div>
