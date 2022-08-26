@@ -5,6 +5,7 @@ import Footer from "../components/footer";
 import Modal from "../components/modal";
 import Navbar from "../components/navbar";
 import React, { useEffect } from "react";
+import Section from "../components/section";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -101,10 +102,10 @@ export default function Dashboard() {
         className="h-full w-full bg-gray-200 bg-cover bg-bottom "
         style={{
           backgroundImage:
-            "url(https://cdn.pixabay.com/photo/2018/03/04/09/51/space-3197611_960_720.jpg)",
+            "url(https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg)",
         }}
       >
-        <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-md drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3">
+        <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-sm drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3">
           <Section
             text={"Pertanyaan yang sering diajukan (F.A.Q)"}
             color="bg-blue-900"
@@ -172,20 +173,6 @@ function Question({ text }) {
   );
 }
 
-function Section({ text, color }) {
-  return (
-    <>
-      <div className="text-center text-blue-900 capitalize text-2xl font-bold">
-        {text}
-      </div>
-      <div
-        className={`flex mx-auto my-3 h-0.5 w-44 ${
-          color === undefined ? "bg-yellow-400" : color
-        }`}
-      ></div>
-    </>
-  );
-}
 
 function CardBerita() {
   return (

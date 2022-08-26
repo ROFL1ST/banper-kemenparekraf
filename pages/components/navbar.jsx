@@ -2,7 +2,7 @@
 import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import logo from "../assets/banper.png";
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
@@ -15,14 +15,17 @@ export default function Navbar() {
       <div className="fixed w-screen z-40">
         <div className="bg-blue-900 h-6"></div>
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
-          <img src={"assets/banper.png"} alt="logo" className="h-36" />
+          <img src={logo.src} alt="logo" className="h-36" />
           <button onClick={() => setNavbarOpen(!navbarOpen)}>
             <Bars3Icon className="h-6 w-6 xl:hidden lg:hidden " />
           </button>
           <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
             <Link href={"/dashboard"}>
               <p
-                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${pathname === "/dashboard"&& "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"} `}
+                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
+                  pathname === "/dashboard" &&
+                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                } `}
               >
                 Home
               </p>
@@ -32,14 +35,20 @@ export default function Navbar() {
             </div>
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
-               className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${pathname === "/berita"&& "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"} `}
+                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
+                  pathname === "/berita" &&
+                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                } `}
               >
                 Berita
               </p>
             </Link>
             <Link href={"/galeri"}>
               <p
-               className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${pathname === "/galeri"&& "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"} `}
+                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
+                  pathname === "/galeri" &&
+                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                } `}
               >
                 Galeri
               </p>
