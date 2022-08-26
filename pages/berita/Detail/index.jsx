@@ -1,4 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
+import axios from "axios";
 import React from "react";
+import Footer from "../../components/footer";
+import Navbar from "../../components/navbar";
 import Card from "../card";
 import News_small_card from "./News_small_card";
 
@@ -16,6 +20,9 @@ export default function DetailPage() {
   };
   React.useEffect(() => {
     document.title = "Detail";
+  });
+
+  React.useEffect(() => {
     const ac = new AbortController();
     getData();
 
@@ -23,39 +30,52 @@ export default function DetailPage() {
       ac.abort();
     };
   });
-  console.log(items);
+  // console.log(items[0]["title"]);
   const [more, setMore] = React.useState(false);
 
   return (
     <>
-      <div className=" items-center flex h-full flex-col pb-10">
-        {/* Banner */}
+      <Navbar />
+      <div className=" items-center flex h-full flex-col pb-10 pt-36">
+        {/* Banner For Dekstop */}
         <div
-          className="flex w-2/3 h-full px-10 py-10 bg-no-repeat bg-cover justify-center rounded-3xl"
+          className="xl:flex lg:flex hidden xl:w-2/3 lg:w-2/3   h-full  bg-no-repeat bg-cover justify-center rounded-3xl"
           style={{
-            backgroundImage:
-              "url(https://akcdn.detik.net.id/visual/2019/05/08/6824f661-c2d9-4b41-a61b-ae80e9f8d62c_169.jpeg?w=1050)",
+            backgroundImage: `url(https://akcdn.detik.net.id/visual/2019/05/08/6824f661-c2d9-4b41-a61b-ae80e9f8d62c_169.jpeg?w=1050)`,
           }}
         >
-          <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left pt-64 text-white">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium ">
-              Banper Infrastruktur Ekraf
-            </h1>
-            <p className="mb-8 leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio,
-              vero.
-              <br /> Rem consequuntur hic corporis cumque accusantium quos
-              asperiores blanditiis voluptas, <br />
-              minima aut et autem commodi dolorem quidem quam iste. Ipsa.
-            </p>
+          <div className="px-10 py-10 bg-black bg-opacity-25 rounded-3xl">
+            <div className=" lg:flex-grow  lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left pt-64 text-white ">
+              <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium w-3/4">
+                Banper Kemenparekraf
+              </h1>
+              <p className="mb-8 leading-relaxed w-3/4">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Doloremque corporis quidem et, magnam debitis rem hic dolorem
+                sapiente explicabo repudiandae.
+              </p>
+            </div>
           </div>
         </div>
-        {/* Banner */}
+        {/* Banner For Dekstop */}
+        {/* <!-- Banner For Mobile --> */}
+        <div className="flex px-5 flex-col justify-center items-center pt-5 xl:hidden lg:hidden w-11/12">
+          <h1 className="title-font sm:text-xl text-3xl mb-4 font-bold pt-5 pb-2">
+            Banper Infrastruktur Ekraf
+          </h1>
+
+          <img
+            src="https://akcdn.detik.net.id/visual/2019/05/08/6824f661-c2d9-4b41-a61b-ae80e9f8d62c_169.jpeg?w=1050"
+            className="rounded-3xl"
+            alt=""
+          />
+        </div>
+        {/* <!-- Banner For Mobile --> */}
         {/* Content */}
-        <div className="relative pt-16 w-2/3 flex justify-between ">
-          <div className="content-left w-11/12 flex flex-col">
+        <div className="relative pt-16 xl:w-2/3 lg:w-2/3 w-4/5 flex xl:justify-between lg:justify-between justify-center ">
+          <div className="content-left xl:w-11/12 lg:w-11/12 flex flex-col">
             {/* detail text */}
-            <div className="w-11/12 text-lg pb-10">
+            <div className="xl:w-11/12 lg:w-11/12 w-full text-lg pb-10">
               <h1 className="">
                 <span className="capitalize font-bold">
                   Maros, 23 November 2021
@@ -103,7 +123,7 @@ export default function DetailPage() {
             </div>
             {/* detail text */}
           </div>
-          <div className="content-right w-1/4 flex flex-col ">
+          <div className="content-right w-1/4 xl:flex lg:flex hidden flex-col ">
             <div className="space-y-5">
               {items?.slice(0, 3).map((data, index) => (
                 <News_small_card data={data} key={index}></News_small_card>
@@ -113,13 +133,13 @@ export default function DetailPage() {
         </div>
         {/* Content */}
         {/* bottom content */}
-        <div className="flex flex-col justify-center pt-20 items-center mx-auto w-11/12">
+        <div className="flex flex-col justify-center pt-20 items-center mx-auto lg:w-11/12 w-4/5">
           <h1 className="font-bold text-blue-900 text-3xl underline underline-offset-8 decoration-yellow-500">
             Berita Terkait
           </h1>
           {more === false ? (
             <>
-              <div className="pt-16  grid grid-cols-4 lg:gap-x-1 gap-x-4 pb-16">
+              <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 gap-x-4 pb-16">
                 {" "}
                 {items?.slice(0, 4).map((data, index) => (
                   <Card data={data} key={index}></Card>
@@ -162,6 +182,7 @@ export default function DetailPage() {
         </div>
         {/* bottom content */}
       </div>
+      <Footer/>
     </>
   );
 }

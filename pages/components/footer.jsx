@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <>
       {" "}
-      <footer className="flex xl:flex-row lg:flex-row md:flex-col flex-col justify-between w-full items-center xl:px-16 lg:px-16 md:px-10 sm:px-10 px-5 pt-10 text-base">
+      <footer className="flex xl:flex-row lg:flex-row md:flex-col flex-col justify-between w-full items-center xl:px-16 lg:px-16 md:px-10 sm:px-10 px-10 pt-10 text-base">
         <div className="xl:w-1/4 lg:w-1/4  text-left">
           <h1 className="mb-5 font-bold">Tentang</h1>
           <p>
