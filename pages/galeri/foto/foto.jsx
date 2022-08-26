@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import FotoCard from "./card";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper";
 import "swiper/css";
 import {
   ArrowLeftCircleIcon,
@@ -19,13 +20,38 @@ export default function Foto() {
             "url(https://cdn.pixabay.com/photo/2018/04/02/21/33/building-3285254_960_720.jpg)",
         }}
       >
-        <div className="bg-black h-full w-full bg-opacity-25 pl-7 2xl:py-52 lg:py-10">
+        <div className="bg-black h-full w-full bg-opacity-25 pl-7 2xl:py-52 lg:py-10 py-10 ">
+          <div className="xl:hidden lg:hidden w-11/12 mx-auto py-5">
+            <h1 className="text-6xl font-semibold text-white text-center">
+              Foto
+            </h1>
+            <p className="text-white text-center my-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
+              repudiandae officia veritatis dignissimos fugit nihil error
+            </p>
+          </div>
           <Swiper
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
+            className="mySwiper"
             spaceBetween={20}
-            slidesPerView={4}
+            slidesPerView={1}
+            modules={{ Pagination }}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 50,
+              },
+            }}
           >
             <SwiperSlide className="swiper-title">
               <h1 className="lg:text-6xl 2xl:text-8xl text-white font-bold">

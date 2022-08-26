@@ -17,7 +17,7 @@ export default function Navbar() {
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
           <img src={"assets/banper.png"} alt="logo" className="h-36" />
           <button onClick={() => setNavbarOpen(!navbarOpen)}>
-            <Bars3Icon className="h-6 w-6 xl:hidden" />
+            <Bars3Icon className="h-6 w-6 xl:hidden lg:hidden " />
           </button>
           <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
             <Link href={"/dashboard"}>

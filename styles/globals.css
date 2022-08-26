@@ -22,3 +22,55 @@ body {
   width: 18% !important;
 
 }
+
+@media (max-width: 1024px) {
+  .swiper-title{
+    display: none !important;
+  }
+
+  .swiper-image{
+    width: 28% !important;
+  
+  }
+  .mySwiper{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .swiper-title{
+    display: none !important;
+  }
+
+  .swiper-image{
+    width: 33% !important;
+  
+  }
+  .mySwiper{
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+
+@media(max-width: 640px) {
+  .swiper-title{
+    display: none !important;
+  }
+
+  .swiper-image{
+    width: 70% !important;
+  
+  }
+  .mySwiper{
+    width: 100%;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+
+    display: flex;
+    justify-content: center;
+  }
+}
+
