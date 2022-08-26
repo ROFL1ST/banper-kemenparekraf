@@ -10,6 +10,8 @@ body {
   font-family: "Open Sans", sans-serif;
   
 }
+
+/* Foto */
 .swiper-title{
   padding-left: 40px;
   padding-right: 40px;
@@ -88,3 +90,15 @@ body {
   }
 }
 
+/* Foto */
+
+/* Video */
+/* @media(max-width: 1080px) {
+  .swiper-video{
+    width: 50% !important;
+  
+  }
+  
+} */
+
+/* Video */

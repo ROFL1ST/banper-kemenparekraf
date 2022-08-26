@@ -20,7 +20,7 @@ export default function Foto() {
             "url(https://cdn.pixabay.com/photo/2018/04/02/21/33/building-3285254_960_720.jpg)",
         }}
       >
-        <div className="bg-black h-full w-full bg-opacity-25 pl-7 2xl:py-52 lg:py-10 py-10 ">
+        <div className="bg-black h-full w-full bg-opacity-25 pl-7 2xl:py-52 lg:py-10 py-16 ">
           <div className="xl:hidden lg:hidden w-11/12 mx-auto py-5">
             <h1 className="text-6xl font-semibold text-white text-center">
               Foto
@@ -34,6 +34,7 @@ export default function Foto() {
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
+            
             className="mySwiper"
             spaceBetween={20}
             slidesPerView={1}
