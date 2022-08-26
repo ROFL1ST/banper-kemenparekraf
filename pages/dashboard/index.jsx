@@ -6,6 +6,7 @@ import Modal from "../components/modal";
 import Navbar from "../components/navbar";
 import React, { useEffect } from "react";
 import Section from "../components/section";
+import building from "../assets/building.png"
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -21,7 +22,7 @@ export default function Dashboard() {
       <Navbar />
       <div
         className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
-        style={{ backgroundImage: "url(assets/building.png)" }}
+        style={{ backgroundImage: `url(${building.src})` }}
       >
         <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
           <h1 className="xl:text-4xl lg:text-4xl md:text-2xl text-3xl font-bold">
