@@ -22,14 +22,14 @@ export default function Card({ data }) {
               {formatter.format(Date.parse(data.publishedAt))}
             </small>
             {data.title.length > MAX_LENGTH ? (
-              <h3 className="my-3 font-bold capitalize h-16 ">
+              <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-lg">
                 {`${data.title.substring(0, MAX_LENGTH)}    ...`}
                 <a href="" className="text-blue-600 font-medium">
                   Read more
                 </a>
               </h3>
             ) : (
-              <h3 className="my-3 font-bold capitalize h-16 text-ellipsis">
+              <h3 className="my-3 font-bold capitalize h-16 text-ellipsis lg:text-sm 2xl:text-lg">
                 {data.title}
               </h3>
             )}
