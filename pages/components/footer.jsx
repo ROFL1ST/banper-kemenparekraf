@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import React from "react";
+import kemenparekraf from "../assets/kemenparekraf.png";
+import wonderful from "../assets/wonderful.png";
 
 export default function Footer() {
   return (
     <>
-      {" "}
       <footer className="flex xl:flex-row lg:flex-row md:flex-col flex-col justify-between w-full items-center xl:px-16 lg:px-16 md:px-10 sm:px-10 px-10 pt-10 text-base">
         <div className="xl:w-1/4 lg:w-1/4  text-left">
           <h1 className="mb-5 font-bold">Tentang</h1>
@@ -35,13 +36,13 @@ export default function Footer() {
         <div className="flex xl:w-1/4 lg:w-1/4 w-1/2 justify-center gap-x-4 xl:my-0 lg:my-0 my-5  items-center">
           <img
             className="2xl:h-32 lg:h-20 h-20"
-            src="assets/kemenparekraf.png"
-            alt=""
+            src={kemenparekraf.src}
+            alt={kemenparekraf.src}
           />
           <img
             className="2xl:h-32 lg:h-20 h-20"
-            src="assets/wonderful.png"
-            alt=""
+            src={wonderful.src}
+            alt={wonderful.src}
           />
         </div>
       </footer>

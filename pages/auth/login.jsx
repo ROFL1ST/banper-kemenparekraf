@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
 
@@ -44,7 +45,7 @@ export default function Login() {
               <p className="text-xs">
                 Belum punya akun?{" "}
                 <span className="text-red-500 font-semibold underline">
-                  <Link href={"/auth/daftar"}>
+                  <Link  href={"/auth/daftar"}>
                     Daftar disini
                   </Link>
                 </span>
@@ -52,6 +53,7 @@ export default function Login() {
             </div>
           </div>
         </div>
+        <Footer/>
       </div>
     </>
   );
