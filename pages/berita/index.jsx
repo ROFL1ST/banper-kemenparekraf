@@ -12,7 +12,7 @@ export default function Berita() {
   const [loading, setLoading] = useState(true);
   const getData = async () => {
     const url =
-      "https://newsapi.org/v2/top-headlines?country=id&apiKey=7297761692414b5388644c4a35899ab3";
+      "https://newsapi.org/v2/top-headlines?country=id&apiKey=3b9daef080ac4675ad714bbf3e0c148a";
     try {
       let respond = await axios.get(url);
       console.log(respond.data.articles);

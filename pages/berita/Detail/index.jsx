@@ -5,18 +5,25 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Card from "../card";
 import News_small_card from "./News_small_card";
+import Small_Card_Loading from "./Small_Card_Loading";
 
 export default function DetailPage() {
+  const [loading, setLoading] = React.useState(true);
+  const loadingLength = [1, 2, 3];
   const [items, setItem] = React.useState([]);
 
   const getData = async () => {
     const url =
-      "https://newsapi.org/v2/top-headlines?country=id&apiKey=7297761692414b5388644c4a35899ab3";
+      "https://newsapi.org/v2/top-headlines?country=id&apiKey=3b9daef080ac4675ad714bbf3e0c148a";
     try {
       let respond = await axios.get(url);
       console.log(respond.data.articles);
       setItem(respond.data.articles);
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
   React.useEffect(() => {
     document.title = "Detail";
@@ -125,9 +132,20 @@ export default function DetailPage() {
           </div>
           <div className="content-right w-1/4 xl:flex lg:flex hidden flex-col ">
             <div className="space-y-5">
-              {items?.slice(0, 3).map((data, index) => (
-                <News_small_card data={data} key={index}></News_small_card>
-              ))}
+              {loading ? (
+                <>
+                  <Small_Card_Loading />
+                  <Small_Card_Loading />
+
+                  <Small_Card_Loading />
+                </>
+              ) : (
+                items
+                  ?.slice(0, 3)
+                  .map((data, index) => (
+                    <News_small_card data={data} key={index}></News_small_card>
+                  ))
+              )}
             </div>
           </div>
         </div>
@@ -182,7 +200,7 @@ export default function DetailPage() {
         </div>
         {/* bottom content */}
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }
