@@ -7,6 +7,7 @@ import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 
 export default function Berita() {
+  const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const getData = async () => {
@@ -42,29 +43,9 @@ export default function Berita() {
       <Menu />
       <div className="pb-20 xl:px-20 lg:px-20  px-10">
         <div className="grid xl:grid-cols-4 lg:grid-cols-4 grid-cols-1 gap-3 mt-10">
-          {loading ? (
-            <>
-              <CardLoading />
-              <CardLoading />
-
-              <CardLoading />
-
-              <CardLoading />
-
-              <CardLoading />
-
-              <CardLoading />
-
-              <CardLoading />
-
-              <CardLoading />
-
-              <CardLoading />
-              <CardLoading />
-            </>
-          ) : (
-            data.map((i, key) => <Card data={i} key={key} />)
-          )}
+          {loading
+            ? loadingLength.map((i, key) => <CardLoading key={key} />)
+            : data.map((i, key) => <Card data={i} key={key} />)}
         </div>
       </div>
       <Footer />
