@@ -39,21 +39,19 @@ export default function Login() {
             </div>
             <div className="flex flex-col justify-center lg:px-72">
               <button className="bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full">
-                Login
+                <Link href={"/proposal/add"}>Login</Link>
               </button>
               <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
               <p className="text-xs">
                 Belum punya akun?{" "}
                 <span className="text-red-500 font-semibold underline">
-                  <Link  href={"/auth/daftar"}>
-                    Daftar disini
-                  </Link>
+                  <Link href={"/auth/daftar"}>Daftar disini</Link>
                 </span>
               </p>
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
