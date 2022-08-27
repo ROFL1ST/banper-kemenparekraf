@@ -39,7 +39,7 @@ export default function Login() {
             </div>
             <div className="flex flex-col justify-center lg:px-72">
               <button className="bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full">
-                <Link href={"/proposal/add"}>Login</Link>
+                <Link href={"/proposal/submitDoc"}>Login</Link>
               </button>
               <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
               <p className="text-xs">
