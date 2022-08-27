@@ -31,7 +31,7 @@ export default function submitDoc() {
               <div className="border mt-3 rounded-full bg-gray-300"></div>
             </div>
             {/* Left */}
-            <div className="flex justify-between gap-x-10">
+            <div className="flex justify-between gap-x-7">
               <div className="space-y-8">
                 <div className="space-y-3">
                   <h1 className="text-sm">
