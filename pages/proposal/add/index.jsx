@@ -25,7 +25,8 @@ export default function Add() {
               <input
                 type="text"
                 placeholder="Masukkan Judul Proposal"
-                className="border px-4 outline-none h-9 rounded-md placeholder:text-sm"
+                className="border  px-3
+    py-3 outline-none rounded-md placeholder:text-sm"
               />
             </div>
             <div className="grid gap-y-2">
