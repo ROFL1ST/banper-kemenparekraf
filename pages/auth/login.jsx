@@ -1,9 +1,14 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
 
 export default function Login() {
+  useEffect(() => {
+    document.title = "Login";
+  });
+
   return (
     <>
       <Navbar />
@@ -45,15 +50,13 @@ export default function Login() {
               <p className="text-xs">
                 Belum punya akun?{" "}
                 <span className="text-red-500 font-semibold underline">
-                  <Link  href={"/auth/daftar"}>
-                    Daftar disini
-                  </Link>
+                  <Link href={"/auth/daftar"}>Daftar disini</Link>
                 </span>
               </p>
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
