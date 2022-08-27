@@ -19,9 +19,9 @@ export default function Login() {
             "url(https://cdn.pixabay.com/photo/2017/05/19/06/22/desk-2325627_960_720.jpg)",
         }}
       >
-        <div className="bg-white w-full h-full bg-opacity-90 pt-32 lg:px-64 px-9">
+        <div className="bg-white w-full h-full bg-opacity-90 pt-32  px-9">
           <Section text={"Login"} />
-          <div className="mt-10">
+          <div className="mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5  mx-auto">
             <div className="grid gap-y-2">
               <label htmlFor="usename">Username atau Email</label>
               <input
