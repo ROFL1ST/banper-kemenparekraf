@@ -10,7 +10,6 @@ export default function Add() {
     <>
       <Navbar />
       <Background>
-        {" "}
         <Section text={"Submit Proposal"} />
         <div className="mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5 2xl:space-y-10 lg:space-y-5 space-y-3  mx-auto">
           <div className="grid gap-y-2">
