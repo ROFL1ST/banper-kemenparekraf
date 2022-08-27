@@ -8,15 +8,15 @@ export default function Login() {
     <>
       <Navbar />
       <div
-        className="bg-gray-200 w-full h-screen bg-cover"
+        className="bg-gray-200 w-full h-screen bg-cover rounded-b-3xl"
         style={{
           backgroundImage:
             "url(https://cdn.pixabay.com/photo/2017/05/19/06/22/desk-2325627_960_720.jpg)",
         }}
       >
-        <div className="bg-white w-full h-full bg-opacity-90 pt-32  px-9">
+        <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
           <Section text={"Login"} />
-          <div className="mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5  mx-auto">
+          <div className="mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5 2xl:space-y-10 lg:space-y-5 space-y-3  mx-auto">
             <div className="grid gap-y-2">
               <label htmlFor="usename">Username atau Email</label>
               <input
@@ -41,7 +41,7 @@ export default function Login() {
               <button className="bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full">
                 Login
               </button>
-              <p className="text-xs text-red-500 my-9">Lupa password</p>
+              <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
               <p className="text-xs">
                 Belum punya akun?{" "}
                 <span className="text-red-500 font-semibold underline">
