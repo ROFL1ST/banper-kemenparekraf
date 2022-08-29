@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef,useState } from "react";
 import FotoCard from "./card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -8,10 +8,13 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "@mui/material";
+import Modal from "./modal";
 
 export default function Foto() {
   const swiperRef = useRef();
   const imageLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
   return (
     <>
       <div
@@ -71,6 +74,7 @@ export default function Foto() {
             {imageLength.map((i, key) => (
               <SwiperSlide className="swiper-image" key={key}>
                 <FotoCard
+                 setOpen={setOpen}
                   img={
                     "https://awsimages.detik.net.id/visual/2021/12/30/cover-headline-sandiaga-uno-4_169.jpeg?w=360&q=90"
                   }
@@ -99,6 +103,7 @@ export default function Foto() {
           </div>
         </div>
       </div>
+      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
     </>
   );
 }
