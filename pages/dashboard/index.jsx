@@ -81,21 +81,7 @@ export default function Dashboard() {
               lorem ipsum
             </p>
           </div>
-          <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-              lorem ipsum
-            </p>
-          </div>
-          <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate ">
-              lorem ipsum
-            </p>
-          </div>
-          <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-            <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-              lorem ipsum
-            </p>
-          </div>
+         
         </div>
       </div>
       {/* faq */}

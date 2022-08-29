@@ -6,6 +6,7 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Pagination } from "swiper";
+import { Link } from "@mui/material";
 
 export default function Video() {
   const swiperRef2 = useRef();
@@ -104,9 +105,11 @@ export default function Video() {
             </Swiper>
           </div>
           <div className="flex justify-center 2xl:mt-16 mt-5">
-            <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
-              Selengkapnya
-            </button>
+            <Link href={"/galeri/video/selengkapnya"}>
+              <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
+                Selengkapnya
+              </button>
+            </Link>
           </div>
         </div>
       </div>

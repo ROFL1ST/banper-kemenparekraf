@@ -7,6 +7,7 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "@mui/material";
 
 export default function Foto() {
   const swiperRef = useRef();
@@ -34,7 +35,6 @@ export default function Foto() {
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
-            
             className="mySwiper"
             spaceBetween={20}
             slidesPerView={1}
@@ -62,9 +62,11 @@ export default function Foto() {
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 necessitatibus? Quidem doloribus ex iure.
               </p>
-              <button className="bg-blue-900 bg-opacity-90 text-white px-5 lg:py-1 2xl:py-2 rounded-full 2xl:text-xl font-semibold mt-10">
-                Selengkapnya
-              </button>
+              <Link href={"/galeri/foto/selengkapnya"}>
+                <button className="bg-blue-900 bg-opacity-90 text-white px-5 lg:py-1 2xl:py-2 rounded-full 2xl:text-xl font-semibold mt-10">
+                  Selengkapnya
+                </button>
+              </Link>
             </SwiperSlide>
             {imageLength.map((i, key) => (
               <SwiperSlide className="swiper-image" key={key}>
@@ -88,6 +90,11 @@ export default function Foto() {
                 className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
                 strokeWidth={1}
               />
+            </button>
+          </div>
+          <div className="lg:hidden flex justify-center 2xl:mt-16 mt-5">
+            <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
+              Selengkapnya
             </button>
           </div>
         </div>
