@@ -1,10 +1,15 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
 
 export default function Login() {
+  useEffect(() => {
+    document.title = "Login";
+  });
+
   return (
     <>
       <Navbar />

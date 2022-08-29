@@ -1,4 +1,11 @@
 import Link from "next/link";
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
 import React, { useEffect } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
@@ -16,99 +23,67 @@ export default function Proposal() {
         <Section text={"List Proposal"}></Section>
         {/* Top */}
         <div className="mt-20 w-3/4 mx-auto">
-          <div className="justify-between flex items-center ">
+          <div className="md:justify-between flex md:flex-row flex-col gap-y-10 pb-5  md:items-center">
             <div>
-              <Link href={"/proposal/submitPro"}>
+              <Link href={"/proposal/submit-proposal"}>
                 <button className="bg-blue-900 py-2 px-5 rounded-md text-white font-semibold w-full">
                   Buat Proposal Baru
                 </button>
               </Link>
             </div>
-            <div className="flex items-center gap-x-3">
+            <div className="flex md:flex-row flex-col md:items-center items-start gap-x-3">
               <p>Search</p>
               <input
                 type="Search"
-                className="border  px-3
-    py-3 outline-none rounded-md placeholder:text-sm"
+                className="border px-3 py-3 outline-none rounded-md placeholder:text-sm"
               />
             </div>
           </div>
-        </div>
-        {/* Top */}
-        {/* Content */}
-        <div className="flex flex-col items-center mt-10">
-          <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 inline-block">
-              <div className="overflow-hidden">
-                <table className="min-w-full">
-                  <thead className="border-b">
-                    <tr>
-                      <th
-                        scope="col"
-                        className="text-sm font-bold text-gray-900 px-10 py-4 text-left"
-                      >
-                        No.
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-bold text-gray-900 px-28 py-4 text-left"
-                      >
-                        First
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-bold text-gray-900 px-28 py-4 text-left"
-                      >
-                        Last
-                      </th>
-                      <th
-                        scope="col"
-                        className="text-sm font-bold text-gray-900 px-28 py-4 text-left"
-                      >
-                        Handle
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="mb-5">
-                    <tr className="border-b">
-                      <td className="px-10 py-4 whitespace-nowrap text-sm font-normal text-gray-900 border-r border-x-2">
-                        1
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-28 py-4 whitespace-nowrap">
-                        Mark
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-28 py-4 whitespace-nowrap">
-                        Otto
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-28 py-4 whitespace-nowrap">
-                        @mdo
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <table>
-                  <tbody>
-                    <tr className="border-b">
-                      <td className="px-10 py-4 whitespace-nowrap text-sm font-normal text-gray-900 border-r border-x-2">
-                        1
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-28 py-4 whitespace-nowrap">
-                        Mark
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-28 py-4 whitespace-nowrap">
-                        Otto
-                      </td>
-                      <td className="text-sm text-gray-900 font-light px-28 py-4 whitespace-nowrap">
-                        @mdo
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell className="capitalize font-bold text-blue-900">
+                    no
+                  </TableCell>
+                  <TableCell className="capitalize font-bold text-blue-900">
+                    judul
+                  </TableCell>
+                  <TableCell className="capitalize font-bold text-blue-900">
+                    jenis bantuan
+                  </TableCell>
+                  <TableCell className="capitalize font-bold text-blue-900">
+                    status
+                  </TableCell>
+                  <TableCell className="capitalize font-bold text-blue-900">
+                    actions
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>1</TableCell>
+                  <TableCell>bantuan sosial</TableCell>
+                  <TableCell>Sarana Ruang Aktif</TableCell>
+                  <TableCell>Belum Lengkap</TableCell>
+                  <TableCell>
+                    <div className="flex space-x-2">
+                      <Link href={"/proposal/submit-document"}>
+                        <div className="bg-blue-200 flex justify-center py-2 rounded-md px-5">
+                          <p className="text-blue-900">Submit Dokumen</p>
+                        </div>
+                      </Link>
+                      <button className="bg-red-600 text-white rounded-md px-5 py-1.5">
+                        Delete
+                      </button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
           </div>
         </div>
-        {/* Content */}
+        {/* Top */}
       </Background>
       <Footer />
     </>
