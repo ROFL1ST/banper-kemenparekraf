@@ -152,7 +152,7 @@ export default function Navbar() {
           <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
             |
           </span>
-          <Link href={"/auth/register"}>
+          <Link href={"/auth/daftar"}>
             <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
               Daftar
             </span>
