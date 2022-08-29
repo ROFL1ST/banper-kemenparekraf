@@ -31,7 +31,7 @@ export default function Navbar() {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1">
-              <Dropdown />
+              <DropdownMekanis />
             </div>
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
@@ -45,7 +45,7 @@ export default function Navbar() {
             </Link>
             <Link href={"/galeri"}>
               <p
-                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
+                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer  ${
                   pathname === "/galeri" &&
                   "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
                 } `}
@@ -53,20 +53,8 @@ export default function Navbar() {
                 Galeri
               </p>
             </Link>
-            <div className="flex space-x-4">
-              <Link href={"/auth/login"}>
-                <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-                  Login
-                </span>
-              </Link>
-              <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-                |
-              </span>
-              <Link href={"/auth/daftar"}>
-                <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-                  Daftar
-                </span>
-              </Link>
+            <div className="cursor-pointer flex items-center space-x-1 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400">
+              <DropdownLD />
             </div>
           </nav>
         </div>
@@ -116,7 +104,7 @@ export default function Navbar() {
                   </div>
                   <div className="px-1 py-1 ">
                     <Menu.Item>
-                      {({ active }) => (
+                      {({ active }) => (  
                         <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                           Unduh Juknis
                         </button>
@@ -140,23 +128,63 @@ export default function Navbar() {
         <Link href={"/berita?type=berita&sort=terbaru"}>
           <p className="cursor-pointer">Berita</p>
         </Link>
-        <Link href={"/galeri"}>
+        <Link href={"/galeri"} >
           <p className="cursor-pointer">Galeri</p>
         </Link>
-        <div className="flex space-x-1">
-          <Link href={"/auth/login"}>
-            <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-              Login
-            </span>
-          </Link>
-          <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-            |
-          </span>
-          <Link href={"/auth/register"}>
-            <span className="hover:text-gray-900 text-sm outline-2 cursor-pointer">
-              Daftar
-            </span>
-          </Link>
+        <div className="flex space-x-3">
+          <div className="cursor-pointer flex items-center space-x-1">
+          <Menu as="div" className="relative inline-block text-left">
+        <div>
+          <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            Login|Daftar
+            <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 "
+              aria-hidden="true"
+            />
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute right-0 mt-2 w-20 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 ">
+              <Link href={"/auth/login"}>
+              <Menu.Item>
+                {({ active }) => (
+                     <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white" >
+                    Login
+                  </button>
+               
+                )}
+              </Menu.Item>
+              </Link>
+             
+            </div>
+            <div className="px-1 py-1">
+              <Link href={"/auth/daftar"}>
+              <Menu.Item>
+               
+               {({ active }) => (
+                 <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                   Daftar
+                 </button>
+               )}
+
+               
+             </Menu.Item>
+              </Link>
+              
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+          </div>
         </div>
       </div>
       {/* Mobile */}
@@ -164,7 +192,7 @@ export default function Navbar() {
   );
 }
 
-function Dropdown() {
+function DropdownMekanis() {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -186,7 +214,7 @@ function Dropdown() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 mt-2 w-38 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
@@ -213,6 +241,64 @@ function Dropdown() {
                   </button>
                 )}
               </Menu.Item>
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    </>
+  );
+}
+
+function DropdownLD() {
+  return (
+    <>
+      <Menu as="div" className="relative inline-block text-left">
+        <div>
+          <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            Login|Daftar
+            <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 "
+              aria-hidden="true"
+            />
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute right-0 mt-2 w-20 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 ">
+              <Link href={"/auth/login"}>
+              <Menu.Item>
+                {({ active }) => (
+                     <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white" >
+                    Login
+                  </button>
+               
+                )}
+              </Menu.Item>
+              </Link>
+             
+            </div>
+            <div className="px-1 py-1">
+              <Link href={"/auth/daftar"}>
+              <Menu.Item>
+               
+               {({ active }) => (
+                 <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                   Daftar
+                 </button>
+               )}
+
+               
+             </Menu.Item>
+              </Link>
+              
             </div>
           </Menu.Items>
         </Transition>
