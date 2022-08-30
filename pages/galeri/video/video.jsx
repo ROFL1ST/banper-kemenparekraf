@@ -67,40 +67,48 @@ export default function Video() {
               }}
             >
               <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={1}
-                  allowFullScreen
-                ></iframe>
+                <div className="w-full h-full block z-40">
+                  <iframe
+                    className="h-72 w-full"
+                    title="yt"
+                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
+                    frameBorder={1}
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={0}
-                  allowFullScreen
-                ></iframe>
+                <div className="w-full h-full">
+                  <iframe
+                    className="h-72 w-full"
+                    title="yt"
+                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
+                    frameBorder={1}
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={0}
-                  allowFullScreen
-                ></iframe>
+                <div className="w-full h-full">
+                  <iframe
+                    className="h-72 w-full"
+                    title="yt"
+                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
+                    frameBorder={1}
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </SwiperSlide>
               <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={0}
-                  allowFullScreen
-                ></iframe>
+                <div className="w-full h-full">
+                  <iframe
+                    className="h-72 w-full"
+                    title="yt"
+                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
+                    frameBorder={1}
+                    allowFullScreen
+                  ></iframe>
+                </div>
               </SwiperSlide>
             </Swiper>
           </div>
