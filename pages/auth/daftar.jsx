@@ -110,14 +110,14 @@ export default function Daftar() {
             />
           </div>
         </div>
-        <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-          <div className="relative flex-col w-full">
+        <div className="flex lg:w-2/3 w-full flex-grow mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+          <div className="relative flex-grow w-1/2">
             <label className="leading-7 text-sm text-gray-600">
               *Usulan Anggota
             </label>
             <input
-              className="w-1/2 bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-              placeholder="Usula Dari Anggota"
+              className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
+              placeholder="Usulan Dari Anggota"
             />
           </div>
         </div>
