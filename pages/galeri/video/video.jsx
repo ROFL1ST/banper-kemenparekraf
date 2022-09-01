@@ -1,15 +1,51 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Pagination } from "swiper";
 import { Link } from "@mui/material";
+import Modal from "./modal";
 
 export default function Video() {
   const swiperRef2 = useRef();
+  const [data] = useState([
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+    {
+      img: "https://i.ytimg.com/vi/YrtS8MESh0I/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLCznpCSQbe00BPCto1wiHWs38EZkA",
+    },
+  ]);
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
 
   return (
     <>
@@ -66,50 +102,18 @@ export default function Video() {
                 },
               }}
             >
-              <SwiperSlide>
-                <div className="w-full h-full block z-40">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="w-full h-full">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="w-full h-full">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="w-full h-full">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
+              {data.map((i, key) => (
+                <SwiperSlide key={key}>
+                  <div
+                    onClick={() => {
+                      setOpen(true);
+                    }}
+                    className="my-auto items-center"
+                  >
+                    <img className=" rounded-lg mx-auto" src={i.img} alt="" />
+                  </div>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
           <div className="flex justify-center 2xl:mt-16 mt-5">
@@ -121,6 +125,7 @@ export default function Video() {
           </div>
         </div>
       </div>
+      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
     </>
   );
 }
