@@ -1,17 +1,22 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import Footer from "../components/footer";
+import Modal from "../components/modal";
 import Navbar from "../components/navbar";
 import Foto from "../galeri/foto/foto";
 import Video from "../galeri/video/video";
 
 export default function Tentang() {
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
+
   useEffect(() => {
     document.title = "Tentang";
   });
   return (
     <>
-      <Navbar />
+      <Navbar open={open} setOpen={setOpen} />
+
       <div className="lg:pt-56 pt-26">
         <div>
           <div className="relative lg:flex hidden bottom-24 mx-24">
@@ -106,6 +111,11 @@ export default function Tentang() {
       <Foto />
       <Video />
       <Footer />
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+      ></Modal>
     </>
   );
 }

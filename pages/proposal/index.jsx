@@ -6,19 +6,22 @@ import {
   TableCell,
   TableBody,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
 
 export default function Proposal() {
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     document.title = "Proposal";
   });
   return (
     <>
-      <Navbar />
+            <Navbar open={open} setOpen={setOpen} />
+
       <Background>
         <Section text={"List Proposal"}></Section>
         {/* Top */}
