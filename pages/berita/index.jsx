@@ -16,19 +16,24 @@ export default function Berita() {
   const cancelButtonRef = useRef(null);
 
   const getData = async () => {
-    const url =
-      "https://newsapi.org/v2/top-headlines?country=id&apiKey=3b9daef080ac4675ad714bbf3e0c148a";
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "true",
+      },
+    };
+    const url = "http://128.199.242.242/api/news";
     try {
-      let respond = await axios.get(url);
-      console.log(respond.data.articles);
-      setData(respond.data.articles);
-      setId(respond.data.articles.length);
+      let respond = await axios.get(url, config);
+      console.log(respond.data.data, "hai");
+      setData(respond.data.data);
+      setId(respond.data.data.length);
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
     }
   };
+  
 
   useEffect(() => {
     const ac = new AbortController();

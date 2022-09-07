@@ -8,19 +8,44 @@ import CardLoading from "../cardLoading";
 import DetailCardLoading from "./detailCardLoading";
 import News_small_card from "./News_small_card";
 import Small_Card_Loading from "./Small_Card_Loading";
-
+import { useRouter } from "next/router";
 export default function DetailPage() {
   const [loading, setLoading] = React.useState(true);
+  const [loading2, setLoading2] = React.useState(true);
+
   const loadingLength = [1, 2, 3, 4];
   const [items, setItem] = React.useState([]);
-
+  const [detail, setDetail] = React.useState([]);
+  var router = useRouter();
+  var id = router.query["id"];
+  const viewss = async () => {
+    const url = `http://128.199.242.242/api/news/${id}`;
+    try {
+      let respond = await axios.put(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getData = async () => {
-    const url =
-      "https://newsapi.org/v2/top-headlines?country=id&apiKey=3b9daef080ac4675ad714bbf3e0c148a";
+    const url = `http://128.199.242.242/api/news/${id}`;
     try {
       let respond = await axios.get(url);
-      console.log(respond.data.articles);
-      setItem(respond.data.articles);
+      // let views = await axios.put(url);
+      console.log("Detail", respond.data.data[0]);
+      setDetail(respond.data.data[0]);
+      setLoading2(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const getList = async () => {
+    const url = "http://128.199.242.242/api/news";
+    try {
+      let respond = await axios.get(url);
+      console.log(respond.data.data);
+      setItem(respond.data.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -29,12 +54,14 @@ export default function DetailPage() {
   };
   React.useEffect(() => {
     document.title = "Detail";
-  });
+    viewss();
+  }, [viewss]);
 
   React.useEffect(() => {
     const ac = new AbortController();
-    getData();
 
+    getList();
+    getData();
     return () => {
       ac.abort();
     };
@@ -55,9 +82,13 @@ export default function DetailPage() {
         >
           <div className="px-10 py-10 bg-black bg-opacity-25 rounded-3xl">
             <div className=" lg:flex-grow  lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left pt-64 text-white ">
-              <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium w-3/4">
-                Banper Kemenparekraf
-              </h1>
+              {loading ? (
+                <div className="text-xs font-bold h-4  bg-gray-300 rounded-full"></div>
+              ) : (
+                <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium w-3/4">
+                  {detail.Judul}
+                </h1>
+              )}
               <p className="mb-8 leading-relaxed w-3/4">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                 Doloremque corporis quidem et, magnam debitis rem hic dolorem
@@ -158,7 +189,7 @@ export default function DetailPage() {
             Berita Terkait
           </h1>
 
-          <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 gap-x-4 pb-16">
+          <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 gap-x-4 pb-16 w-3/4">
             {" "}
             {loading ? (
               <>
