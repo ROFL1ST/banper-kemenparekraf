@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import axios from "axios";
 import React from "react";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Card from "../card";
-import CardLoading from "../cardLoading";
 import DetailCardLoading from "./detailCardLoading";
 import News_small_card from "./News_small_card";
 import Small_Card_Loading from "./Small_Card_Loading";
@@ -16,7 +16,8 @@ export default function DetailPage() {
   const [items, setItem] = React.useState([]);
   const [detail, setDetail] = React.useState({ data: {}, loading2: true });
   var router = useRouter();
-  var {id} = router.query
+
+  const { id } = router.query;
   const viewss = async () => {
     const url = `http://128.199.242.242/api/news/${id}`;
     try {
@@ -50,16 +51,21 @@ export default function DetailPage() {
       console.log(error);
     }
   };
+
   React.useEffect(() => {
     document.title = "Detail";
-    viewss();
-  }, [viewss]);
-
+  });
+  React.useEffect(() => {
+    if (router.isReady) {
+      getData();
+      viewss();
+    }
+  }, [router.isReady]);
   React.useEffect(() => {
     const ac = new AbortController();
 
     getList();
-    getData();
+
     return () => {
       ac.abort();
     };
@@ -67,7 +73,7 @@ export default function DetailPage() {
   // console.log(items[0]["title"]);
   const [more, setMore] = React.useState(false);
   const { data, loading2 } = detail;
-  console.log(data);
+  // console.log(router.query.id);
   return (
     <>
       <Navbar />
