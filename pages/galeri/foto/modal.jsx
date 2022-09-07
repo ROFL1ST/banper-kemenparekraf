@@ -10,7 +10,7 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
-export default function Modal({ open, setOpen, cancelButtonRef }) {
+export default function Modal({ open, setOpen, cancelButtonRef, data }) {
   const swiperRef = React.useRef();
   const [image] = React.useState([
     {

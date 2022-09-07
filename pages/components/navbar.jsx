@@ -58,7 +58,7 @@ export default function Navbar({ open, setOpen }) {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400">
-              <DropdownLD setOpen={setOpen} />
+              <DropdownLD setOpen={setOpen} pathname={pathname} />
             </div>
           </nav>
         </div>
@@ -250,7 +250,7 @@ function DropdownMekanis() {
   );
 }
 
-function DropdownLD({setOpen}) {
+function DropdownLD({ setOpen, pathname }) {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -277,7 +277,12 @@ function DropdownLD({setOpen}) {
               <Link href={"/auth/login"}>
                 <Menu.Item>
                   {({ active }) => (
-                    <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                    <button
+                      className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                        pathname === "/auth/login" &&
+                        "bg-white rounded-full text-blue-900 font-bold "
+                      } `}
+                    >
                       Login
                     </button>
                   )}
@@ -285,17 +290,25 @@ function DropdownLD({setOpen}) {
               </Link>
             </div>
             <div className="px-1 py-1">
-             
-                <Menu.Item>
-                  {({ active }) => (
-                    <button onClick={() => {
-                      setOpen(true);
-                    }} className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                      Daftar
-                    </button>
-                  )}
-                </Menu.Item>
-              
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      if (pathname === "/auth/daftar") {
+                        return;
+                      } else {
+                        setOpen(true);
+                      }
+                    }}
+                    className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                      pathname === "/auth/daftar" &&
+                      "bg-white rounded-full text-blue-900 font-bold "
+                    } `}
+                  >
+                    Daftar
+                  </button>
+                )}
+              </Menu.Item>
             </div>
           </Menu.Items>
         </Transition>

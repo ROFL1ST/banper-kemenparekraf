@@ -10,25 +10,9 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
-export default function Modal({ open, setOpen, cancelButtonRef }) {
+export default function Modal({ open, setOpen, cancelButtonRef, data }) {
   const swiperRef = React.useRef();
-  const [youtube] = React.useState([
-    {
-      ytb: "https://www.youtube.com/embed/YrtS8MESh0I",
-    },
-    {
-      ytb: "https://www.youtube.com/embed/YrtS8MESh0I",
-    },
-    {
-      ytb: "https://www.youtube.com/embed/YrtS8MESh0I",
-    },
-    {
-      ytb: "https://www.youtube.com/embed/YrtS8MESh0I",
-    },
-    {
-      ytb: "https://www.youtube.com/embed/YrtS8MESh0I",
-    },
-  ]);
+ 
   return (
     <>
       <Transition.Root show={open} as={React.Fragment}>
@@ -81,7 +65,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="my-auto relative  overflow-hidden transform transition-all lg:w-1/2 w-4/5 h-full ">
-                  <CardModal img={youtube.ytb}></CardModal>
+                  <CardModal data={data}></CardModal>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

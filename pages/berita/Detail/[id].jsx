@@ -83,7 +83,7 @@ export default function DetailPage() {
           <div
             className="xl:flex lg:flex hidden    h-full  bg-no-repeat bg-cover justify-center rounded-3xl"
             style={{
-              backgroundImage: `url(https://akcdn.detik.net.id/visual/2019/05/08/6824f661-c2d9-4b41-a61b-ae80e9f8d62c_169.jpeg?w=1050)`,
+              backgroundImage: `url("http://128.199.242.242/dashboard/assets/images/blog/${data.foto}")`,
             }}
           >
             <div className="px-10 py-10 bg-black bg-opacity-25 rounded-3xl">
@@ -213,7 +213,16 @@ export default function DetailPage() {
                 <DetailCardLoading />
               </>
             ) : (
-              items.slice(0, 4).map((i, key) => <Card data={i} key={key} />)
+              items.slice(0, 4).map((i, key) => (
+                <div
+                  onClick={() => {
+                    getData();
+                  }}
+                  key={key}
+                >
+                  <Card data={i} />
+                </div>
+              ))
             )}
           </div>
           <div

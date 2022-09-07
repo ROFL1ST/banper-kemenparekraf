@@ -37,7 +37,7 @@ export default function Dashboard() {
     document.title = "Dashboard";
     getData();
   }, []);
-  console.log(data.berita.length);
+  console.log(data.berita);
   return (
     <>
       <div className="overflow-x-hidden">
@@ -80,20 +80,26 @@ export default function Dashboard() {
           </p>
           <Section text={"Berita"} />
           <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full xl:w-1/2 lg:w-1/2">
-            {data.loading ? (
-              <>
-                <CardBeritaLoading />
-                <CardBeritaLoading />
-              </>
-            ) : data.berita.length != 1 ? (
-              data.berita.map((i, key) => <CardBerita key={key} data={i} />)
+            {data.berita.length != 0 ||
+            data.berita != undefined ||
+            data.berita != [] ? (
+              data.loading ? (
+                <>
+                  <CardBeritaLoading />
+                  <CardBeritaLoading />
+                </>
+              ) : data.berita.length != 1 ? (
+                data.berita.map((i, key) => <CardBerita key={key} data={i} />)
+              ) : (
+                <>
+                  {data.berita.map((i, key) => (
+                    <CardBerita key={key} data={i} />
+                  ))}
+                  <CardForOneBerita />
+                </>
+              )
             ) : (
-              <>
-                {data.berita.map((i, key) => (
-                  <CardBerita key={key} data={i} />
-                ))}
-                <CardForOneBerita />
-              </>
+              <h1>No Data</h1>
             )}
           </div>
           <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
@@ -219,7 +225,12 @@ function CardBerita({ data }) {
     <>
       <Link href={`/berita/Detail/${data.Id}`}>
         <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex">
-          <div className="bg-gray-200 w-1/2 rounded-xl h-full"></div>
+          <div
+            style={{
+              backgroundImage: `url(${data.foto})`,
+            }}
+            className=" w-1/2 rounded-xl h-full bg-cover"
+          ></div>
           <div className="py-4 w-1/2 px-5 flex flex-col justify-between h-full">
             <div>
               <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">

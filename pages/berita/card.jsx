@@ -14,7 +14,7 @@ export default function Card({ data }) {
           <div
             className="w-full h-1/2 bg-cover rounded-t-2xl bg-center"
             style={{
-              backgroundImage: `url("http://128.199.242.242/api/${data.foto}")`,
+              backgroundImage: `url(${data.foto})`,
             }}
           ></div>
           <div className="px-5 py-1">
