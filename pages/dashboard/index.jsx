@@ -7,19 +7,40 @@ import Navbar from "../components/navbar";
 import React, { useEffect } from "react";
 import Section from "../components/section";
 import building from "../assets/building.png";
+import axios from "axios";
+import CardBeritaLoading from "./component/CardBeritaLoading";
+import CardForOneBerita from "./component/CardForOneBerita";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
 
+  const [data, setData] = React.useState({ berita: {}, loading: true });
+  const getData = async () => {
+    const config = {
+      headers: {
+        "Access-Control-Allow-Origin": "true",
+      },
+    };
+    const url = "http://128.199.242.242/api/news?limit=2";
+    try {
+      let respond = await axios.get(url, config);
+      console.log(respond.data.data, "hai");
+      setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
+    } catch (error) {
+      console.log(error);
+      setData((s) => ({ ...s, loading: false }));
+    }
+  };
   useEffect(() => {
     document.title = "Dashboard";
-  });
-
+    getData();
+  }, []);
+  console.log(data.berita.length);
   return (
     <>
       <div className="overflow-x-hidden">
-        <Navbar open={open} setOpen={setOpen}  />
+        <Navbar open={open} setOpen={setOpen} />
         <div
           className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
           style={{ backgroundImage: `url(${building.src})` }}
@@ -58,8 +79,21 @@ export default function Dashboard() {
           </p>
           <Section text={"Berita"} />
           <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full xl:w-1/2 lg:w-1/2">
-            <CardBerita />
-            <CardBerita />
+            {data.loading ? (
+              <>
+                <CardBeritaLoading />
+                <CardBeritaLoading />
+              </>
+            ) : data.berita.length != 1 ? (
+              data.berita.map((i, key) => <CardBerita key={key} data={i} />)
+            ) : (
+              <>
+                {data.berita.map((i, key) => (
+                  <CardBerita key={key} data={i} />
+                ))}
+                <CardForOneBerita />
+              </>
+            )}
           </div>
           <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
             <a href="#">see more</a>
@@ -174,7 +208,12 @@ function Question({ text }) {
   );
 }
 
-function CardBerita() {
+function CardBerita({ data }) {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
   return (
     <>
       <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex">
@@ -182,20 +221,17 @@ function CardBerita() {
         <div className="py-4 w-1/2 px-5 flex flex-col justify-between h-full">
           <div>
             <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">
-              23 Desember 2021
+              {formatter.format(Date.parse(data.CreatedAt))}
             </small>
             <h3 className="xl:text-base lg:text-base max-h-16 truncate text-sm my-3 font-bold capitalize">
-              Menkeparekraf dorong pengembangan potensi ekonomi Kreatif kuliner
-              magelang
+              {data.Judul}
             </h3>
             <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem
-              laudantium culpa ullam minima alias quis mollitia praesentium
-              sunt!
+              {data.isi}
             </small>
           </div>
           <small className="text-xs font-semibold text-blue-900">
-            Kota Magelang
+            {data.NamaKota}
           </small>
         </div>
       </div>
