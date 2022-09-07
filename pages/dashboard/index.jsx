@@ -10,6 +10,7 @@ import building from "../assets/building.png";
 import axios from "axios";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
+import Link from "next/link";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -216,25 +217,27 @@ function CardBerita({ data }) {
   });
   return (
     <>
-      <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex">
-        <div className="bg-gray-200 w-1/2 rounded-xl h-full"></div>
-        <div className="py-4 w-1/2 px-5 flex flex-col justify-between h-full">
-          <div>
-            <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">
-              {formatter.format(Date.parse(data.CreatedAt))}
-            </small>
-            <h3 className="xl:text-base lg:text-base max-h-16 truncate text-sm my-3 font-bold capitalize">
-              {data.Judul}
-            </h3>
-            <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
-              {data.isi}
+      <Link href={`/berita/Detail/${data.Id}`}>
+        <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex">
+          <div className="bg-gray-200 w-1/2 rounded-xl h-full"></div>
+          <div className="py-4 w-1/2 px-5 flex flex-col justify-between h-full">
+            <div>
+              <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">
+                {formatter.format(Date.parse(data.CreatedAt))}
+              </small>
+              <h3 className="xl:text-base lg:text-base max-h-16 truncate text-sm my-3 font-bold capitalize">
+                {data.Judul}
+              </h3>
+              <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
+                {data.isi}
+              </small>
+            </div>
+            <small className="text-xs font-semibold text-blue-900">
+              {data.NamaKota}
             </small>
           </div>
-          <small className="text-xs font-semibold text-blue-900">
-            {data.NamaKota}
-          </small>
         </div>
-      </div>
+      </Link>
     </>
   );
 }
