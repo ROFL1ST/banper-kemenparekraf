@@ -18,14 +18,7 @@ export default function DetailPage() {
   var router = useRouter();
 
   const { id } = router.query;
-  const viewss = async () => {
-    const url = `http://128.199.242.242/api/news/${id}`;
-    try {
-      let respond = await axios.put(url);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+ 
   const getData = async () => {
     const url = `http://128.199.242.242/api/news/${id}`;
     try {
@@ -58,7 +51,7 @@ export default function DetailPage() {
   React.useEffect(() => {
     if (router.isReady) {
       getData();
-      viewss();
+    
     }
   }, [router.isReady]);
   React.useEffect(() => {

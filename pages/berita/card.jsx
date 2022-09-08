@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 const MAX_LENGTH = 60;
+import axios from "axios";
 import Link from "next/link";
 export default function Card({ data }) {
   const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -7,10 +8,24 @@ export default function Card({ data }) {
     month: "long",
     day: "2-digit",
   });
+  const viewss = async () => {
+    const url = `http://128.199.242.242/api/news/${data.Id}`;
+    try {
+      let respond = await axios.put(url);
+      console.log("berhasil")
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Link href={`/berita/Detail/${data.Id}`}>
-        <div className="bg-gray-100 w-full h-80 rounded-2xl">
+        <div
+          onClick={() => {
+            viewss();
+          }}
+          className="bg-gray-100 w-full h-80 rounded-2xl"
+        >
           <div
             className="w-full h-1/2 bg-cover rounded-t-2xl bg-center"
             style={{

@@ -51,7 +51,6 @@ export default function Dashboard() {
               Banper Infrastruktur Ekraf
             </h1>
             <p className="mt-7 mb-3">
-              {" "}
               Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan
               Sarana Ruang Kreatif.
             </p>
@@ -107,6 +106,7 @@ export default function Dashboard() {
           </div>
           <Section text={"Galeri"} />
           <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
+            {/* foto */}
             <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
               <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
                 lorem ipsum
@@ -122,21 +122,28 @@ export default function Dashboard() {
                 lorem ipsum
               </p>
             </div>
+            {/* foto */}
+
+            {/* video */}
             <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
               <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
                 lorem ipsum
               </p>
+              <p className="text-[#00f6ff]">Video</p>
             </div>
             <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
               <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate ">
                 lorem ipsum
               </p>
+              <p className="text-[#00f6ff]">Video</p>
             </div>
             <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
               <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
                 lorem ipsum
               </p>
+              <p className="text-[#00f6ff]">Video</p>
             </div>
+            {/* video */}
           </div>
         </div>
         {/* faq */}

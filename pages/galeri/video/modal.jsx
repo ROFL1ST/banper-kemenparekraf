@@ -1,17 +1,16 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationIcon } from "@heroicons/react/outline";
+
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+
 import CardModal from "./cardModal";
-import { Navigation, Pagination } from "swiper";
+
 import "swiper/css";
 import "swiper/css/navigation";
-import {
-  ArrowLeftCircleIcon,
-  ArrowRightCircleIcon,
-} from "@heroicons/react/24/solid";
+
+import axios from "axios";
 export default function Modal({ open, setOpen, cancelButtonRef, data }) {
-  const swiperRef = React.useRef();
+
+
  
   return (
     <>

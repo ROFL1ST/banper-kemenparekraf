@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function CardModal({ img, tgl }) {
-  console.log(tgl);
   return (
     <>
       <div className="my-auto items-center">
