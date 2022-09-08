@@ -1,15 +1,44 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Pagination } from "swiper";
 import { Link } from "@mui/material";
+import Modal from "./modal";
+import axios from "axios";
+import CardVideo from "./cardVideo";
 
 export default function Video() {
   const swiperRef2 = useRef();
+  const [videoData, setVideoData] = useState({ data: {}, loading: true });
+  const getList = async () => {
+    const url = "http://128.199.242.242/api/video";
+    try {
+      let respond = await axios.get(url);
+      setVideoData((s) => ({
+        ...s,
+        data: respond.data.data,
+        loading: false,
+      }));
+    } catch (error) {
+      console.log(error);
+      setVideoData((s) => ({ ...s, loading: false }));
+    }
+  };
+  console.log(videoData.data);
+
+  useEffect(() => {
+    const ac = new AbortController();
+    getList();
+
+    return () => {
+      ac.abort();
+    };
+  }, []);
+  const { data, loading } = videoData;
 
   return (
     <>
@@ -66,50 +95,15 @@ export default function Video() {
                 },
               }}
             >
-              <SwiperSlide>
-                <div className="w-full h-full block z-40">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="w-full h-full">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="w-full h-full">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="w-full h-full">
-                  <iframe
-                    className="h-72 w-full"
-                    title="yt"
-                    src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                    frameBorder={1}
-                    allowFullScreen
-                  ></iframe>
-                </div>
-              </SwiperSlide>
+              {data && !loading ? (
+                videoData.data.map((i, key) => (
+                  <SwiperSlide key={key}>
+                    <CardVideo data={i} />
+                  </SwiperSlide>
+                ))
+              ) : (
+                <></>
+              )}
             </Swiper>
           </div>
           <div className="flex justify-center 2xl:mt-16 mt-5">

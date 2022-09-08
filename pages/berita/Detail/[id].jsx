@@ -1,39 +1,70 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import axios from "axios";
 import React from "react";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Card from "../card";
-import CardLoading from "../cardLoading";
 import DetailCardLoading from "./detailCardLoading";
 import News_small_card from "./News_small_card";
 import Small_Card_Loading from "./Small_Card_Loading";
-
+import { useRouter } from "next/router";
 export default function DetailPage() {
   const [loading, setLoading] = React.useState(true);
+
   const loadingLength = [1, 2, 3, 4];
   const [items, setItem] = React.useState([]);
+  const [detail, setDetail] = React.useState({ data: {}, loading2: true });
+  var router = useRouter();
 
+  const { id } = router.query;
+  const viewss = async () => {
+    const url = `http://128.199.242.242/api/news/${id}`;
+    try {
+      let respond = await axios.put(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const getData = async () => {
-    const url =
-      "https://newsapi.org/v2/top-headlines?country=id&apiKey=3b9daef080ac4675ad714bbf3e0c148a";
+    const url = `http://128.199.242.242/api/news/${id}`;
     try {
       let respond = await axios.get(url);
-      console.log(respond.data.articles);
-      setItem(respond.data.articles);
+      // let views = await axios.put(url);
+
+      setDetail((s) => ({ ...s, data: respond.data.data[0], loading2: false }));
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const getList = async () => {
+    const url = "http://128.199.242.242/api/news";
+    try {
+      let respond = await axios.get(url);
+      // console.log(respond.data.data);
+      setItem(respond.data.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
     }
   };
+
   React.useEffect(() => {
     document.title = "Detail";
   });
-
+  React.useEffect(() => {
+    if (router.isReady) {
+      getData();
+      viewss();
+    }
+  }, [router.isReady]);
   React.useEffect(() => {
     const ac = new AbortController();
-    getData();
+
+    getList();
 
     return () => {
       ac.abort();
@@ -41,31 +72,43 @@ export default function DetailPage() {
   }, []);
   // console.log(items[0]["title"]);
   const [more, setMore] = React.useState(false);
-
+  const { data, loading2 } = detail;
+  // console.log(router.query.id);
   return (
     <>
       <Navbar />
-      <div className=" items-center flex h-full flex-col pb-10 pt-36">
+      <div className=" items-center flex h-full flex-col pb-10 pt-36 xl:w-2/3 lg:w-2/3 mx-auto">
         {/* Banner For Dekstop */}
-        <div
-          className="xl:flex lg:flex hidden xl:w-2/3 lg:w-2/3   h-full  bg-no-repeat bg-cover justify-center rounded-3xl"
-          style={{
-            backgroundImage: `url(https://akcdn.detik.net.id/visual/2019/05/08/6824f661-c2d9-4b41-a61b-ae80e9f8d62c_169.jpeg?w=1050)`,
-          }}
-        >
-          <div className="px-10 py-10 bg-black bg-opacity-25 rounded-3xl">
-            <div className=" lg:flex-grow  lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left pt-64 text-white ">
-              <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium w-3/4">
-                Banper Kemenparekraf
-              </h1>
-              <p className="mb-8 leading-relaxed w-3/4">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Doloremque corporis quidem et, magnam debitis rem hic dolorem
-                sapiente explicabo repudiandae.
-              </p>
+        {data && !loading2 ? (
+          <div
+            className="xl:flex lg:flex hidden    h-full  bg-no-repeat bg-cover justify-center rounded-3xl"
+            style={{
+              backgroundImage: `url("http://128.199.242.242/dashboard/assets/images/blog/${data.foto}")`,
+            }}
+          >
+            <div className="px-10 py-10 bg-black bg-opacity-25 rounded-3xl">
+              <div className=" lg:flex-grow  lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left pt-64 text-white ">
+                <div>
+                  <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium w-3/4">
+                    {data.Judul}
+                  </h1>
+                  <p className="mb-8 leading-relaxed w-3/4">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                    Doloremque corporis quidem et, magnam debitis rem hic
+                    dolorem sapiente explicabo repudiandae.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className=" w-full h-96 rounded-2xl bg-gray-300 animate-pulse">
+            <div className="space-y-2 pt-72 px-10">
+              <div className="text-xs font-bold h-4 w-1/2 bg-gray-500 rounded-full"></div>
+              <div className="text-xs font-bold h-4 w-1/4 bg-gray-500 rounded-full"></div>
+            </div>
+          </div>
+        )}
         {/* Banner For Dekstop */}
         {/* <!-- Banner For Mobile --> */}
         <div className="flex px-5 flex-col justify-center items-center pt-5 xl:hidden lg:hidden w-11/12">
@@ -81,7 +124,7 @@ export default function DetailPage() {
         </div>
         {/* <!-- Banner For Mobile --> */}
         {/* Content */}
-        <div className="relative pt-16 xl:w-2/3 lg:w-2/3 w-4/5 flex xl:justify-between lg:justify-between justify-center ">
+        <div className="relative pt-16  flex xl:justify-between lg:justify-between justify-center lg:w-full w-4/5 ">
           <div className="content-left xl:w-11/12 lg:w-11/12 flex flex-col">
             {/* detail text */}
             <div className="xl:w-11/12 lg:w-11/12 w-full text-lg pb-10">
@@ -153,12 +196,12 @@ export default function DetailPage() {
         </div>
         {/* Content */}
         {/* bottom content */}
-        <div className="flex flex-col justify-center pt-20 items-center mx-auto lg:w-11/12 w-4/5">
+        <div className="flex flex-col justify-center pt-20 items-center mx-auto lg:w-full w-4/5">
           <h1 className="font-bold text-blue-900 text-3xl underline underline-offset-8 decoration-yellow-500">
             Berita Terkait
           </h1>
 
-          <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 gap-x-4 pb-16">
+          <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 gap-x-4 pb-16 w-full">
             {" "}
             {loading ? (
               <>
@@ -170,7 +213,16 @@ export default function DetailPage() {
                 <DetailCardLoading />
               </>
             ) : (
-              items.slice(0, 4).map((i, key) => <Card data={i} key={key} />)
+              items.slice(0, 4).map((i, key) => (
+                <div
+                  onClick={() => {
+                    getData();
+                  }}
+                  key={key}
+                >
+                  <Card data={i} />
+                </div>
+              ))
             )}
           </div>
           <div

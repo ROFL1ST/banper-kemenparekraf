@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
+import Modal from "../components/modal";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
 
@@ -9,10 +10,11 @@ export default function Login() {
   useEffect(() => {
     document.title = "Login";
   });
-
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
   return (
     <>
-      <Navbar />
+      <Navbar open={open} setOpen={setOpen} />
       <Background>
         {" "}
         <Section text={"Login"} />
@@ -54,6 +56,11 @@ export default function Login() {
         </div>
       </Background>
       <Footer />
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+      ></Modal>
     </>
   );
 }
