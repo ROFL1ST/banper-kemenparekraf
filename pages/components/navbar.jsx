@@ -161,7 +161,12 @@ export default function Navbar({ open, setOpen }) {
                     <Link href={"/auth/login"}>
                       <Menu.Item>
                         {({ active }) => (
-                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          <button
+                            className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                              pathname === "/auth/login" &&
+                              "bg-white  text-blue-900 font-bold "
+                            } `}
+                          >
                             Login
                           </button>
                         )}
@@ -173,9 +178,16 @@ export default function Navbar({ open, setOpen }) {
                       {({ active }) => (
                         <button
                           onClick={() => {
-                            setOpen(true);
+                            if (pathname === "/auth/daftar") {
+                              return;
+                            } else {
+                              setOpen(true);
+                            }
                           }}
-                          className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white"
+                          className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                            pathname === "/auth/daftar" &&
+                            "bg-white  text-blue-900 font-bold "
+                          } `}
                         >
                           Daftar
                         </button>
@@ -280,7 +292,7 @@ function DropdownLD({ setOpen, pathname }) {
                     <button
                       className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
                         pathname === "/auth/login" &&
-                        "bg-white rounded-full text-blue-900 font-bold "
+                        "bg-white  text-blue-900 font-bold "
                       } `}
                     >
                       Login
@@ -302,7 +314,7 @@ function DropdownLD({ setOpen, pathname }) {
                     }}
                     className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
                       pathname === "/auth/daftar" &&
-                      "bg-white rounded-full text-blue-900 font-bold "
+                      "bg-white  text-blue-900 font-bold "
                     } `}
                   >
                     Daftar

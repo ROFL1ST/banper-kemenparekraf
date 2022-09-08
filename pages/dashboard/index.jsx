@@ -247,7 +247,11 @@ function CardBerita({ data }) {
                 {data.Judul}
               </h3>
               <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
-                {data.isi}
+                <h3 className="my-3 font-normal capitalize h-16 text-clip lg:text-sm 2xl:text-lg">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Integer finibus ligula nec ultricies faucibus. Sed eleifend
+                  accumsan
+                </h3>
               </small>
             </div>
             <small className="text-xs font-semibold text-blue-900">

@@ -5,7 +5,7 @@ export default function News_small_card({ data }) {
     <>
       <div className="flex justify-center items-center ">
         <div
-          className="flex w-full h-full  bg-no-repeat bg-cover justify-center rounded-xl "
+          className="flex w-full h-full  bg-no-repeat bg-cover bg-center justify-center rounded-xl "
           style={{ backgroundImage: `url(${data.foto})` }}
         >
           <div className="bg-black bg-opacity-25 px-3 w-full py-3 rounded-xl">
