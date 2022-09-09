@@ -11,6 +11,7 @@ import axios from "axios";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
+import parse from "html-react-parser";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -226,7 +227,7 @@ function Question({ text }) {
 }
 
 function CardBerita({ data }) {
-  const MAX_LENGTHtitle = 75;
+  const MAX_LENGTHtitle = 55;
   const MAX_LENGTHdetail = 125;
   const detail =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus ligula nec ultricies faucibus. Sed eleifend accumsan turpis id semper. Morbi et faucibus nisi. Cras in mauris at est bibendum dapibus at ac metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ultricies tincidunt aliquam. Nullam vestibulum metus sed metus bibendum porttitor. Nunc venenatis libero eget ante mollis gravida. Ut dictum ac justo nec molestie. Donec nec felis luctus tortor egestas accumsan. Maecenas laoreet auctor porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique magna non lobortis vestibulum.";
@@ -244,7 +245,7 @@ function CardBerita({ data }) {
             style={{
               backgroundImage: `url(${data.foto})`,
             }}
-            className=" w-1/2 rounded-xl h-full bg-cover"
+            className=" w-1/2 rounded-xl h-full bg-cover bg-center"
           ></div>
           <div className="py-4 w-1/2 px-5 flex flex-col justify-between h-full">
             <div>
@@ -252,7 +253,7 @@ function CardBerita({ data }) {
                 {formatter.format(Date.parse(data.CreatedAt))}
               </small>
               {data.Judul.length > MAX_LENGTHtitle ? (
-                <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-base">
+                <h3 className="my-3 font-bold capitalize h-16 text-sm lg:text-sm 2xl:text-base">
                   {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
                 </h3>
               ) : (
@@ -260,16 +261,8 @@ function CardBerita({ data }) {
                   {data.Judul}
                 </h3>
               )}
-              <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
-                {detail.length > MAX_LENGTHdetail ? (
-                  <h3 className="my-3 font-normal capitalize h-16 text-clip lg:text-sm 2xl:text-lg">
-                    {`${detail.substring(0, MAX_LENGTHdetail)}    ...`}
-                  </h3>
-                ) : (
-                  <h3 className="my-3 font-normal capitalize h-16 text-clip lg:text-sm 2xl:text-lg">
-                    {detail}
-                  </h3>
-                )}
+              <small className="xl:text-base lg:text-base text-xs text-ellipsis overflow-y-auto">
+                <IsiBerita data={data.isi} />
               </small>
             </div>
             <small className="text-xs font-semibold text-blue-900">
@@ -280,4 +273,10 @@ function CardBerita({ data }) {
       </Link>
     </>
   );
+}
+
+function IsiBerita({data}) {
+  const reactElement = parse(`${data}`);
+
+  return reactElement[0]["props"]["children"].slice(2, 8) ;
 }

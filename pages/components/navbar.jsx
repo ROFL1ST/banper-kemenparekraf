@@ -40,7 +40,7 @@ export default function Navbar({ open, setOpen }) {
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
-                  pathname === "/berita" &&
+                  pathname === "/berita"  &&
                   "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
                 } `}
               >
