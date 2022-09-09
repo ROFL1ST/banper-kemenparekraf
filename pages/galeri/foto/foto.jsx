@@ -134,9 +134,11 @@ export default function Foto() {
             </button>
           </div>
           <div className="lg:hidden flex justify-center 2xl:mt-16 mt-5">
-            <button className="bg-[#2e619c] text-white px-5 py-2 2xl:py-3 rounded-full">
-              Selengkapnya
-            </button>
+            <Link href={"/galeri/foto/selengkapnya"}>
+              <button className="bg-[#2e619c] text-white px-5 py-2 2xl:py-3 rounded-full">
+                Selengkapnya
+              </button>
+            </Link>
           </div>
         </div>
       </div>

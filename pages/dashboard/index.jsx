@@ -102,7 +102,7 @@ export default function Dashboard() {
             )}
           </div>
           <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
-            <a href="#">see more</a>
+            <Link href={"/berita?type=berita&sort=terbaru"}>see more</Link>
           </div>
           <Section text={"Galeri"} />
           <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
