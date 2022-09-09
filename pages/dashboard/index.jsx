@@ -261,7 +261,7 @@ function CardBerita({ data }) {
                   {data.Judul}
                 </h3>
               )}
-              <small className="xl:text-base lg:text-base text-xs text-ellipsis overflow-y-auto">
+              <small className="xl:text-base h-1 lg:text-base text-xs text-ellipsis overflow-y-auto">
                 <IsiBerita data={data.isi} />
               </small>
             </div>
@@ -277,6 +277,7 @@ function CardBerita({ data }) {
 
 function IsiBerita({data}) {
   const reactElement = parse(`${data}`);
+  console.log(reactElement.slice(0,1)[0])
 
-  return reactElement[0]["props"]["children"].slice(2, 8) ;
+  return reactElement.slice(0,1)[0]
 }
