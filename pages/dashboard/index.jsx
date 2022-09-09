@@ -160,7 +160,7 @@ export default function Dashboard() {
           >
             <Section
               text={"Pertanyaan yang sering diajukan (F.A.Q)"}
-              color="bg-blue-900"
+              color="bg-[#0d3361]"
             />
             <div className="gap-y-7 flex xl:flex-row lg:flex-row md:flex-col flex-col items-center w-full h-full justify-between mt-10">
               <div className="flex flex-col xl:w-1/2 lg:w-1/2 md:w-3/4 w-3/4 space-y-4">
@@ -177,10 +177,10 @@ export default function Dashboard() {
               <div className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
             </div>
             <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
-              <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
+              <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
                 Unduh Juknis
               </button>
-              <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
+              <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
                 Unduh Template
               </button>
             </div>

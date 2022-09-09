@@ -80,7 +80,7 @@ export default function Footer() {
           </svg>
         </a>
       </div>
-      <div className="bg-blue-900">
+      <div className="bg-[#142b51]">
         <div className="mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row justify-center items-center">
           <p className="text-white text-sm text-center sm:text-left">
             © 2022 Kementrian Pariwisata dan Ekonomi Kreatif/Badan Pariwisata

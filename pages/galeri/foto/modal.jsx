@@ -125,6 +125,7 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
                             img={i.images}
                             tgl={formatter.format(Date.parse(foto.CreatedAt))}
                             summary={i.summary}
+                            place={foto.NamaKota}
                           ></CardModal>
                         </SwiperSlide>
                       ))

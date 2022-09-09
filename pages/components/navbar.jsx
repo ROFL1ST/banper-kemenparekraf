@@ -15,7 +15,7 @@ export default function Navbar({ open, setOpen }) {
     <>
       {/* Dekstop */}
       <div className="fixed w-screen z-40">
-        <div className="bg-blue-900 h-6"></div>
+        <div className="bg-[#142b51] h-6"></div>
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
           <Link href={"/dashboard"}>
             <img src={logo.src} alt="logo" className="h-36" />

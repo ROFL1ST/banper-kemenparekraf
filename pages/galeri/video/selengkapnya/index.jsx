@@ -4,6 +4,7 @@ import Footer from "../../../components/footer";
 import Modal from "../../../components/modal";
 import Navbar from "../../../components/navbar";
 import CardVideo from "../cardVideo";
+import Loading from "../loading";
 
 export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);
@@ -43,7 +44,18 @@ export default function Selengkapnya() {
           {data && !loading ? (
             videoData.data.map((i, key) => <CardVideo key={key} data={i} />)
           ) : (
-            <></>
+            <>
+              <Loading />
+              <Loading />
+              <Loading />
+              <Loading />
+              <Loading />
+              <Loading />
+              <Loading />
+              <Loading />
+              <Loading />
+              <Loading />
+            </>
           )}
         </div>
       </div>

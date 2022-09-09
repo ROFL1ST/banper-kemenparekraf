@@ -10,11 +10,10 @@ import {
 import { Link } from "@mui/material";
 import Modal from "./modal";
 import axios from "axios";
+import Loading from "./loading";
 
 export default function Foto() {
   const swiperRef = useRef();
- 
- 
 
   // API galery
   const [items, setItem] = useState({ data: {}, loading: true });
@@ -92,7 +91,7 @@ export default function Foto() {
                 necessitatibus? Quidem doloribus ex iure.
               </p>
               <Link href={"/galeri/foto/selengkapnya"}>
-                <button className="bg-blue-900 bg-opacity-90 text-white px-5 lg:py-1 2xl:py-2 rounded-full 2xl:text-base font-semibold mt-10">
+                <button className="bg-[#2e619c] bg-opacity-90 text-white px-5 py-2 2xl:py-3 rounded-full lg:text-sm 2xl:text-base font-semibold mt-10">
                   Selengkapnya
                 </button>
               </Link>
@@ -100,11 +99,24 @@ export default function Foto() {
             {data && !loading ? (
               data.map((i, key) => (
                 <SwiperSlide className="swiper-image" key={key}>
-                  <FotoCard  data={i} />
+                  <FotoCard data={i} />
                 </SwiperSlide>
               ))
             ) : (
-              <></>
+              <>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+              </>
             )}
           </Swiper>
           <div className="flex justify-center space-x-3 2xl:mt-10 mt-5">
@@ -122,13 +134,12 @@ export default function Foto() {
             </button>
           </div>
           <div className="lg:hidden flex justify-center 2xl:mt-16 mt-5">
-            <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
+            <button className="bg-[#2e619c] text-white px-5 py-2 2xl:py-3 rounded-full">
               Selengkapnya
             </button>
           </div>
         </div>
       </div>
-     
     </>
   );
 }

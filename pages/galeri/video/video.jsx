@@ -10,6 +10,7 @@ import { Link } from "@mui/material";
 import Modal from "./modal";
 import axios from "axios";
 import CardVideo from "./cardVideo";
+import Loading from "./loading";
 
 export default function Video() {
   const swiperRef2 = useRef();
@@ -102,13 +103,29 @@ export default function Video() {
                   </SwiperSlide>
                 ))
               ) : (
-                <></>
+                <>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                </>
               )}
             </Swiper>
           </div>
           <div className="flex justify-center 2xl:mt-16 mt-5">
             <Link href={"/galeri/video/selengkapnya"}>
-              <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
+              <button className="bg-[#2e619c] bg-opacity-90 text-white px-5 py-2 2xl:py-3 rounded-full">
                 Selengkapnya
               </button>
             </Link>
