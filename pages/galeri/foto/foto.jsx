@@ -1,4 +1,4 @@
-import { useRef,useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import FotoCard from "./card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -9,12 +9,38 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link } from "@mui/material";
 import Modal from "./modal";
+import axios from "axios";
 
 export default function Foto() {
   const swiperRef = useRef();
-  const imageLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
-  const [open, setOpen] = useState(false);
-  const cancelButtonRef = useRef(null);
+ 
+ 
+
+  // API galery
+  const [items, setItem] = useState({ data: {}, loading: true });
+  const getList = async () => {
+    const url = "http://128.199.242.242/api/gallery?offset=0&limit=10";
+    try {
+      let respond = await axios.get(url);
+      // console.log(respond.data.data);
+      setItem((s) => ({ ...s, data: respond.data.data, loading: false }));
+    } catch (error) {
+      console.log(error);
+      setItem((s) => ({ ...s, loading: false }));
+    }
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+
+    getList();
+
+    return () => {
+      ac.abort();
+    };
+  }, []);
+  // console.log(items);
+  const { data, loading } = items;
   return (
     <>
       <div
@@ -66,21 +92,20 @@ export default function Foto() {
                 necessitatibus? Quidem doloribus ex iure.
               </p>
               <Link href={"/galeri/foto/selengkapnya"}>
-                <button className="bg-blue-900 bg-opacity-90 text-white px-5 lg:py-1 2xl:py-2 rounded-full 2xl:text-xl font-semibold mt-10">
+                <button className="bg-blue-900 bg-opacity-90 text-white px-5 lg:py-1 2xl:py-2 rounded-full 2xl:text-base font-semibold mt-10">
                   Selengkapnya
                 </button>
               </Link>
             </SwiperSlide>
-            {imageLength.map((i, key) => (
-              <SwiperSlide className="swiper-image" key={key}>
-                <FotoCard
-                 setOpen={setOpen}
-                  img={
-                    "https://awsimages.detik.net.id/visual/2021/12/30/cover-headline-sandiaga-uno-4_169.jpeg?w=360&q=90"
-                  }
-                />
-              </SwiperSlide>
-            ))}
+            {data && !loading ? (
+              data.map((i, key) => (
+                <SwiperSlide className="swiper-image" key={key}>
+                  <FotoCard  data={i} />
+                </SwiperSlide>
+              ))
+            ) : (
+              <></>
+            )}
           </Swiper>
           <div className="flex justify-center space-x-3 2xl:mt-10 mt-5">
             <button onClick={() => swiperRef.current.slidePrev()}>
@@ -103,7 +128,7 @@ export default function Foto() {
           </div>
         </div>
       </div>
-      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
+     
     </>
   );
 }

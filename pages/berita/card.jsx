@@ -12,7 +12,7 @@ export default function Card({ data }) {
     const url = `http://128.199.242.242/api/news/${data.Id}`;
     try {
       let respond = await axios.put(url);
-      console.log("berhasil")
+      console.log("berhasil");
     } catch (error) {
       console.log(error);
     }
@@ -39,9 +39,12 @@ export default function Card({ data }) {
             {data.Judul.length > MAX_LENGTH ? (
               <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-base">
                 {`${data.Judul.substring(0, MAX_LENGTH)}    ...`}
-                <a href="" className="text-blue-600 font-medium">
+                <Link
+                  href={`/berita/Detail/${data.Id}`}
+                  className="text-blue-600 text-sm font-medium"
+                >
                   Read more
-                </a>
+                </Link>
               </h3>
             ) : (
               <h3 className="my-3 font-bold capitalize h-16 text-ellipsis lg:text-sm 2xl:text-base">

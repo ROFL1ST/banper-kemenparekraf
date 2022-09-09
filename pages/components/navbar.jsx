@@ -35,7 +35,7 @@ export default function Navbar({ open, setOpen }) {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1">
-              <DropdownMekanis />
+              <DropdownMekanis pathname={pathname} />
             </div>
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
@@ -205,7 +205,7 @@ export default function Navbar({ open, setOpen }) {
   );
 }
 
-function DropdownMekanis() {
+function DropdownMekanis({ pathname }) {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -232,7 +232,11 @@ function DropdownMekanis() {
               <Menu.Item>
                 {({ active }) => (
                   <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                    F.A.Q
+                    {pathname != "/dashboard" ? (
+                      <Link href={"/dashboard#faq"}>F.A.Q</Link>
+                    ) : (
+                      <a href="#faq">F.A.Q</a>
+                    )}
                   </button>
                 )}
               </Menu.Item>

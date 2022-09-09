@@ -28,7 +28,7 @@ export default function CardVideo({ data }) {
           className=" rounded-lg mx-auto max-h-80 min-w-full bg-no-repeat bg-cover"
           style={{ backgroundImage: `url(${data.thumbnail})` }}
         >
-          <div className=" bg-black xl:p-28 md:p-20 p-16 bg-opacity-25 rounded-lg ">
+          <div className=" bg-black xl:p-28 md:p-20 sm:p-36 p-20 bg-opacity-25 rounded-lg ">
             <div className="mx-auto flex justify-center items-center ">
               <div className="bg-white bg-opacity-25 rounded-full xl:p-5 p-2 border-white border flex justify-center items-center">
                 {" "}

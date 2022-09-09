@@ -154,7 +154,10 @@ export default function Dashboard() {
               "url(https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg)",
           }}
         >
-          <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-sm drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3">
+          <div
+            id="faq"
+            className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-sm drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3"
+          >
             <Section
               text={"Pertanyaan yang sering diajukan (F.A.Q)"}
               color="bg-blue-900"
@@ -223,6 +226,11 @@ function Question({ text }) {
 }
 
 function CardBerita({ data }) {
+  const MAX_LENGTHtitle = 75;
+  const MAX_LENGTHdetail = 125;
+  const detail =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus ligula nec ultricies faucibus. Sed eleifend accumsan turpis id semper. Morbi et faucibus nisi. Cras in mauris at est bibendum dapibus at ac metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ultricies tincidunt aliquam. Nullam vestibulum metus sed metus bibendum porttitor. Nunc venenatis libero eget ante mollis gravida. Ut dictum ac justo nec molestie. Donec nec felis luctus tortor egestas accumsan. Maecenas laoreet auctor porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique magna non lobortis vestibulum.";
+
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -243,15 +251,25 @@ function CardBerita({ data }) {
               <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">
                 {formatter.format(Date.parse(data.CreatedAt))}
               </small>
-              <h3 className="xl:text-base lg:text-base max-h-16 truncate text-sm my-3 font-bold capitalize">
-                {data.Judul}
-              </h3>
-              <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
-                <h3 className="my-3 font-normal capitalize h-16 text-clip lg:text-sm 2xl:text-lg">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Integer finibus ligula nec ultricies faucibus. Sed eleifend
-                  accumsan
+              {data.Judul.length > MAX_LENGTHtitle ? (
+                <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-base">
+                  {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
                 </h3>
+              ) : (
+                <h3 className="my-3 font-bold capitalize h-16 text-ellipsis lg:text-sm 2xl:text-base">
+                  {data.Judul}
+                </h3>
+              )}
+              <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
+                {detail.length > MAX_LENGTHdetail ? (
+                  <h3 className="my-3 font-normal capitalize h-16 text-clip lg:text-sm 2xl:text-lg">
+                    {`${detail.substring(0, MAX_LENGTHdetail)}    ...`}
+                  </h3>
+                ) : (
+                  <h3 className="my-3 font-normal capitalize h-16 text-clip lg:text-sm 2xl:text-lg">
+                    {detail}
+                  </h3>
+                )}
               </small>
             </div>
             <small className="text-xs font-semibold text-blue-900">
