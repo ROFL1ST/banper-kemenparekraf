@@ -1,14 +1,45 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Pagination } from "swiper";
+import { Link } from "@mui/material";
+import Modal from "./modal";
+import axios from "axios";
+import CardVideo from "./cardVideo";
+import Loading from "./loading";
 
 export default function Video() {
   const swiperRef2 = useRef();
+  const [videoData, setVideoData] = useState({ data: {}, loading: true });
+  const getList = async () => {
+    const url = "http://128.199.242.242/api/video";
+    try {
+      let respond = await axios.get(url);
+      setVideoData((s) => ({
+        ...s,
+        data: respond.data.data,
+        loading: false,
+      }));
+    } catch (error) {
+      console.log(error);
+      setVideoData((s) => ({ ...s, loading: false }));
+    }
+  };
+  console.log(videoData.data);
+
+  useEffect(() => {
+    const ac = new AbortController();
+    getList();
+
+    return () => {
+      ac.abort();
+    };
+  }, []);
+  const { data, loading } = videoData;
 
   return (
     <>
@@ -65,48 +96,39 @@ export default function Video() {
                 },
               }}
             >
-              <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={1}
-                  allowFullScreen
-                ></iframe>
-              </SwiperSlide>
-              <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={0}
-                  allowFullScreen
-                ></iframe>
-              </SwiperSlide>
-              <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={0}
-                  allowFullScreen
-                ></iframe>
-              </SwiperSlide>
-              <SwiperSlide>
-                <iframe
-                  className="h-72 w-full"
-                  title="yt"
-                  src="https://www.youtube.com/embed/N9XIaxhe_EM"
-                  frameBorder={0}
-                  allowFullScreen
-                ></iframe>
-              </SwiperSlide>
+              {data && !loading ? (
+                videoData.data.map((i, key) => (
+                  <SwiperSlide key={key}>
+                    <CardVideo data={i} />
+                  </SwiperSlide>
+                ))
+              ) : (
+                <>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                </>
+              )}
             </Swiper>
           </div>
           <div className="flex justify-center 2xl:mt-16 mt-5">
-            <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
-              Selengkapnya
-            </button>
+            <Link href={"/galeri/video/selengkapnya"}>
+              <button className="bg-[#2e619c] bg-opacity-90 text-white px-5 py-2 2xl:py-3 rounded-full">
+                Selengkapnya
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,13 +1,20 @@
 import Link from "next/link";
+import { useEffect, useState, useRef } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
+import Modal from "../components/modal";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
 
 export default function Login() {
+  useEffect(() => {
+    document.title = "Login";
+  });
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
   return (
     <>
-      <Navbar />
+      <Navbar open={open} setOpen={setOpen} />
       <Background>
         {" "}
         <Section text={"Login"} />
@@ -33,9 +40,11 @@ export default function Login() {
             </label>
           </div>
           <div className="flex flex-col justify-center lg:px-72">
-            <button className="bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full">
-              <Link href={"/proposal/submitDoc"}>Login</Link>
-            </button>
+            <Link href={"/proposal"}>
+              <button className="bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full">
+                Login
+              </button>
+            </Link>
             <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
             <p className="text-xs">
               Belum punya akun?{" "}
@@ -46,7 +55,12 @@ export default function Login() {
           </div>
         </div>
       </Background>
-      <Footer/>
+      <Footer />
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+      ></Modal>
     </>
   );
 }

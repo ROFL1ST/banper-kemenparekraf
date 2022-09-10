@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import FotoCard from "./card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -7,10 +7,39 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "@mui/material";
+import Modal from "./modal";
+import axios from "axios";
+import Loading from "./loading";
 
 export default function Foto() {
   const swiperRef = useRef();
-  const imageLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
+
+  // API galery
+  const [items, setItem] = useState({ data: {}, loading: true });
+  const getList = async () => {
+    const url = "http://128.199.242.242/api/gallery?offset=0&limit=10";
+    try {
+      let respond = await axios.get(url);
+      // console.log(respond.data.data);
+      setItem((s) => ({ ...s, data: respond.data.data, loading: false }));
+    } catch (error) {
+      console.log(error);
+      setItem((s) => ({ ...s, loading: false }));
+    }
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+
+    getList();
+
+    return () => {
+      ac.abort();
+    };
+  }, []);
+  // console.log(items);
+  const { data, loading } = items;
   return (
     <>
       <div
@@ -34,7 +63,6 @@ export default function Foto() {
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
-            
             className="mySwiper"
             spaceBetween={20}
             slidesPerView={1}
@@ -62,19 +90,34 @@ export default function Foto() {
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 necessitatibus? Quidem doloribus ex iure.
               </p>
-              <button className="bg-blue-900 bg-opacity-90 text-white px-5 lg:py-1 2xl:py-2 rounded-full 2xl:text-xl font-semibold mt-10">
-                Selengkapnya
-              </button>
+              <Link href={"/galeri/foto/selengkapnya"}>
+                <button className="bg-[#2e619c] bg-opacity-90 text-white px-5 py-2 2xl:py-3 rounded-full lg:text-sm 2xl:text-base font-semibold mt-10">
+                  Selengkapnya
+                </button>
+              </Link>
             </SwiperSlide>
-            {imageLength.map((i, key) => (
-              <SwiperSlide className="swiper-image" key={key}>
-                <FotoCard
-                  img={
-                    "https://awsimages.detik.net.id/visual/2021/12/30/cover-headline-sandiaga-uno-4_169.jpeg?w=360&q=90"
-                  }
-                />
-              </SwiperSlide>
-            ))}
+            {data && !loading ? (
+              data.map((i, key) => (
+                <SwiperSlide className="swiper-image" key={key}>
+                  <FotoCard data={i} />
+                </SwiperSlide>
+              ))
+            ) : (
+              <>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+              </>
+            )}
           </Swiper>
           <div className="flex justify-center space-x-3 2xl:mt-10 mt-5">
             <button onClick={() => swiperRef.current.slidePrev()}>
@@ -89,6 +132,13 @@ export default function Foto() {
                 strokeWidth={1}
               />
             </button>
+          </div>
+          <div className="lg:hidden flex justify-center 2xl:mt-16 mt-5">
+            <Link href={"/galeri/foto/selengkapnya"}>
+              <button className="bg-[#2e619c] text-white px-5 py-2 2xl:py-3 rounded-full">
+                Selengkapnya
+              </button>
+            </Link>
           </div>
         </div>
       </div>
