@@ -145,6 +145,10 @@ export default function Dashboard() {
               <p className="text-[#00f6ff]">Video</p>
             </div>
             {/* video */}
+            
+          </div>
+          <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
+            <Link href={"/galeri"}>see more</Link>
           </div>
         </div>
         {/* faq */}
@@ -276,8 +280,7 @@ function CardBerita({ data }) {
 }
 
 function IsiBerita({ data }) {
-  const reactElement = parse(`${data}`);
-  console.log(reactElement.slice(0, 1)[0]);
+  const reactElement = parse(`${data.substring(0, 340)}...`);
 
-  return reactElement.slice(0, 1)[0];
+  return reactElement;
 }
