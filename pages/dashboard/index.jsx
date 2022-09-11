@@ -7,11 +7,11 @@ import Navbar from "../components/navbar";
 import React, { useEffect } from "react";
 import Section from "../components/section";
 import building from "../assets/building.png";
-import axios from "axios";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
 import parse from "html-react-parser";
+import { getFeed } from '../api/restApi'
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -26,7 +26,8 @@ export default function Dashboard() {
     };
     const url = "http://128.199.242.242/api/news?limit=2";
     try {
-      let respond = await axios.get(url, config);
+      //let respond = await axios.get(url, config);
+      let respond = await getFeed("news?limit=2").then(result => result);
       console.log(respond.data.data, "hai");
       setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
     } catch (error) {
@@ -145,10 +146,6 @@ export default function Dashboard() {
               <p className="text-[#00f6ff]">Video</p>
             </div>
             {/* video */}
-            
-          </div>
-          <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
-            <Link href={"/galeri"}>see more</Link>
           </div>
         </div>
         {/* faq */}
@@ -280,7 +277,8 @@ function CardBerita({ data }) {
 }
 
 function IsiBerita({ data }) {
-  const reactElement = parse(`${data.substring(0, 340)}...`);
+  const reactElement = parse(`${data}`);
+  console.log(reactElement.slice(0, 1)[0]);
 
-  return reactElement;
+  return reactElement.slice(0, 1)[0];
 }
