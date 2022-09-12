@@ -28,13 +28,13 @@ export default function MenuSubsector() {
       <div className="flex justify-center  mt-9  items-center ml-5 ">
         <Swiper
           className="w-screen"
-          slidesPerView={13}
+          slidesPerView={"auto"}
           spaceBetween={15}
           freeMode={true}
           modules={[FreeMode, Pagination]}
         >
           {subsector?.map((i, key) => (
-            <SwiperSlide className="min-w-fit" key={key}>
+            <SwiperSlide className="min-w-fit menu" key={key}>
               <Button nama={i.Nama} />
             </SwiperSlide>
           ))}
