@@ -106,9 +106,13 @@ export default function DetailPage() {
               ) : (
                 items
                   ?.slice(0, 3)
-                  .map((data, index) => (
-                    <News_small_card data={data} key={index}></News_small_card>
-                  ))
+                  .map((i, index) =>
+                    data.Id === i.Id ? (
+                      <></>
+                    ) : (
+                      <News_small_card data={i} key={index}></News_small_card>
+                    )
+                  )
               )}
             </div>
           </div>
@@ -122,25 +126,29 @@ export default function DetailPage() {
 
           <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pb-16 w-full">
             {" "}
-            {loading ? (
+            {!loading2 && data ? (
+              items.slice(0, 4).map((i, key) =>
+                data.Id === i.Id ? (
+                  <></>
+                ) : (
+                  <div
+                    onClick={() => {
+                      getData();
+                      // console.log("hai")
+                    }}
+                    key={key}
+                  >
+                    <Card data={i} />
+                  </div>
+                )
+              )
+            ) : (
               <>
                 <DetailCardLoading />
                 <DetailCardLoading />
                 <DetailCardLoading />
                 <DetailCardLoading />
               </>
-            ) : (
-              items.slice(0, 4).map((i, key) => (
-                <div
-                  onClick={() => {
-                    getData();
-                    // console.log("hai")
-                  }}
-                  key={key}
-                >
-                  {id === i.Id ? <></> : <Card data={i} />}
-                </div>
-              ))
             )}
           </div>
           <div

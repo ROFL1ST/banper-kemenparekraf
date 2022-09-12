@@ -9,7 +9,7 @@ export default function DetailCardLoading({ data }) {
   });
   return (
     <>
-      <div className="bg-gray-100 w-96 h-80 rounded-2xl border-blue-300 animate-pulse">
+      <div className="bg-gray-100 w-full h-80 rounded-2xl border-blue-300 animate-pulse">
         <div className="w-full h-1/2 bg-cover rounded-t-2xl bg-center bg-gray-300"></div>
         <div className="pl-2 pr-10 py-5 space-y-16">
           <div className="space-y-2">
