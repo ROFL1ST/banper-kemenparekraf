@@ -2,6 +2,7 @@
 const MAX_LENGTH = 60;
 import axios from "axios";
 import Link from "next/link";
+import { PutViews } from "../api/restApi";
 export default function Card({ data }) {
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
@@ -9,9 +10,8 @@ export default function Card({ data }) {
     day: "2-digit",
   });
   const viewss = async () => {
-    const url = `http://128.199.242.242/api/news/${data.Id}`;
     try {
-      let respond = await axios.put(url);
+      let respond = await PutViews(`news/${data.Id}`).then((result) => result);
       console.log("berhasil");
     } catch (error) {
       console.log(error);

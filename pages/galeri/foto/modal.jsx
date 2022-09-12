@@ -11,9 +11,9 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
 import axios from "axios";
+import { getFoto } from "../../api/restApi";
 export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
   const swiperRef = React.useRef();
- 
 
   //
   const formatter = new Intl.DateTimeFormat("en-GB", {
@@ -26,7 +26,11 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
     const url = `http://128.199.242.242/api/gallery/${foto.id}`;
     // console.log(url)
     try {
-      let respond = await axios.get(url);
+      // let respond = await axios.get(url);
+      let respond = await getFoto(`gallery/${foto.id}`).then(
+        (result) => result
+      );
+
       setFotoData((s) => ({
         ...s,
         data: respond.data.data,

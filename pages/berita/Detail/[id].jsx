@@ -12,6 +12,7 @@ import Small_Card_Loading from "./component/Small_Card_Loading";
 import News_small_card from "./component/News_small_card";
 import DetailCardLoading from "./component/detailCardLoading";
 import Card from "../card";
+import { getFeed } from "../../api/restApi";
 
 export default function DetailPage() {
   const [loading, setLoading] = React.useState(true);
@@ -24,11 +25,10 @@ export default function DetailPage() {
   const { id } = router.query;
 
   const getData = async () => {
-    const url = `http://128.199.242.242/api/news/${id}`;
+    // const url = `http://128.199.242.242/api/news/${id}`;
     try {
-      let respond = await axios.get(url);
+      let respond = await getFeed(`news/${id}`).then((result) => result);
       // let views = await axios.put(url);
-
       setDetail((s) => ({ ...s, data: respond.data.data[0], loading2: false }));
     } catch (error) {
       setLoading(false);
@@ -39,7 +39,7 @@ export default function DetailPage() {
   const getList = async () => {
     const url = "http://128.199.242.242/api/news";
     try {
-      let respond = await axios.get(url);
+      let respond = await getFeed("news").then((result) => result);
       // console.log(respond.data.data);
       setItem(respond.data.data);
       setLoading(false);
@@ -81,7 +81,7 @@ export default function DetailPage() {
             {/* detail text */}
             <div className="xl:w-11/12 lg:w-11/12 w-full text-lg pb-10">
               {/* {reactElement} */}
-              {data && !loading2  ? (
+              {data && !loading2 ? (
                 <Isi loading={loading2} data={data.isi}></Isi>
               ) : (
                 <div className="space-y-2  animate-pulse">

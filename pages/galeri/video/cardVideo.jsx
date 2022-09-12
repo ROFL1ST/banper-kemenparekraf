@@ -2,14 +2,15 @@ import React from "react";
 import Modal from "./modal";
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
+import { PutViews } from "../../api/restApi";
 
 export default function CardVideo({ data }) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
   const viewss = async () => {
-    const url = `http://128.199.242.242/api/video/${data.id}`;
+    // const url = `http://128.199.242.242/api/video/${data.id}`;
     try {
-      let respond = await axios.put(url);
+      let respond = await PutViews(`video/${data.id}`).then((result) => result);
       console.log("berhasil");
     } catch (error) {
       console.log(error);

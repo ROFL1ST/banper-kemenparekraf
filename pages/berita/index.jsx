@@ -6,6 +6,7 @@ import axios from "axios";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import Modal from "../components/modal";
+import { getFeed } from "../api/restApi";
 
 export default function Berita() {
   const [open, setOpen] = useState(false);
@@ -16,14 +17,8 @@ export default function Berita() {
   const cancelButtonRef = useRef(null);
 
   const getData = async () => {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "true",
-      },
-    };
-    const url = "http://128.199.242.242/api/news";
     try {
-      let respond = await axios.get(url, config);
+      let respond = await getFeed("news").then((result) => result);
       console.log(respond.data.data, "hai");
       setData(respond.data.data);
       setId(respond.data.data.length);
@@ -33,7 +28,6 @@ export default function Berita() {
       console.log(error);
     }
   };
-  
 
   useEffect(() => {
     const ac = new AbortController();

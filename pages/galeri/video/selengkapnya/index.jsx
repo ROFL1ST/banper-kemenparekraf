@@ -13,7 +13,9 @@ export default function Selengkapnya() {
   const getList = async () => {
     const url = "http://128.199.242.242/api/video";
     try {
-      let respond = await axios.get(url);
+      // let respond = await axios.get(url);
+      let respond = await getFeed("video").then((result) => result);
+w
       setVideoData((s) => ({
         ...s,
         data: respond.data.data,

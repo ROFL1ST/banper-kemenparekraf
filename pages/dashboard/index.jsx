@@ -11,7 +11,7 @@ import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
 import parse from "html-react-parser";
-import { getFeed } from '../api/restApi'
+import { getFeed } from "../api/restApi";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -24,10 +24,10 @@ export default function Dashboard() {
         "Access-Control-Allow-Origin": "true",
       },
     };
-    const url = "http://128.199.242.242/api/news?limit=2";
+
     try {
       //let respond = await axios.get(url, config);
-      let respond = await getFeed("news?limit=2").then(result => result);
+      let respond = await getFeed("news?limit=2").then((result) => result);
       console.log(respond.data.data, "hai");
       setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
     } catch (error) {
@@ -277,8 +277,8 @@ function CardBerita({ data }) {
 }
 
 function IsiBerita({ data }) {
-  const reactElement = parse(`${data}`);
-  console.log(reactElement.slice(0, 1)[0]);
+  const reactElement = parse(`${data.substring(0, 449)}`);
+  console.log(reactElement);
 
-  return reactElement.slice(0, 1)[0];
+  return reactElement;
 }
