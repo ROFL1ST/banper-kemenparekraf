@@ -1,7 +1,45 @@
 import * as axios from "axios";
 const BASE_URL = "http://128.199.242.242/api/";
-function getFeed(path_url) {
-  console.log("BASE_URL + path_url", BASE_URL + path_url);
+function getApi(path_url) {
+  return new Promise((resolve, reject) => {
+    var config = {
+      method: "get",
+      url: BASE_URL + path_url,
+      headers: {
+        //'Authorization': 'Bearer ' + token
+      },
+    };
+    axios(config)
+      .then(function (response) {
+        resolve(response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  });
+}
+export function getFeed(path_url) {
+  // console.log("BASE_URL + path_url", BASE_URL + path_url);
+  return new Promise((resolve, reject) => {
+    var config = {
+      method: "get",
+      url: BASE_URL + path_url,
+      headers: {
+        //'Authorization': 'Bearer ' + token
+      },
+    };
+    axios(config) 
+      .then(function (response) {
+        resolve(response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  });
+}
+
+function getGaleri(path_url) {
+  // console.log("BASE_URL + path_url", BASE_URL + path_url);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",
@@ -20,46 +58,6 @@ function getFeed(path_url) {
   });
 }
 
-function getFoto(path_url) {
-  console.log("BASE_URL + path_url", BASE_URL + path_url);
-  return new Promise((resolve, reject) => {
-    var config = {
-      method: "get",
-      url: BASE_URL + path_url,
-      headers: {
-        //'Authorization': 'Bearer ' + token
-      },
-    };
-    axios(config)
-      .then(function (response) {
-        resolve(response);
-      })
-      .catch(function (error) {
-        reject(error);
-      });
-  });
-}
-
-
-function getVideo(path_url) {
-  console.log("BASE_URL + path_url", BASE_URL + path_url);
-  return new Promise((resolve, reject) => {
-    var config = {
-      method: "get",
-      url: BASE_URL + path_url,
-      headers: {
-        //'Authorization': 'Bearer ' + token
-      },
-    };
-    axios(config)
-      .then(function (response) {
-        resolve(response);
-      })
-      .catch(function (error) {
-        reject(error);
-      });
-  });
-}
 function getDelete(path_url, token) {
   return new Promise((resolve, reject) => {
     console.log("path_url", BASE_URL + path_url);
@@ -79,7 +77,7 @@ function getDelete(path_url, token) {
       });
   });
 }
-function PostFeed(path_url, token, data, method) {
+function postFeed(path_url, token, data, method) {
   return new Promise((resolve, reject) => {
     var config = {
       method: method,
@@ -100,7 +98,7 @@ function PostFeed(path_url, token, data, method) {
   });
 }
 
-function PutViews(path_url) {
+function putViews(path_url) {
   return new Promise((resolve, reject) => {
     var config = {
       method: "put",
@@ -118,4 +116,4 @@ function PutViews(path_url) {
       });
   });
 }
-export { getFeed, PostFeed, getDelete, PutViews, getFoto, getVideo };
+export { postFeed as PostFeed, getDelete, putViews as PutViews, getGaleri ,getApi};

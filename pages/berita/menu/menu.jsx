@@ -1,15 +1,20 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
+import MenuBerita from "./menuBerita";
+import MenuProvinsi from "./menuProvinsi";
+import MenuSubsector from "./menuSubsector";
 
 export default function Menu() {
   const { query } = useRouter();
   const { sort, type } = query;
+
   return (
     <div className="pt-28">
       <div className="h-full w-full bg-white shadow-sm py-5">
         <div className="flex space-x-10 justify-center">
           <Link href={`/berita?type=berita&sort=${sort}`}>
-            <p
+            <button
               className={`${
                 type === undefined || type === "berita"
                   ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
@@ -17,10 +22,10 @@ export default function Menu() {
               }`}
             >
               Berita
-            </p>
+            </button>
           </Link>
           <Link href={`/berita?type=subsector&sort=${sort}`}>
-            <p
+            <button
               className={`${
                 type === "subsector"
                   ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
@@ -28,10 +33,10 @@ export default function Menu() {
               }`}
             >
               Subsector
-            </p>
+            </button>
           </Link>
           <Link href={`/berita?type=provinsi&sort=${sort}`}>
-            <p
+            <button
               className={`${
                 type === "provinsi"
                   ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
@@ -39,32 +44,18 @@ export default function Menu() {
               }`}
             >
               Provinsi
-            </p>
+            </button>
           </Link>
         </div>
-        <div className="flex justify-center space-x-5 mt-9">
-          <Link href={`/berita?type=${type}&sort=terbaru`}>
-            <button
-              className={
-                sort === "terbaru"
-                  ? "bg-blue-900 bg-opacity-80 py-1 rounded-full px-5 text-white font-semibold"
-                  : "bg-gray-400 py-1 rounded-full px-5 text-white "
-              }
-            >
-              Terbaru
-            </button>
-          </Link>
-          <Link href={`/berita?type=${type}&sort=trending`}>
-            <button
-              className={
-                sort === "trending"
-                  ? "bg-blue-900 bg-opacity-80 py-1 rounded-full px-5 text-white font-semibold"
-                  : "bg-gray-400 py-1 rounded-full px-5 text-white "
-              }
-            >
-              Trending
-            </button>
-          </Link>
+        <div>
+          {" "}
+          {type === "berita" ? (
+            <MenuBerita />
+          ) : type === "subsector" ? (
+            <MenuSubsector />
+          ) : (
+            <MenuProvinsi />
+          )}
         </div>
       </div>
     </div>

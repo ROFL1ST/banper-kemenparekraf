@@ -10,8 +10,8 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
-import axios from "axios";
-import { getFoto } from "../../api/restApi";
+import { getGaleri } from "../../api/restApi";
+
 export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
   const swiperRef = React.useRef();
 
@@ -27,7 +27,7 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
     // console.log(url)
     try {
       // let respond = await axios.get(url);
-      let respond = await getFoto(`gallery/${foto.id}`).then(
+      let respond = await getGaleri(`gallery/${foto.id}`).then(
         (result) => result
       );
 

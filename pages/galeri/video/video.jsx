@@ -7,11 +7,9 @@ import {
 } from "@heroicons/react/24/outline";
 import { Pagination } from "swiper";
 import { Link } from "@mui/material";
-import Modal from "./modal";
-import axios from "axios";
 import CardVideo from "./cardVideo";
 import Loading from "./loading";
-import { getFeed, getVideo } from "../../api/restApi";
+import { getGaleri } from "../../api/restApi";
 
 export default function Video() {
   const swiperRef2 = useRef();
@@ -20,7 +18,7 @@ export default function Video() {
     // const url = "http://128.199.242.242/api/video";
     try {
       // let respond = await axios.get(url);
-      let respond = await getVideo("video").then((result) => result);
+      let respond = await getGaleri("video").then((result) => result);
       setVideoData((s) => ({
         ...s,
         data: respond.data.data,

@@ -11,7 +11,7 @@ import { Link } from "@mui/material";
 import Modal from "./modal";
 import axios from "axios";
 import Loading from "./loading";
-import { getFoto } from "../../api/restApi";
+import { getGaleri } from "../../api/restApi";
 
 export default function Foto() {
   const swiperRef = useRef();
@@ -20,10 +20,9 @@ export default function Foto() {
   const [items, setItem] = useState({ data: {}, loading: true });
   const getList = async () => {
     try {
-      let respond = await getFoto("gallery?offset=0&limit=10").then(
+      let respond = await getGaleri("gallery?offset=0&limit=10").then(
         (result) => result
       );
-      // console.log(respond.data.data);
       setItem((s) => ({ ...s, data: respond.data.data, loading: false }));
     } catch (error) {
       console.log(error);
