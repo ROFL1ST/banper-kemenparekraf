@@ -80,7 +80,7 @@ export default function Dashboard() {
             consequatur libero. Necessitatibus, consequatur?
           </p>
           <Section text={"Berita"} />
-          <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full xl:w-1/2 lg:w-full">
+          <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
             {data.berita.length != 0 ||
             data.berita != undefined ||
             data.berita != [] ? (
@@ -262,7 +262,7 @@ function CardBerita({ data }) {
                   {data.Judul}
                 </h3>
               )}
-              <div className="xl:text-base h-36 lg:text-base text-sm overflow-y-auto scrollbar">
+              <div className="xl:text-base h-36 mb-2 lg:text-base text-sm overflow-y-auto scrollbar">
                 <IsiBerita data={data.isi} />
               </div>
             </div>
