@@ -82,8 +82,8 @@ body {
   }
   .mySwiper{
     width: 100%;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+      padding-left: 5px !important;
+      padding-right: 5px !important;
 
     display: flex;
     justify-content: center;

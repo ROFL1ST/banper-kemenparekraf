@@ -35,7 +35,7 @@ export default function Banner({ data, loading2 }) {
       {/* <!-- Banner For Mobile --> */}
       <div className="flex px-5 flex-col justify-center items-center pt-5 xl:hidden lg:hidden w-11/12">
         {data && !loading2 ? (
-          <h1 className="flex title-font sm:text-xl text-3xl mb-4 font-bold pt-5 pb-2">
+          <h1 className="flex title-font text-xl mb-4 font-bold pt-5 pb-2">
             {data.Judul}
           </h1>
         ) : (

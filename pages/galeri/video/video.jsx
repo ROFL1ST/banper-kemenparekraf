@@ -52,7 +52,7 @@ export default function Video() {
             "url(https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80)",
         }}
       >
-        <div className="bg-black bg-opacity-50 h-full w-full 2xl:py-20 lg:py-16 py-16 rounded-b-3xl">
+        <div className="bg-black bg-opacity-50 h-full w-full 2xl:py-20 lg:py-16 py-16 md:p-0 p-5 rounded-b-3xl">
           <h1 className="text-6xl font-semibold text-white text-center">
             Video
           </h1>
@@ -74,7 +74,7 @@ export default function Video() {
               />
             </button>
           </div>
-          <div className="px-5">
+          <div className="md:px-5">
             {" "}
             <Swiper
               onSwiper={(swiper2) => (swiperRef2.current = swiper2)}

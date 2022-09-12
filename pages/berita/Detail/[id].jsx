@@ -32,6 +32,7 @@ export default function DetailPage() {
       setDetail((s) => ({ ...s, data: respond.data.data[0], loading2: false }));
     } catch (error) {
       setLoading(false);
+      setDetail((s) => ({ ...s, loading2: false }));
       console.log(error);
     }
   };
@@ -74,13 +75,13 @@ export default function DetailPage() {
   return (
     <>
       <Navbar />
-      <div className=" items-center flex h-full flex-col pb-10 pt-36 xl:w-2/3 lg:w-2/3 mx-auto">
+      <div className=" items-center flex h-full flex-col pb-10 pt-36 xl:w-2/3 lg:w-11/12 mx-auto">
         <Banner data={data} loading2={loading2} />
         {/* Content */}
-        <div className="relative pt-16  flex xl:justify-between lg:justify-between justify-center lg:w-full w-4/5 ">
+        <div className="relative pt-16  flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
           <div className="content-left xl:w-11/12 lg:w-11/12 flex flex-col">
             {/* detail text */}
-            <div className="xl:w-11/12 lg:w-11/12 w-full text-lg pb-10">
+            <div className="xl:w-11/12 lg:w-11/12 w-full text-base pb-10">
               {/* {reactElement} */}
               {data && !loading2 ? (
                 <Isi loading={loading2} data={data.isi}></Isi>
@@ -133,7 +134,9 @@ export default function DetailPage() {
                 ) : (
                   <div
                     onClick={() => {
-                      getData();
+                      // getData();
+                      setDetail((s) => ({ ...s, loading2: true }));
+
                       // console.log("hai")
                     }}
                     key={key}
@@ -161,7 +164,6 @@ export default function DetailPage() {
               }
             }}
           >
-            {" "}
             <h1 className="flex justify-center items-center text-blue-900 underline  cursor-pointer">
               More
             </h1>
