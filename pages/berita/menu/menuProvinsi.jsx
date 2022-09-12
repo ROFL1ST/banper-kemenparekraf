@@ -1,13 +1,14 @@
-import { Link } from "@mui/material";
-import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation, FreeMode } from "swiper";
 import { getApi } from "../../api/restApi";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  ArrowLeftCircleIcon,
+  ArrowRightCircleIcon,
+} from "@heroicons/react/24/solid";
 
 export default function MenuProvinsi() {
   const [provinsi, setProvinsi] = useState([]);
@@ -23,21 +24,41 @@ export default function MenuProvinsi() {
   useEffect(() => {
     getProvinsi();
   }, []);
+  const navigationPrevRef = useRef(null);
+  const navigationNextRef = useRef(null);
   return (
     <>
-      <div className="flex justify-center  mt-9  items-center ml-5 ">
+      <div className="flex justify-center  mt-9  items-center  ">
         <Swiper
           className="w-screen"
           slidesPerView={"auto"}
           spaceBetween={15}
           freeMode={true}
-          modules={[FreeMode, Pagination]}
+          navigation={{
+            prevEl: navigationPrevRef.current,
+            nextEl: navigationNextRef.current,
+          }}
+          modules={[FreeMode, Pagination, Navigation]}
         >
           {provinsi?.map((i, key) => (
-            <SwiperSlide className="min-w-fit menu" key={key}>
+            <SwiperSlide className=" menu" key={key}>
               <Button nama={i.NamaProvinsi} />
             </SwiperSlide>
           ))}
+          {/* <div className="flex">
+            <button ref={navigationPrevRef}>
+              <ArrowLeftCircleIcon
+                className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-gray-400"
+                strokeWidth={1}
+              />
+            </button>
+            <button ref={navigationNextRef}>
+              <ArrowRightCircleIcon
+                className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-gray-400"
+                strokeWidth={1}
+              />
+            </button>
+          </div> */}
         </Swiper>
       </div>
     </>
@@ -49,8 +70,7 @@ function Button({ nama, id }) {
     <button
       className={`bg-blue-900 bg-opacity-80  px-5 py-2 text-sm   rounded-full   text-white font-semibold `}
     >
-      <p className="px-2">{nama}</p>
+      {nama}
     </button>
   );
 }
-

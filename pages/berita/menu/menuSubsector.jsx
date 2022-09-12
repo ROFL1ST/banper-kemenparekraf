@@ -34,7 +34,7 @@ export default function MenuSubsector() {
           modules={[FreeMode, Pagination]}
         >
           {subsector?.map((i, key) => (
-            <SwiperSlide className="min-w-fit menu" key={key}>
+            <SwiperSlide className=" menu" key={key}>
               <Button nama={i.Nama} />
             </SwiperSlide>
           ))}
@@ -49,7 +49,7 @@ function Button({ nama, id }) {
     <button
       className={`bg-blue-900 bg-opacity-80  px-5 py-2 text-sm   rounded-full   text-white font-semibold `}
     >
-      <p className="px-2">{nama}</p>
+      {nama}
     </button>
   );
 }
