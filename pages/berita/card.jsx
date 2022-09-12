@@ -4,6 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 import { PutViews } from "../api/restApi";
 export default function Card({ data }) {
+  
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",

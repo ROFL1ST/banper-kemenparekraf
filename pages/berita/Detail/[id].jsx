@@ -61,11 +61,12 @@ export default function DetailPage() {
     const ac = new AbortController();
 
     getList();
+    getData();
 
     return () => {
       ac.abort();
     };
-  }, []);
+  }, [router]);
   // console.log(items[0]["title"]);
   const [more, setMore] = React.useState(false);
   const { data, loading2 } = detail;
@@ -133,10 +134,11 @@ export default function DetailPage() {
                 <div
                   onClick={() => {
                     getData();
+                    // console.log("hai")
                   }}
                   key={key}
                 >
-                  <Card data={i} />
+                  {id === i.Id ? <></> : <Card data={i} />}
                 </div>
               ))
             )}
