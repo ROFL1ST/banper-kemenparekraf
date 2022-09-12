@@ -28,8 +28,9 @@ export default function MenuSubsector() {
       <div className="flex justify-center  mt-9  items-center ml-5 ">
         <Swiper
           className="w-screen"
-          slidesPerView={"auto"}
-          spaceBetween={25}
+          slidesPerView={13}
+          spaceBetween={15}
+          freeMode={true}
           modules={[FreeMode, Pagination]}
         >
           {subsector?.map((i, key) => (
