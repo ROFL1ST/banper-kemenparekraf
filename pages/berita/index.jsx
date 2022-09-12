@@ -1,8 +1,7 @@
 import Navbar from "../components/navbar";
 import { useEffect, useState, useRef } from "react";
-import Menu from "./menu";
+import Menu from "./menu/menu";
 import Card from "./card";
-import axios from "axios";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import Modal from "../components/modal";
@@ -19,9 +18,7 @@ export default function Berita() {
   const getData = async () => {
     try {
       let respond = await getFeed("news").then((result) => result);
-      console.log(respond.data.data, "hai");
       setData(respond.data.data);
-      setId(respond.data.data.length);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -40,11 +37,9 @@ export default function Berita() {
   useEffect(() => {
     document.title = "Berita";
   });
-  console.log(data);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
-
       <Menu />
       <div className="pb-20 xl:px-20 lg:px-20  px-10">
         <div className="grid xl:grid-cols-4 lg:grid-cols-4 grid-cols-1 gap-3 mt-10">

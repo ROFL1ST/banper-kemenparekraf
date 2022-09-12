@@ -12,6 +12,7 @@ import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
 import parse from "html-react-parser";
 import { getFeed } from "../api/restApi";
+import Galeri from "./component/Galeri";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -28,10 +29,10 @@ export default function Dashboard() {
     try {
       //let respond = await axios.get(url, config);
       let respond = await getFeed("news?limit=2").then((result) => result);
-      console.log(respond.data.data, "hai");
+      // console.log(respond.data.data, "hai");
       setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setData((s) => ({ ...s, loading: false }));
     }
   };
@@ -39,7 +40,7 @@ export default function Dashboard() {
     document.title = "Dashboard";
     getData();
   }, []);
-  console.log(data.berita);
+  // console.log(data.berita);
   return (
     <>
       <div className="overflow-x-hidden">
@@ -107,46 +108,7 @@ export default function Dashboard() {
             <Link href={"/berita?type=berita&sort=terbaru"}>see more</Link>
           </div>
           <Section text={"Galeri"} />
-          <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-            {/* foto */}
-            <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
-            {/* foto */}
-
-            {/* video */}
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-              <p className="text-[#00f6ff]">Video</p>
-            </div>
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate ">
-                lorem ipsum
-              </p>
-              <p className="text-[#00f6ff]">Video</p>
-            </div>
-            <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-              <p className="text-[#00f6ff]">Video</p>
-            </div>
-            {/* video */}
-          </div>
+          <Galeri />
         </div>
         {/* faq */}
         <div
@@ -278,7 +240,7 @@ function CardBerita({ data }) {
 
 function IsiBerita({ data }) {
   const reactElement = parse(`${data.substring(0, 449)}`);
-  console.log(reactElement);
+  // console.log(reactElement);
 
   return reactElement;
 }
