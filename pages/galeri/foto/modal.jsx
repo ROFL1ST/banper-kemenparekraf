@@ -102,19 +102,19 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-11/12 w-full justify-center ">
+                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-4/5 w-full justify-center ">
                   {foto && !loading ? (
-                    <button
+                    <div
                       className={`${
                         data[0]["images"].length !== 1 ? "flex" : "hidden"
                       } justify-center items-center`}
-                      onClick={() => swiperRef.current.slidePrev()}
                     >
                       <ArrowLeftCircleIcon
+                        onClick={() => swiperRef.current.slidePrev()}
                         className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
                         strokeWidth={1}
                       />
-                    </button>
+                    </div>
                   ) : (
                     <></>
                   )}
@@ -147,17 +147,18 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                     )}
                   </Swiper>
                   {foto && !loading ? (
-                    <button
+                    <div
                       className={`${
                         data[0]["images"].length !== 1 ? "flex" : "hidden"
                       } justify-center items-center`}
-                      onClick={() => swiperRef.current.slideNext()}
+                      
                     >
                       <ArrowRightCircleIcon
+                      onClick={() => swiperRef.current.slideNext()}
                         className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
                         strokeWidth={1}
                       />
-                    </button>
+                    </div>
                   ) : (
                     <></>
                   )}
