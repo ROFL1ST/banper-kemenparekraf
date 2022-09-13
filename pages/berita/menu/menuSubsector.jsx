@@ -25,7 +25,7 @@ export default function MenuSubsector() {
   }, []);
   return (
     <>
-      <nav className="mt-9 px-20 bg-red-200 flex">
+      <nav className="mt-9 px-20 space-x-2 space-y-2">
         {subsector?.map((i, key) => (
           <Button nama={i.Nama} key={key} />
         ))}
@@ -37,7 +37,7 @@ export default function MenuSubsector() {
 function Button({ nama, id }) {
   return (
     <button
-      className={`bg-blue-900 rounded-full px-3 text-white font-semibold `}
+      className={`bg-blue-900 rounded-full py-1 px-3 text-white font-semibold `}
     >
       {nama}
     </button>
