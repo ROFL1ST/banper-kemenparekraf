@@ -74,7 +74,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
 
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <div className=" flex absolute xl:right-[19.5rem] lg:right-10 right-5 top-20 text-white">
+              <div className="cursor-pointer flex absolute xl:right-[19.5rem] lg:right-10 right-5 top-20 text-white">
                 <svg
                   onClick={() => {
                     setOpen(false);
