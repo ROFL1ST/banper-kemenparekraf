@@ -14,11 +14,8 @@ export default function Galeri() {
     try {
       await getGaleri("gallery?offset=0&limit=3").then((result) => {
         setImages(result.data.data);
-        setLoading(false);
       });
     } catch (er) {
-      setLoading(false);
-
       console.log(er);
     }
   }
@@ -100,6 +97,24 @@ function Foto({ data, foto }) {
 }
 
 function Video({ video, vid, loading }) {
+  const [kota, setKota] = useState({});
+  const [load, setLoad] = useState(true);
+  async function detail() {
+    try {
+      await getGaleri(`video/${video.id}`).then((result) => {
+        setKota(result.data.data[0]);
+        setLoad(false);
+      });
+    } catch (error) {
+      console.log(error);
+      setLoad(false);
+    }
+  }
+
+  useEffect(() => {
+    detail();
+  }, []);
+  // console.log(kota)
   // modal video
   const [open1, setOpen1] = useState(false);
   const cancelButtonRef = useRef(null);
@@ -135,6 +150,17 @@ function Video({ video, vid, loading }) {
               </svg>
             </div>
           </div>
+          {!load && kota ? (
+            <p className="uppercase font-bold text-white xl:text-base lg:text-base md:text-sm text-sm truncate">
+              {kota.NamaKota}
+            </p>
+          ) : (
+            <>
+              <div className="animate-pulse">
+                <div className="text-xs font-bold h-2 w-1/4 bg-gray-500 rounded-full"></div>
+              </div>
+            </>
+          )}
           <p className="text-blue-300">video</p>
         </div>
       </div>

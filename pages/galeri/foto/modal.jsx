@@ -14,8 +14,7 @@ import { getGaleri } from "../../api/restApi";
 
 export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
   const swiperRef = React.useRef();
-  // let timer = null;
-  //
+
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -23,10 +22,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
   });
   const [fotoData, setFotoData] = React.useState({ data: {}, loading: true });
   const getList = async () => {
-    // const url = `http://128.199.242.242/api/gallery/${foto.id}`;
-    // console.log(url)
     try {
-      // let respond = await axios.get(url);
       let respond = await getGaleri(`gallery/${foto.id}`).then(
         (result) => result
       );
@@ -50,7 +46,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
     };
   }, []);
   const { data, loading } = fotoData;
-  console.log(foto);
+
   return (
     <>
       <Transition.Root show={open} as={React.Fragment}>
@@ -151,10 +147,9 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                       className={`${
                         data[0]["images"].length !== 1 ? "flex" : "hidden"
                       } justify-center items-center`}
-                      
                     >
                       <ArrowRightCircleIcon
-                      onClick={() => swiperRef.current.slideNext()}
+                        onClick={() => swiperRef.current.slideNext()}
                         className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
                         strokeWidth={1}
                       />
