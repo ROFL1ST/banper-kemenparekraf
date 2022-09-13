@@ -4,7 +4,16 @@ import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
 import Modal from "../modal";
 import Loading from "./loading";
-
+function shuffleArray(array) {
+  let i = array.length - 1;
+  for (; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
 export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);
   const [panjang, setPanjang] = React.useState(0);
@@ -28,8 +37,9 @@ export default function Selengkapnya() {
   }, []);
 
   const { data, loading } = images;
-  console.log(panjang, "banyak foto");
 
+  const shuffledPosts = shuffleArray(data);
+  console.log(shuffledPosts)
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -37,7 +47,7 @@ export default function Selengkapnya() {
       <div className="pt-24 px-20">
         {images && !loading ? (
           <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-            {data?.map((i, key) => (
+            {shuffledPosts.map((i, key) => (
               <Foto
                 key={key}
                 foto={key}
