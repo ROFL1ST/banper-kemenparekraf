@@ -12,9 +12,9 @@ import {
 } from "@heroicons/react/24/solid";
 import { getGaleri } from "../../api/restApi";
 
-export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
+export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
   const swiperRef = React.useRef();
-
+  // let timer = null;
   //
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
@@ -23,7 +23,7 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
   });
   const [fotoData, setFotoData] = React.useState({ data: {}, loading: true });
   const getList = async () => {
-    const url = `http://128.199.242.242/api/gallery/${foto.id}`;
+    // const url = `http://128.199.242.242/api/gallery/${foto.id}`;
     // console.log(url)
     try {
       // let respond = await axios.get(url);
@@ -103,16 +103,25 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-1/2 w-full justify-center ">
-                  <button onClick={() => swiperRef.current.slidePrev()}>
-                    <ArrowLeftCircleIcon
-                      className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
-                      strokeWidth={1}
-                    />
-                  </button>
+                  {foto && !loading ? (
+                    <button
+                      className={`${
+                        data[0]["images"].length !== 1 ? "flex" : "hidden"
+                      } justify-center items-center`}
+                      onClick={() => swiperRef.current.slidePrev()}
+                    >
+                      <ArrowLeftCircleIcon
+                        className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
+                        strokeWidth={1}
+                      />
+                    </button>
+                  ) : (
+                    <></>
+                  )}
                   <Swiper
                     centeredSlides={true}
                     slidesPerView={1}
-                    spaceBetween={20}
+                    spaceBetween={30}
                     pagination={{
                       clickable: true,
                     }}
@@ -120,11 +129,11 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
                     onSwiper={(swiper) => {
                       swiperRef.current = swiper;
                     }}
-                    className="mySwiper"
+                    className="modalSwiper"
                   >
-                    {data && !loading ? (
+                    {foto && !loading ? (
                       data[0]["images"].map((i, key) => (
-                        <SwiperSlide key={key}>
+                        <SwiperSlide className="modalGalery" key={key}>
                           <CardModal
                             img={i.images}
                             tgl={formatter.format(Date.parse(foto.CreatedAt))}
@@ -137,12 +146,21 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
                       <></>
                     )}
                   </Swiper>
-                  <button onClick={() => swiperRef.current.slideNext()}>
-                    <ArrowRightCircleIcon
-                      className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
-                      strokeWidth={1}
-                    />
-                  </button>
+                  {foto && !loading ? (
+                    <button
+                      className={`${
+                        data[0]["images"].length !== 1 ? "flex" : "hidden"
+                      } justify-center items-center`}
+                      onClick={() => swiperRef.current.slideNext()}
+                    >
+                      <ArrowRightCircleIcon
+                        className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
+                        strokeWidth={1}
+                      />
+                    </button>
+                  ) : (
+                    <></>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

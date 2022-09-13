@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { getGaleri } from "../../../api/restApi";
 import Footer from "../../../components/footer";
 import Modal from "../../../components/modal";
 import Navbar from "../../../components/navbar";
@@ -10,27 +11,21 @@ export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
   const [videoData, setVideoData] = React.useState({ data: {}, loading: true });
-  const getList = async () => {
-    const url = "http://128.199.242.242/api/video";
+  async function getVideo() {
     try {
-      // let respond = await axios.get(url);
-      let respond = await getFeed("video").then((result) => result);
-w
-      setVideoData((s) => ({
-        ...s,
-        data: respond.data.data,
-        loading: false,
-      }));
+      await getGaleri("video?offset=0&limit=10").then((result) => {
+        setVideoData((s) => ({ ...s, data: result.data.data, loading: false }));
+      });
     } catch (error) {
       console.log(error);
-      setVideoData((s) => ({ ...s, loading: false }));
+      setVideoData((s) => ({ ...s, loading: true }));
     }
-  };
-  console.log(videoData.data);
+  }
+  // console.log(videoData.data);
 
   React.useEffect(() => {
     const ac = new AbortController();
-    getList();
+    getVideo();
 
     return () => {
       ac.abort();

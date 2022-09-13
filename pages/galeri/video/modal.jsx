@@ -4,7 +4,7 @@ import CardModal from "./cardModal";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function Modal({ open, setOpen, cancelButtonRef, data }) {
+export default function VideoModal({ open, setOpen, cancelButtonRef, data }) {
  
   return (
     <>

@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "./modal";
+import VideoModal from "./modal";
 import { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import { PutViews } from "../../api/restApi";
@@ -52,7 +52,7 @@ export default function CardVideo({ data }) {
           </div>
         </div>
       </div>
-      <Modal
+      <VideoModal
         data={data}
         open={open}
         setOpen={setOpen}

@@ -109,6 +109,9 @@ export default function Dashboard() {
           </div>
           <Section text={"Galeri"} />
           <Galeri />
+          <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
+            <Link href={"/galeri"}>see more</Link>
+          </div>
         </div>
         {/* faq */}
         <div
