@@ -3,6 +3,7 @@ import { getGaleri } from "../../../api/restApi";
 import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
 import Modal from "../modal";
+import Loading from "./loading";
 
 export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);
@@ -34,9 +35,9 @@ export default function Selengkapnya() {
       <Navbar open={open} setOpen={setOpen} />
 
       <div className="pt-24 px-20">
-        <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-          {images && !loading ? (
-            data?.map((i, key) => (
+        {images && !loading ? (
+          <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
+            {data?.map((i, key) => (
               <Foto
                 key={key}
                 foto={key}
@@ -44,11 +45,13 @@ export default function Selengkapnya() {
                 loading={loading}
                 panjang={panjang}
               />
-            ))
-          ) : (
-            <></>
-          )}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <>
+            <Loading />
+          </>
+        )}
       </div>
       <Footer />
     </>
