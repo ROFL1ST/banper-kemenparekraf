@@ -74,7 +74,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
 
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <div className="lg:hidden flex absolute right-5 top-20 text-white">
+              <div className=" flex absolute xl:right-[19.5rem] lg:right-10 right-5 top-20 text-white">
                 <svg
                   onClick={() => {
                     setOpen(false);
@@ -102,7 +102,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-1/2 w-full justify-center ">
+                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-11/12 w-full justify-center ">
                   {foto && !loading ? (
                     <button
                       className={`${
@@ -120,7 +120,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                   )}
                   <Swiper
                     centeredSlides={true}
-                    slidesPerView={1}
+                    slidesPerView={"auto"}
                     spaceBetween={30}
                     pagination={{
                       clickable: true,

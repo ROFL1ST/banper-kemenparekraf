@@ -3,7 +3,7 @@ import { useState } from "react";
 import { getGaleri } from "../../api/restApi";
 import Modal from "../../galeri/foto/modal";
 import VideoModal from "../../galeri/video/modal";
-
+import GaleryLoading from "./GaleryLoading";
 
 export default function Galeri() {
   const [images, setImages] = useState([]);
@@ -40,29 +40,32 @@ export default function Galeri() {
     videoList();
   }, []);
 
-  // modal foto
-  const [open, setOpen] = useState(false);
-
   return (
     <>
-      <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-        {/* foto */}
-        {images?.map((i, key) => (
-          <Foto key={key} foto={key} data={i} loading={loading} />
-        ))}
-        {/* foto */}
+      {!loading ? (
+        <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
+          {/* foto */}
+          {images?.map((i, key) => (
+            <Foto key={key} foto={key} data={i} />
+          ))}
+          {/* foto */}
 
-        {/* video */}
-        {videos?.map((i, vid) => (
-          <Video video={i} vid={vid} key={vid} loading={loading} />
-        ))}
-        {/* video */}
-      </div>
+          {/* video */}
+          {videos?.map((i, vid) => (
+            <Video video={i} vid={vid} key={vid} />
+          ))}
+          {/* video */}
+        </div>
+      ) : (
+        <>
+          <GaleryLoading />
+        </>
+      )}
     </>
   );
 }
 
-function Foto({ data, foto, loading }) {
+function Foto({ data, foto }) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
 
@@ -85,14 +88,13 @@ function Foto({ data, foto, loading }) {
           </p>
         </div>
       </div>
-     
-        <Modal
-          open={open}
-          setOpen={setOpen}
-          cancelButtonRef={cancelButtonRef}
-          foto={data}
-        />
-    
+
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+        foto={data}
+      />
     </>
   );
 }

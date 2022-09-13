@@ -17,7 +17,7 @@ function shuffleArray(array) {
 export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);
   const [panjang, setPanjang] = React.useState(0);
-  const cancelButtonRef = React.useRef(null);
+
 
   const [images, setImages] = React.useState({ data: {}, loading: true });
   async function imageList() {
@@ -39,12 +39,12 @@ export default function Selengkapnya() {
   const { data, loading } = images;
 
   const shuffledPosts = shuffleArray(data);
-  console.log(shuffledPosts)
+
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
 
-      <div className="pt-24 px-20">
+      <div className="pt-24 lg:px-20 px-5">
         {images && !loading ? (
           <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
             {shuffledPosts.map((i, key) => (
@@ -67,7 +67,7 @@ export default function Selengkapnya() {
     </>
   );
 }
-function Foto({ i, foto, loading, panjang }) {
+function Foto({ i, foto }) {
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
   return (
