@@ -13,16 +13,7 @@ import Link from "next/link";
 import parse from "html-react-parser";
 import { getFeed } from "../api/restApi";
 import Galeri from "./component/Galeri";
-function shuffleArray(array) {
-  let i = array.length - 1;
-  for (; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    const temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-  return array;
-}
+
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
@@ -50,7 +41,7 @@ export default function Dashboard() {
     getData();
   }, []);
   // console.log(data.berita);
-  const shuffledPosts = shuffleArray(data.berita);
+
   return (
     <>
       <div className="overflow-x-hidden">
@@ -101,10 +92,10 @@ export default function Dashboard() {
                   <CardBeritaLoading />
                 </>
               ) : data.berita.length != 1 ? (
-                shuffledPosts.map((i, key) => <CardBerita key={key} data={i} />)
+                data.berita.map((i, key) => <CardBerita key={key} data={i} />)
               ) : (
                 <>
-                  {shuffledPosts.map((i, key) => (
+                  {data.berita.map((i, key) => (
                     <CardBerita key={key} data={i} />
                   ))}
                   <CardForOneBerita />
