@@ -21,26 +21,16 @@ function getApi(path_url) {
       });
   });
 }
-export function getDown(path_url) {
-  // console.log("BASE_URL + path_url", BASE_URL + path_url);
-  return new Promise((resolve, reject) => {
-    var config = {
-      method: "get",
-      url: DOWNLOAD_URL + path_url,
-      headers: {
-        //'Authorization': 'Bearer ' + token
-      },
-    };
-    axios(config)
-      .then(function (response) {
-        resolve(response);
-      })
-      .catch(function (error) {
-        reject(error);
-      });
+function download(url, filename) {
+  console.log("halo");
+  fetch(url).then(async function (t) {
+    const b = await t.blob();
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(b);
+    a.setAttribute("download", filename);
+    a.click();
   });
 }
-
 
 function getGaleri(path_url) {
   // console.log("BASE_URL + path_url", BASE_URL + path_url);
@@ -126,4 +116,5 @@ export {
   putViews as PutViews,
   getGaleri,
   getApi,
+  download,
 };

@@ -11,7 +11,7 @@ import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
 import parse from "html-react-parser";
-import { getDown, getApi } from "../api/restApi";
+import { getDown, getApi, download } from "../api/restApi";
 import Galeri from "./component/Galeri";
 
 export default function Dashboard() {
@@ -45,18 +45,10 @@ export default function Dashboard() {
   };
 
   // juknis
-  const download = async () => {
-    try {
-      await getDown(
-        "assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
-      ).then((result) => {
-        console.log(result);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
+  const juknisUrl =
+    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+  const juknisName = "juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   useEffect(() => {
     document.title = "Dashboard";
     getData();
@@ -166,9 +158,7 @@ export default function Dashboard() {
             </div>
             <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
               <button
-                onClick={() => {
-                  download();
-                }}
+                onClick={() => download(juknisUrl, juknisName)}
                 className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full"
               >
                 Unduh Juknis

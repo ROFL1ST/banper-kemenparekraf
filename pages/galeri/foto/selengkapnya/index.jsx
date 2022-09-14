@@ -37,7 +37,7 @@ export default function Selengkapnya() {
 
   const { data, loading } = images;
 
-  const shuffledPosts = shuffleArray(data);
+  // const shuffledPosts = shuffleArray(data);
 
   return (
     <>
