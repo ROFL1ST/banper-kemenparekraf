@@ -47,13 +47,16 @@ export default function Menu() {
             </button>
           </Link>
         </div>
-        {type === "berita" ? (
-          <MenuBerita />
-        ) : type === "subsector" ? (
-          <MenuSubsector />
-        ) : (
-          <MenuProvinsi />
-        )}
+        <div>
+          {" "}
+          {type === "berita" ? (
+            <MenuBerita />
+          ) : type === "subsector" ? (
+            <MenuSubsector />
+          ) : (
+            <MenuProvinsi />
+          )}
+        </div>
       </div>
     </div>
   );

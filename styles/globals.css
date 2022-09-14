@@ -137,3 +137,7 @@ body {
 }:-webkit-scrollbar-thumb:hover {
   background: #1d4481;
 }
+
+.menu{
+  width: auto !important;
+}

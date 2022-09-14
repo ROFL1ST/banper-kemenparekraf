@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper";
+import { Pagination, Navigation, FreeMode } from "swiper";
 import { getApi } from "../../api/restApi";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -25,19 +25,36 @@ export default function MenuSubsector() {
   }, []);
   return (
     <>
-      <nav className="mt-9 px-20 space-x-2 space-y-2">
-        {subsector?.map((i, key) => (
-          <Button nama={i.Nama} key={key} />
-        ))}
-      </nav>
+      <div className="flex justify-center  mt-9  items-center ml-5 ">
+        <Swiper
+          className="w-screen"
+          slidesPerView={"auto"}
+          spaceBetween={15}
+          freeMode={true}
+          modules={[FreeMode, Pagination]}
+        >
+          {subsector?.map((i, key) => (
+            <SwiperSlide className=" menu" key={key}>
+              <Button nama={i.Nama} i={key} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </>
   );
 }
 
-function Button({ nama, id }) {
+function Button({ nama, id, i }) {
+  const [active, setActive] = useState(false);
   return (
     <button
-      className={`bg-blue-900 rounded-full py-1 px-3 text-white font-semibold `}
+      onClick={() => {
+        setActive(false);
+        // setActive(true);
+      }}
+      className={`${
+        active ? "bg-blue-900" : "bg-gray-400"
+      } bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold `}
     >
       {nama}
     </button>
