@@ -4,7 +4,6 @@ import axios from "axios";
 import Link from "next/link";
 import { PutViews } from "../api/restApi";
 export default function Card({ data }) {
-  
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -42,7 +41,7 @@ export default function Card({ data }) {
                 {`${data.Judul.substring(0, MAX_LENGTH)}    ...`}
                 <Link
                   href={`/berita/Detail/${data.Id}`}
-                  className="text-blue-600 text-sm font-medium"
+                  className="text-blue-600 text-sm font-medium cursor-pointer"
                 >
                   Read more
                 </Link>

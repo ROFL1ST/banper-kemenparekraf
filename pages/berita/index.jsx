@@ -50,7 +50,11 @@ export default function Berita() {
         <div className="grid xl:grid-cols-4 lg:grid-cols-4 grid-cols-1 gap-3 mt-10">
           {loading
             ? loadingLength.map((i, key) => <CardLoading key={key} />)
-            : data.map((i, key) => <Card data={i} key={key} />)}
+            : sub_id === undefined
+            ? data.map((i, key) => <Card data={i} key={key} />)
+            : data
+                .filter((i) => i.subsektorId === parseInt(sub_id))
+                .map((i, key) => <Card data={i} key={key} />)}
         </div>
       </div>
       <Footer />

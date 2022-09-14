@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import parse from "html-react-parser";
 
 export default function Banner({ data, loading2 }) {
   return (
@@ -8,19 +7,15 @@ export default function Banner({ data, loading2 }) {
       {/* Banner For Dekstop */}
       {data && !loading2 ? (
         <div
-          className="xl:flex lg:flex hidden    h-full  bg-no-repeat bg-cover justify-center rounded-3xl"
+          className="xl:flex bg-no-repeat bg-cover bg-bottom hidden lg:h-[26rem] 2xl:h-[34rem] w-full justify-center rounded-3xl"
           style={{
             backgroundImage: `url("http://128.199.242.242/dashboard/assets/images/blog/${data.foto}")`,
           }}
         >
-          <div className="px-10 py-10 bg-black bg-opacity-25 rounded-3xl">
-            <div className=" lg:flex-grow  lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left pt-96 text-white ">
-              <div>
-                <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium w-3/4">
-                  {data.Judul}
-                </h1>
-              </div>
-            </div>
+          <div className="h-full w-full bg-black bg-opacity-60 rounded-3xl flex flex-col justify-end p-8">
+            <h1 className="title-font sm:text-4xl text-white text-3xl mb-4 font-medium w-3/4">
+              {data.Judul}
+            </h1>
           </div>
         </div>
       ) : (

@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import axios from "axios";
+import { ArrowLeftCircleIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import Banner from "./component/Banner";
 import Isi from "./component/Isi";
 import Small_Card_Loading from "./component/Small_Card_Loading";
 import News_small_card from "./component/News_small_card";
 import DetailCardLoading from "./component/detailCardLoading";
 import Card from "../card";
-import { getFeed } from "../../api/restApi";
+import { getApi } from "../../api/restApi";
 
 export default function DetailPage() {
   const [loading, setLoading] = React.useState(true);
@@ -25,10 +25,8 @@ export default function DetailPage() {
   const { id } = router.query;
 
   const getData = async () => {
-    // const url = `http://128.199.242.242/api/news/${id}`;
     try {
-      let respond = await getFeed(`news/${id}`).then((result) => result);
-      // let views = await axios.put(url);
+      let respond = await getApi(`news/${id}`).then((result) => result);
       setDetail((s) => ({ ...s, data: respond.data.data[0], loading2: false }));
     } catch (error) {
       setLoading(false);
@@ -40,8 +38,7 @@ export default function DetailPage() {
   const getList = async () => {
     const url = "http://128.199.242.242/api/news";
     try {
-      let respond = await getFeed("news").then((result) => result);
-      // console.log(respond.data.data);
+      let respond = await getApi("news").then((result) => result);
       setItem(respond.data.data);
       setLoading(false);
     } catch (error) {
@@ -68,17 +65,19 @@ export default function DetailPage() {
       ac.abort();
     };
   }, [router]);
-  // console.log(items[0]["title"]);
   const [more, setMore] = React.useState(false);
   const { data, loading2 } = detail;
 
   return (
     <>
       <Navbar />
-      <div className=" items-center flex h-full flex-col pb-10 pt-36 xl:w-2/3 lg:w-11/12 mx-auto">
+      <div className="items-center flex h-full flex-col pb-10 pt-32 2xl:w-2/3 lg:w-11/12 mx-auto">
+        <button onClick={()=>Router.back()}>
+          <ArrowLeftCircleIcon className="h-8 w-8 text-blue-900 mb-5" />
+        </button>
         <Banner data={data} loading2={loading2} />
         {/* Content */}
-        <div className="relative pt-16  flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
+        <div className="relative pt-16 flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
           <div className="content-left xl:w-11/12 lg:w-11/12 flex flex-col">
             {/* detail text */}
             <div className="xl:w-11/12 lg:w-11/12 w-full text-base pb-10">

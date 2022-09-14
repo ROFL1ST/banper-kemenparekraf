@@ -3,7 +3,6 @@ const BASE_URL = "http://128.199.242.242/api/";
 const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
 
 function getApi(path_url) {
-  console.log(BASE_URL + path_url);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",
