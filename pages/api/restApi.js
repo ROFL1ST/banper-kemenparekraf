@@ -1,6 +1,9 @@
 import * as axios from "axios";
 const BASE_URL = "http://128.199.242.242/api/";
+const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
+
 function getApi(path_url) {
+  console.log(BASE_URL + path_url);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",
@@ -18,17 +21,17 @@ function getApi(path_url) {
       });
   });
 }
-export function getFeed(path_url) {
+export function getDown(path_url) {
   // console.log("BASE_URL + path_url", BASE_URL + path_url);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",
-      url: BASE_URL + path_url,
+      url: DOWNLOAD_URL + path_url,
       headers: {
         //'Authorization': 'Bearer ' + token
       },
     };
-    axios(config) 
+    axios(config)
       .then(function (response) {
         resolve(response);
       })
@@ -37,6 +40,7 @@ export function getFeed(path_url) {
       });
   });
 }
+
 
 function getGaleri(path_url) {
   // console.log("BASE_URL + path_url", BASE_URL + path_url);
@@ -116,4 +120,10 @@ function putViews(path_url) {
       });
   });
 }
-export { postFeed as PostFeed, getDelete, putViews as PutViews, getGaleri ,getApi};
+export {
+  postFeed as PostFeed,
+  getDelete,
+  putViews as PutViews,
+  getGaleri,
+  getApi,
+};
