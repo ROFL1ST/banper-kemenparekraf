@@ -11,7 +11,7 @@ import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
 import parse from "html-react-parser";
-import { getFeed } from "../api/restApi";
+import { getDown, getFeed } from "../api/restApi";
 import Galeri from "./component/Galeri";
 
 export default function Dashboard() {
@@ -20,12 +20,6 @@ export default function Dashboard() {
 
   const [data, setData] = React.useState({ berita: {}, loading: true });
   const getData = async () => {
-    const config = {
-      headers: {
-        "Access-Control-Allow-Origin": "true",
-      },
-    };
-
     try {
       //let respond = await axios.get(url, config);
       let respond = await getFeed("news?limit=2").then((result) => result);
@@ -36,9 +30,37 @@ export default function Dashboard() {
       setData((s) => ({ ...s, loading: false }));
     }
   };
+
+  // faq
+  const [faq, setFaq] = React.useState({ datas: {}, loading2: true });
+
+  const getFaq = async () => {
+    try {
+      await getFeed("master/faq").then((result) => {
+        setFaq((s) => ({ ...s, datas: result.data.data, loading2: false }));
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // juknis
+  const download = async () => {
+    try {
+      await getDown(
+        "assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
+      ).then((result) => {
+        console.log(result);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     document.title = "Dashboard";
     getData();
+    getFaq();
   }, []);
   // console.log(data.berita);
 
@@ -132,20 +154,23 @@ export default function Dashboard() {
             />
             <div className="gap-y-7 flex xl:flex-row lg:flex-row md:flex-col flex-col items-center w-full h-full justify-between mt-10">
               <div className="flex flex-col xl:w-1/2 lg:w-1/2 md:w-3/4 w-3/4 space-y-4">
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
-                <Question text={"Bagaimana cara mengajukan pertanyaan?"} />
+                {faq && !faq.loading2 ? (
+                  faq.datas.map((i, key) => (
+                    <Question key={key} text={i.title} sub={i.summary} />
+                  ))
+                ) : (
+                  <></>
+                )}
               </div>
               <div className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
             </div>
             <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
-              <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
+              <button
+                onClick={() => {
+                  download();
+                }}
+                className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full"
+              >
                 Unduh Juknis
               </button>
               <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
@@ -166,7 +191,7 @@ export default function Dashboard() {
   );
 }
 
-function Question({ text }) {
+function Question({ text, sub }) {
   return (
     <>
       <div className="mx-auto w-full  rounded-md  bg-white ">
@@ -174,7 +199,7 @@ function Question({ text }) {
           {({ open }) => (
             <>
               <Disclosure.Button className="flex w-full justify-between  px-4 py-2 text-left text-sm font-medium  ">
-                <span>{text}</span>
+                <span className="w-11/12">{text}</span>
                 <ChevronUpIcon
                   className={`${
                     open ? "rotate-180 transform" : ""
@@ -182,8 +207,7 @@ function Question({ text }) {
                 />
               </Disclosure.Button>
               <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                If you're unhappy with your purchase for any reason, email us
-                within 90 days and we'll refund you in full, no questions asked.
+                <Summary data={sub} />
               </Disclosure.Panel>
             </>
           )}
@@ -191,6 +215,12 @@ function Question({ text }) {
       </div>
     </>
   );
+}
+function Summary({ data }) {
+  const reactElement = parse(`${data}`);
+  // console.log(reactElement);
+
+  return reactElement;
 }
 
 function CardBerita({ data }) {
