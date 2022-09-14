@@ -1,5 +1,5 @@
 import { Link } from "@mui/material";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -9,7 +9,7 @@ import { getApi } from "../../api/restApi";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function MenuSubsector() {
+export default function MenuSubsector({ getData }) {
   const [subsector, setSubsector] = useState([]);
   const getSubsector = async () => {
     try {
@@ -35,7 +35,7 @@ export default function MenuSubsector() {
         >
           {subsector?.map((i, key) => (
             <SwiperSlide className=" menu" key={key}>
-              <Button nama={i.Nama} i={key} />
+              <Button nama={i.Nama} id={i.Id} getData={getData} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -44,17 +44,17 @@ export default function MenuSubsector() {
   );
 }
 
-function Button({ nama, id, i }) {
-  const [active, setActive] = useState(false);
+function Button({ nama, id, getData }) {
+  const { query } = useRouter();
+  const { sort, type } = query;
   return (
     <button
       onClick={() => {
-        setActive(false);
-        // setActive(true);
+        Router.push(`/berita?type=${type}&sort=${sort}&sub_id=${id}`);
+        getData();
       }}
-      className={`${
-        active ? "bg-blue-900" : "bg-gray-400"
-      } bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold `}
+      className={`
+       bg-gray-400 focus:bg-blue-900 bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold `}
     >
       {nama}
     </button>

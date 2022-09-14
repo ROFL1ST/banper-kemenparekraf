@@ -9,7 +9,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
   const handleChange = () => {
     setCheck((current) => !current);
   };
-  console.log(check);
+  // console.log(check);
   return (
     <>
       <Transition.Root show={open} as={React.Fragment}>
