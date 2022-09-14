@@ -79,7 +79,7 @@ export default function Navbar({ open, setOpen }) {
           <div className="cursor-pointer flex items-center space-x-1">
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                <Menu.Button className="inline-flex w-full justify-center text-sm hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                   Mekanisme Pendaftaran
                   <ChevronDownIcon
                     className="ml-2 -mr-1 h-5 w-5 "
@@ -141,10 +141,6 @@ export default function Navbar({ open, setOpen }) {
               <div>
                 <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
                   Login|Daftar
-                  <ChevronDownIcon
-                    className="ml-2 -mr-1 h-5 w-5 "
-                    aria-hidden="true"
-                  />
                 </Menu.Button>
               </div>
               <Transition
@@ -273,10 +269,7 @@ function DropdownLD({ setOpen, pathname }) {
         <div>
           <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             Login|Daftar
-            <ChevronDownIcon
-              className="ml-2 -mr-1 h-5 w-5 "
-              aria-hidden="true"
-            />
+           
           </Menu.Button>
         </div>
         <Transition

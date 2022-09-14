@@ -98,8 +98,8 @@ export default function Dashboard() {
           <Section text={"Berita"} />
           <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
             {data.berita.length != 0 ||
-            data.berita != undefined ||
-            data.berita != [] ? (
+              data.berita != undefined ||
+              data.berita != [] ? (
               data.loading ? (
                 <>
                   <CardBeritaLoading />
@@ -154,7 +154,10 @@ export default function Dashboard() {
                   <></>
                 )}
               </div>
-              <div className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
+              <div className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]" style={{
+                backgroundImage:
+                  "url(https://www.fitforworksg.com/wp-content/uploads/2021/07/pexels-ivan-samkov-4458554-scaled.jpg)",
+              }}></div>
             </div>
             <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
               <button
@@ -191,9 +194,8 @@ function Question({ text, sub }) {
               <Disclosure.Button className="flex w-full justify-between  px-4 py-2 text-left text-sm font-medium  ">
                 <span className="w-11/12">{text}</span>
                 <ChevronUpIcon
-                  className={`${
-                    open ? "rotate-180 transform" : ""
-                  } h-5 w-5 text-blue-900 `}
+                  className={`${open ? "rotate-180 transform" : ""
+                    } h-5 w-5 text-blue-900 `}
                 />
               </Disclosure.Button>
               <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
