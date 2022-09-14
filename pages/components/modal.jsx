@@ -2,49 +2,23 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import React from "react";
+import useDownloader from "react-use-downloader";
 
 export default function Modal({ open, setOpen, cancelButtonRef }) {
   const [check, setCheck] = React.useState(false);
 
   const handleChange = () => {
+    download(fileUrl, filename);
     setCheck((current) => !current);
   };
   // console.log(check);
 
-  const onButtonClick = () => {
-    // using Java Script method to get PDF file
-    fetch(
-      "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip"
-    ).then((response) => {
-      response.blob().then((blob) => {
-        // Creating new object of PDF file
-        const fileURL = window.URL.createObjectURL(blob);
-        // Setting various property values
-        let alink = document.createElement("a");
-        alink.href = fileURL;
-        alink.download =
-          "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
-        alink.click();
-      });
-    });
-  };
-  const onButtonClick2 = () => {
-    // using Java Script method to get PDF file
-    fetch(
-      "http://128.199.242.242/dashboard/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
-    ).then((response) => {
-      response.blob().then((blob) => {
-        // Creating new object of PDF file
-        const fileURL = window.URL.createObjectURL(blob);
-        // Setting various property values
-        let alink = document.createElement("a");
-        alink.href = fileURL;
-        alink.download =
-          "http://128.199.242.242/dashboard/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
-        alink.click();
-      });
-    });
-  };
+  const { size, elapsed, percentage, download, cancel, error, isInProgress } =
+    useDownloader();
+
+  const fileUrl =
+    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+  const filename = "File.pdf";
   return (
     <>
       <Transition.Root show={open} as={React.Fragment}>
@@ -131,8 +105,6 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
                         <button
                           onClick={() => {
                             setOpen(false);
-                            onButtonClick();
-                            onButtonClick2();
                           }}
                           type="submit"
                           className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
