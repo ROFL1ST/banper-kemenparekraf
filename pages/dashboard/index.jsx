@@ -13,7 +13,6 @@ import Link from "next/link";
 import parse from "html-react-parser";
 import { getDown, getApi, download } from "../api/restApi";
 import Galeri from "./component/Galeri";
-
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
