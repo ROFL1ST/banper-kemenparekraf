@@ -48,7 +48,8 @@ export default function Dashboard() {
 
   const juknisUrl =
     "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
-  const juknisName = "juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+  const TemplateUrl =
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   useEffect(() => {
     document.title = "Dashboard";
     getData();
@@ -167,7 +168,7 @@ export default function Dashboard() {
                 <a href={juknisUrl}> Unduh Juknis</a>
               </button>
               <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
-                Unduh Template
+                <a href={TemplateUrl}> Unduh Template</a>
               </button>
             </div>
           </div>
