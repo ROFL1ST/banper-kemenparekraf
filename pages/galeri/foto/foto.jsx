@@ -1,4 +1,4 @@
-import { useRef,useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import FotoCard from "./card";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
@@ -9,12 +9,38 @@ import {
 } from "@heroicons/react/24/outline";
 import { Link } from "@mui/material";
 import Modal from "./modal";
+import axios from "axios";
+import Loading from "./loading";
+import { getGaleri } from "../../api/restApi";
 
 export default function Foto() {
   const swiperRef = useRef();
-  const imageLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
-  const [open, setOpen] = useState(false);
-  const cancelButtonRef = useRef(null);
+
+  // API galery
+  const [items, setItem] = useState({ data: {}, loading: true });
+  const getList = async () => {
+    try {
+      let respond = await getGaleri("gallery?offset=0&limit=10").then(
+        (result) => result
+      );
+      setItem((s) => ({ ...s, data: respond.data.data, loading: false }));
+    } catch (error) {
+      console.log(error);
+      setItem((s) => ({ ...s, loading: false }));
+    }
+  };
+
+  useEffect(() => {
+    const ac = new AbortController();
+
+    getList();
+
+    return () => {
+      ac.abort();
+    };
+  }, []);
+  // console.log(items);
+  const { data, loading } = items;
   return (
     <>
       <div
@@ -24,7 +50,7 @@ export default function Foto() {
             "url(https://cdn.pixabay.com/photo/2018/04/02/21/33/building-3285254_960_720.jpg)",
         }}
       >
-        <div className="bg-black h-full w-full bg-opacity-25 pl-7 2xl:py-52 lg:py-10 py-16 ">
+        <div className="bg-black h-full w-full bg-opacity-25 md:pl-7 2xl:py-52 lg:py-10 py-16 ">
           <div className="xl:hidden lg:hidden w-11/12 mx-auto py-5">
             <h1 className="text-6xl font-semibold text-white text-center">
               Foto
@@ -66,21 +92,33 @@ export default function Foto() {
                 necessitatibus? Quidem doloribus ex iure.
               </p>
               <Link href={"/galeri/foto/selengkapnya"}>
-                <button className="bg-blue-900 bg-opacity-90 text-white px-5 lg:py-1 2xl:py-2 rounded-full 2xl:text-xl font-semibold mt-10">
+                <button className="bg-[#2e619c] bg-opacity-90 text-white px-5 py-2 2xl:py-3 rounded-full lg:text-sm 2xl:text-base font-semibold mt-10">
                   Selengkapnya
                 </button>
               </Link>
             </SwiperSlide>
-            {imageLength.map((i, key) => (
-              <SwiperSlide className="swiper-image" key={key}>
-                <FotoCard
-                 setOpen={setOpen}
-                  img={
-                    "https://awsimages.detik.net.id/visual/2021/12/30/cover-headline-sandiaga-uno-4_169.jpeg?w=360&q=90"
-                  }
-                />
-              </SwiperSlide>
-            ))}
+            {data && !loading ? (
+              data.map((i, key) => (
+                <SwiperSlide className="swiper-image" key={key}>
+                  <FotoCard data={i} />
+                </SwiperSlide>
+              ))
+            ) : (
+              <>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+                <SwiperSlide className="swiper-image">
+                  <Loading />
+                </SwiperSlide>
+              </>
+            )}
           </Swiper>
           <div className="flex justify-center space-x-3 2xl:mt-10 mt-5">
             <button onClick={() => swiperRef.current.slidePrev()}>
@@ -97,13 +135,14 @@ export default function Foto() {
             </button>
           </div>
           <div className="lg:hidden flex justify-center 2xl:mt-16 mt-5">
-            <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
-              Selengkapnya
-            </button>
+            <Link href={"/galeri/foto/selengkapnya"}>
+              <button className="bg-[#2e619c] text-white px-5 py-2 2xl:py-3 rounded-full">
+                Selengkapnya
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef} />
     </>
   );
 }

@@ -8,6 +8,9 @@ import Video from "./video/video";
 export default function Berita() {
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
+  React.useEffect(() => {
+    document.title = "Gallery"
+  })
 
   return (
     <>

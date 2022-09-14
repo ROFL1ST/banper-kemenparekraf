@@ -1,17 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationIcon } from "@heroicons/react/outline";
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import CardModal from "./cardModal";
-import { Navigation, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
-import {
-  ArrowLeftCircleIcon,
-  ArrowRightCircleIcon,
-} from "@heroicons/react/24/solid";
-export default function Modal({ open, setOpen, cancelButtonRef, data }) {
-  const swiperRef = React.useRef();
+
+export default function VideoModal({ open, setOpen, cancelButtonRef, data }) {
  
   return (
     <>
@@ -64,7 +57,7 @@ export default function Modal({ open, setOpen, cancelButtonRef, data }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="my-auto relative  overflow-hidden transform transition-all lg:w-1/2 w-4/5 h-full ">
+                <Dialog.Panel className="my-auto relative  overflow-hidden transform transition-all lg:w-1/2 w-11/12 h-full ">
                   <CardModal data={data}></CardModal>
                 </Dialog.Panel>
               </Transition.Child>

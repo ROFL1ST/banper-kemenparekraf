@@ -82,8 +82,8 @@ body {
   }
   .mySwiper{
     width: 100%;
-    padding-left: 5px !important;
-    padding-right: 5px !important;
+      padding-left: 5px !important;
+      padding-right: 5px !important;
 
     display: flex;
     justify-content: center;
@@ -102,3 +102,43 @@ body {
 } */
 
 /* Video */
+.scrollbar::-webkit-scrollbar {
+  width: 15px;
+  height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #f7f4ed;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #142b51;
+  border-radius: 100vh;
+  border: 3px solid #f6f7ed;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #1d4481;
+}
+
+/* ::-webkit-scrollbar {
+  width: 15px;
+  height: 20px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #f7f4ed;
+}
+::-webkit-scrollbar-thumb {
+  background: #142b51;
+  border-radius: 100vh;
+  border: 3px solid #f6f7ed;
+}:-webkit-scrollbar-thumb:hover {
+  background: #1d4481;
+} */
+
+.menu{
+  width: auto !important;
+}
+

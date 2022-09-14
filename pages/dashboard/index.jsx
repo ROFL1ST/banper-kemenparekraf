@@ -7,10 +7,12 @@ import Navbar from "../components/navbar";
 import React, { useEffect } from "react";
 import Section from "../components/section";
 import building from "../assets/building.png";
-import axios from "axios";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
+import parse from "html-react-parser";
+import { getFeed } from "../api/restApi";
+import Galeri from "./component/Galeri";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -23,13 +25,14 @@ export default function Dashboard() {
         "Access-Control-Allow-Origin": "true",
       },
     };
-    const url = "http://128.199.242.242/api/news?limit=2";
+
     try {
-      let respond = await axios.get(url, config);
-      console.log(respond.data.data, "hai");
+      //let respond = await axios.get(url, config);
+      let respond = await getFeed("news?limit=2").then((result) => result);
+      // console.log(respond.data.data, "hai");
       setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setData((s) => ({ ...s, loading: false }));
     }
   };
@@ -37,7 +40,8 @@ export default function Dashboard() {
     document.title = "Dashboard";
     getData();
   }, []);
-  console.log(data.berita);
+  // console.log(data.berita);
+
   return (
     <>
       <div className="overflow-x-hidden">
@@ -51,7 +55,6 @@ export default function Dashboard() {
               Banper Infrastruktur Ekraf
             </h1>
             <p className="mt-7 mb-3">
-              {" "}
               Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan
               Sarana Ruang Kreatif.
             </p>
@@ -79,7 +82,7 @@ export default function Dashboard() {
             consequatur libero. Necessitatibus, consequatur?
           </p>
           <Section text={"Berita"} />
-          <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full xl:w-1/2 lg:w-1/2">
+          <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
             {data.berita.length != 0 ||
             data.berita != undefined ||
             data.berita != [] ? (
@@ -103,40 +106,12 @@ export default function Dashboard() {
             )}
           </div>
           <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
-            <a href="#">see more</a>
+            <Link href={"/berita?type=berita&sort=terbaru"}>see more</Link>
           </div>
           <Section text={"Galeri"} />
-          <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-            <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
-            <div className="bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate ">
-                lorem ipsum
-              </p>
-            </div>
-            <div className="col-span-2 bg-gray-300 h-64 w-full flex flex-col justify-end p-7">
-              <p className="uppercase font-bold xl:text-base lg:text-base md:text-sm text-sm truncate">
-                lorem ipsum
-              </p>
-            </div>
+          <Galeri />
+          <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
+            <Link href={"/galeri"}>see more</Link>
           </div>
         </div>
         {/* faq */}
@@ -147,10 +122,13 @@ export default function Dashboard() {
               "url(https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg)",
           }}
         >
-          <div className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-sm drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3">
+          <div
+            id="faq"
+            className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-sm drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3"
+          >
             <Section
               text={"Pertanyaan yang sering diajukan (F.A.Q)"}
-              color="bg-blue-900"
+              color="bg-[#0d3361]"
             />
             <div className="gap-y-7 flex xl:flex-row lg:flex-row md:flex-col flex-col items-center w-full h-full justify-between mt-10">
               <div className="flex flex-col xl:w-1/2 lg:w-1/2 md:w-3/4 w-3/4 space-y-4">
@@ -167,10 +145,10 @@ export default function Dashboard() {
               <div className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
             </div>
             <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
-              <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
+              <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
                 Unduh Juknis
               </button>
-              <button className="text-white bg-blue-900 px-5 py-1.5 rounded-full">
+              <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
                 Unduh Template
               </button>
             </div>
@@ -216,6 +194,11 @@ function Question({ text }) {
 }
 
 function CardBerita({ data }) {
+  const MAX_LENGTHtitle = 48;
+  const MAX_LENGTHdetail = 125;
+  const detail =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus ligula nec ultricies faucibus. Sed eleifend accumsan turpis id semper. Morbi et faucibus nisi. Cras in mauris at est bibendum dapibus at ac metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ultricies tincidunt aliquam. Nullam vestibulum metus sed metus bibendum porttitor. Nunc venenatis libero eget ante mollis gravida. Ut dictum ac justo nec molestie. Donec nec felis luctus tortor egestas accumsan. Maecenas laoreet auctor porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique magna non lobortis vestibulum.";
+
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -229,19 +212,25 @@ function CardBerita({ data }) {
             style={{
               backgroundImage: `url(${data.foto})`,
             }}
-            className=" w-1/2 rounded-xl h-full bg-cover"
+            className=" w-1/2 rounded-xl h-full bg-cover bg-center"
           ></div>
           <div className="py-4 w-1/2 px-5 flex flex-col justify-between h-full">
             <div>
               <small className="font-semibold xl:text-base lg:text-sm text-xs text-gray-500">
                 {formatter.format(Date.parse(data.CreatedAt))}
               </small>
-              <h3 className="xl:text-base lg:text-base max-h-16 truncate text-sm my-3 font-bold capitalize">
-                {data.Judul}
-              </h3>
-              <small className="xl:text-base lg:text-base text-xs text-ellipsis ">
-                {data.isi}
-              </small>
+              {data.Judul.length > MAX_LENGTHtitle ? (
+                <h3 className="my-3 font-bold capitalize lg:h-14 h-16 text-sm lg:text-sm 2xl:text-base">
+                  {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
+                </h3>
+              ) : (
+                <h3 className="my-3 font-bold capitalize lg:h-14 h-16 text-ellipsis lg:text-sm 2xl:text-base">
+                  {data.Judul}
+                </h3>
+              )}
+              <div className="xl:text-base h-36 mb-2 lg:text-base text-sm overflow-y-auto scrollbar">
+                <IsiBerita data={data.isi} />
+              </div>
             </div>
             <small className="text-xs font-semibold text-blue-900">
               {data.NamaKota}
@@ -251,4 +240,11 @@ function CardBerita({ data }) {
       </Link>
     </>
   );
+}
+
+function IsiBerita({ data }) {
+  const reactElement = parse(`${data.substring(0, 449)}`);
+  // console.log(reactElement);
+
+  return reactElement;
 }

@@ -7,17 +7,18 @@ import {
 } from "@heroicons/react/24/outline";
 import { Pagination } from "swiper";
 import { Link } from "@mui/material";
-import Modal from "./modal";
-import axios from "axios";
 import CardVideo from "./cardVideo";
+import Loading from "./loading";
+import { getGaleri } from "../../api/restApi";
 
 export default function Video() {
   const swiperRef2 = useRef();
   const [videoData, setVideoData] = useState({ data: {}, loading: true });
   const getList = async () => {
-    const url = "http://128.199.242.242/api/video";
+    // const url = "http://128.199.242.242/api/video";
     try {
-      let respond = await axios.get(url);
+      // let respond = await axios.get(url);
+      let respond = await getGaleri("video").then((result) => result);
       setVideoData((s) => ({
         ...s,
         data: respond.data.data,
@@ -39,7 +40,6 @@ export default function Video() {
     };
   }, []);
   const { data, loading } = videoData;
-
   return (
     <>
       <div
@@ -49,7 +49,7 @@ export default function Video() {
             "url(https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80)",
         }}
       >
-        <div className="bg-black bg-opacity-50 h-full w-full 2xl:py-20 lg:py-16 py-16 rounded-b-3xl">
+        <div className="bg-black bg-opacity-50 h-full w-full 2xl:py-20 lg:py-16 py-16 md:p-0 p-5 rounded-b-3xl">
           <h1 className="text-6xl font-semibold text-white text-center">
             Video
           </h1>
@@ -71,7 +71,7 @@ export default function Video() {
               />
             </button>
           </div>
-          <div className="px-5">
+          <div className="md:px-5">
             {" "}
             <Swiper
               onSwiper={(swiper2) => (swiperRef2.current = swiper2)}
@@ -102,13 +102,29 @@ export default function Video() {
                   </SwiperSlide>
                 ))
               ) : (
-                <></>
+                <>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Loading />
+                  </SwiperSlide>
+                </>
               )}
             </Swiper>
           </div>
           <div className="flex justify-center 2xl:mt-16 mt-5">
             <Link href={"/galeri/video/selengkapnya"}>
-              <button className="bg-blue-500 text-white px-5 py-1 rounded-full">
+              <button className="bg-[#2e619c] bg-opacity-90 text-white px-5 py-2 2xl:py-3 rounded-full">
                 Selengkapnya
               </button>
             </Link>
