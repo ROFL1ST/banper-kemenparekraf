@@ -3,22 +3,23 @@ import { ExclamationIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import React from "react";
 import useDownloader from "react-use-downloader";
+import { getDown } from "../api/restApi";
 
 export default function Modal({ open, setOpen, cancelButtonRef }) {
   const [check, setCheck] = React.useState(false);
 
-  const handleChange = () => {
-    download(fileUrl, filename);
+  const handleChange = async () => {
+    await getDown(
+      "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
+    );
+    await getDown(
+      "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip"
+    );
+
     setCheck((current) => !current);
   };
   // console.log(check);
 
-  const { size, elapsed, percentage, download, cancel, error, isInProgress } =
-    useDownloader();
-
-  const fileUrl =
-    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
-  const filename = "File.pdf";
   return (
     <>
       <Transition.Root show={open} as={React.Fragment}>
