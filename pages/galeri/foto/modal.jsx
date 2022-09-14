@@ -12,10 +12,9 @@ import {
 } from "@heroicons/react/24/solid";
 import { getGaleri } from "../../api/restApi";
 
-export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
+export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
   const swiperRef = React.useRef();
 
-  //
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -23,10 +22,7 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
   });
   const [fotoData, setFotoData] = React.useState({ data: {}, loading: true });
   const getList = async () => {
-    const url = `http://128.199.242.242/api/gallery/${foto.id}`;
-    // console.log(url)
     try {
-      // let respond = await axios.get(url);
       let respond = await getGaleri(`gallery/${foto.id}`).then(
         (result) => result
       );
@@ -50,7 +46,7 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
     };
   }, []);
   const { data, loading } = fotoData;
-  console.log(foto);
+
   return (
     <>
       <Transition.Root show={open} as={React.Fragment}>
@@ -74,7 +70,7 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
 
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <div className="lg:hidden flex absolute right-5 top-20 text-white">
+              <div className="cursor-pointer flex absolute xl:right-[19.5rem] lg:right-10 right-5 top-20 text-white">
                 <svg
                   onClick={() => {
                     setOpen(false);
@@ -102,17 +98,26 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-1/2 w-full justify-center ">
-                  <button onClick={() => swiperRef.current.slidePrev()}>
-                    <ArrowLeftCircleIcon
-                      className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
-                      strokeWidth={1}
-                    />
-                  </button>
+                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-4/5 w-full justify-center ">
+                  {foto && !loading ? (
+                    <div
+                      className={`${
+                        data[0]["images"].length !== 1 ? "flex" : "hidden"
+                      } justify-center items-center`}
+                    >
+                      <ArrowLeftCircleIcon
+                        onClick={() => swiperRef.current.slidePrev()}
+                        className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
+                        strokeWidth={1}
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                   <Swiper
                     centeredSlides={true}
-                    slidesPerView={1}
-                    spaceBetween={20}
+                    slidesPerView={"auto"}
+                    spaceBetween={30}
                     pagination={{
                       clickable: true,
                     }}
@@ -120,11 +125,11 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
                     onSwiper={(swiper) => {
                       swiperRef.current = swiper;
                     }}
-                    className="mySwiper"
+                    className="modalSwiper"
                   >
-                    {data && !loading ? (
+                    {foto && !loading ? (
                       data[0]["images"].map((i, key) => (
-                        <SwiperSlide key={key}>
+                        <SwiperSlide className="modalGalery" key={key}>
                           <CardModal
                             img={i.images}
                             tgl={formatter.format(Date.parse(foto.CreatedAt))}
@@ -137,12 +142,21 @@ export default function Modal({ open, setOpen, cancelButtonRef, foto }) {
                       <></>
                     )}
                   </Swiper>
-                  <button onClick={() => swiperRef.current.slideNext()}>
-                    <ArrowRightCircleIcon
-                      className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
-                      strokeWidth={1}
-                    />
-                  </button>
+                  {foto && !loading ? (
+                    <div
+                      className={`${
+                        data[0]["images"].length !== 1 ? "flex" : "hidden"
+                      } justify-center items-center`}
+                    >
+                      <ArrowRightCircleIcon
+                        onClick={() => swiperRef.current.slideNext()}
+                        className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-white"
+                        strokeWidth={1}
+                      />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>

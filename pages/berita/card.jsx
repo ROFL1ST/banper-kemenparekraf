@@ -25,7 +25,7 @@ export default function Card({ data }) {
           onClick={() => {
             viewss();
           }}
-          className="bg-gray-100 w-full h-80 rounded-2xl"
+          className="bg-[#f5f5fa] w-full h-80 rounded-2xl"
         >
           <div
             className="w-full h-1/2 bg-cover rounded-t-2xl bg-center"

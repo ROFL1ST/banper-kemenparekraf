@@ -40,7 +40,6 @@ export default function Video() {
     };
   }, []);
   const { data, loading } = videoData;
-
   return (
     <>
       <div
