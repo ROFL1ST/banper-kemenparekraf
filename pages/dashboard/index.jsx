@@ -11,7 +11,7 @@ import CardBeritaLoading from "./component/CardBeritaLoading";
 import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
 import parse from "html-react-parser";
-import { getDown, getFeed } from "../api/restApi";
+import { getDown, getApi } from "../api/restApi";
 import Galeri from "./component/Galeri";
 
 export default function Dashboard() {
@@ -22,7 +22,7 @@ export default function Dashboard() {
   const getData = async () => {
     try {
       //let respond = await axios.get(url, config);
-      let respond = await getFeed("news?limit=2").then((result) => result);
+      let respond = await getApi("news?limit=2").then((result) => result);
       // console.log(respond.data.data, "hai");
       setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
     } catch (error) {
@@ -36,7 +36,7 @@ export default function Dashboard() {
 
   const getFaq = async () => {
     try {
-      await getFeed("master/faq").then((result) => {
+      await getApi("master/faq").then((result) => {
         setFaq((s) => ({ ...s, datas: result.data.data, loading2: false }));
       });
     } catch (error) {

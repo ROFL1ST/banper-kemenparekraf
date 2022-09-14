@@ -14,7 +14,7 @@ import { getGaleri } from "../../api/restApi";
 
 export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
   const swiperRef = React.useRef();
-
+ 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -24,9 +24,10 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
   const getList = async () => {
     try {
       let respond = await getGaleri(`gallery/${foto.id}`).then(
-        (result) => result
+        (result) => result,
+       
       );
-
+console.log(respond)
       setFotoData((s) => ({
         ...s,
         data: respond.data.data,
@@ -99,7 +100,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-4/5 w-full justify-center ">
-                  {foto && !loading ? (
+                  {foto && !loading  ? (
                     <div
                       className={`${
                         data[0]["images"].length !== 1 ? "flex" : "hidden"
@@ -127,7 +128,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                     }}
                     className="modalSwiper"
                   >
-                    {foto && !loading ? (
+                    {foto && !loading  ? (
                       data[0]["images"].map((i, key) => (
                         <SwiperSlide className="modalGalery" key={key}>
                           <CardModal
@@ -142,7 +143,7 @@ export default function Modal({ foto, open, setOpen, cancelButtonRef }) {
                       <></>
                     )}
                   </Swiper>
-                  {foto && !loading ? (
+                  {foto && !loading  ? (
                     <div
                       className={`${
                         data[0]["images"].length !== 1 ? "flex" : "hidden"

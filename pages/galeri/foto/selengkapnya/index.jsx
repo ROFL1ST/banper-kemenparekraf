@@ -18,7 +18,6 @@ export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);
   const [panjang, setPanjang] = React.useState(0);
 
-
   const [images, setImages] = React.useState({ data: {}, loading: true });
   async function imageList() {
     try {
@@ -47,7 +46,7 @@ export default function Selengkapnya() {
       <div className="pt-24 lg:px-20 px-5">
         {images && !loading ? (
           <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-            {shuffledPosts.map((i, key) => (
+            {data.map((i, key) => (
               <Foto
                 key={key}
                 foto={key}
@@ -70,6 +69,7 @@ export default function Selengkapnya() {
 function Foto({ i, foto }) {
   const [open, setOpen] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
+  console.log(foto)
   return (
     <>
       <div
@@ -97,6 +97,7 @@ function Foto({ i, foto }) {
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
         foto={i}
+       
       />
     </>
   );
