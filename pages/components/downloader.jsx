@@ -6,7 +6,7 @@ function Downloader({ setOpen, setCheck }) {
   const { pathname } = useRouter();
 
   const juknisUrl =
-    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+    "assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const TemplateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
