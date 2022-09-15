@@ -15,7 +15,7 @@ export default function Daftar() {
       <Navbar />
       <Background>
         <Section text={"Daftar"} />
-        <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
+        <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
           <div className="relative flex-grow w-full">
             <label className="leading-7 text-sm text-gray-600">
               *Nama Komunitas/ Pemerintah Daerah/ Lembaga Adat <br />
@@ -207,12 +207,12 @@ export default function Daftar() {
               />
             </div>
           </div>
-          <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white px-28 rounded-xl text-xl py-3">
+          <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3">
             daftar sekarang
           </button>
         </div>
-        <Footer />
       </Background>
+      <Footer />
     </>
   );
 }
