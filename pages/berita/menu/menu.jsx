@@ -24,7 +24,7 @@ export default function Menu({ getData, setLoading }) {
               Berita
             </button>
           </Link>
-          <Link href={`/berita?type=subsector&sort=${sort}`}>
+          <Link href={`/berita?type=subsector&sort=${sort}&sub_id=1`}>
             <button
               className={`${
                 type === "subsector"
