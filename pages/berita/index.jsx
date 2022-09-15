@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Navbar from "../components/navbar";
 import { useEffect, useState, useRef } from "react";
 import Menu from "./menu/menu";
