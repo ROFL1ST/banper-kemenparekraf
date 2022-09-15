@@ -11,13 +11,26 @@ import Background from "../components/background";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
+import Router, { useRouter } from "next/router";
 
 export default function Proposal() {
   const [open, setOpen] = useState(false);
+  const [token, setToken] = React.useState();
+  const { pathname } = useRouter();
 
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      return;
+      // alert("You need to Log In first!")
+    } else {
+      Router.push("/dashboard");
+    }
+  }, [token]);
   useEffect(() => {
     document.title = "Proposal";
   });
+  console.log(token);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />

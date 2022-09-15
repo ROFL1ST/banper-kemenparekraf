@@ -100,6 +100,25 @@ function postFeed(path_url, token, data, method) {
       });
   });
 }
+function login(path_url, data) {
+  return new Promise((resolve, reject) => {
+    var config = {
+      method: "post",
+      url: BASE_URL + path_url,
+      headers: {
+        "Access-Control-Allow-Origin": "true",
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        resolve(response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  });
+}
 
 function putViews(path_url) {
   return new Promise((resolve, reject) => {
@@ -125,4 +144,5 @@ export {
   putViews as PutViews,
   getGaleri,
   getApi,
+  login,
 };

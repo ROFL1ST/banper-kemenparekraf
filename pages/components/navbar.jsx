@@ -1,16 +1,21 @@
 /* eslint-disable @next/next/no-img-element */
 import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-import { useRouter } from "next/router";
+
 import logo from "../assets/banper.png";
 import React from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import Router, { useRouter } from "next/router";
 
 export default function Navbar({ open, setOpen }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const { pathname } = useRouter();
-
+  const [token, setToken] = React.useState();
+  React.useEffect(() => {
+    // Perform localStorage action
+    setToken(localStorage.getItem("token"));
+  }, []);
   return (
     <>
       {/* Dekstop */}
@@ -40,7 +45,7 @@ export default function Navbar({ open, setOpen }) {
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
-                  pathname === "/berita"  &&
+                  pathname === "/berita" &&
                   "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
                 } `}
               >
@@ -58,7 +63,11 @@ export default function Navbar({ open, setOpen }) {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400">
-              <DropdownLD setOpen={setOpen} pathname={pathname} />
+              {token != undefined ? (
+                <DropdownPeople pathname={pathname} setOpen={setOpen} />
+              ) : (
+                <DropdownLD setOpen={setOpen} pathname={pathname} />
+              )}
             </div>
           </nav>
         </div>
@@ -269,7 +278,6 @@ function DropdownLD({ setOpen, pathname }) {
         <div>
           <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             Login|Daftar
-           
           </Menu.Button>
         </div>
         <Transition
@@ -315,6 +323,98 @@ function DropdownLD({ setOpen, pathname }) {
                     } `}
                   >
                     Daftar
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    </>
+  );
+}
+
+function DropdownPeople({ setOpen, pathname }) {
+  return (
+    <>
+      <Menu as="div" className="relative inline-block text-left">
+        <div>
+          <Menu.Button className="flex w-full justify-center   hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 text-[142b51]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+              />
+            </svg>
+          </Menu.Button>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute right-0 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 ">
+              <Link href={"/proposal"}>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                        pathname === "/proposal" &&
+                        "bg-white  text-blue-900 font-bold "
+                      } `}
+                    >
+                      List Proposal
+                    </button>
+                  )}
+                </Menu.Item>
+              </Link>
+            </div>
+            <div className="px-1 py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      if (pathname === "/auth/daftar") {
+                        return;
+                      } else {
+                        setOpen(true);
+                      }
+                    }}
+                    className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                      pathname === "/auth/daftar" &&
+                      "bg-white  text-blue-900 font-bold "
+                    } `}
+                  >
+                    Edit Profile
+                  </button>
+                )}
+              </Menu.Item>
+            </div>
+            <div className="px-1 py-1">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      alert("You've Logged Out!");
+                      Router.push("/dashboard");
+                    }}
+                    className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white   `}
+                  >
+                    Logout
                   </button>
                 )}
               </Menu.Item>
