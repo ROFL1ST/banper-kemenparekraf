@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import MenuBerita from "./menuBerita";
 import MenuProvinsi from "./menuProvinsi";
 import MenuSubsector from "./menuSubsector";
 
-export default function Menu({ getData, setLoading }) {
+export default function Menu({ getData, setLoading ,data}) {
   const { query } = useRouter();
   const { sort, type } = query;
 
@@ -50,7 +49,7 @@ export default function Menu({ getData, setLoading }) {
         <div>
           {" "}
           {type === "berita" ? (
-            <MenuBerita  />
+            <MenuBerita getData={getData} data={data}/>
           ) : type === "subsector" ? (
             <MenuSubsector getData={getData} setLoading={setLoading} />
           ) : (
