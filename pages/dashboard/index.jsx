@@ -133,7 +133,7 @@ export default function Dashboard() {
           className="h-full w-full bg-gray-200 bg-cover bg-bottom "
           style={{
             backgroundImage:
-              "url(https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg)",
+              "url(https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg)" ,
           }}
         >
           <div
@@ -155,7 +155,7 @@ export default function Dashboard() {
                 )}
               </div>
               <div
-                className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100 rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
+                className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
                 style={{
                   backgroundImage:
                     "url(https://www.fitforworksg.com/wp-content/uploads/2021/07/pexels-ivan-samkov-4458554-scaled.jpg)",
