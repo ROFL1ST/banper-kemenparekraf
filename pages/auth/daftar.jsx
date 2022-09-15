@@ -1,15 +1,19 @@
 import Link from "next/link";
+import { useEffect } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
 
 export default function Daftar() {
+  useEffect(() => {
+    document.title = "Daftar";
+  });
+
   return (
     <>
       <Navbar />
       <Background>
-        {" "}
         <Section text={"Daftar"} />
         <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
           <div className="relative flex-grow w-full">
