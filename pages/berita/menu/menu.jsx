@@ -5,7 +5,7 @@ import MenuBerita from "./menuBerita";
 import MenuProvinsi from "./menuProvinsi";
 import MenuSubsector from "./menuSubsector";
 
-export default function Menu({getData}) {
+export default function Menu({ getData, setLoading }) {
   const { query } = useRouter();
   const { sort, type } = query;
 
@@ -50,9 +50,9 @@ export default function Menu({getData}) {
         <div>
           {" "}
           {type === "berita" ? (
-            <MenuBerita />
+            <MenuBerita  />
           ) : type === "subsector" ? (
-            <MenuSubsector getData={getData} />
+            <MenuSubsector getData={getData} setLoading={setLoading} />
           ) : (
             <MenuProvinsi />
           )}

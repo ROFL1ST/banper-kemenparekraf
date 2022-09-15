@@ -37,12 +37,12 @@ export default function Footer() {
           <img
             className="2xl:h-32 lg:h-20 h-20"
             src={kemenparekraf.src}
-            alt={kemenparekraf.src}
+            alt={"logo"}
           />
           <img
             className="2xl:h-32 lg:h-20 h-20"
             src={wonderful.src}
-            alt={wonderful.src}
+            alt={"logo"}
           />
         </div>
       </footer>
