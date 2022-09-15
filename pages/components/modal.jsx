@@ -4,21 +4,22 @@ import Link from "next/link";
 import React from "react";
 import useDownloader from "react-use-downloader";
 import { getDown } from "../api/restApi";
+import Downloader from "./downloader";
 
 export default function Modal({ open, setOpen, cancelButtonRef }) {
   const [check, setCheck] = React.useState(false);
 
   const handleChange = async () => {
-    await getDown(
-      "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
-    );
-    await getDown(
-      "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip"
-    );
+    // await getDown(
+    //   "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
+    // );
+    // await getDown(
+    //   "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip"
+    // );
 
     setCheck((current) => !current);
   };
-  // console.log(check);
+  console.log(check);
 
   return (
     <>
@@ -102,17 +103,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
                       Decline
                     </button>
                     {check ? (
-                      <Link href={"/auth/daftar"}>
-                        <button
-                          onClick={() => {
-                            setOpen(false);
-                          }}
-                          type="submit"
-                          className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
-                        >
-                          Accept
-                        </button>
-                      </Link>
+                      <Downloader setOpen={setOpen} setCheck={setCheck} />
                     ) : (
                       <button
                         type="submit"
