@@ -19,7 +19,7 @@ export default function Modal({ open, setOpen, cancelButtonRef }) {
 
     setCheck((current) => !current);
   };
-  console.log(check);
+  // console.log(check);
 
   return (
     <>

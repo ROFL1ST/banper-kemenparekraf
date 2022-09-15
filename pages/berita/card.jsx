@@ -12,7 +12,6 @@ export default function Card({ data }) {
   const viewss = async () => {
     try {
       let respond = await PutViews(`news/${data.Id}`).then((result) => result);
-      console.log("berhasil");
     } catch (error) {
       console.log(error);
     }
@@ -26,6 +25,7 @@ export default function Card({ data }) {
           }}
           className="bg-[#f5f5fa] w-full h-80 rounded-2xl"
         >
+          <p>{data.views}</p>
           <div
             className="w-full h-1/2 bg-cover rounded-t-2xl bg-center"
             style={{
