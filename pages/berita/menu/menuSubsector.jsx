@@ -46,7 +46,10 @@ export default function MenuSubsector({ getData }) {
 
 function Button({ nama, id, getData }) {
   const { query } = useRouter();
-  const { sort, type } = query;
+  const { sort, type, sub_id } = query;
+  const { pathname } = useRouter();
+  // console.log(sub_id)
+
   return (
     <button
       onClick={() => {
@@ -54,7 +57,11 @@ function Button({ nama, id, getData }) {
         getData();
       }}
       className={`
-       bg-gray-400 focus:bg-blue-900 bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold `}
+       ${
+         sub_id === `${id}`
+           ? "bg-blue-900 bg-opacity-80 py-2 rounded-full px-5 text-white font-semibold"
+           : "bg-gray-400  bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold "
+       }`}
     >
       {nama}
     </button>

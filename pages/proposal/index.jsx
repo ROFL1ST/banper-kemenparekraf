@@ -7,7 +7,6 @@ import {
   TableBody,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import Background from "../components/background";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
@@ -16,7 +15,6 @@ import Router, { useRouter } from "next/router";
 export default function Proposal() {
   const [open, setOpen] = useState(false);
   const [token, setToken] = React.useState();
-  const { pathname } = useRouter();
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
