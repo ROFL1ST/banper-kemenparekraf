@@ -50,7 +50,7 @@ export default function Menu({ getData, setLoading }) {
         <div>
           {" "}
           {type === "berita" ? (
-            <MenuBerita  />
+            <MenuBerita />
           ) : type === "subsector" ? (
             <MenuSubsector getData={getData} setLoading={setLoading} />
           ) : (

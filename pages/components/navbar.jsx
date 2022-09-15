@@ -9,13 +9,24 @@ import { Fragment } from "react";
 import Router, { useRouter } from "next/router";
 
 export default function Navbar({ open, setOpen }) {
+  const juknisUrl =
+    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+  const templateUrl =
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const { pathname } = useRouter();
   const [token, setToken] = React.useState();
   React.useEffect(() => {
     // Perform localStorage action
-    setToken(localStorage.getItem("token"));
-  }, []);
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+    } else if (sessionStorage.getItem("token") != null) {
+      setToken(sessionStorage.getItem("token"));
+    } else {
+      return;
+    }
+  }, [token]);
+  console.log(token);
   return (
     <>
       {/* Dekstop */}
@@ -40,7 +51,11 @@ export default function Navbar({ open, setOpen }) {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1">
-              <DropdownMekanis pathname={pathname} />
+              <DropdownMekanis
+                juknisUrl={juknisUrl}
+                templateUrl={templateUrl}
+                pathname={pathname}
+              />
             </div>
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
@@ -109,27 +124,33 @@ export default function Navbar({ open, setOpen }) {
                   <div className="px-1 py-1 ">
                     <Menu.Item>
                       {({ active }) => (
-                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                          F.A.Q
-                        </button>
+                        <Link href={"/dashboard#faq"}>
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                            F.A.Q
+                          </button>
+                        </Link>
                       )}
                     </Menu.Item>
                   </div>
                   <div className="px-1 py-1 ">
                     <Menu.Item>
                       {({ active }) => (
-                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                          Unduh Juknis
-                        </button>
+                        <a href={juknisUrl}>
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                            Unduh Juknis
+                          </button>
+                        </a>
                       )}
                     </Menu.Item>
                   </div>
                   <div className="px-1 py-1">
                     <Menu.Item>
                       {({ active }) => (
-                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                          Unduh Template
-                        </button>
+                        <a href={templateUrl}>
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                            Unduh Template
+                          </button>
+                        </a>
                       )}
                     </Menu.Item>
                   </div>
@@ -210,7 +231,7 @@ export default function Navbar({ open, setOpen }) {
   );
 }
 
-function DropdownMekanis({ pathname }) {
+function DropdownMekanis({ pathname, juknisUrl, templateUrl }) {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -249,18 +270,22 @@ function DropdownMekanis({ pathname }) {
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
-                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                    Unduh Juknis
-                  </button>
+                  <a href={juknisUrl}>
+                    <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                      Unduh Juknis
+                    </button>
+                  </a>
                 )}
               </Menu.Item>
             </div>
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
-                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                    Unduh Template
-                  </button>
+                  <a href={templateUrl}>
+                    <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                      Unduh Template
+                    </button>
+                  </a>
                 )}
               </Menu.Item>
             </div>
@@ -409,6 +434,7 @@ function DropdownPeople({ setOpen, pathname }) {
                   <button
                     onClick={() => {
                       localStorage.removeItem("token");
+                      sessionStorage.removeItem("token");
                       alert("You've Logged Out!");
                       Router.push("/dashboard");
                     }}

@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { login } from "../api/restApi";
 import Router from "next/router";
 export default function Login() {
-  const [check, setCheck] = useState(false);
+  const [remember, setRemember] = useState(false);
 
   const handleChange = async () => {
     // await getDown(
@@ -19,7 +19,7 @@ export default function Login() {
     //   "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip"
     // );
 
-    setCheck((current) => !current);
+    setRemember((current) => !current);
   };
   1;
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Login() {
     try {
       await login("authentication", values).then((result) => {
         console.log(result);
-        if (check) {
+        if (remember) {
           localStorage.setItem("token", result.data.data.token);
         } else {
           sessionStorage.setItem("token", result.data.data.token);
@@ -87,7 +87,7 @@ export default function Login() {
           </div>
           <div className="flex space-x-2 items-center mt-5">
             <input
-              value={check}
+              value={remember}
               defaultValue={false}
               onChange={handleChange}
               type="checkbox"
