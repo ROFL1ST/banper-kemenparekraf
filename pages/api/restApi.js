@@ -28,6 +28,7 @@ export function getDown(path_url) {
       url: DOWNLOAD_URL + path_url,
       headers: {
         //'Authorization': 'Bearer ' + token
+        "Access-Control-Allow-Origin": "*",
       },
     };
     axios(config)
@@ -39,7 +40,6 @@ export function getDown(path_url) {
       });
   });
 }
-
 
 function getGaleri(path_url) {
   // console.log("BASE_URL + path_url", BASE_URL + path_url);
