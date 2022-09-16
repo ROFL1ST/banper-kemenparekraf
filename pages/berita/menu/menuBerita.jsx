@@ -11,7 +11,7 @@ export default function MenuBerita({ getData, setLoading }) {
           <button
             onClick={() => {
               getData("terbaru");
-              setLoading(true);
+              
             }}
             className={
               sort === "terbaru"
@@ -26,7 +26,7 @@ export default function MenuBerita({ getData, setLoading }) {
           <button
             onClick={() => {
               getData("trending");
-              setLoading(true);
+              
 
             }}
             className={
