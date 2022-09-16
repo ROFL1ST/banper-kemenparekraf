@@ -11,7 +11,6 @@ import Router from "next/router";
 import { Alert } from "@mui/material";
 export default function Login() {
   const [remember, setRemember] = useState(false);
-
   const handleChange = async () => {
     // await getDown(
     //   "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
@@ -66,7 +65,7 @@ export default function Login() {
         console.log(result);
 
         if (result.data.message == "Failed") {
-          alert("Error");
+          alert(result.data.display_message);
         } else {
           if (remember) {
             localStorage.setItem("token", result.data.data.token);
