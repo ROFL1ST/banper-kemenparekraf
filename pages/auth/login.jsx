@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { login } from "../api/restApi";
 import Router from "next/router";
 import { Alert } from "@mui/material";
+import Loading from "../components/Loading";
 export default function Login() {
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -135,9 +136,19 @@ export default function Login() {
           <div className="flex flex-col justify-center lg:px-72">
             <button
               type="submit"
-              className={`bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full ${loading && "animate-pulse"}`}
+              className={`bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full ${
+                loading && "animate-pulse"
+              }`}
             >
-              {loading ? "...loading" : "Login"}
+              {loading ? (
+                <>
+                  <div className="mx-auto">
+                    <Loading />
+                  </div>
+                </>
+              ) : (
+                "Login"
+              )}
             </button>
 
             <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
