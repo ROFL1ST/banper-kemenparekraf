@@ -18,11 +18,14 @@ export default function Berita() {
   const cancelButtonRef = useRef(null);
   const { query } = useRouter();
   const { sort, type, sub_id } = query;
+  var router = useRouter();
 
   const getData = async (sort) => {
     try {
       let respond = await getApi(
-        `news?limit=15&${sub_id !== undefined && `subsektorId=${sub_id}`}&sort=${sort}`
+        `news?limit=15&${
+          sub_id !== undefined && `subsektorId=${sub_id}`
+        }&sort=${sort}`
       );
       setData(respond.data.data);
       setLoading(false);
@@ -39,8 +42,12 @@ export default function Berita() {
     return () => {
       ac.abort();
     };
-  }, []);
-
+  }, [loading]);
+  useEffect(() => {
+    if (router.isReady) {
+      getData();
+    }
+  }, [router.isReady]);
   useEffect(() => {
     document.title = "Berita";
   });
