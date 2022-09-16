@@ -34,7 +34,18 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values)  => {
+    // console.log("values", values);
+    //var postImage = await login("login", values).then(result => result);
+    // let respond = await login("login", values).then(
+    //   (result) => result
+    // );
+    // console.log("respond", respond)
+    /*console.log("values", values);
+    let respond = await login("login", values).then(
+      (result) => result
+    );
+    console.log("respond", respond);
     try {
       await login("authentication", values).then((result) => {
         console.log(result);
@@ -44,9 +55,15 @@ export default function Login() {
           sessionStorage.setItem("token", result.data.data.token);
         }
         Router.push("/proposal");
-      });
+      
     } catch (err) {
       console.log(err);
+    }*/
+
+    try {
+      await login("authentication")
+    } catch (error) {
+      
     }
   };
   return (

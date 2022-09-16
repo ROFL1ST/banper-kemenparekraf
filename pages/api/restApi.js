@@ -101,18 +101,18 @@ function postFeed(path_url, token, data, method) {
       });
   });
 }
-function login(path_url, data) {
+function login(path_url, param) {
   return new Promise((resolve, reject) => {
     var config = {
       method: "post",
       url: BASE_URL + path_url,
       headers: {
-        "Access-Control-Allow-Origin": "true",
       },
-      data: data,
+      data: param,
     };
     axios(config)
       .then(function (response) {
+        console.log("response", response);
         resolve(response);
       })
       .catch(function (error) {
