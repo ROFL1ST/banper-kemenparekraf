@@ -11,6 +11,7 @@ import Router from "next/router";
 import { Alert } from "@mui/material";
 export default function Login() {
   const [remember, setRemember] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleChange = async () => {
     // await getDown(
     //   "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
@@ -59,10 +60,11 @@ export default function Login() {
     } catch (err) {
       console.log(err);
     }*/
-
+    setLoading(true);
     try {
       await login("authentication", values).then((result) => {
         console.log(result);
+        setLoading(false);
 
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
@@ -76,6 +78,8 @@ export default function Login() {
         }
       });
     } catch (error) {
+      setLoading(false);
+
       console.log(error);
     }
   };
@@ -131,9 +135,9 @@ export default function Login() {
           <div className="flex flex-col justify-center lg:px-72">
             <button
               type="submit"
-              className="bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full"
+              className={`bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full ${loading && "animate-pulse"}`}
             >
-              Login
+              {loading ? "...loading" : "Login"}
             </button>
 
             <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
