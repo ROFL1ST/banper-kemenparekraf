@@ -18,10 +18,7 @@ export default function Proposal() {
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
-    if (
-      localStorage.getItem("token") == "undefined" ||
-      sessionStorage.getItem("token") == "undefined"
-    ) {
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
       Router.push("/dashboard");
       // alert("You need to Log In first!")
     } else {

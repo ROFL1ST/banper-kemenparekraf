@@ -64,14 +64,15 @@ export default function Login() {
     try {
       await login("authentication", values).then((result) => {
         console.log(result);
-        if (remember) {
-          localStorage.setItem("token", result.data.data.token);
-        } else {
-          sessionStorage.setItem("token", result.data.data.token);
-        }
+
         if (result.data.message == "Failed") {
-          alert("Error")
+          alert("Error");
         } else {
+          if (remember) {
+            localStorage.setItem("token", result.data.data.token);
+          } else {
+            sessionStorage.setItem("token", result.data.data.token);
+          }
           Router.push("/proposal");
         }
       });
@@ -97,7 +98,7 @@ export default function Login() {
               className="border px-4 outline-none h-9 rounded-md "
             />
             {errors.email && (
-              <span className="text-red-600 font-bold">
+              <span className="text-red-600 font-bold text-sm">
                 Please fill it with your email
               </span>
             )}
@@ -110,7 +111,7 @@ export default function Login() {
               className="border px-4 outline-none h-9 rounded-md "
             />
             {errors.password && (
-              <span className="text-red-600 font-bold">
+              <span className="text-red-600 font-bold text-sm">
                 Please fill it with your password
               </span>
             )}

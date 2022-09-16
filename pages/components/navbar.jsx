@@ -18,9 +18,9 @@ export default function Navbar({ open, setOpen }) {
   const [token, setToken] = React.useState();
   React.useEffect(() => {
     // Perform localStorage action
-    if (localStorage.getItem("token") != undefined) {
+    if (localStorage.getItem("token") != "undefined") {
       setToken(localStorage.getItem("token"));
-    } else if (sessionStorage.getItem("token") != undefined) {
+    } else if (sessionStorage.getItem("token") != "undefined") {
       setToken(sessionStorage.getItem("token"));
     } else {
       return;
