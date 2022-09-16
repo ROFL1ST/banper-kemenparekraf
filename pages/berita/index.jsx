@@ -47,7 +47,7 @@ export default function Berita() {
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
-      <Menu data={data} getData={getData} />
+      <Menu data={data} getData={getData} setLoading={setLoading} />
       <div className="pb-20 xl:px-20 lg:px-20  px-10">
         <div className="grid xl:grid-cols-4 lg:grid-cols-4 grid-cols-1 gap-3 mt-10">
           {loading

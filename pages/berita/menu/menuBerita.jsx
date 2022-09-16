@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-export default function MenuBerita({ getData }) {
+export default function MenuBerita({ getData, setLoading }) {
   const { query } = useRouter();
   const { sort, type } = query;
   return (
@@ -11,6 +11,7 @@ export default function MenuBerita({ getData }) {
           <button
             onClick={() => {
               getData("terbaru");
+              setLoading(true);
             }}
             className={
               sort === "terbaru"
@@ -25,6 +26,8 @@ export default function MenuBerita({ getData }) {
           <button
             onClick={() => {
               getData("trending");
+              setLoading(true);
+
             }}
             className={
               sort === "trending"

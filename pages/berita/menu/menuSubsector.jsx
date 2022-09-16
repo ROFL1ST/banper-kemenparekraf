@@ -9,7 +9,7 @@ import { getApi } from "../../api/restApi";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function MenuSubsector({ getData }) {
+export default function MenuSubsector({ getData, setLoading }) {
   const [subsector, setSubsector] = useState([]);
   const getSubsector = async () => {
     try {
@@ -35,7 +35,7 @@ export default function MenuSubsector({ getData }) {
         >
           {subsector?.map((i, key) => (
             <SwiperSlide className=" menu" key={key}>
-              <Button nama={i.Nama} id={i.Id} getData={getData} />
+              <Button nama={i.Nama} id={i.Id} getData={getData} setLoading={setLoading} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -44,7 +44,7 @@ export default function MenuSubsector({ getData }) {
   );
 }
 
-function Button({ nama, id, getData }) {
+function Button({ nama, id, getData, setLoading }) {
   const { query } = useRouter();
   const { sort, type, sub_id } = query;
   const { pathname } = useRouter();
@@ -55,6 +55,7 @@ function Button({ nama, id, getData }) {
       onClick={() => {
         Router.push(`/berita?type=${type}&sort=${sort}&sub_id=${id}`);
         getData();
+        setLoading(true);
       }}
       className={`
        ${
