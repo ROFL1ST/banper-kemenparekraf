@@ -18,9 +18,9 @@ export default function Navbar({ open, setOpen }) {
   const [token, setToken] = React.useState();
   React.useEffect(() => {
     // Perform localStorage action
-    if (localStorage.getItem("token") != null) {
+    if (localStorage.getItem("token") != undefined) {
       setToken(localStorage.getItem("token"));
-    } else if (sessionStorage.getItem("token") != null) {
+    } else if (sessionStorage.getItem("token") != undefined) {
       setToken(sessionStorage.getItem("token"));
     } else {
       return;
@@ -78,10 +78,10 @@ export default function Navbar({ open, setOpen }) {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400">
-              {token != undefined ? (
-                <DropdownPeople pathname={pathname} setOpen={setOpen} />
-              ) : (
+              {token == null || token == "undefined" || token == undefined ? (
                 <DropdownLD setOpen={setOpen} pathname={pathname} />
+              ) : (
+                <DropdownPeople pathname={pathname} setOpen={setOpen} />
               )}
             </div>
           </nav>

@@ -18,11 +18,14 @@ export default function Proposal() {
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
-    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
-      return;
+    if (
+      localStorage.getItem("token") == "undefined" ||
+      sessionStorage.getItem("token") == "undefined"
+    ) {
+      Router.push("/dashboard");
       // alert("You need to Log In first!")
     } else {
-      Router.push("/dashboard");
+      return;
     }
   }, [token]);
   useEffect(() => {

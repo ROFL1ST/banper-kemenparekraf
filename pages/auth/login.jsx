@@ -8,6 +8,7 @@ import Section from "../components/section";
 import { useForm } from "react-hook-form";
 import { login } from "../api/restApi";
 import Router from "next/router";
+import { Alert } from "@mui/material";
 export default function Login() {
   const [remember, setRemember] = useState(false);
 
@@ -34,7 +35,7 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (values)  => {
+  const onSubmit = async (values) => {
     // console.log("values", values);
     //var postImage = await login("login", values).then(result => result);
     // let respond = await login("login", values).then(
@@ -61,9 +62,21 @@ export default function Login() {
     }*/
 
     try {
-      await login("authentication")
+      await login("authentication", values).then((result) => {
+        console.log(result);
+        if (remember) {
+          localStorage.setItem("token", result.data.data.token);
+        } else {
+          sessionStorage.setItem("token", result.data.data.token);
+        }
+        if (result.data.message == "Failed") {
+          alert("Error")
+        } else {
+          Router.push("/proposal");
+        }
+      });
     } catch (error) {
-      
+      console.log(error);
     }
   };
   return (
