@@ -16,13 +16,8 @@ export default function CardModal({ img, tgl, summary, place }) {
           <h1 className="font-semibold text-white lg:text-lg">
             {tgl} | {place}
           </h1>
-          {summary.length > MAX_LENGTH ? (
-            <p className="text-white lg:w-3/4 lg:text-xs text-xs">{summary}</p>
-          ) : (
-            <p className="text-white lg:w-3/4 lg:text-base text-sm">
-              {summary}
-            </p>
-          )}
+
+          <p className="text-white lg:w-3/4 lg:text-base text-sm">{summary}</p>
         </div>
       </div>
     </>
