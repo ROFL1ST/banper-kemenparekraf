@@ -9,13 +9,24 @@ import { Fragment } from "react";
 import Router, { useRouter } from "next/router";
 
 export default function Navbar({ open, setOpen }) {
+  const juknisUrl =
+    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+  const templateUrl =
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const { pathname } = useRouter();
   const [token, setToken] = React.useState();
   React.useEffect(() => {
     // Perform localStorage action
-    setToken(localStorage.getItem("token"));
-  }, []);
+    if (localStorage.getItem("token") != "undefined") {
+      setToken(localStorage.getItem("token"));
+    } else if (sessionStorage.getItem("token") != "undefined") {
+      setToken(sessionStorage.getItem("token"));
+    } else {
+      return;
+    }
+  }, [token]);
+  console.log(token);
   return (
     <>
       {/* Dekstop */}
@@ -40,7 +51,11 @@ export default function Navbar({ open, setOpen }) {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1">
-              <DropdownMekanis pathname={pathname} />
+              <DropdownMekanis
+                juknisUrl={juknisUrl}
+                templateUrl={templateUrl}
+                pathname={pathname}
+              />
             </div>
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
@@ -63,10 +78,10 @@ export default function Navbar({ open, setOpen }) {
               </p>
             </Link>
             <div className="cursor-pointer flex items-center space-x-1 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400">
-              {token != undefined ? (
-                <DropdownPeople pathname={pathname} setOpen={setOpen} />
-              ) : (
+              {token == null || token == "undefined" || token == undefined ? (
                 <DropdownLD setOpen={setOpen} pathname={pathname} />
+              ) : (
+                <DropdownPeople pathname={pathname} setOpen={setOpen} />
               )}
             </div>
           </nav>
@@ -109,27 +124,33 @@ export default function Navbar({ open, setOpen }) {
                   <div className="px-1 py-1 ">
                     <Menu.Item>
                       {({ active }) => (
-                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                          F.A.Q
-                        </button>
+                        <Link href={"/dashboard#faq"}>
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                            F.A.Q
+                          </button>
+                        </Link>
                       )}
                     </Menu.Item>
                   </div>
                   <div className="px-1 py-1 ">
                     <Menu.Item>
                       {({ active }) => (
-                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                          Unduh Juknis
-                        </button>
+                        <a href={juknisUrl}>
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                            Unduh Juknis
+                          </button>
+                        </a>
                       )}
                     </Menu.Item>
                   </div>
                   <div className="px-1 py-1">
                     <Menu.Item>
                       {({ active }) => (
-                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                          Unduh Template
-                        </button>
+                        <a href={templateUrl}>
+                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                            Unduh Template
+                          </button>
+                        </a>
                       )}
                     </Menu.Item>
                   </div>
@@ -148,7 +169,13 @@ export default function Navbar({ open, setOpen }) {
           <div className="cursor-pointer flex items-center space-x-1">
             <Menu as="div" className="relative inline-block text-left">
               <div>
-                <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+                <Menu.Button
+                  className={`inline-flex w-full justify-center   text-sm  hover:bg-opacity-70  ${
+                    pathname === "/auth/daftar" || pathname === "/auth/login"
+                      ? "bg-white  text-blue-900 font-bold py-1 px-2 rounded-full"
+                      : ""
+                  }`}
+                >
                   Login|Daftar
                 </Menu.Button>
               </div>
@@ -168,8 +195,7 @@ export default function Navbar({ open, setOpen }) {
                         {({ active }) => (
                           <button
                             className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                              pathname === "/auth/login" &&
-                              "bg-white  text-blue-900 font-bold "
+                              active && "bg-white  text-blue-900 font-bold "
                             } `}
                           >
                             Login
@@ -190,8 +216,7 @@ export default function Navbar({ open, setOpen }) {
                             }
                           }}
                           className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                            pathname === "/auth/daftar" &&
-                            "bg-white  text-blue-900 font-bold "
+                            active && "bg-white  text-blue-900 font-bold "
                           } `}
                         >
                           Daftar
@@ -210,62 +235,76 @@ export default function Navbar({ open, setOpen }) {
   );
 }
 
-function DropdownMekanis({ pathname }) {
+function DropdownMekanis({ pathname, juknisUrl, templateUrl }) {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            Mekanisme Pendaftaran
-            <ChevronDownIcon
-              className="ml-2 -mr-1 h-5 w-5 "
-              aria-hidden="true"
-            />
-          </Menu.Button>
-        </div>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="absolute right-0 mt-2 w-38 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="px-1 py-1 ">
-              <Menu.Item>
-                {({ active }) => (
-                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                    {pathname != "/dashboard" ? (
-                      <Link href={"/dashboard#faq"}>F.A.Q</Link>
-                    ) : (
-                      <a href="#faq">F.A.Q</a>
+        {({ open }) => (
+          <>
+            <div>
+              <Menu.Button
+                className={` inline-flex w-full justify-center text-sm  ${
+                  open &&
+                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                }`}
+              >
+                Mekanisme Pendaftaran
+                <ChevronDownIcon
+                  className="ml-2 -mr-1 h-5 w-5 "
+                  aria-hidden="true"
+                />
+              </Menu.Button>
+            </div>
+            <Transition
+              show={open}
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute right-0 mt-2 w-38 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="px-1 py-1 ">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                        {pathname != "/dashboard" ? (
+                          <Link href={"/dashboard#faq"}>F.A.Q</Link>
+                        ) : (
+                          <a href="#faq">F.A.Q</a>
+                        )}
+                      </button>
                     )}
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-            <div className="px-1 py-1 ">
-              <Menu.Item>
-                {({ active }) => (
-                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                    Unduh Juknis
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-            <div className="px-1 py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                    Unduh Template
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-          </Menu.Items>
-        </Transition>
+                  </Menu.Item>
+                </div>
+                <div className="px-1 py-1 ">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a href={juknisUrl}>
+                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          Unduh Juknis
+                        </button>
+                      </a>
+                    )}
+                  </Menu.Item>
+                </div>
+                <div className="px-1 py-1">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a href={templateUrl}>
+                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          Unduh Template
+                        </button>
+                      </a>
+                    )}
+                  </Menu.Item>
+                </div>
+              </Menu.Items>
+            </Transition>
+          </>
+        )}
       </Menu>
     </>
   );
@@ -275,60 +314,72 @@ function DropdownLD({ setOpen, pathname }) {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="inline-flex w-full justify-center   text-sm  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            Login|Daftar
-          </Menu.Button>
-        </div>
-        <Transition
-          as={Fragment}
-          enter="transition ease-out duration-100"
-          enterFrom="transform opacity-0 scale-95"
-          enterTo="transform opacity-100 scale-100"
-          leave="transition ease-in duration-75"
-          leaveFrom="transform opacity-100 scale-100"
-          leaveTo="transform opacity-0 scale-95"
-        >
-          <Menu.Items className="absolute right-0 mt-2 w-20 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div className="px-1 py-1 ">
-              <Link href={"/auth/login"}>
-                <Menu.Item>
-                  {({ active }) => (
-                    <button
-                      className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                        pathname === "/auth/login" &&
-                        "bg-white  text-blue-900 font-bold "
-                      } `}
-                    >
-                      Login
-                    </button>
-                  )}
-                </Menu.Item>
-              </Link>
+        {({ open }) => (
+          <>
+            <div>
+              <Menu.Button
+                className={`inline-flex w-full justify-center  hover:text-gray-900 text-sm    ${
+                  pathname === "/auth/daftar" ||
+                  pathname === "/auth/login" ||
+                  open
+                    ? "bg-white px-5 py-1 rounded-full text-blue-900 font-bold bg-opacity-70"
+                    : ""
+                }`}
+              >
+                Login/Daftar
+              </Menu.Button>
             </div>
-            <div className="px-1 py-1">
-              <Menu.Item>
-                {({ active }) => (
-                  <button
-                    onClick={() => {
-                      if (pathname === "/auth/daftar") {
-                        return;
-                      } else {
-                        setOpen(true);
-                      }
-                    }}
-                    className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                      pathname === "/auth/daftar" &&
-                      "bg-white  text-blue-900 font-bold "
-                    } `}
-                  >
-                    Daftar
-                  </button>
-                )}
-              </Menu.Item>
-            </div>
-          </Menu.Items>
-        </Transition>
+            <Transition
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute right-0 mt-2 w-20 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="px-1 py-1 ">
+                  <Link href={"/auth/login"}>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                            pathname === "/auth/login" &&
+                            "bg-white  text-blue-900 font-bold "
+                          } `}
+                        >
+                          Login
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </Link>
+                </div>
+                <div className="px-1 py-1">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={() => {
+                          if (pathname === "/auth/daftar") {
+                            return;
+                          } else {
+                            setOpen(true);
+                          }
+                        }}
+                        className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                          pathname === "/auth/daftar" &&
+                          "bg-white  text-blue-900 font-bold "
+                        } `}
+                      >
+                        Daftar
+                      </button>
+                    )}
+                  </Menu.Item>
+                </div>
+              </Menu.Items>
+            </Transition>
+          </>
+        )}
       </Menu>
     </>
   );
@@ -409,6 +460,7 @@ function DropdownPeople({ setOpen, pathname }) {
                   <button
                     onClick={() => {
                       localStorage.removeItem("token");
+                      sessionStorage.removeItem("token");
                       alert("You've Logged Out!");
                       Router.push("/dashboard");
                     }}

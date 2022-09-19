@@ -89,6 +89,10 @@ export default function submitDoc() {
               <CardDocument text={i} key={key}></CardDocument>
             ))}
             {/* Document */}
+            {/* Catatan Dokument */}
+            <h1 className="text-2xl md:pt-0 pt-24">Catatan Dokument</h1>
+            <Catatan />
+            {/* Catatan Dokument */}
           </div>
         </div>
       </div>
@@ -138,6 +142,23 @@ function CardDocument({ text }) {
         </div>
       </div>
       {/* Box Document 8 */}
+    </>
+  );
+}
+function Catatan() {
+  return (
+    <>
+      <div className="bg-white bg-opacity-20 rounded-xl lg:px-10 px-5 py-5 shadow-xl space-y-7 md:flex md:flex-col md:justify-center ">
+        <textarea
+          id="message"
+          rows="4"
+          className="block p-5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  "
+          placeholder="Tambahkan Komentar"
+        ></textarea>
+        <button className="bg-red-500 text-white lg:w-2/5 w-full py-2 md:px-0 px-4 rounded-lg mx-auto lg:text-base text-sm">
+          Tambahkan Catatan Tambahan
+        </button>
+      </div>
     </>
   );
 }

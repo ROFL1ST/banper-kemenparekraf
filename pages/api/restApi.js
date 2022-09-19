@@ -3,6 +3,7 @@ const BASE_URL = "http://128.199.242.242/api/";
 const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
 
 function getApi(path_url) {
+  console.log(BASE_URL + path_url);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",
@@ -100,18 +101,17 @@ function postFeed(path_url, token, data, method) {
       });
   });
 }
-function login(path_url, data) {
+function login(path_url, param) {
   return new Promise((resolve, reject) => {
     var config = {
       method: "post",
       url: BASE_URL + path_url,
-      headers: {
-        "Access-Control-Allow-Origin": "true",
-      },
-      data: data,
+      headers: {},
+      data: param,
     };
     axios(config)
       .then(function (response) {
+        console.log("response", response);
         resolve(response);
       })
       .catch(function (error) {

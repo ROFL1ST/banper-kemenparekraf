@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Navbar from "../components/navbar";
 import { useEffect, useState, useRef } from "react";
 import Menu from "./menu/menu";
@@ -17,12 +18,14 @@ export default function Berita() {
   const cancelButtonRef = useRef(null);
   const { query } = useRouter();
   const { sort, type, sub_id } = query;
-  const [state, setState] = useState({});
+  var router = useRouter();
 
-  const getData = async () => {
+  const getData = async (sort) => {
     try {
       let respond = await getApi(
-        `news?limit=15&${sub_id !== undefined && `subsektorId=${sub_id}`}`
+        `news?limit=15&${
+          sub_id !== undefined && `subsektorId=${sub_id}`
+        }&sort=${sort}`
       );
       setData(respond.data.data);
       setLoading(false);
@@ -39,37 +42,24 @@ export default function Berita() {
     return () => {
       ac.abort();
     };
-  }, []);
+  }, [loading]);
+  useEffect(() => {
+    if (router.isReady) {
+      getData();
+    }
+  }, [router.isReady]);
   useEffect(() => {
     document.title = "Berita";
   });
-
-  const newest = () => {
-    console.log("hai");
-    let sortir = data.sort((a, b) => (a.id > b.id ? -1 : 1));
-    setState({
-      data: sortir,
-    });
-  };
-  const hotest = () => {
-    let hoter = data.length - 1;
-    setState({
-      data: hoter,
-    });
-  };
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
-      <Menu getData={getData} newest={newest} hotest={hotest} />
+      <Menu data={data} getData={getData} setLoading={setLoading} />
       <div className="pb-20 xl:px-20 lg:px-20  px-10">
         <div className="grid xl:grid-cols-4 lg:grid-cols-4 grid-cols-1 gap-3 mt-10">
           {loading
             ? loadingLength.map((i, key) => <CardLoading key={key} />)
-            : sub_id === undefined
-            ? data.map((i, key) => <Card data={i} key={key} />)
-            : data
-                .filter((i) => i.subsektorId === parseInt(sub_id))
-                .map((i, key) => <Card data={i} key={key} />)}
+            : data.map((i, key) => <Card data={i} key={key} />)}
         </div>
       </div>
       <Footer />

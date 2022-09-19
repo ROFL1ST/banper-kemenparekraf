@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import MenuBerita from "./menuBerita";
 import MenuProvinsi from "./menuProvinsi";
 import MenuSubsector from "./menuSubsector";
 
-export default function Menu({ getData, setLoading }) {
+export default function Menu({ getData, setLoading, data }) {
   const { query } = useRouter();
   const { sort, type } = query;
 
@@ -15,6 +14,9 @@ export default function Menu({ getData, setLoading }) {
         <div className="flex space-x-10 justify-center">
           <Link href={`/berita?type=berita&sort=${sort}`}>
             <button
+              onClick={() => {
+                setLoading(true)
+              }}
               className={`${
                 type === undefined || type === "berita"
                   ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
@@ -24,8 +26,11 @@ export default function Menu({ getData, setLoading }) {
               Berita
             </button>
           </Link>
-          <Link href={`/berita?type=subsector&sort=${sort}`}>
+          <Link href={`/berita?type=subsector&sort=${sort}&sub_id=1`}>
             <button
+              onClick={() => {
+                setLoading(true)
+              }}
               className={`${
                 type === "subsector"
                   ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
@@ -37,6 +42,9 @@ export default function Menu({ getData, setLoading }) {
           </Link>
           <Link href={`/berita?type=provinsi&sort=${sort}`}>
             <button
+              onClick={() => {
+                setLoading(true)
+              }}
               className={`${
                 type === "provinsi"
                   ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
@@ -50,7 +58,7 @@ export default function Menu({ getData, setLoading }) {
         <div>
           {" "}
           {type === "berita" ? (
-            <MenuBerita  />
+            <MenuBerita getData={getData} data={data} setLoading={setLoading} />
           ) : type === "subsector" ? (
             <MenuSubsector getData={getData} setLoading={setLoading} />
           ) : (

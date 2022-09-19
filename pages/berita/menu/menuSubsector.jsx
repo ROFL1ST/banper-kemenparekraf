@@ -9,7 +9,7 @@ import { getApi } from "../../api/restApi";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function MenuSubsector({ getData }) {
+export default function MenuSubsector({ getData, setLoading }) {
   const [subsector, setSubsector] = useState([]);
   const getSubsector = async () => {
     try {
@@ -35,7 +35,7 @@ export default function MenuSubsector({ getData }) {
         >
           {subsector?.map((i, key) => (
             <SwiperSlide className=" menu" key={key}>
-              <Button nama={i.Nama} id={i.Id} getData={getData} />
+              <Button nama={i.Nama} id={i.Id} getData={getData} setLoading={setLoading} />
             </SwiperSlide>
           ))}
         </Swiper>
@@ -44,17 +44,25 @@ export default function MenuSubsector({ getData }) {
   );
 }
 
-function Button({ nama, id, getData }) {
+function Button({ nama, id, getData, setLoading }) {
   const { query } = useRouter();
-  const { sort, type } = query;
+  const { sort, type, sub_id } = query;
+  const { pathname } = useRouter();
+  // console.log(sub_id)
+
   return (
     <button
       onClick={() => {
         Router.push(`/berita?type=${type}&sort=${sort}&sub_id=${id}`);
         getData();
+        setLoading(true);
       }}
       className={`
-       bg-gray-400 focus:bg-blue-900 bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold `}
+       ${
+         sub_id === `${id}`
+           ? "bg-blue-900 bg-opacity-80 py-2 rounded-full px-5 text-white font-semibold"
+           : "bg-gray-400  bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold "
+       }`}
     >
       {nama}
     </button>

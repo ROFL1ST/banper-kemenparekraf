@@ -8,9 +8,11 @@ import Section from "../components/section";
 import { useForm } from "react-hook-form";
 import { login } from "../api/restApi";
 import Router from "next/router";
+import { Alert } from "@mui/material";
+import Loading from "../components/Loading";
 export default function Login() {
-  const [check, setCheck] = useState(false);
-
+  const [remember, setRemember] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleChange = async () => {
     // await getDown(
     //   "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
@@ -19,7 +21,7 @@ export default function Login() {
     //   "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip"
     // );
 
-    setCheck((current) => !current);
+    setRemember((current) => !current);
   };
   1;
   useEffect(() => {
@@ -35,18 +37,51 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (values) => {
+    // console.log("values", values);
+    //var postImage = await login("login", values).then(result => result);
+    // let respond = await login("login", values).then(
+    //   (result) => result
+    // );
+    // console.log("respond", respond)
+    /*console.log("values", values);
+    let respond = await login("login", values).then(
+      (result) => result
+    );
+    console.log("respond", respond);
     try {
       await login("authentication", values).then((result) => {
         console.log(result);
-        if (check) {
+        if (remember) {
           localStorage.setItem("token", result.data.data.token);
         } else {
           sessionStorage.setItem("token", result.data.data.token);
         }
         Router.push("/proposal");
-      });
+      
     } catch (err) {
       console.log(err);
+    }*/
+    setLoading(true);
+    try {
+      await login("authentication", values).then((result) => {
+        console.log(result);
+        setLoading(false);
+
+        if (result.data.message == "Failed") {
+          alert(result.data.display_message);
+        } else {
+          if (remember) {
+            localStorage.setItem("token", result.data.data.token);
+          } else {
+            sessionStorage.setItem("token", result.data.data.token);
+          }
+          Router.push("/proposal");
+        }
+      });
+    } catch (error) {
+      setLoading(false);
+      alert(error)
+      console.log(error);
     }
   };
   return (
@@ -67,7 +102,7 @@ export default function Login() {
               className="border px-4 outline-none h-9 rounded-md "
             />
             {errors.email && (
-              <span className="text-red-600 font-bold">
+              <span className="text-red-600 font-bold text-sm">
                 Please fill it with your email
               </span>
             )}
@@ -80,14 +115,14 @@ export default function Login() {
               className="border px-4 outline-none h-9 rounded-md "
             />
             {errors.password && (
-              <span className="text-red-600 font-bold">
+              <span className="text-red-600 font-bold text-sm">
                 Please fill it with your password
               </span>
             )}
           </div>
           <div className="flex space-x-2 items-center mt-5">
             <input
-              value={check}
+              value={remember}
               defaultValue={false}
               onChange={handleChange}
               type="checkbox"
@@ -101,9 +136,19 @@ export default function Login() {
           <div className="flex flex-col justify-center lg:px-72">
             <button
               type="submit"
-              className="bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full"
+              className={`bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full ${
+                loading && "animate-pulse"
+              }`}
             >
-              Login
+              {loading ? (
+                <>
+                  <div className="mx-auto">
+                    <Loading />
+                  </div>
+                </>
+              ) : (
+                "Login"
+              )}
             </button>
 
             <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
