@@ -80,7 +80,7 @@ export default function Login() {
       });
     } catch (error) {
       setLoading(false);
-
+      alert(error)
       console.log(error);
     }
   };
