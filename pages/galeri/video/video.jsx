@@ -29,7 +29,6 @@ export default function Video() {
       setVideoData((s) => ({ ...s, loading: false }));
     }
   };
-  console.log(videoData.data);
 
   useEffect(() => {
     const ac = new AbortController();

@@ -2,7 +2,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import React from "react";
-import useDownloader from "react-use-downloader";
 import { getDown } from "../api/restApi";
 import Downloader from "./downloader";
 

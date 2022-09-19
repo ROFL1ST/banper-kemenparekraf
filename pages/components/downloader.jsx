@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import React from "react";
 import { getDown } from "../api/restApi";
 import axios from "axios";
-import fileDownload from "js-file-download";
 function Downloader({ setOpen, setCheck }) {
   const { pathname } = useRouter();
 

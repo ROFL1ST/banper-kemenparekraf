@@ -1,5 +1,4 @@
 import React from "react";
-import useDownloader from "react-use-downloader";
 
 export default function Test() {
   const { size, elapsed, percentage, download, cancel, error, isInProgress } =
