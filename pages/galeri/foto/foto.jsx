@@ -76,7 +76,7 @@ export default function Foto() {
             }}
           >
             <SwiperSlide className="swiper-title">
-              <h1 className="lg:text-6xl 2xl:text-8xl text-white font-bold">
+              <h1 className="lg:text-6xl 2xl:text-8xl text-white font-semibold">
                 Foto
               </h1>
               <p className="text-white my-3 lg:text-sm 2xl:text-lg 2xl:w-3/4">
