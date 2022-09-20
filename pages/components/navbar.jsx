@@ -10,9 +10,9 @@ import Router, { useRouter } from "next/router";
 
 export default function Navbar({ open, setOpen }) {
   const juknisUrl =
-    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+    "http://128.199.242.242/home/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const templateUrl =
-    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+    "http://128.199.242.242/home/assets/Dokumen_Banper_TA_2022.zip";
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const { pathname } = useRouter();
   const [token, setToken] = React.useState();
@@ -33,17 +33,17 @@ export default function Navbar({ open, setOpen }) {
       <div className="fixed w-screen z-40">
         <div className="bg-[#142b51] h-6"></div>
         <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
-          <Link href={"/dashboard"}>
+          <Link href={"/home"}>
             <img src={logo.src} alt={"logo"} className="h-36" />
           </Link>
           <button onClick={() => setNavbarOpen(!navbarOpen)}>
             <Bars3Icon className="h-6 w-6 xl:hidden lg:hidden " />
           </button>
           <nav className="xl:flex lg:flex md:hidden hidden space-x-7 text-black items-center">
-            <Link href={"/dashboard"}>
+            <Link href={"/home"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
-                  pathname === "/dashboard" &&
+                  pathname === "/home" &&
                   "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
                 } `}
               >
@@ -96,7 +96,7 @@ export default function Navbar({ open, setOpen }) {
           (navbarOpen ? " flex" : " hidden")
         }
       >
-        <Link href={"/dashboard"}>
+        <Link href={"/home"}>
           <p className={"cursor-pointer"}>Dashboard</p>
         </Link>
         <div className="flex space-x-3">
@@ -124,7 +124,7 @@ export default function Navbar({ open, setOpen }) {
                   <div className="px-1 py-1 ">
                     <Menu.Item>
                       {({ active }) => (
-                        <Link href={"/dashboard#faq"}>
+                        <Link href={"/home#faq"}>
                           <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
                             F.A.Q
                           </button>
@@ -270,8 +270,8 @@ function DropdownMekanis({ pathname, juknisUrl, templateUrl }) {
                   <Menu.Item>
                     {({ active }) => (
                       <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                        {pathname != "/dashboard" ? (
-                          <Link href={"/dashboard#faq"}>F.A.Q</Link>
+                        {pathname != "/home" ? (
+                          <Link href={"/home#faq"}>F.A.Q</Link>
                         ) : (
                           <a href="#faq">F.A.Q</a>
                         )}
@@ -462,7 +462,7 @@ function DropdownPeople({ setOpen, pathname }) {
                       localStorage.removeItem("token");
                       sessionStorage.removeItem("token");
                       alert("You've Logged Out!");
-                      Router.push("/dashboard");
+                      Router.push("/home");
                     }}
                     className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white   `}
                   >

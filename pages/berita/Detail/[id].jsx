@@ -105,13 +105,9 @@ export default function DetailPage() {
               ) : (
                 items
                   ?.slice(0, 3)
-                  .map((i, index) =>
-                    data.Id === i.Id ? (
-                      <></>
-                    ) : (
-                      <News_small_card data={i} key={index}></News_small_card>
-                    )
-                  )
+                  .map((i, index) => (
+                    <News_small_card data={i} key={index}></News_small_card>
+                  ))
               )}
             </div>
           </div>
@@ -175,7 +171,7 @@ export default function DetailPage() {
 }
 
 function Card({ data }) {
-const MAX_LENGTH = 60;
+  const MAX_LENGTH = 60;
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
@@ -232,7 +228,6 @@ const MAX_LENGTH = 60;
     </>
   );
 }
-
 
 function News_small_card({ data }) {
   return (
