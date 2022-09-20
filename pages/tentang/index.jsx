@@ -12,14 +12,35 @@ import axios from "axios";
 export default function Tentang() {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
-
+  const [sub] = useState([
+    { id: 1, nama: "aplikasi" },
+    { id: 2, nama: "pengembangan Permainan" },
+    { id: 3, nama: "arsitektur" },
+    { id: 4, nama: "desain interior" },
+    { id: 5, nama: "desain komunikasi visual" },
+    { id: 6, nama: "desain produk" },
+    { id: 7, nama: "fesyen" },
+    { id: 8, nama: "film, animasi dan video" },
+    { id: 9, nama: "fotografi" },
+    { id: 10, nama: "kriya" },
+    { id: 11, nama: "kuliner" },
+    { id: 12, nama: "musik" },
+    { id: 13, nama: "penerbitan" },
+    { id: 14, nama: "periklanan" },
+    { id: 15, nama: "seni pertunjukan" },
+    { id: 16, nama: "seni rupa; dan" },
+    { id: 17, nama: "televisi dan radio" },
+  ]);
+  const juknisUrl =
+    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+  const TemplateUrl =
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   useEffect(() => {
     document.title = "Tentang";
   });
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
-
       <div className="lg:pt-56 pt-26">
         <div>
           <div className="relative lg:flex hidden bottom-24 mx-24">
@@ -38,7 +59,7 @@ export default function Tentang() {
             <div className="flex justify-center">
               <div className="bg-yellow-300 h-0.5 my-3 w-44"></div>
             </div>
-            <div className="lg:text-sm 2xl:text-2xl leading-relaxed">
+            <div className="lg:text-sm 2xl:text-xl leading-relaxed">
               <p>
                 Presiden joko widodo mengatakan bahwa "pembangunan infrastruktur
                 bertujuan untuk menumbuhkan sentra-sentra ekonomi baru yang
@@ -88,24 +109,29 @@ export default function Tentang() {
                 belas) subsektor ekonomi kreatif, yaitu:
               </p>
             </div>
-            <div className="grid lg:grid-cols-3 gap-x-5 gap-y-1 mt-5">
-              <div className="px-2 py-1 w-full border bg-white text-sm">
-                1. aplikasi
-              </div>
+            <div className="grid lg:grid-rows-5 lg:grid-flow-col gap-x-5 gap-y-3 mt-5">
+              {sub.map((i, key) => (
+                <div
+                  key={key}
+                  className="px-8 py-3 w-full border bg-white text-base font-medium"
+                >
+                  {i.id}. {i.nama}
+                </div>
+              ))}
             </div>
-            <p className="lg:text-sm leading-relaxed my-8 2xl:text-2xl">
+            <p className="lg:text-sm leading-relaxed my-8 2xl:text-xl">
               Dasar kebijakan untuk pelaksanaan program bantuan pemerintah
               adalah peraturan menteri keuangan nomor 168/pmk.05/2015 jo
               173/pmk.05/2 tentang perubahan atas peraturan menteri keuangan
               nomor 168/pmk.05/2015 tentang mekanisme anggran bantuan pemerintah
               pada kementrian negara/lembaga
             </p>
-            <div className="flex justify-center space-x-10 lg:text-sm 2xl:text-2xl my-5">
-              <button className="bg-blue-800 rounded-full text-white lg:px-4 px-2.5 py-2">
-                Unduh Juknis
+            <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 ">
+              <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
+                <a href={juknisUrl}> Unduh Juknis</a>
               </button>
-              <button className="bg-blue-800 rounded-full text-white lg:px-4 px-2.5 py-2">
-                Unduh Template
+              <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
+                <a href={TemplateUrl}> Unduh Template</a>
               </button>
             </div>
           </div>
