@@ -344,7 +344,7 @@ function CardModal({ img, tgl, summary, place }) {
             {tgl} | {place}
           </h1>
 
-          <p className="text-white lg:w-3/4 lg:text-sm text-sm">{summary}</p>
+          <p className="text-white lg:w-3/4 lg:text-sm text-xs">{summary}</p>
         </div>
       </div>
     </>
