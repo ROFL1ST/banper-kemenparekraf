@@ -71,7 +71,7 @@ export default function Foto() {
               },
               1024: {
                 slidesPerView: 4,
-                spaceBetween: 50,
+                spaceBetween: 30,
               },
             }}
           >
