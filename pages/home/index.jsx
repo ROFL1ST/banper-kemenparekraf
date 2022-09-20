@@ -246,11 +246,11 @@ function CardBerita({ data }) {
                 {formatter.format(Date.parse(data.CreatedAt))}
               </small>
               {data.Judul.length > MAX_LENGTHtitle ? (
-                <h3 className="my-3 font-bold capitalize lg:h-14 h-16 text-sm lg:text-sm 2xl:text-base">
+                <h3 className="my-3 font-bold capitalize lg:h-14 h-12 text-sm lg:text-sm 2xl:text-base">
                   {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
                 </h3>
               ) : (
-                <h3 className="my-3 font-bold capitalize lg:h-14 h-16 text-ellipsis lg:text-sm 2xl:text-base">
+                <h3 className="my-3 font-bold capitalize lg:h-14 h-12 text-ellipsis lg:text-sm 2xl:text-base">
                   {data.Judul}
                 </h3>
               )}
