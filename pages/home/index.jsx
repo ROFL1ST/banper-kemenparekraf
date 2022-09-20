@@ -3,7 +3,7 @@ import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { Disclosure } from "@headlessui/react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import  { useEffect, useState, useRef, Fragment } from "react";
+import { useEffect, useState, useRef, Fragment } from "react";
 import Section from "../components/section";
 import building from "../assets/building.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
@@ -194,7 +194,7 @@ function Question({ text, sub }) {
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="flex w-full justify-between  px-4 py-2 text-left text-sm font-medium  ">
+              <Disclosure.Button className="flex w-full justify-between  px-4 py-2 text-left text-sm  font-medium  ">
                 <span className="w-11/12">{text}</span>
                 <ChevronUpIcon
                   className={`${
@@ -202,7 +202,8 @@ function Question({ text, sub }) {
                   } h-5 w-5 text-blue-900 `}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+              {open ? <div className="border-b"></div> : <></>}
+              <Disclosure.Panel className="px-4 pt-4 pb-2 lg:text-sm text-xs text-gray-500">
                 <Summary data={sub} />
               </Disclosure.Panel>
             </>
