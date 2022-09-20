@@ -8,6 +8,7 @@ import { getApi, PutViews } from "../api/restApi";
 import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
+import axios from "axios";
 const MAX_LENGTH = 60;
 
 export default function Berita() {

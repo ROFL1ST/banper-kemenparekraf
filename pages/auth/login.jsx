@@ -6,9 +6,10 @@ import Navbar from "../components/navbar";
 import Section from "../components/section";
 import { useForm } from "react-hook-form";
 import { login } from "../api/restApi";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import Loading from "../components/Loading";
 import { Dialog, Transition } from "@headlessui/react";
+import axios from "axios";
 
 export default function Login() {
   const [remember, setRemember] = useState(false);

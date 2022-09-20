@@ -14,6 +14,8 @@ import { getDown, getApi, download } from "../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
 
 import Galeri from "./component/Galeri";
+import { useRouter } from "next/router";
+import axios from "axios";
 export default function Dashboard() {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);

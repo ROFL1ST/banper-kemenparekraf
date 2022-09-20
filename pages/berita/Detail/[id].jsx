@@ -13,6 +13,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import { getApi } from "../../api/restApi";
 import Link from "next/link";
+import axios from "axios";
 
 export default function DetailPage() {
   const [open, setOpen] = React.useState(false);

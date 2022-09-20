@@ -6,6 +6,7 @@ import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
 import Loading from "../loading";
 import { Dialog, Transition } from "@headlessui/react";
+import { useRouter } from "next/router";
 
 export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);

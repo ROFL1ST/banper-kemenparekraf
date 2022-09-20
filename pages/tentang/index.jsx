@@ -6,6 +6,8 @@ import Navbar from "../components/navbar";
 import Foto from "../galeri/foto/foto";
 import Video from "../galeri/video/video";
 import { Dialog, Transition } from "@headlessui/react";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Tentang() {
   const [open, setOpen] = useState(false);

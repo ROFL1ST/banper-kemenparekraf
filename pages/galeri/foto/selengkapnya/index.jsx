@@ -12,6 +12,8 @@ import {
 } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import axios from "axios";
 
 export default function Selengkapnya() {
   const [open, setOpen] = React.useState(false);
