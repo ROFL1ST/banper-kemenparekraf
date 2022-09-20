@@ -7,11 +7,10 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Link } from "@mui/material";
-import axios from "axios";
 import Loading from "./loading";
 import { getGaleri } from "../../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
-
+import bg from "../../assets/galeri.png";
 export default function Foto() {
   const swiperRef = useRef();
 
@@ -38,17 +37,11 @@ export default function Foto() {
       ac.abort();
     };
   }, []);
-  // console.log(items);
+  console.log(bg);
   const { data, loading } = items;
   return (
     <>
-      <div
-        className="w-full  bg-no-repeat bg-cover bg-bottom"
-        style={{
-          backgroundImage:
-            "url(https://cdn.pixabay.com/photo/2018/04/02/21/33/building-3285254_960_720.jpg)",
-        }}
-      >
+      <div className="w-full bg bg-no-repeat bg-cover bg-bottom">
         <div className="bg-black h-full w-full bg-opacity-25 md:pl-7 2xl:py-52 lg:py-10 py-16 ">
           <div className="xl:hidden lg:hidden w-11/12 mx-auto py-5">
             <h1 className="text-6xl font-semibold text-white text-center">
@@ -73,7 +66,7 @@ export default function Foto() {
                 spaceBetween: 20,
               },
               768: {
-                slidesPerView: 1,
+                slidesPerView: 2,
                 spaceBetween: 20,
               },
               1024: {
@@ -156,7 +149,7 @@ function FotoCard({ data }) {
         onClick={() => {
           setOpen(true);
         }}
-        className="lg:h-96 2xl:h-[30rem] h-96 rounded-2xl w-full bg-cover bg-center   "
+        className="lg:h-96 2xl:h-[30rem] h-96 rounded-2xl w-full bg-cover bg-center shadow-2xl"
         style={{
           backgroundImage: `url(${data.images[0]["images"]})`,
         }}
@@ -344,7 +337,9 @@ function CardModal({ img, tgl, summary, place }) {
             {tgl} | {place}
           </h1>
 
-          <p className="text-white lg:w-3/4 lg:text-sm text-xs">{summary}</p>
+          <p className="text-white lg:w-3/4 md:w-full sm:w-1/2 w-4/5  lg:text-sm text-xs font-extralight">
+            {summary}
+          </p>
         </div>
       </div>
     </>

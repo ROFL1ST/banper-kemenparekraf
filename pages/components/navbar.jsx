@@ -92,7 +92,7 @@ export default function Navbar({ open, setOpen }) {
       {/* Mobile */}
       <div
         className={
-          "z-30 rounded-b-2xl flex flex-col fixed xl:hidden lg:hidden w-full pt-32 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5 text-sm space-y-3 px-10" +
+          "z-30 rounded-b-2xl flex flex-col fixed xl:hidden lg:hidden w-full pt-32 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5 text-sm space-y-3 px-10 text-white" +
           (navbarOpen ? " flex" : " hidden")
         }
       >
