@@ -28,6 +28,9 @@ body {
 .bg{
   background-image: url("../pages/assets/galeri.png");
 }
+.bg2{
+  background-image: url("../pages/assets/video.png");
+}
 @media (max-width: 1080px) {
 
 
