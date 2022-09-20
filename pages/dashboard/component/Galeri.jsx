@@ -186,8 +186,8 @@ function Video({ video, vid, loading }) {
 }
 
 function CardVideo({ data }) {
-  const [open, setOpen] = React.useState(false);
-  const cancelButtonRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
   const viewss = async () => {
     // const url = `http://128.199.242.242/api/video/${data.id}`;
     try {
@@ -246,7 +246,7 @@ function VideoModal({ open, setOpen, cancelButtonRef, data }) {
  
   return (
     <>
-      <Transition.Root show={open} as={React.Fragment}>
+      <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-40"
@@ -254,7 +254,7 @@ function VideoModal({ open, setOpen, cancelButtonRef, data }) {
           onClose={setOpen}
         >
           <Transition.Child
-            as={React.Fragment}
+            as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -287,7 +287,7 @@ function VideoModal({ open, setOpen, cancelButtonRef, data }) {
                 </svg>
               </div>
               <Transition.Child
-                as={React.Fragment}
+                as={Fragment}
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 enterTo="opacity-100 translate-y-0 sm:scale-100"

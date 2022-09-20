@@ -3,7 +3,7 @@ import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import { Disclosure } from "@headlessui/react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
-import React, { useEffect } from "react";
+import  { useEffect, useState, useRef, Fragment } from "react";
 import Section from "../components/section";
 import building from "../assets/building.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
@@ -15,10 +15,10 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import Galeri from "./component/Galeri";
 export default function Dashboard() {
-  const [open, setOpen] = React.useState(false);
-  const cancelButtonRef = React.useRef(null);
+  const [open, setOpen] = useState(false);
+  const cancelButtonRef = useRef(null);
 
-  const [data, setData] = React.useState({ berita: {}, loading: true });
+  const [data, setData] = useState({ berita: {}, loading: true });
   const getData = async () => {
     try {
       //let respond = await axios.get(url, config);
@@ -32,7 +32,7 @@ export default function Dashboard() {
   };
 
   // faq
-  const [faq, setFaq] = React.useState({ datas: {}, loading2: true });
+  const [faq, setFaq] = useState({ datas: {}, loading2: true });
 
   const getFaq = async () => {
     try {
@@ -274,7 +274,7 @@ function IsiBerita({ data }) {
 }
 
 function Modal({ open, setOpen, cancelButtonRef }) {
-  const [check, setCheck] = React.useState(false);
+  const [check, setCheck] = useState(false);
 
   const handleChange = async () => {
     // await getDown(
@@ -290,7 +290,7 @@ function Modal({ open, setOpen, cancelButtonRef }) {
 
   return (
     <>
-      <Transition.Root show={open} as={React.Fragment}>
+      <Transition.Root show={open} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-50"
@@ -298,7 +298,7 @@ function Modal({ open, setOpen, cancelButtonRef }) {
           onClose={setOpen}
         >
           <Transition.Child
-            as={React.Fragment}
+            as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -312,7 +312,7 @@ function Modal({ open, setOpen, cancelButtonRef }) {
           <div className="fixed z-10 inset-0 overflow-y-auto">
             <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
               <Transition.Child
-                as={React.Fragment}
+                as={Fragment}
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 enterTo="opacity-100 translate-y-0 sm:scale-100"
