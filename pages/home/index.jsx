@@ -141,7 +141,7 @@ export default function Dashboard() {
         >
           <div
             id="faq"
-            className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-sm drop-shadow-lg py-16 2xl:px-80 xl:px-60 lg:px-20 md:px-10 px-3"
+            className="bg-gray-200 w-full h-full bg-opacity-20 backdrop-blur-sm drop-shadow-lg py-16  2xl:px-60 lg:px-20 md:px-10 px-3"
           >
             <Section
               text={"Pertanyaan yang sering diajukan (F.A.Q)"}
@@ -158,14 +158,14 @@ export default function Dashboard() {
                 )}
               </div>
               <div
-                className="xl:w-96 lg:w-96 md:w-3/4 w-3/4 h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
+                className="xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[39rem] lg:h-[39rem] h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
                 style={{
                   backgroundImage:
                     "url(https://www.fitforworksg.com/wp-content/uploads/2021/07/pexels-ivan-samkov-4458554-scaled.jpg)",
                 }}
               ></div>
             </div>
-            <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-10 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
+            <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-20 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
               <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
                 <a href={juknisUrl}> Unduh Juknis</a>
               </button>
@@ -255,7 +255,7 @@ function CardBerita({ data }) {
                   {data.Judul}
                 </h3>
               )}
-              <div className="xl:text-base lg:h-auto h-36 mb-2 pt-2 lg:text-base text-sm overflow-y-auto scrollbar">
+              <div className="xl:text-base lg:h-44 h-36 mb-2 pt-2 lg:text-base text-sm overflow-y-auto scrollbar">
                 <IsiBerita data={data.isi} />
               </div>
             </div>
