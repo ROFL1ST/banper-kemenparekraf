@@ -41,7 +41,7 @@ export default function Menu({ getData, setLoading, data }) {
               Subsector
             </button>
           </Link>
-          <Link href={`/berita?type=provinsi&sort=11`}>
+          <Link href={`/berita?type=provinsi&sort=${sort}&prov_id=11`}>
             <button
               onClick={() => {
                 setLoading(true);

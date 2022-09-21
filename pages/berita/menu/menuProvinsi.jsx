@@ -73,13 +73,13 @@ function Button({ nama, id, getData }) {
   const { pathname } = useRouter();
 
   return (
-    <Link href={`/berita?type=${type}&sort=${id}`}>
+    <Link href={`/berita?type=${type}&sort=terbaru&prov_id=${id}`}>
       <button
         onClick={() => {
-          getData(`${id}`);
+          getData("terbaru", ``, `${id}`);
         }}
         className={`${
-          sort === `${id}`
+          prov_id === `${id}`
             ? "bg-blue-900 bg-opacity-80  px-5 py-2 text-sm   rounded-full   text-white font-semibold "
             : " bg-gray-400 bg-opacity-80  px-5 py-2 text-sm   rounded-full   text-white font-semibold "
         }`}
