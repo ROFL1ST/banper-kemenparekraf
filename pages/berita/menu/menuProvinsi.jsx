@@ -14,13 +14,17 @@ import Link from "next/link";
 
 export default function MenuProvinsi({ getData, setLoading }) {
   const [provinsi, setProvinsi] = useState([]);
+  const [load, setLoad] = useState(true);
+  const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
   const getProvinsi = async () => {
     try {
       await getApi("master/provinsi").then((val) => {
         setProvinsi(val.data.data);
+        setLoad(false);
       });
     } catch (er) {
       console.log(er);
+      setLoad(false);
     }
   };
   useEffect(() => {
@@ -42,25 +46,28 @@ export default function MenuProvinsi({ getData, setLoading }) {
           }}
           modules={[FreeMode, Pagination, Navigation]}
         >
-          {provinsi?.map((i, key) => (
-            <SwiperSlide className=" menu" key={key}>
-              <Button nama={i.NamaProvinsi} id={i.Id} getData={getData} setLoading={setLoading} />
-            </SwiperSlide>
-          ))}
-          {/* <div className="flex">
-            <button ref={navigationPrevRef}>
-              <ArrowLeftCircleIcon
-                className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-gray-400"
-                strokeWidth={1}
-              />
-            </button>
-            <button ref={navigationNextRef}>
-              <ArrowRightCircleIcon
-                className="lg:h-9 lg:w-9 2xl:h-12 2xl:w-12 text-gray-400"
-                strokeWidth={1}
-              />
-            </button>
-          </div> */}
+          {!load ? (
+            provinsi?.map((i, key) => (
+              <SwiperSlide className=" menu" key={key}>
+                <Button
+                  nama={i.NamaProvinsi}
+                  id={i.Id}
+                  getData={getData}
+                  setLoading={setLoading}
+                />
+              </SwiperSlide>
+            ))
+          ) : (
+            <>
+              <div className=" space-x-5">
+                {loadingLength.map((i, key) => (
+                  <SwiperSlide key={key} className="animate-pulse menu">
+                    <ButtonLoading />
+                  </SwiperSlide>
+                ))}
+              </div>
+            </>
+          )}
         </Swiper>
       </div>
     </>
@@ -76,7 +83,7 @@ function Button({ nama, id, getData, setLoading }) {
     <Link href={`/berita?type=${type}&sort=terbaru&prov_id=${id}`}>
       <button
         onClick={() => {
-          setLoading(true)
+          setLoading(true);
           getData("terbaru", ``, `${id}`);
         }}
         className={`${
@@ -88,5 +95,16 @@ function Button({ nama, id, getData, setLoading }) {
         {nama}
       </button>
     </Link>
+  );
+}
+
+function ButtonLoading({}) {
+  // console.log(sub_id)
+
+  return (
+    <button
+      className={`
+       ${"bg-blue-900 bg-opacity-80 py-4 rounded-full px-16 text-white font-semibold"}`}
+    ></button>
   );
 }

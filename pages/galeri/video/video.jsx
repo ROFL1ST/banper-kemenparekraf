@@ -8,7 +8,7 @@ import {
 import { Pagination } from "swiper";
 import { Link } from "@mui/material";
 import Loading from "./loading";
-import { getGaleri } from "../../api/restApi";
+import { getGaleri, PutViews } from "../../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
 import bg from "../../assets/video.png";
 
