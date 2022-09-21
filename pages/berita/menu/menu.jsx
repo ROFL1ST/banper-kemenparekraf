@@ -29,7 +29,7 @@ export default function Menu({ getData, setLoading, data }) {
           <Link href={`/berita?type=subsector&sort=${sort}&sub_id=1`}>
             <button
               onClick={() => {
-                setLoading(true);
+                // setLoading(true);
                 getData(`${sort}`, "1");
               }}
               className={`${
@@ -44,7 +44,8 @@ export default function Menu({ getData, setLoading, data }) {
           <Link href={`/berita?type=provinsi&sort=${sort}&prov_id=11`}>
             <button
               onClick={() => {
-                setLoading(true);
+                // setLoading(true);
+                getData("terbaru", ``, `11`);
               }}
               className={`${
                 type === "provinsi"
