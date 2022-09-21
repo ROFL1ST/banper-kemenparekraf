@@ -44,7 +44,7 @@ export default function MenuProvinsi({ getData, setLoading }) {
         >
           {provinsi?.map((i, key) => (
             <SwiperSlide className=" menu" key={key}>
-              <Button nama={i.NamaProvinsi} id={i.Id} getData={getData} />
+              <Button nama={i.NamaProvinsi} id={i.Id} getData={getData} setLoading={setLoading} />
             </SwiperSlide>
           ))}
           {/* <div className="flex">
@@ -67,7 +67,7 @@ export default function MenuProvinsi({ getData, setLoading }) {
   );
 }
 
-function Button({ nama, id, getData }) {
+function Button({ nama, id, getData, setLoading }) {
   const { query } = useRouter();
   const { sort, type, sub_id, prov_id } = query;
   const { pathname } = useRouter();
@@ -76,6 +76,7 @@ function Button({ nama, id, getData }) {
     <Link href={`/berita?type=${type}&sort=terbaru&prov_id=${id}`}>
       <button
         onClick={() => {
+          setLoading(true)
           getData("terbaru", ``, `${id}`);
         }}
         className={`${

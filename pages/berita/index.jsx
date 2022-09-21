@@ -17,6 +17,7 @@ export default function Berita() {
   const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [more, setMore] = useState(false);
   const cancelButtonRef = useRef(null);
   const { query } = useRouter();
   const { sort, type, sub_id } = query;
@@ -25,7 +26,7 @@ export default function Berita() {
   const getData = async (sort, sub_id, prov_id) => {
     try {
       let respond = await getApi(
-        `news?limit=15&${
+        `news?limit=${!more ? "15" : ""}&${
           sub_id !== undefined && `subsektorId=${sub_id}`
         }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
       );
@@ -44,7 +45,7 @@ export default function Berita() {
     return () => {
       ac.abort();
     };
-  }, [loading]);
+  }, []);
   useEffect(() => {
     if (router.isReady) {
       getData();
@@ -67,6 +68,14 @@ export default function Berita() {
             data.map((i, key) => <Card data={i} key={key} />)
           )}
         </div>
+      </div>
+      <div
+        onClick={() => {
+          setMore(true);
+        }}
+        className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm"
+      >
+        <p>more</p>
       </div>
       <Footer />
       <Modal
