@@ -17,16 +17,15 @@ export default function Berita() {
   const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [more, setMore] = useState(false);
   const cancelButtonRef = useRef(null);
   const { query } = useRouter();
   const { sort, type, sub_id } = query;
   var router = useRouter();
 
-  const getData = async (sort, sub_id, prov_id) => {
+  const getData = async (sort, sub_id, prov_id, limit = 5) => {
     try {
       let respond = await getApi(
-        `news?limit=${!more ? "15" : ""}&${
+        `news?limit=${limit}&${
           sub_id !== undefined && `subsektorId=${sub_id}`
         }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
       );
@@ -69,14 +68,15 @@ export default function Berita() {
           )}
         </div>
       </div>
-      <div
+      <button
         onClick={() => {
-          setMore(true);
+          let limit = 4;
+          getData(sort, sub_id, "", limit + 10);
         }}
-        className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm"
+        className="text-blue-700 underline mt-5 mb-10 text-sm text-center w-full"
       >
-        <p>more</p>
-      </div>
+        more
+      </button>
       <Footer />
       <Modal
         open={open}
