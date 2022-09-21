@@ -15,7 +15,7 @@ export default function Menu({ getData, setLoading, data }) {
           <Link href={`/berita?type=berita&sort=${sort}`}>
             <button
               onClick={() => {
-                setLoading(true)
+                setLoading(true);
               }}
               className={`${
                 type === undefined || type === "berita"
@@ -29,7 +29,8 @@ export default function Menu({ getData, setLoading, data }) {
           <Link href={`/berita?type=subsector&sort=${sort}&sub_id=1`}>
             <button
               onClick={() => {
-                setLoading(true)
+                setLoading(true);
+                getData(`${sort}`, "1");
               }}
               className={`${
                 type === "subsector"
@@ -40,10 +41,10 @@ export default function Menu({ getData, setLoading, data }) {
               Subsector
             </button>
           </Link>
-          <Link href={`/berita?type=provinsi&sort=${sort}`}>
+          <Link href={`/berita?type=provinsi&sort=11`}>
             <button
               onClick={() => {
-                setLoading(true)
+                setLoading(true);
               }}
               className={`${
                 type === "provinsi"
@@ -62,7 +63,7 @@ export default function Menu({ getData, setLoading, data }) {
           ) : type === "subsector" ? (
             <MenuSubsector getData={getData} setLoading={setLoading} />
           ) : (
-            <MenuProvinsi />
+            <MenuProvinsi getData={getData} setLoading={setLoading} />
           )}
         </div>
       </div>

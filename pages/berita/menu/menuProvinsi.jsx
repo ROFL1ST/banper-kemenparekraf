@@ -9,8 +9,10 @@ import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/solid";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function MenuProvinsi() {
+export default function MenuProvinsi({ getData, setLoading }) {
   const [provinsi, setProvinsi] = useState([]);
   const getProvinsi = async () => {
     try {
@@ -42,7 +44,7 @@ export default function MenuProvinsi() {
         >
           {provinsi?.map((i, key) => (
             <SwiperSlide className=" menu" key={key}>
-              <Button nama={i.NamaProvinsi} />
+              <Button nama={i.NamaProvinsi} id={i.Id} getData={getData} />
             </SwiperSlide>
           ))}
           {/* <div className="flex">
@@ -65,12 +67,25 @@ export default function MenuProvinsi() {
   );
 }
 
-function Button({ nama, id }) {
+function Button({ nama, id, getData }) {
+  const { query } = useRouter();
+  const { sort, type, sub_id, prov_id } = query;
+  const { pathname } = useRouter();
+
   return (
-    <button
-      className={`bg-blue-900 bg-opacity-80  px-5 py-2 text-sm   rounded-full   text-white font-semibold `}
-    >
-      {nama}
-    </button>
+    <Link href={`/berita?type=${type}&sort=${id}`}>
+      <button
+        onClick={() => {
+          getData(`${id}`);
+        }}
+        className={`${
+          sort === `${id}`
+            ? "bg-blue-900 bg-opacity-80  px-5 py-2 text-sm   rounded-full   text-white font-semibold "
+            : " bg-gray-400 bg-opacity-80  px-5 py-2 text-sm   rounded-full   text-white font-semibold "
+        }`}
+      >
+        {nama}
+      </button>
+    </Link>
   );
 }

@@ -22,12 +22,12 @@ export default function Berita() {
   const { sort, type, sub_id } = query;
   var router = useRouter();
 
-  const getData = async (sort) => {
+  const getData = async (sort, sub_id, prov_id) => {
     try {
       let respond = await getApi(
         `news?limit=15&${
           sub_id !== undefined && `subsektorId=${sub_id}`
-        }&sort=${sort}`
+        }&sort=${sort}&`
       );
       setData(respond.data.data);
       setLoading(false);
@@ -130,7 +130,6 @@ function Card({ data }) {
     </>
   );
 }
-
 
 function Modal({ open, setOpen, cancelButtonRef }) {
   const [check, setCheck] = useState(false);
