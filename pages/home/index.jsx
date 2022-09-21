@@ -53,7 +53,7 @@ export default function Dashboard() {
   const TemplateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   useEffect(() => {
-    document.title = "Dashboard";
+    document.title = "Home";
     getData();
     getFaq();
   }, []);
