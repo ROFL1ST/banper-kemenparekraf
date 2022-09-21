@@ -31,7 +31,7 @@ export default function DetailPage() {
       let respond = await getApi(`news/${id}`).then((result) => result);
       setDetail((s) => ({ ...s, data: respond.data.data[0], loading2: false }));
     } catch (error) {
-      setLoading(false);
+      // setLoading(false);
       setDetail((s) => ({ ...s, loading2: false }));
       console.log(error);
     }
@@ -107,10 +107,14 @@ export default function DetailPage() {
                 </>
               ) : (
                 items
-                  ?.slice(0, 3)
-                  .map((i, index) => (
-                    <News_small_card data={i} key={index}></News_small_card>
-                  ))
+                  ?.slice(0, 4)
+                  .map((i, index) =>
+                    data.Id === i.Id ? (
+                      <></>
+                    ) : (
+                      <News_small_card data={i} key={index}></News_small_card>
+                    )
+                  )
               )}
             </div>
           </div>
@@ -125,7 +129,7 @@ export default function DetailPage() {
           <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pb-16 w-full">
             {" "}
             {!loading2 && data ? (
-              items.slice(0, 4).map((i, key) =>
+              items.slice(0, 5).map((i, key) =>
                 data.Id === i.Id ? (
                   <></>
                 ) : (
