@@ -234,7 +234,7 @@ function CardBerita({ data }) {
   return (
     <>
       <Link href={`/berita/Detail/${data.Id}`}>
-        <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex">
+        <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex cursor-pointer">
           <div
             style={{
               backgroundImage: `url(${data.foto})`,

@@ -73,8 +73,8 @@ export default function Navbar({ open, setOpen }) {
             <Link href={"/galeri"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer  ${
-                  pathname === "/galeri" &&
-                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                  pathname === "/galeri" || pathname === "/galeri/foto/selengkapnya" || pathname === "/galeri/video/selengkapnya" ?
+                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold" : ""
                 } `}
               >
                 Galeri
