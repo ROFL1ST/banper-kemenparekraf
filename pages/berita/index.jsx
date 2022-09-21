@@ -22,7 +22,7 @@ export default function Berita() {
   const { sort, type, sub_id } = query;
   var router = useRouter();
 
-  const getData = async (sort, sub_id, prov_id, limit = 5) => {
+  const getData = async (sort, sub_id, prov_id, limit = 15) => {
     try {
       let respond = await getApi(
         `news?limit=${limit}&${
@@ -70,7 +70,7 @@ export default function Berita() {
       </div>
       <button
         onClick={() => {
-          let limit = 4;
+          let limit = 15;
           getData(sort, sub_id, "", limit + 10);
         }}
         className="text-blue-700 underline mt-5 mb-10 text-sm text-center w-full"

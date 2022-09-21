@@ -14,6 +14,9 @@ export default function Navbar({ open, setOpen }) {
   const templateUrl =
     "http://128.199.242.242/home/assets/Dokumen_Banper_TA_2022.zip";
   const [navbarOpen, setNavbarOpen] = React.useState(false);
+  const [menu1, setMenu1] = React.useState(false);
+  const [menu2, setMenu2] = React.useState(false);
+
   const { pathname } = useRouter();
   const [token, setToken] = React.useState();
   React.useEffect(() => {
@@ -97,137 +100,121 @@ export default function Navbar({ open, setOpen }) {
         }
       >
         <Link href={"/home"}>
-          <p className={"cursor-pointer"}>Dashboard</p>
+          <p
+            className={`cursor-pointer  ${
+              pathname === "/home" ? "text-blue-900 font-bold" : "font-medium"
+            }`}
+          >
+            Home
+          </p>
         </Link>
-        <div className="flex space-x-3">
-          <div className="cursor-pointer flex items-center space-x-1">
-            <Menu as="div" className="relative inline-block text-left">
-              <div>
-                <Menu.Button className="inline-flex w-full justify-center text-sm hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                  Mekanisme Pendaftaran
-                  <ChevronDownIcon
-                    className="ml-2 -mr-1 h-5 w-5 "
-                    aria-hidden="true"
-                  />
-                </Menu.Button>
-              </div>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="px-1 py-1 ">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <Link href={"/home#faq"}>
-                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                            F.A.Q
-                          </button>
-                        </Link>
-                      )}
-                    </Menu.Item>
-                  </div>
-                  <div className="px-1 py-1 ">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a href={juknisUrl}>
-                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                            Unduh Juknis
-                          </button>
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </div>
-                  <div className="px-1 py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <a href={templateUrl}>
-                          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-                            Unduh Template
-                          </button>
-                        </a>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+        <div onClick={() => setMenu1(!menu1)} className="flex space-x-3">
+          <div
+            className={
+              "cursor-pointer flex items-center space-x-1" +
+              (menu1
+                ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
+                : "")
+            }
+          >
+            Mekanisme Pendaftaran
+            <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 "
+              aria-hidden="true"
+            />
           </div>
         </div>
+        <div
+          className={`${menu1 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
+        >
+          <button className=" group flex w-full items-center rounded-md  px-2 py-2  text-sm text-white">
+            {pathname != "/home" ? (
+              <Link href={"/home#faq"}>F.A.Q</Link>
+            ) : (
+              <a href="#faq">F.A.Q</a>
+            )}
+          </button>
+
+          <a href={juknisUrl}>
+            <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+              Unduh Juknis
+            </button>
+          </a>
+
+          <a href={templateUrl}>
+            <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+              Unduh Template
+            </button>
+          </a>
+        </div>
+
         <Link href={"/berita?type=berita&sort=terbaru"}>
-          <p className="cursor-pointer">Berita</p>
+          <p
+            className={`cursor-pointer  ${
+              pathname === "/berita" ? "text-blue-900 font-bold" : "font-medium"
+            }`}
+          >
+            Berita
+          </p>
         </Link>
         <Link href={"/galeri"}>
-          <p className="cursor-pointer">Galeri</p>
+          <p
+            className={`cursor-pointer  ${
+              pathname === "/galeri" ||
+              pathname === "/galeri/foto/selengkapnya" ||
+              pathname === "/galeri/video/selengkapnya"
+                ? "text-blue-900 font-bold"
+                : "font-medium"
+            }`}
+          >
+            Galeri
+          </p>
         </Link>
-        <div className="flex space-x-3">
-          <div className="cursor-pointer flex items-center space-x-1">
-            <Menu as="div" className="relative inline-block text-left">
-              <div>
-                <Menu.Button
-                  className={`inline-flex w-full justify-center   text-sm  hover:bg-opacity-70  ${
-                    pathname === "/auth/daftar" || pathname === "/auth/login"
-                      ? "bg-white  text-blue-900 font-bold py-1 px-2 rounded-full"
-                      : ""
-                  }`}
-                >
-                  Login|Daftar
-                </Menu.Button>
-              </div>
-              <Transition
-                as={Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items className="absolute right-0 mt-2 w-20 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="px-1 py-1 ">
-                    <Link href={"/auth/login"}>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                              active && "bg-white  text-blue-900 font-bold "
-                            } `}
-                          >
-                            Login
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </Link>
-                  </div>
-                  <div className="px-1 py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={() => {
-                            if (pathname === "/auth/daftar") {
-                              return;
-                            } else {
-                              setOpen(true);
-                            }
-                          }}
-                          className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                            active && "bg-white  text-blue-900 font-bold "
-                          } `}
-                        >
-                          Daftar
-                        </button>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </Menu>
+        <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
+          <div
+            className={
+              "cursor-pointer flex items-center space-x-1" +
+              (menu2
+                ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
+                : "")
+            }
+          >
+            Login|Daftar
+            <ChevronDownIcon
+              className="ml-2 -mr-1 h-5 w-5 "
+              aria-hidden="true"
+            />
           </div>
+        </div>
+        <div
+          className={`${menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
+        >
+          <Link href={"/auth/login"}>
+            <button
+              className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                pathname === "/auth/login" &&
+                "bg-white  text-blue-900 font-bold "
+              } `}
+            >
+              Login
+            </button>
+          </Link>
+
+          <button
+            onClick={() => {
+              if (pathname === "/auth/daftar") {
+                return;
+              } else {
+                setOpen(true);
+              }
+            }}
+            className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+              pathname === "/auth/daftar" &&
+              "bg-white  text-blue-900 font-bold "
+            } `}
+          >
+            Daftar
+          </button>
         </div>
       </div>
       {/* Mobile */}
