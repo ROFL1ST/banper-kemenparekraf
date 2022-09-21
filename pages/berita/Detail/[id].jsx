@@ -315,7 +315,7 @@ function Banner({ data, loading2 }) {
           <img
             src={`http://128.199.242.242/dashboard/assets/images/blog/${data.foto}`}
             className="rounded-3xl"
-            alt=""
+            alt="banner"
           />
         ) : (
           <div className=" w-full h-96 rounded-2xl bg-gray-300 animate-pulse"></div>

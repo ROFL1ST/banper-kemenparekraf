@@ -158,7 +158,7 @@ export default function Dashboard() {
                 )}
               </div>
               <div
-                className="xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[39rem] lg:h-[39rem] h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
+                className="xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[42rem] lg:h-[45rem] h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
                 style={{
                   backgroundImage:
                     "url(https://www.fitforworksg.com/wp-content/uploads/2021/07/pexels-ivan-samkov-4458554-scaled.jpg)",
