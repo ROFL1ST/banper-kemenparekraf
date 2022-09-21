@@ -255,7 +255,7 @@ function CardBerita({ data }) {
                   {data.Judul}
                 </h3>
               )}
-              <div className="xl:text-base lg:h-auto h-36 mb-2 pt-2 lg:text-base text-sm overflow-y-auto scrollbar">
+              <div className="xl:text-base lg:h-44 h-36 mb-2 pt-2 lg:text-base text-sm overflow-y-auto scrollbar">
                 <IsiBerita data={data.isi} />
               </div>
             </div>
