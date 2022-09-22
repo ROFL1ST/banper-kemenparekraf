@@ -429,7 +429,7 @@ function Downloader({ setOpen, setCheck }) {
       });
   };
   return (
-    <Link href={`${pathname === "/auth/login" ? "daftar" : "auth/daftar"}`}>
+    <Link href={`${pathname === "/auth/login" ? "daftar" : "/auth/daftar"}`}>
       <button
         onClick={() => {
           setOpen(false);
