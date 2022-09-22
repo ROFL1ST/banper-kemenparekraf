@@ -75,7 +75,7 @@ export default function Proposal() {
   useEffect(() => {
     const result = list.filter((list) => list.Judul.includes(search));
     setSearchResults(result);
-  }, [setSearchResults]);
+  },);
 
   return (
     <>
@@ -155,7 +155,7 @@ export default function Proposal() {
                         ) : searchResults.length != 0 ? (
                           <>
                             <TableRow>
-                              {searchResults?.map((i, key) => (
+                              {searchResults.map((i, key) => (
                                 <ListPropose
                                   data={i}
                                   key={key}
