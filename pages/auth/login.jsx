@@ -64,7 +64,7 @@ export default function Login() {
     }*/
     setLoading(true);
     try {
-      await login("authentication", values).then((result) => {
+      await login("login", values).then((result) => {
         console.log(result);
         setLoading(false);
 
