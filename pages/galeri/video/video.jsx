@@ -44,7 +44,7 @@ export default function Video() {
     <>
       <div
         className="w-full h-full  bg-no-repeat bg-cover bg-bottom rounded-b-3xl"
-       style={{backgroundImage: `url(${bg.src})`}}
+        style={{ backgroundImage: `url(${bg.src})` }}
       >
         <div className="bg-black bg-opacity-20 h-full w-full 2xl:py-40 lg:py-16 py-16 md:p-0 p-5 rounded-b-3xl">
           <h1 className="text-6xl font-semibold text-white text-center">
@@ -132,7 +132,6 @@ export default function Video() {
   );
 }
 
-
 function CardVideo({ data }) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
@@ -145,6 +144,35 @@ function CardVideo({ data }) {
       console.log(error);
     }
   };
+
+  const [kota, setKota] = useState({});
+  const [load, setLoad] = useState(true);
+  async function detail() {
+    try {
+      await getGaleri(`video/${data.id}`).then((result) => {
+        setKota(result.data.data[0]);
+        setLoad(false);
+      });
+    } catch (error) {
+      console.log(error);
+      setLoad(false);
+    }
+  }
+
+  useEffect(() => {
+    detail();
+  }, []);
+  console.log(kota);
+
+  // hover
+  const [isHovering, setIsHovering] = useState(false);
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
   return (
     <>
       <div
@@ -152,16 +180,23 @@ function CardVideo({ data }) {
           setOpen(true);
           viewss();
         }}
+        onMouseOver={handleMouseOver}
+        onMouseOut={handleMouseOut}
         className="my-auto items-center"
       >
         <div
-          className=" rounded-lg mx-auto max-h-80 min-w-full bg-no-repeat bg-cover"
+          className=" rounded-lg mx-auto max-h-96 min-w-full bg-no-repeat bg-cover "
           style={{ backgroundImage: `url(${data.thumbnail})` }}
         >
-          <div className=" bg-black xl:p-28 md:p-20 sm:p-36 p-20 bg-opacity-25 rounded-lg ">
+          <div
+            className={` rounded-lg   xbg-black xl:p-28 md:p-20 sm:p-36 p-20  ${
+              isHovering
+                ? "hover:bg-gradient-to-t hover:from-black transition ease-in-out hover:-translate-y-0.5"
+                : "bg-black bg-opacity-25 transition ease-in-out "
+            }`}
+          >
             <div className="mx-auto flex justify-center items-center ">
               <div className="bg-white bg-opacity-25 rounded-full xl:p-5 p-2 border-white border flex justify-center items-center">
-                {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -178,6 +213,33 @@ function CardVideo({ data }) {
                 </svg>
               </div>
             </div>
+            {isHovering && (
+              <Transition show={isHovering} appear={true}>
+                <Transition.Child
+                  enter="transition-opacity ease-linear duration-300"
+                  enterFrom="opacity-0 "
+                  enterTo="opacity-100"
+                  leave="transition-opacity ease-linear duration-300"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <div className="absolute justify-start flex flex-col bottom-10 left-10 ">
+                    {!load && kota ? (
+                      <p className="uppercase font-bold text-white xl:text-base lg:text-base md:text-sm text-sm truncate">
+                        {kota.NamaKota}
+                      </p>
+                    ) : (
+                      <>
+                        <div className="animate-pulse">
+                          <div className="text-xs font-bold h-2 w-1/4 bg-gray-500 rounded-full"></div>
+                        </div>
+                      </>
+                    )}
+                    <p className="text-blue-300">video</p>
+                  </div>
+                </Transition.Child>
+              </Transition>
+            )}
           </div>
         </div>
       </div>
@@ -191,7 +253,6 @@ function CardVideo({ data }) {
   );
 }
 function VideoModal({ open, setOpen, cancelButtonRef, data }) {
- 
   return (
     <>
       <Transition.Root show={open} as={Fragment}>
