@@ -173,52 +173,137 @@ export default function Navbar({ open, setOpen }) {
             Galeri
           </p>
         </Link>
-        <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
-          <div
-            className={
-              "cursor-pointer flex items-center space-x-1" +
-              (menu2
-                ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
-                : "")
-            }
-          >
-            Login|Daftar
-            <ChevronDownIcon
-              className="ml-2 -mr-1 h-5 w-5 "
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-        <div
-          className={`${menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
-        >
-          <Link href={"/auth/login"}>
-            <button
-              className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                pathname === "/auth/login" &&
-                "bg-white  text-blue-900 font-bold "
-              } `}
+        {token == null || token == "undefined" || token == undefined ? (
+          <>
+            <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
+              <div
+                className={
+                  "cursor-pointer flex items-center space-x-1" +
+                  (menu2
+                    ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
+                    : "")
+                }
+              >
+                Login|Daftar
+                <ChevronDownIcon
+                  className="ml-2 -mr-1 h-5 w-5 "
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+            <div
+              className={`${
+                menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"
+              }`}
             >
-              Login
-            </button>
-          </Link>
+              <Link href={"/auth/login"}>
+                <button
+                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                    pathname === "/auth/login" &&
+                    "bg-white  text-blue-900 font-bold "
+                  } `}
+                >
+                  Login
+                </button>
+              </Link>
 
-          <button
-            onClick={() => {
-              if (pathname === "/auth/daftar") {
-                return;
-              } else {
-                setOpen(true);
-              }
-            }}
-            className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-              pathname === "/auth/daftar" &&
-              "bg-white  text-blue-900 font-bold "
-            } `}
-          >
-            Daftar
-          </button>
-        </div>
+              <button
+                onClick={() => {
+                  if (pathname === "/auth/daftar") {
+                    return;
+                  } else {
+                    setOpen(true);
+                  }
+                }}
+                className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                  pathname === "/auth/daftar" &&
+                  "bg-white  text-blue-900 font-bold "
+                } `}
+              >
+                Daftar
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
+              <div
+                className={
+                  "cursor-pointer flex items-center space-x-1" +
+                  (menu2
+                    ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
+                    : "")
+                }
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 text-[142b51]"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                  />
+                </svg>
+                <ChevronDownIcon
+                  className="ml-2 -mr-1 h-5 w-5 "
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+            <div
+              className={`${
+                menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"
+              }`}
+            >
+              <Link href={"/proposal"}>
+                <button
+                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                    pathname === "/proposal" &&
+                    "bg-white  text-blue-900 font-bold "
+                  } `}
+                >
+                  List Proposal
+                </button>
+              </Link>
+
+              <button
+                onClick={() => {
+                  if (pathname === "/auth/daftar") {
+                    return;
+                  } else {
+                    setOpen(true);
+                  }
+                }}
+                className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                  pathname === "/auth/daftar" &&
+                  "bg-white  text-blue-900 font-bold "
+                } `}
+              >
+                Edit Profile
+              </button>
+              <button
+                onClick={() => {
+                  if (pathname === "/auth/daftar") {
+                    return;
+                  } else {
+                    setOpen(true);
+                  }
+                }}
+                className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                  pathname === "/auth/daftar" &&
+                  "bg-white  text-blue-900 font-bold "
+                } `}
+              >
+                Logout
+              </button>
+            </div>
+          </>
+        )}
       </div>
       {/* Mobile */}
     </>

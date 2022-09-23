@@ -5,6 +5,8 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Section from "../../components/section";
 import { useForm } from "react-hook-form";
+import Router, { useRouter } from "next/router";
+
 import { getApi, getPropose, PostFeed } from "../../api/restApi";
 
 export default function Add() {
@@ -27,12 +29,19 @@ export default function Add() {
       await PostFeed("proposal", token, values, "post").then((result) => {
         console.log(result.data);
         console.log(values);
-        if (result.data.message) {
+        if (result.data.message != "Success") {
           setError((s) => ({
             ...s,
             status: true,
             msg: result.data.display_message,
           }));
+          setTimeout(() => {
+            setError((s) => ({
+              ...s,
+              status: false,
+              msg: "",
+            }));
+          }, 3000);
         } else {
           Router.push("/proposal");
         }
@@ -68,8 +77,6 @@ export default function Add() {
     detail();
   }, []);
   // console.log(jenis);
-
-  
 
   return (
     <>

@@ -13,6 +13,7 @@ import Section from "../components/section";
 import Router, { useRouter } from "next/router";
 import { getApi, getDelete, getPropose } from "../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
+import { data } from "autoprefixer";
 
 export default function Proposal() {
   const [search, setSearch] = React.useState("");
@@ -75,7 +76,7 @@ export default function Proposal() {
   useEffect(() => {
     const result = list.filter((list) => list.Judul.includes(search));
     setSearchResults(result);
-  },[search]);
+  }, [search]);
 
   return (
     <>
@@ -192,8 +193,9 @@ function ListPropose(data, getList) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
   console.log(data);
-  const [jenis, setJenis] = useState([]);
   const [load, setLoad] = useState(true);
+
+  const [jenis, setJenis] = useState([]);
   async function detail() {
     try {
       await getApi(`master/jenis_bantuan`).then((result) => {
@@ -236,7 +238,7 @@ function ListPropose(data, getList) {
       <TableCell>Belum Lengkap</TableCell>
       <TableCell>
         <div className="flex space-x-2">
-          <Link href={"/proposal/submit-document"}>
+          <Link href={`/proposal/submit-document/${data.data.Id}`}>
             <div className="cursor-pointer bg-blue-200 flex justify-center py-2 rounded-md px-5">
               <p className="text-blue-900">Submit Dokumen</p>
             </div>
@@ -331,10 +333,8 @@ function DeletePop({
                       onClick={() => {
                         if (localStorage.getItem("token") != null) {
                           deletePropose(id, localStorage.getItem("token"));
-                          getList(localStorage.getItem("token"));
                         } else if (sessionStorage.getItem("token") != null) {
                           deletePropose(id, sessionStorage.getItem("token"));
-                          getList(sessionStorage.getItem("token"));
                         } else {
                           alert("You're not real");
                         }
