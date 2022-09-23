@@ -216,7 +216,7 @@ function CardVideo({ data }) {
             {isHovering && (
               <Transition show={isHovering} appear={true}>
                 <Transition.Child
-                  enter="transition-opacity ease-linear duration-300"
+                  enter="transition-opacity ease-linear duration-300 "
                   enterFrom="opacity-0 "
                   enterTo="opacity-100"
                   leave="transition-opacity ease-linear duration-300"
