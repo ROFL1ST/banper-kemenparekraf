@@ -75,7 +75,7 @@ export default function Proposal() {
   useEffect(() => {
     const result = list.filter((list) => list.Judul.includes(search));
     setSearchResults(result);
-  },);
+  },[search]);
 
   return (
     <>
