@@ -6,6 +6,9 @@ import Router, { useRouter } from "next/router";
 import { getApi, getPropose } from "../../api/restApi";
 
 export default function SubmitDoc() {
+  React.useEffect(() => {
+    document.title = "Submit Dokumen";
+  });
   const teks = [
     "Dokument 1: Surat Permohonan",
     "Dokument 2: Proposal Ringkas",
