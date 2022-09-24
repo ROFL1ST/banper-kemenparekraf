@@ -86,7 +86,7 @@ export default function SubmitDoc() {
 
             {/* Document */}
             {!load && data ? (
-              doc?.map((i, key) => (
+              teks?.map((i, key) => (
                 <CardDocument text={i} key={key}></CardDocument>
               ))
             ) : (
