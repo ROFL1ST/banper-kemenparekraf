@@ -191,7 +191,7 @@ function CardVideo({ data }) {
           <div
             className={` rounded-lg   xbg-black xl:p-28 md:p-20 sm:p-36 p-20  ${
               isHovering
-                ? "hover:bg-gradient-to-t hover:from-black transition ease-in-out hover:-translate-y-0.5"
+                ? "hover:bg-gradient-to-t hover:from-black bg-black bg-opacity-25 transition ease-in-out hover:-translate-y-0.5"
                 : "bg-black bg-opacity-25 transition ease-in-out "
             }`}
           >
