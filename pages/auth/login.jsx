@@ -38,30 +38,6 @@ export default function Login() {
   } = useForm();
 
   const onSubmit = async (values) => {
-    // console.log("values", values);
-    //var postImage = await login("login", values).then(result => result);
-    // let respond = await login("login", values).then(
-    //   (result) => result
-    // );
-    // console.log("respond", respond)
-    /*console.log("values", values);
-    let respond = await login("login", values).then(
-      (result) => result
-    );
-    console.log("respond", respond);
-    try {
-      await login("authentication", values).then((result) => {
-        console.log(result);
-        if (remember) {
-          localStorage.setItem("token", result.data.data.token);
-        } else {
-          sessionStorage.setItem("token", result.data.data.token);
-        }
-        Router.push("/proposal");
-      
-    } catch (err) {
-      console.log(err);
-    }*/
     setLoading(true);
     try {
       await login("login", values).then((result) => {
@@ -89,7 +65,6 @@ export default function Login() {
     <>
       <Navbar open={open} setOpen={setOpen} />
       <Background>
-        {" "}
         <Section text={"Login"} />
         <form
           onSubmit={handleSubmit(onSubmit)}
