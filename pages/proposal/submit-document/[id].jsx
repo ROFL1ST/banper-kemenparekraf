@@ -265,20 +265,35 @@ function CardDocument({ data, teks, num }) {
                 .filter((teks) => teks.id === num + 1)
                 .map((teks) => teks.nama)}
             </h1>
-            <h1 className="lg:text-sm text-xs text-gray-400  text-start">
+            <h1
+              className={`lg:text-sm text-xs ${
+                data.FileName == ""
+                  ? "text-gray-400"
+                  : "text-[#142b51] font-bold"
+              }  text-start`}
+            >
               {data.FileName == "" ? "Tidak Lengkap" : "Terisi"}
             </h1>
           </div>
           <div className="border mt-3 rounded-full bg-gray-300"></div>
-          <div className={`flex justify-between pt-10  lg:gap-x-0 gap-x-4 ${data.FileName === "" ? "lg:pr-36" : "lg:pr-44"}`}>
-            <div className="flex items-center lg:gap-x-8 gap-x-3  ">
+          <div
+            className={`flex justify-between pt-10  lg:gap-x-0 gap-x-4  ${
+              data.FileName === "" ? "lg:pr-36" : "lg:pr-44 "
+            }`}
+          >
+            <div
+              className={`flex items-center lg:gap-x-8 gap-x-3  ${
+                data.FileName == "" ? "w-11/12" : "w-4/5"
+              }
+`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-14 h-14 text-gray-400"
+                className="lg:w-14 lg:h-14 w-20 h-20 text-gray-400"
               >
                 <path
                   strokeLinecap="round"
@@ -286,11 +301,16 @@ function CardDocument({ data, teks, num }) {
                   d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
                 />
               </svg>
-              <p className="lg:text-sm text-xs w-11/12">
-                File dalam bentuk <span className="font-bold">{data.Type}</span>{" "}
-                dengan ukuran maximal{" "}
-                <span className="text-red-500 font-semibold">3MB</span>
-              </p>
+              {data.FileName == "" ? (
+                <p className="lg:text-sm text-xs ">
+                  File dalam bentuk{" "}
+                  <span className="font-bold">{data.Type}</span>
+                  dengan ukuran maximal
+                  <span className="text-red-500 font-semibold"> 3MB</span>
+                </p>
+              ) : (
+                <p className="lg:text-sm text-xs truncate">{data.FileName}</p>
+              )}
             </div>
             {data.FileName === "" ? (
               <button className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold ">
