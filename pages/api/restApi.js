@@ -120,6 +120,28 @@ function postFeed(path_url, token, data, method) {
       });
   });
 }
+
+export function postDoc(path_url, token, data, method) {
+  console.log(token)
+  return new Promise((resolve, reject) => {
+    var config = {
+      method: method,
+      url: BASE_URL + path_url,
+      headers: {
+        Authorization: "Bearer " + token,
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    axios(config)
+      .then(function (response) {
+        resolve(response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  });
+}
 function login(path_url, param) {
   return new Promise((resolve, reject) => {
     var config = {

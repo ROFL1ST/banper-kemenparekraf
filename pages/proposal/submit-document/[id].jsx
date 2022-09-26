@@ -3,7 +3,8 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Section from "../../components/section";
 import Router, { useRouter } from "next/router";
-import { getApi, getPropose } from "../../api/restApi";
+import { getApi, getPropose, postDoc } from "../../api/restApi";
+import Uploady from "@rpldy/uploady";
 
 export default function SubmitDoc() {
   React.useEffect(() => {
@@ -249,7 +250,67 @@ function CardPengusul() {
   );
 }
 
-function CardDocument({ data, teks, num }) {
+function CardDocument({ data, teks, num, props }) {
+  const inputRef = React.useRef(null);
+  const [token, setToken] = React.useState("");
+
+  const handleClick = () => {
+    // 👇️ open file input box on click of other element
+    inputRef.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    const fileObj = event.target.files && event.target.files[0];
+    if (!fileObj) {
+      return;
+    }
+
+    if (
+      event.target.files.type !== "image/jpeg" ||
+      event.target.files.type !== "application/pdf" ||
+      event.target.files.type !== "application/x-zip-compressed"
+    ) {
+      alert("wajib file : .pdf, .jpg, .zip");
+      event.target.value = null;
+    } else {
+      console.log("berhasil");
+    }
+  };
+  const onSubmit = async (values) => {
+    setLoading(true);
+    try {
+      await postDoc("proposal/upload", token, values, "post").then((result) => {
+        console.log(result.data);
+        console.log(values);
+        if (result.data.message != "Success") {
+          setError((s) => ({
+            ...s,
+            status: true,
+            msg: result.data.display_message,
+          }));
+          setTimeout(() => {
+            setError((s) => ({
+              ...s,
+              status: false,
+              msg: "",
+            }));
+          }, 3000);
+        } else {
+          Router.push("/proposal");
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+    }
+  });
   return (
     <>
       {/* Box Document 8 */}
@@ -313,9 +374,17 @@ function CardDocument({ data, teks, num }) {
               )}
             </div>
             {data.FileName === "" ? (
-              <button className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold ">
-                upload
-              </button>
+              <>
+               <Uploady destination={""} >
+                
+               <button
+               onClick={handleClick}
+                  className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold "
+                >
+                  upload
+                </button>
+               </Uploady>
+              </>
             ) : (
               <>
                 <svg
