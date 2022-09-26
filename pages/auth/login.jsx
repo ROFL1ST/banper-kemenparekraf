@@ -65,7 +65,21 @@ export default function Login() {
               status: true,
               msg: result.data.data.data[0].message,
             }));
+            setTimeout(() => {
+              setError((s) => ({
+                ...s,
+                status: false,
+                msg: "",
+              }));
+            }, 3000);
           }
+          setTimeout(() => {
+            setError((s) => ({
+              ...s,
+              status: false,
+              msg: "",
+            }));
+          }, 3000);
         } else {
           if (remember) {
             localStorage.setItem("token", result.data.data.token);
