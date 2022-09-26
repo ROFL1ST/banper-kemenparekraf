@@ -255,18 +255,22 @@ function CardDocument({ data, teks, num }) {
       {/* Box Document 8 */}
       <div className="bg-white bg-opacity-20 rounded-xl lg:px-10 px-5 py-8 shadow-xl space-y-7">
         <div>
-          <div className="justify-between flex lg:pr-36 items-center">
+          <div
+            className={`justify-between flex  items-center ${
+              data.FileName === "" ? "lg:pr-36" : "lg:pr-44"
+            }`}
+          >
             <h1 className="lg:text-sm text-xs lg:w-3/4 w-3/5">
               {teks
                 .filter((teks) => teks.id === num + 1)
                 .map((teks) => teks.nama)}
             </h1>
-            <h1 className="lg:text-sm text-xs text-gray-400  ">
+            <h1 className="lg:text-sm text-xs text-gray-400  text-start">
               {data.FileName == "" ? "Tidak Lengkap" : "Terisi"}
             </h1>
           </div>
           <div className="border mt-3 rounded-full bg-gray-300"></div>
-          <div className="flex justify-between pt-10 lg:pr-36 lg:gap-x-0 gap-x-4">
+          <div className={`flex justify-between pt-10  lg:gap-x-0 gap-x-4 ${data.FileName === "" ? "lg:pr-36" : "lg:pr-44"}`}>
             <div className="flex items-center lg:gap-x-8 gap-x-3  ">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -288,9 +292,28 @@ function CardDocument({ data, teks, num }) {
                 <span className="text-red-500 font-semibold">3MB</span>
               </p>
             </div>
-            <button className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold ">
-              upload
-            </button>
+            {data.FileName === "" ? (
+              <button className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold ">
+                upload
+              </button>
+            ) : (
+              <>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-10 h-10 my-auto text-[#142b51]"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </>
+            )}
           </div>
         </div>
       </div>
