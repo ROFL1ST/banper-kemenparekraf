@@ -10,14 +10,26 @@ export default function SubmitDoc() {
     document.title = "Submit Dokumen";
   });
   const teks = [
-    "Dokument 1: Surat Permohonan",
-    "Dokument 2: Proposal Ringkas",
-    "Dokument 3: Proposal",
-    "Dokument 4: Surat Pernyataan Tidak Terjadi Konflik Internal",
-    "Dokument 5: Surat Pernyataan Tidak Terkait Partai Politik",
-    "Dokument 6: Surat Pernyataan Bersedia Menerima Dan Memanfaatkan (dengan materai)",
-    "Dokument 7: Anggaran Biaya",
-    "Dokument 8: Legalitas Lembaga (Komunitas: Akta Notaris Lembaga Adat: Akta Notaris/Surat Pengakuan)",
+    { id: 1, nama: "Dokument 1: Surat Permohonan" },
+    { id: 2, nama: "Dokument 2: Proposal Ringkas" },
+    { id: 3, nama: "Dokument 3: Proposal" },
+    {
+      id: 4,
+      nama: "Dokument 4: Surat Pernyataan Tidak Terjadi Konflik Internal",
+    },
+    {
+      id: 5,
+      nama: "Dokument 5: Surat Pernyataan Tidak Terkait Partai Politik",
+    },
+    {
+      id: 6,
+      nama: "Dokument 6: Surat Pernyataan Bersedia Menerima Dan Memanfaatkan (dengan materai)",
+    },
+    { id: 7, nama: "Dokument 7: Anggaran Biaya" },
+    {
+      id: 8,
+      nama: "Dokument 8: Legalitas Lembaga (Komunitas: Akta Notaris Lembaga Adat: Akta Notaris/Surat Pengakuan)",
+    },
   ];
   const router = useRouter();
   const { id } = router.query;
@@ -89,13 +101,18 @@ export default function SubmitDoc() {
 
             {/* Document */}
             {!load && data ? (
-              teks?.map((i, key) => (
-                <CardDocument text={i} key={key}></CardDocument>
+              doc?.map((i, key) => (
+                <CardDocument
+                  data={i}
+                  teks={teks}
+                  key={key}
+                  num={key}
+                ></CardDocument>
               ))
             ) : (
               <></>
             )}
-        
+
             {/* Document */}
             {/* Catatan Dokument */}
             <h1 className="text-2xl md:pt-0 pt-24">Catatan Dokument</h1>
@@ -232,16 +249,20 @@ function CardPengusul() {
   );
 }
 
-function CardDocument({ text }) {
+function CardDocument({ data, teks, num }) {
   return (
     <>
       {/* Box Document 8 */}
       <div className="bg-white bg-opacity-20 rounded-xl lg:px-10 px-5 py-8 shadow-xl space-y-7">
         <div>
           <div className="justify-between flex lg:pr-36 items-center">
-            <h1 className="lg:text-sm text-xs lg:w-3/4 w-3/5">{text}</h1>
+            <h1 className="lg:text-sm text-xs lg:w-3/4 w-3/5">
+              {teks
+                .filter((teks) => teks.id === num + 1)
+                .map((teks) => teks.nama)}
+            </h1>
             <h1 className="lg:text-sm text-xs text-gray-400  ">
-              Tidak Lengkap
+              {data.FileName == "" ? "Tidak Lengkap" : "Terisi"}
             </h1>
           </div>
           <div className="border mt-3 rounded-full bg-gray-300"></div>
@@ -262,7 +283,8 @@ function CardDocument({ text }) {
                 />
               </svg>
               <p className="lg:text-sm text-xs w-11/12">
-                File dalam bentuk .pdf, .jpg, .jpege dengan ukuran maximal{" "}
+                File dalam bentuk <span className="font-bold">{data.Type}</span>{" "}
+                dengan ukuran maximal{" "}
                 <span className="text-red-500 font-semibold">3MB</span>
               </p>
             </div>
