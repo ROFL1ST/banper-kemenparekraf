@@ -30,8 +30,8 @@ export default function Navbar({ open, setOpen }) {
     }
   }, [token]);
   // console.log(token);
-  const [log, setLog] = useState(false);
-  const cancelButtonRef = useRef(null);
+  const [log, setLog] = React.useState(false);
+  const cancelButtonRef = React.useRef(null);
 
   return (
     <>
@@ -90,7 +90,12 @@ export default function Navbar({ open, setOpen }) {
               {token == null || token == "undefined" || token == undefined ? (
                 <DropdownLD setOpen={setOpen} pathname={pathname} />
               ) : (
-                <DropdownPeople pathname={pathname} setOpen={setOpen} />
+                <DropdownPeople
+                  pathname={pathname}
+                  setOpen={setOpen}
+                  log={log}
+                  setLog={setLog}
+                />
               )}
             </div>
           </nav>
@@ -464,7 +469,7 @@ function DropdownLD({ setOpen, pathname }) {
   );
 }
 
-function DropdownPeople({ setOpen, pathname }) {
+function DropdownPeople({ setOpen, pathname, log, setLog }) {
   return (
     <>
       <Menu as="div" className="relative inline-block text-left">
@@ -538,10 +543,7 @@ function DropdownPeople({ setOpen, pathname }) {
                 {({ active }) => (
                   <button
                     onClick={() => {
-                      localStorage.removeItem("token");
-                      sessionStorage.removeItem("token");
-                      alert("You've Logged Out!");
-                      Router.push("/home");
+                      setLog(true);
                     }}
                     className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white   `}
                   >
@@ -591,26 +593,14 @@ function LogOut({ log, setLog, cancelButtonRef }) {
               >
                 <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3">
                   <div className="bg-white px-4 lg:px-1  pt-5 pb-4 ">
-                    <div className="sm:flex sm:items-start">
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
+                    <div className="flex items-center justify-center">
+                      <div className="mt-3 text-center md:w-3/4 ml-4 ">
                         <Dialog.Title
                           as="h3"
-                          className="text-lg md:text-sm leading-6 pb-3 font-medium text-gray-900"
+                          className="text-lg md:text-lg leading-6 pb-3 font-bold text-gray-900"
                         >
-                          Terms Of Service
+                          Are you sure you want to log out?
                         </Dialog.Title>
-                        <div className="mt-2">
-                          <p className="text-sm md:text-xs text-gray-500 justify-start text-start ">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Modi dignissimos dolor illum a recusandae
-                            soluta error architecto? Placeat architecto vel enim
-                            deleniti reprehenderit repudiandae, consequatur
-                            natus delectus odit sed, vero distinctio officiis
-                            necessitatibus. Corrupti, ut quo aperiam officia
-                            ullam enim corporis recusandae, ad culpa illum,
-                            tenetur maiores saepe consectetur exercitationem!
-                          </p>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -626,8 +616,13 @@ function LogOut({ log, setLog, cancelButtonRef }) {
                     </button>
 
                     <button
+                      onClick={() => {
+                        localStorage.removeItem("token");
+                        sessionStorage.removeItem("token");
+                        Router.push("/home");
+                      }}
                       type="submit"
-                      className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
+                      className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto lg:text-sm"
                     >
                       Log Out
                     </button>
