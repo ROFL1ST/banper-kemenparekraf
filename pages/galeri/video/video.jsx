@@ -11,8 +11,6 @@ import Loading from "./loading";
 import { getGaleri, PutViews } from "../../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
 import bg from "../../assets/video.png";
-import { FilePicker } from '@apideck/file-picker'
-import '@apideck/file-picker/dist/styles.css'
 export default function Video() {
   const swiperRef2 = useRef();
   const [videoData, setVideoData] = useState({ data: {}, loading: true });
