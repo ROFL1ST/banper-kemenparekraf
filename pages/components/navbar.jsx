@@ -66,8 +66,9 @@ export default function Navbar({ open, setOpen }) {
             <Link href={"/berita?type=berita&sort=terbaru"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
-                  pathname === "/berita" &&
-                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                  pathname === "/berita" || pathname === "/berita/Detail/[id]"
+                    ? "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                    : ""
                 } `}
               >
                 Berita
@@ -507,8 +508,11 @@ function DropdownPeople({ setOpen, pathname, log, setLog }) {
                   {({ active }) => (
                     <button
                       className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                        pathname === "/proposal" &&
-                        "bg-white  text-blue-900 font-bold "
+                        pathname === "/proposal" ||
+                        pathname === "/proposal/submit-document/[id]" ||
+                        pathname === "/proposal/submit-proposal"
+                          ? "bg-white  text-blue-900 font-bold "
+                          : ""
                       } `}
                     >
                       List Proposal

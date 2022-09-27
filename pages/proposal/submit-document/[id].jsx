@@ -171,7 +171,6 @@ function CardPengusul() {
     }
   }, [token]);
   // const result = list.filter(list.Id);
-  // console.log(result)
 
   // jenis bantuan
   const [jenis, setJenis] = React.useState([]);
@@ -179,7 +178,6 @@ function CardPengusul() {
     try {
       await getApi(`master/jenis_bantuan`).then((result) => {
         setJenis(result.data.data);
-        setLoad(false);
       });
     } catch (error) {
       console.log(error);
@@ -190,6 +188,23 @@ function CardPengusul() {
     detail();
   }, []);
 
+  // subsektor
+  const [sub, setSub] = React.useState([]);
+  const getSub = async () => {
+    try {
+      await getApi("master/subsektor").then((result) => {
+        setSub(result.data.data);
+        setLoad(false);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    getSub();
+  }, []);
+  console.log(sub);
   return (
     <>
       <div className="bg-white bg-opacity-20 rounded-xl px-10 py-8 shadow-xl space-y-7">
@@ -214,7 +229,21 @@ function CardPengusul() {
                 <div className="space-y-3">
                   <h1 className="text-sm">Subsector</h1>
                   <p className="text-xs text-gray-400">
-                    Pengembangan Permainan
+                    {sub
+                      .filter(
+                        (sub) =>
+                          sub.Id.toString() ===
+                          list[0].Subsektors.split("\n")[0][0]
+                      )
+                      .map((sub) => sub.Nama)}
+                    ,{" "}
+                    {sub
+                      .filter(
+                        (sub) =>
+                          sub.Id.toString() ===
+                          list[0].Subsektors.split("\n")[0][2]
+                      )
+                      .map((sub) => sub.Nama)}
                   </p>
                 </div>
               </div>
@@ -348,20 +377,29 @@ function CardDocument({ data, teks, num, props }) {
               }
 `}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="lg:w-14 lg:h-14 w-20 h-20 text-gray-400"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+              {data.File == "" ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="lg:w-14 lg:h-14 w-20 h-20 text-gray-400"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                  />
+                </svg>
+              ) : (
+                <img
+                  src={`http://128.199.242.242/dashboard/${data.File}`}
+                  alt=""
+                  className="w-20 h-16 rounded-xl"
                 />
-              </svg>
+              )}
+
               {data.FileName == "" ? (
                 <p className="lg:text-sm text-xs ">
                   File dalam bentuk{" "}
@@ -375,15 +413,14 @@ function CardDocument({ data, teks, num, props }) {
             </div>
             {data.FileName === "" ? (
               <>
-               <Uploady destination={""} >
-                
-               <button
-               onClick={handleClick}
-                  className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold "
-                >
-                  upload
-                </button>
-               </Uploady>
+                <Uploady destination={""}>
+                  <button
+                    onClick={handleClick}
+                    className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold "
+                  >
+                    upload
+                  </button>
+                </Uploady>
               </>
             ) : (
               <>

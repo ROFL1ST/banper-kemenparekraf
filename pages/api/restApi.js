@@ -2,13 +2,12 @@ import * as axios from "axios";
 const BASE_URL = "http://128.199.242.242/api/";
 const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
 export function getPropose(path_url, token) {
-  console.log(token);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",
       url: BASE_URL + path_url,
       headers: {
-        'Authorization': 'Bearer ' + token
+        Authorization: "Bearer " + token,
       },
     };
     axios(config)
@@ -100,7 +99,7 @@ function getDelete(path_url, token) {
   });
 }
 function postFeed(path_url, token, data, method) {
-  console.log(token)
+  console.log(token);
   return new Promise((resolve, reject) => {
     var config = {
       method: method,
@@ -122,7 +121,7 @@ function postFeed(path_url, token, data, method) {
 }
 
 export function postDoc(path_url, token, data, method) {
-  console.log(token)
+  console.log(token);
   return new Promise((resolve, reject) => {
     var config = {
       method: method,
