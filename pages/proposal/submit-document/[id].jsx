@@ -4,7 +4,8 @@ import Navbar from "../../components/navbar";
 import Section from "../../components/section";
 import Router, { useRouter } from "next/router";
 import { getApi, getPropose, postDoc } from "../../api/restApi";
-import Uploady from "@rpldy/uploady";
+
+import Loading from "../../components/Loading";
 
 export default function SubmitDoc() {
   React.useEffect(() => {
@@ -204,7 +205,7 @@ function CardPengusul() {
   React.useEffect(() => {
     getSub();
   }, []);
-  console.log(sub);
+
   return (
     <>
       <div className="bg-white bg-opacity-20 rounded-xl px-10 py-8 shadow-xl space-y-7">
@@ -280,58 +281,19 @@ function CardPengusul() {
 }
 
 function CardDocument({ data, teks, num, props }) {
-  const inputRef = React.useRef(null);
+  var router = useRouter();
+
+  const { id } = router.query;
+
+  const [values, setValues] = React.useState({
+    id: data.Id,
+    proposalId: id,
+    dokumen: "",
+  });
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState({ status: false, msg: "" });
+
   const [token, setToken] = React.useState("");
-
-  const handleClick = () => {
-    // 👇️ open file input box on click of other element
-    inputRef.current.click();
-  };
-
-  const handleFileChange = (event) => {
-    const fileObj = event.target.files && event.target.files[0];
-    if (!fileObj) {
-      return;
-    }
-
-    if (
-      event.target.files.type !== "image/jpeg" ||
-      event.target.files.type !== "application/pdf" ||
-      event.target.files.type !== "application/x-zip-compressed"
-    ) {
-      alert("wajib file : .pdf, .jpg, .zip");
-      event.target.value = null;
-    } else {
-      console.log("berhasil");
-    }
-  };
-  const onSubmit = async (values) => {
-    setLoading(true);
-    try {
-      await postDoc("proposal/upload", token, values, "post").then((result) => {
-        console.log(result.data);
-        console.log(values);
-        if (result.data.message != "Success") {
-          setError((s) => ({
-            ...s,
-            status: true,
-            msg: result.data.display_message,
-          }));
-          setTimeout(() => {
-            setError((s) => ({
-              ...s,
-              status: false,
-              msg: "",
-            }));
-          }, 3000);
-        } else {
-          Router.push("/proposal");
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   React.useEffect(() => {
     if (localStorage.getItem("token") != null) {
@@ -340,6 +302,57 @@ function CardDocument({ data, teks, num, props }) {
       setToken(sessionStorage.getItem("token"));
     }
   });
+
+  //
+  const inputRef = React.useRef(null);
+  const handleClick = () => {
+    // 👇️ open file input box on click of other element
+    inputRef.current.click();
+  };
+  const handleFileChange = async (event) => {
+    const fileObj = event.target.files && event.target.files[0];
+    if (!fileObj) {
+      return;
+    } else {
+      setValues((s) => ({ ...s, dokumen: event.target.files[0] }));
+      setLoading(true);
+    }
+
+    if (values.dokumen) {
+      const fileExtension = values.dokumen.name.split(".").at(-1);
+      const allowedFileTypes = ["pdf", "jpg", "zip"];
+      if (!allowedFileTypes.includes(fileExtension)) {
+        alert(
+          `File does not support. Files type must be ${allowedFileTypes.join(
+            ", "
+          )}`
+        );
+        return false;
+      } else {
+        handleSubmit(token, values);
+      }
+    } else {
+      alert("Pick a file");
+      setLoading(false);
+    }
+    console.log(values.dokumen.name);
+  };
+
+  const handleSubmit = async (token, values) => {
+    console.log("hai");
+    const formData = new FormData();
+
+    formData.append("dokumen", values.dokumen);
+    try {
+      await postDoc("proposal/upload", token, values, "post").then((result) => {
+        console.log(result.data.data);
+        setLoading(false);
+      });
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+    }
+  };
   return (
     <>
       {/* Box Document 8 */}
@@ -393,11 +406,13 @@ function CardDocument({ data, teks, num, props }) {
                   />
                 </svg>
               ) : (
-                <img
-                  src={`http://128.199.242.242/dashboard/${data.File}`}
-                  alt=""
-                  className="w-20 h-16 rounded-xl"
-                />
+                <a href={`http://128.199.242.242/dashboard/${data.File}`}>
+                  <img
+                    src={`http://128.199.242.242/dashboard/${data.File}`}
+                    alt=""
+                    className="w-20 h-16 rounded-xl"
+                  />
+                </a>
               )}
 
               {data.FileName == "" ? (
@@ -413,14 +428,26 @@ function CardDocument({ data, teks, num, props }) {
             </div>
             {data.FileName === "" ? (
               <>
-                <Uploady destination={""}>
-                  <button
-                    onClick={handleClick}
-                    className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold "
-                  >
-                    upload
-                  </button>
-                </Uploady>
+                <input
+                  style={{ display: "none" }}
+                  ref={inputRef}
+                  type="file"
+                  onChange={handleFileChange}
+                />
+                <button
+                  onClick={handleClick}
+                  className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold "
+                >
+                  {loading ? (
+                    <>
+                      <div className="mx-auto">
+                        <Loading />
+                      </div>
+                    </>
+                  ) : (
+                    "Login"
+                  )}
+                </button>
               </>
             ) : (
               <>

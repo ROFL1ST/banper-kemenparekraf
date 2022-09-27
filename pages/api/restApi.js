@@ -128,7 +128,7 @@ export function postDoc(path_url, token, data, method) {
       url: BASE_URL + path_url,
       headers: {
         Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
       data: data,
     };
