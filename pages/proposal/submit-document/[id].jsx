@@ -310,16 +310,14 @@ function CardDocument({ data, teks, num, props }) {
     inputRef.current.click();
   };
   const handleFileChange = async (event) => {
+    event.preventDefault();
     const fileObj = event.target.files && event.target.files[0];
     if (!fileObj) {
       return;
     } else {
       setValues((s) => ({ ...s, dokumen: event.target.files[0] }));
       setLoading(true);
-    }
-
-    if (values.dokumen) {
-      const fileExtension = values.dokumen.name.split(".").at(-1);
+      const fileExtension = event.target.files[0].name.split(".").at(-1);
       const allowedFileTypes = ["pdf", "jpg", "zip"];
       if (!allowedFileTypes.includes(fileExtension)) {
         alert(
@@ -327,26 +325,32 @@ function CardDocument({ data, teks, num, props }) {
             ", "
           )}`
         );
+        setLoading(false);
         return false;
       } else {
-        handleSubmit(token, values);
+        console.log(values)
+        if (values.dokumen) {
+          handleSubmit(token, values);
+        } else {
+          setLoading(false);
+          return false;
+        }
       }
-    } else {
-      alert("Pick a file");
-      setLoading(false);
     }
-    console.log(values.dokumen.name);
   };
 
   const handleSubmit = async (token, values) => {
-    console.log("hai");
+    console.log(values);
     const formData = new FormData();
 
-    formData.append("dokumen", values.dokumen);
+    formData.append("dokumen", values);
     try {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
-        console.log(result.data.data);
+        console.log(result);
         setLoading(false);
+        if (result.data.message == "Failed") {
+          alert(result.data.display_message);
+        }
       });
     } catch (err) {
       console.log(err);
@@ -433,6 +437,7 @@ function CardDocument({ data, teks, num, props }) {
                   ref={inputRef}
                   type="file"
                   onChange={handleFileChange}
+                  accept=".zip, .jpg, .pdf"
                 />
                 <button
                   onClick={handleClick}

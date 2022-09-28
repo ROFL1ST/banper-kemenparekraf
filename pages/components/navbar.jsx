@@ -114,7 +114,7 @@ export default function Navbar({ open, setOpen }) {
         <Link href={"/home"}>
           <p
             className={`cursor-pointer  ${
-              pathname === "/home" ? "text-blue-900 font-bold" : "font-medium"
+              pathname === "/home" ? "text-blue-900 font-bold" : "font-medium "
             }`}
           >
             Home

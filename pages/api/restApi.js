@@ -121,7 +121,7 @@ function postFeed(path_url, token, data, method) {
 }
 
 export function postDoc(path_url, token, data, method) {
-  console.log(token);
+  console.log(data)
   return new Promise((resolve, reject) => {
     var config = {
       method: method,

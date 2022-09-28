@@ -166,3 +166,6 @@ body {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
+.scroll-content {
+  padding-bottom: 0 !important;
+}
