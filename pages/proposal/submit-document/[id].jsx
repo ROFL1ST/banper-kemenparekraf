@@ -39,6 +39,7 @@ export default function SubmitDoc() {
   // getList
   const [load, setLoad] = React.useState(true);
   const [doc, setDoc] = React.useState([]);
+  const [percent, setPercent] = React.useState("0");
   async function detail(token) {
     try {
       await getPropose(`proposal/detail?UsulanHeaderID=${id}`, token).then(
@@ -67,6 +68,17 @@ export default function SubmitDoc() {
       }
     }
   }, [router.isReady]);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      const have = doc
+        .filter((doc) => doc.FileName != "")
+        .map((doc) => doc.length);
+      const all = doc.length;
+      setPercent((have.length / all) * 100);
+      console.log((have.length / all) * 100);
+    }, 4000);
+  });
   const data = JSON.stringify(doc);
   return (
     <>
@@ -82,19 +94,7 @@ export default function SubmitDoc() {
           <Section text={"Submit Document"}></Section>
           <div className="lg:mt-32 mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5 2xl:space-y-10 lg:space-y-5 space-y-3  mx-auto">
             {/* Box Persentase */}
-            <div className="border border-blue-900 bg-blue-400 bg-opacity-20 rounded-xl px-10 py-8 flex lg:flex-row flex-col   justify-between">
-              <h1 className="lg:pb-10 pb-5 lg:text-base text-sm">
-                0 dari 8 Syarat Terselesaikan
-              </h1>
-              <div className="flex flex-col">
-                <div className="flex lg:justify-center justify-between lg:gap-x-56 gap-x-0 lg:text-base sm:text-sm">
-                  <h1>0%</h1>
-                  <h1>50%</h1>
-                  <h1>100%</h1>
-                </div>
-                <div className="py-1.5 mt-3 rounded-full bg-gray-300"></div>
-              </div>
-            </div>
+            <PercentBox percent={percent} />
             {/* Box Persentase */}
 
             {/* Box Pengusul */}
@@ -127,6 +127,58 @@ export default function SubmitDoc() {
     </>
   );
 }
+
+function PercentBox({ percent }) {
+  return (
+    <>
+      <div className="border border-blue-900 bg-blue-400 bg-opacity-20 rounded-xl px-10 py-8 flex lg:flex-row flex-col   justify-between">
+        <h1 className="lg:pb-10 pb-5 lg:text-base text-sm">
+          0 dari 8 Syarat Terselesaikan
+        </h1>
+        <div className="flex flex-col">
+          <div className="flex lg:justify-center justify-between lg:gap-x-56 gap-x-0 lg:text-base sm:text-sm">
+            <h1>0%</h1>
+            <h1>50%</h1>
+            <h1>100%</h1>
+          </div>
+          <Progress_bar bgcolor={"#142b51"} height={15} progress={percent} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+const Progress_bar = ({ bgcolor, progress, height }) => {
+  const Parentdiv = {
+    height: height,
+    width: "100%",
+    backgroundColor: "#d1d5db",
+    borderRadius: 40,
+    marginTop: 30,
+  };
+
+  const Childdiv = {
+    height: "100%",
+    width: `${progress}%`,
+    backgroundColor: bgcolor,
+    borderRadius: 40,
+    textAlign: "left",
+  };
+
+  const progresstext = {
+    padding: 10,
+    color: "black",
+    fontWeight: 900,
+  };
+
+  return (
+    <div style={Parentdiv}>
+      <div style={Childdiv}>
+        <span style={progresstext}></span>
+      </div>
+    </div>
+  );
+};
 function CardPengusul() {
   const [token, setToken] = React.useState("");
   const [list, setList] = React.useState([]);
