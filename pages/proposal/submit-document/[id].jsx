@@ -310,12 +310,12 @@ function CardDocument({ data, teks, num, props }) {
     inputRef.current.click();
   };
   const handleFileChange = async (event) => {
-    event.preventDefault();
-    const fileObj = event.target.files && event.target.files[0];
+    const fileObj = event.target.files[0];
+    setValues((s) => ({ ...s, dokumen: event.target.files[0] }));
+
     if (!fileObj) {
       return;
     } else {
-      setValues((s) => ({ ...s, dokumen: event.target.files[0] }));
       setLoading(true);
       const fileExtension = event.target.files[0].name.split(".").at(-1);
       const allowedFileTypes = ["pdf", "jpg", "zip"];
@@ -328,7 +328,7 @@ function CardDocument({ data, teks, num, props }) {
         setLoading(false);
         return false;
       } else {
-        console.log(values)
+        console.log(values);
         if (values.dokumen) {
           handleSubmit(token, values);
         } else {

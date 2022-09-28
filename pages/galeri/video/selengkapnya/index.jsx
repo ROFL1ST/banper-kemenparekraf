@@ -281,13 +281,13 @@ function CardVideo({ data }) {
         className="my-auto items-center"
       >
         <div
-          className=" rounded-lg mx-auto max-h-96 min-w-full bg-no-repeat bg-cover "
+          className=" rounded-lg mx-auto max-h-96 min-w-full bg-no-repeat bg-cover relative"
           style={{ backgroundImage: `url(${data.thumbnail})` }}
         >
           <div
-            className={` rounded-lg   xbg-black xl:p-28 md:p-20 sm:p-36 p-20  ${
+            className={` rounded-lg   xbg-black xl:p-28 md:p-20 sm:p-36 p-20   ${
               isHovering
-                ? "hover:bg-gradient-to-t hover:from-black transition ease-in-out hover:-translate-y-0.5"
+                ? "hover:bg-gradient-to-t hover:from-black bg-black bg-opacity-25 transition ease-in-out hover:-translate-y-0.5"
                 : "bg-black bg-opacity-25 transition ease-in-out "
             }`}
           >
@@ -312,14 +312,14 @@ function CardVideo({ data }) {
             {isHovering && (
               <Transition show={isHovering} appear={true}>
                 <Transition.Child
-                  enter="transition-opacity ease-linear duration-300"
+                  enter="transition-opacity ease-linear duration-300 "
                   enterFrom="opacity-0 "
                   enterTo="opacity-100"
                   leave="transition-opacity ease-linear duration-300"
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-                  <div className="absolute justify-start flex flex-col bottom-10 left-10 ">
+                  <div className="absolute justify-start lg:flex hidden flex-col bottom-10 left-10 ">
                     {!load && kota ? (
                       <p className="uppercase font-bold text-white xl:text-base lg:text-base md:text-sm text-sm truncate">
                         {kota.NamaKota}
@@ -336,6 +336,20 @@ function CardVideo({ data }) {
                 </Transition.Child>
               </Transition>
             )}
+            <div className="lg:hidden absolute justify-start flex flex-col bottom-5 left-5 ">
+              {!load && kota ? (
+                <p className="uppercase font-bold text-white xl:text-base lg:text-base md:text-sm text-sm truncate">
+                  {kota.NamaKota}
+                </p>
+              ) : (
+                <>
+                  <div className="animate-pulse">
+                    <div className="text-xs font-bold h-2 w-1/4 bg-gray-500 rounded-full"></div>
+                  </div>
+                </>
+              )}
+              <p className="text-blue-300">video</p>
+            </div>
           </div>
         </div>
       </div>
