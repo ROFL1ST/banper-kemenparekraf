@@ -40,6 +40,8 @@ export default function SubmitDoc() {
   const [load, setLoad] = React.useState(true);
   const [doc, setDoc] = React.useState([]);
   const [percent, setPercent] = React.useState("0");
+  const [have, setHave] = React.useState(0);
+  const [all, setAll] = React.useState(0);
   async function detail(token) {
     try {
       await getPropose(`proposal/detail?UsulanHeaderID=${id}`, token).then(
@@ -77,6 +79,8 @@ export default function SubmitDoc() {
       const all = doc.length;
       setPercent((have.length / all) * 100);
       console.log((have.length / all) * 100);
+      setHave(have.length);
+      setAll(all);
     }, 4000);
   });
   const data = JSON.stringify(doc);
@@ -94,7 +98,7 @@ export default function SubmitDoc() {
           <Section text={"Submit Document"}></Section>
           <div className="lg:mt-32 mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5 2xl:space-y-10 lg:space-y-5 space-y-3  mx-auto">
             {/* Box Persentase */}
-            <PercentBox percent={percent} />
+            <PercentBox percent={percent} have={have} all={all} />
             {/* Box Persentase */}
 
             {/* Box Pengusul */}
@@ -128,12 +132,12 @@ export default function SubmitDoc() {
   );
 }
 
-function PercentBox({ percent }) {
+function PercentBox({ percent, have, all }) {
   return (
     <>
       <div className="border border-blue-900 bg-blue-400 bg-opacity-20 rounded-xl px-10 py-8 flex lg:flex-row flex-col   justify-between">
         <h1 className="lg:pb-10 pb-5 lg:text-base text-sm">
-          0 dari 8 Syarat Terselesaikan
+          {have} dari {all} Syarat Terselesaikan
         </h1>
         <div className="flex flex-col">
           <div className="flex lg:justify-center justify-between lg:gap-x-56 gap-x-0 lg:text-base sm:text-sm">
