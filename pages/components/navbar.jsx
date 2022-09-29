@@ -519,21 +519,16 @@ function DropdownPeople({ setOpen, pathname, log, setLog }) {
             <div className="px-1 py-1">
               <Menu.Item>
                 {({ active }) => (
-                  <button
-                    onClick={() => {
-                      if (pathname === "/auth/daftar") {
-                        return;
-                      } else {
-                        setOpen(true);
-                      }
-                    }}
-                    className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                      pathname === "/auth/daftar" &&
-                      "bg-white  text-blue-900 font-bold "
-                    } `}
-                  >
-                    Edit Profile
-                  </button>
+                  <Link href={"/editProfile"}>
+                    <button
+                      className={`group flex justify-center w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                        pathname === "/editProfile" &&
+                        "bg-white  text-blue-900 font-bold "
+                      } `}
+                    >
+                      Edit Profile
+                    </button>
+                  </Link>
                 )}
               </Menu.Item>
             </div>
