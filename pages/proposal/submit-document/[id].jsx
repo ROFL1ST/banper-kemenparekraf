@@ -214,15 +214,18 @@ function CardPengusul() {
 
   // jenis bantuan & kategori & profile
   const [user, setUser] = React.useState([]);
-
+  const [muter, setMuter] = React.useState(true);
   const getData = async (value) => {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
         console.log(result.data.data);
+        setMuter(false)
       });
     } catch (error) {
       console.log(error);
+      setMuter(false)
+
     }
   };
 
@@ -335,7 +338,7 @@ function CardPengusul() {
                 <div className="space-y-3">
                   <h1 className="text-sm">Kategori</h1>
                   <p className="text-xs text-gray-400">
-                    {!load ? (
+                    {!muter ? (
                       kategori
                         .filter((kategori) => kategori.Id == user[0].Kategori)
                         .map((kategori) => kategori.Nama)
