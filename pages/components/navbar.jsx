@@ -553,6 +553,8 @@ function DropdownPeople({ setOpen, pathname, log, setLog }) {
   );
 }
 function LogOut({ log, setLog, cancelButtonRef }) {
+  const { pathname } = useRouter();
+
   return (
     <>
       <Transition.Root show={log} as={React.Fragment}>
@@ -615,6 +617,9 @@ function LogOut({ log, setLog, cancelButtonRef }) {
                         localStorage.removeItem("token");
                         sessionStorage.removeItem("token");
                         Router.push("/home");
+                        if (pathname == "/home") {
+                          window.location.reload(false);
+                        }
                       }}
                       type="submit"
                       className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto lg:text-sm"
