@@ -169,18 +169,27 @@ export default function EditProfile() {
               <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                 <div className="relative flex-grow w-full">
                   <label className="leading-7 text-sm text-gray-600">
-                    *Email Komunitas
+                  *Email Komunitas
                   </label>
                   <input
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
                     placeholder="Masukan Email Komunitas"
                   />
                 </div>
+                <div className="relative flex-grow w-full">
+                  <label className="leading-7 text-sm text-gray-600">
+                  *Ketik Ulang Email Komunitas
+                  </label>
+                  <input
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
+                    placeholder="Ulangi Email Komunitas"
+                  />
+                </div>
               </div>
               <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                 <div className="relative flex-grow w-full">
                   <label className="leading-7 text-sm text-gray-600">
-                    Nomor Telepon Komunitas
+                  *Nomor Telepon Komunitas
                   </label>
                   <input
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
@@ -189,7 +198,7 @@ export default function EditProfile() {
                 </div>
                 <div className="relative flex-grow w-full">
                   <label className="leading-7 text-sm text-gray-600">
-                    *Subsektor Utama
+                  *Subsektor Utama
                   </label>
                   <input
                     className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
@@ -197,17 +206,18 @@ export default function EditProfile() {
                   />
                 </div>
               </div>
-              <div className="flex lg:w-2/3 w-full flex-grow mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                <div className="relative flex-grow w-1/2">
+              <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <div className="relative flex-grow w-full">
                   <label className="leading-7 text-sm text-gray-600">
-                    *Usulan Anggota
+                  *Usulan Anggota
                   </label>
                   <input
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
-                    placeholder="Usulan Dari Anggota"
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
+                    placeholder="Usulan dari anggota"
                   />
                 </div>
               </div>
+             
               <hr className="bg-yellow-400 h-0.5 m-10" />
               <div className="  border-10 border-b-orange-600 ">
                 <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
