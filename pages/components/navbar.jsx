@@ -611,6 +611,7 @@ function LogOut({ log, setLog, cancelButtonRef }) {
 
                     <button
                       onClick={() => {
+                        setLog(false);
                         localStorage.removeItem("token");
                         sessionStorage.removeItem("token");
                         Router.push("/home");
