@@ -99,7 +99,7 @@ export default function DetailPage() {
           </div>
           <div className="content-right w-1/4 xl:flex lg:flex hidden flex-col ">
             <div className="space-y-5">
-              {loading ? (
+              {loading && !data ? (
                 <>
                   <Small_Card_Loading />
                   <Small_Card_Loading />
@@ -108,13 +108,9 @@ export default function DetailPage() {
               ) : (
                 items
                   ?.slice(0, 4)
-                  .map((i, index) =>
-                    data.Id === i.Id ? (
-                      <></>
-                    ) : (
-                      <News_small_card data={i} key={index}></News_small_card>
-                    )
-                  )
+                  .map((i, index) => (
+                    <News_small_card data={i} key={index}></News_small_card>
+                  ))
               )}
             </div>
           </div>
