@@ -230,7 +230,20 @@ function CardPengusul() {
   }, [token]);
   // const result = list.filter(list.Id);
 
-  // jenis bantuan
+  // jenis bantuan & kategori
+  const [kategori, setKategori] = React.useState([]);
+
+  async function getKateg() {
+    try {
+      await getApi("master/kategori").then((result) => {
+        setKategori(result.data.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  //
   const [jenis, setJenis] = React.useState([]);
   async function detail() {
     try {
@@ -244,6 +257,7 @@ function CardPengusul() {
   }
   React.useEffect(() => {
     detail();
+    getKateg();
   }, []);
 
   // subsektor
@@ -310,7 +324,9 @@ function CardPengusul() {
               <div className="space-y-8">
                 <div className="space-y-3">
                   <h1 className="text-sm">Kategori</h1>
-                  <p className="text-xs text-gray-400">Komunitas</p>
+                  <p className="text-xs text-gray-400">
+                    {/* {!load ? kategori.filter((kategori) => kategori.Id) : <></>} */}
+                  </p>
                 </div>
                 <div className="space-y-3">
                   <h1 className="text-sm">Jenis Bantuan</h1>
@@ -341,11 +357,11 @@ function CardDocument({ data, teks, num, props }) {
   var router = useRouter();
 
   const { id } = router.query;
-  const [file, setFile] = React.useState();
+  const [file, setFile] = React.useState("");
   const [values, setValues] = React.useState({
     id: data.Id,
     proposalId: id,
-    dokumen: "",
+    dokumen: file,
   });
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState({ status: false, msg: "" });
@@ -366,9 +382,11 @@ function CardDocument({ data, teks, num, props }) {
     // 👇️ open file input box on click of other element
     inputRef.current.click();
   };
-  const handleFileChange = async (event) => {
-    event.preventDefault();
+  async function handleFileChange(event) {
+    // event.preventDefault();
     const fileObj = event.target.files[0];
+    setFile("value");
+    console.log(file);
 
     if (!fileObj) {
       return false;
@@ -376,6 +394,7 @@ function CardDocument({ data, teks, num, props }) {
 
     event.target.value = null;
     setLoading(true);
+
     const fileExtension = fileObj.name.split(".").at(-1);
     const allowedFileTypes = ["pdf", "jpg", "zip"];
     if (!allowedFileTypes.includes(fileExtension)) {
@@ -385,19 +404,16 @@ function CardDocument({ data, teks, num, props }) {
         )}`
       );
       setLoading(false);
-      return false;
     } else {
-      // setValues((s) => ({ ...s, dokumen: fileObj }));
-      setFile(fileObj)
-      console.log(file)
+      setValues((s) => ({ ...s, dokumen: fileObj }));
+      console.log(values);
       if (values.dokumen) {
         handleSubmit(token, values);
       } else {
         setLoading(false);
-        return false;
       }
     }
-  };
+  }
 
   const handleSubmit = async (token, values) => {
     console.log(values);
@@ -510,7 +526,7 @@ function CardDocument({ data, teks, num, props }) {
                       </div>
                     </>
                   ) : (
-                    "Login"
+                    "Submit"
                   )}
                 </button>
               </>
