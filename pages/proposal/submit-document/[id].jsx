@@ -77,7 +77,7 @@ export default function SubmitDoc() {
       .map((doc) => doc.length);
     const all = doc.length;
     setPercent((have.length / all) * 100);
-    console.log((have.length / all) * 100);
+    // console.log((have.length / all) * 100);
     setHave(have.length);
     setAll(all);
   }, [doc]);
@@ -219,7 +219,7 @@ function CardPengusul() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        console.log(result.data.data);
+        // console.log(result.data.data);
         setMuter(false)
       });
     } catch (error) {
@@ -326,7 +326,7 @@ function CardPengusul() {
                       .filter(
                         (sub) =>
                           sub.Id.toString() ===
-                          list[0].Subsektors.split("\n")[0][2]
+                          list[0].Subsektors.split("\n")[0][2] + list[0].Subsektors.split("\n")[0][3]
                       )
                       .map((sub) => sub.Nama)}
                   </p>
@@ -405,7 +405,7 @@ function CardDocument({ data, teks, num, props }) {
     // event.preventDefault();
     const fileObj = event.target.files[0];
     setFile("value");
-    console.log(file);
+    // console.log(file);
 
     if (!fileObj) {
       return false;
@@ -425,7 +425,7 @@ function CardDocument({ data, teks, num, props }) {
       setLoading(false);
     } else {
       setValues((s) => ({ ...s, dokumen: fileObj }));
-      console.log(values);
+      // console.log(values);
       if (values.dokumen) {
         handleSubmit(token, values);
       } else {
@@ -435,13 +435,13 @@ function CardDocument({ data, teks, num, props }) {
   }
 
   const handleSubmit = async (token, values) => {
-    console.log(values);
+    // console.log(values);
     const formData = new FormData();
 
     formData.append("dokumen", values);
     try {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
-        console.log(result);
+        // console.log(result);
         setLoading(false);
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
