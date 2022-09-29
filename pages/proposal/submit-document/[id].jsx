@@ -72,17 +72,15 @@ export default function SubmitDoc() {
   }, [router.isReady]);
 
   React.useEffect(() => {
-    setTimeout(() => {
-      const have = doc
-        .filter((doc) => doc.FileName != "")
-        .map((doc) => doc.length);
-      const all = doc.length;
-      setPercent((have.length / all) * 100);
-      console.log((have.length / all) * 100);
-      setHave(have.length);
-      setAll(all);
-    }, 4000);
-  });
+    const have = doc
+      .filter((doc) => doc.FileName != "")
+      .map((doc) => doc.length);
+    const all = doc.length;
+    setPercent((have.length / all) * 100);
+    console.log((have.length / all) * 100);
+    setHave(have.length);
+    setAll(all);
+  }, [doc]);
   const data = JSON.stringify(doc);
   return (
     <>
@@ -158,10 +156,13 @@ const Progress_bar = ({ bgcolor, progress, height }) => {
     width: "100%",
     backgroundColor: "#d1d5db",
     borderRadius: 40,
-    marginTop: 30,
+    marginTop: 20,
   };
 
   const Childdiv = {
+    transition: "all 2s",
+    willChange: "transform",
+    left: 0,
     height: "100%",
     width: `${progress}%`,
     backgroundColor: bgcolor,
@@ -340,7 +341,7 @@ function CardDocument({ data, teks, num, props }) {
   var router = useRouter();
 
   const { id } = router.query;
-
+  const [file, setFile] = React.useState();
   const [values, setValues] = React.useState({
     id: data.Id,
     proposalId: id,
@@ -366,31 +367,34 @@ function CardDocument({ data, teks, num, props }) {
     inputRef.current.click();
   };
   const handleFileChange = async (event) => {
+    event.preventDefault();
     const fileObj = event.target.files[0];
-    setValues((s) => ({ ...s, dokumen: event.target.files[0] }));
 
     if (!fileObj) {
-      return;
+      return false;
+    }
+
+    event.target.value = null;
+    setLoading(true);
+    const fileExtension = fileObj.name.split(".").at(-1);
+    const allowedFileTypes = ["pdf", "jpg", "zip"];
+    if (!allowedFileTypes.includes(fileExtension)) {
+      alert(
+        `File does not support. Files type must be ${allowedFileTypes.join(
+          ", "
+        )}`
+      );
+      setLoading(false);
+      return false;
     } else {
-      setLoading(true);
-      const fileExtension = event.target.files[0].name.split(".").at(-1);
-      const allowedFileTypes = ["pdf", "jpg", "zip"];
-      if (!allowedFileTypes.includes(fileExtension)) {
-        alert(
-          `File does not support. Files type must be ${allowedFileTypes.join(
-            ", "
-          )}`
-        );
+      // setValues((s) => ({ ...s, dokumen: fileObj }));
+      setFile(fileObj)
+      console.log(file)
+      if (values.dokumen) {
+        handleSubmit(token, values);
+      } else {
         setLoading(false);
         return false;
-      } else {
-        console.log(values);
-        if (values.dokumen) {
-          handleSubmit(token, values);
-        } else {
-          setLoading(false);
-          return false;
-        }
       }
     }
   };

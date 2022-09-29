@@ -34,9 +34,11 @@ export default function Proposal() {
   const getList = async (auth) => {
     try {
       await getPropose("proposal?offset=0&limit=10", auth).then((result) => {
-        console.log(result.data.message);
+        console.log("HAO");
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
+            setList("");
+
             return;
           } else {
             alert("Token is not valid");
@@ -46,6 +48,7 @@ export default function Proposal() {
           }
         } else {
           setList(result.data.data);
+          console.log("HAO 2.0");
         }
         setLoad(false);
       });
@@ -143,13 +146,11 @@ export default function Proposal() {
                           <>
                             <TableRow>
                               {list?.map((i, key) => (
-                                <>
-                                  <ListPropose
-                                    data={i}
-                                    key={key}
-                                    getList={getList}
-                                  />
-                                </>
+                                <ListPropose
+                                  getList={getList}
+                                  data={i}
+                                  key={key}
+                                />
                               ))}
                             </TableRow>
                           </>
@@ -158,9 +159,9 @@ export default function Proposal() {
                             <TableRow>
                               {searchResults.map((i, key) => (
                                 <ListPropose
+                                  getList={getList}
                                   data={i}
                                   key={key}
-                                  getList={getList}
                                 />
                               ))}
                             </TableRow>
@@ -189,7 +190,7 @@ export default function Proposal() {
   );
 }
 
-function ListPropose(data, getList) {
+function ListPropose(data) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
   console.log(data);
@@ -260,7 +261,7 @@ function ListPropose(data, getList) {
         deletePropose={deletePropose}
         title={data.data.Judul}
         id={data.data.Id}
-        getList={getList}
+        getList={data.getList}
       ></DeletePop>
     </>
   );
@@ -333,8 +334,10 @@ function DeletePop({
                       onClick={() => {
                         if (localStorage.getItem("token") != null) {
                           deletePropose(id, localStorage.getItem("token"));
+                          getList(localStorage.getItem("token"));
                         } else if (sessionStorage.getItem("token") != null) {
                           deletePropose(id, sessionStorage.getItem("token"));
+                          getList(sessionStorage.getItem("token"));
                         } else {
                           alert("You're not real");
                         }
