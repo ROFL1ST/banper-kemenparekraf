@@ -280,21 +280,16 @@ export default function Navbar({ open, setOpen }) {
                 </button>
               </Link>
 
-              <button
-                onClick={() => {
-                  if (pathname === "/auth/daftar") {
-                    return;
-                  } else {
-                    setOpen(true);
-                  }
-                }}
-                className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                  pathname === "/auth/daftar" &&
-                  "bg-white  text-blue-900 font-bold "
-                } `}
-              >
-                Edit Profile
-              </button>
+              <Link href={"/editProfile"}>
+                <button
+                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                    pathname === "/editProfile" &&
+                    "bg-white  text-blue-900 font-bold "
+                  } `}
+                >
+                  Edit Profile
+                </button>
+              </Link>
               <button
                 onClick={() => {
                   if (pathname === "/auth/daftar") {
