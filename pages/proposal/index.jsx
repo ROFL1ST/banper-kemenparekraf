@@ -211,6 +211,8 @@ function ListPropose(data) {
       setLoad(false);
     }
   }
+
+  
   useEffect(() => {
     detail();
   }, []);

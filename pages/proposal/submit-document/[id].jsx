@@ -212,25 +212,20 @@ function CardPengusul() {
     }
   };
 
-  React.useEffect(() => {
-    if (localStorage.getItem("token") != null) {
-      setToken(localStorage.getItem("token"));
-      getList(localStorage.getItem("token"));
-    } else {
-      setToken(sessionStorage.getItem("token"));
-      getList(sessionStorage.getItem("token"));
-    }
-    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
-      // alert("You need to Log In first!")
+  // jenis bantuan & kategori & profile
+  const [user, setUser] = React.useState([]);
 
-      return;
-    } else {
-      Router.push("/home");
+  const getData = async (value) => {
+    try {
+      await getPropose("user", value).then((result) => {
+        setUser(result.data.data);
+        console.log(result.data.data);
+      });
+    } catch (error) {
+      console.log(error);
     }
-  }, [token]);
-  // const result = list.filter(list.Id);
+  };
 
-  // jenis bantuan & kategori
   const [kategori, setKategori] = React.useState([]);
 
   async function getKateg() {
@@ -255,10 +250,6 @@ function CardPengusul() {
       setLoad(false);
     }
   }
-  React.useEffect(() => {
-    detail();
-    getKateg();
-  }, []);
 
   // subsektor
   const [sub, setSub] = React.useState([]);
@@ -274,9 +265,28 @@ function CardPengusul() {
   };
 
   React.useEffect(() => {
+    detail();
+    getKateg();
     getSub();
   }, []);
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+      getList(localStorage.getItem("token"));
+      getData(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+      getList(sessionStorage.getItem("token"));
+      getData(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
 
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [token]);
   return (
     <>
       <div className="bg-white bg-opacity-20 rounded-xl px-10 py-8 shadow-xl space-y-7">
@@ -325,7 +335,13 @@ function CardPengusul() {
                 <div className="space-y-3">
                   <h1 className="text-sm">Kategori</h1>
                   <p className="text-xs text-gray-400">
-                    {/* {!load ? kategori.filter((kategori) => kategori.Id) : <></>} */}
+                    {!load ? (
+                      kategori
+                        .filter((kategori) => kategori.Id == user[0].Kategori)
+                        .map((kategori) => kategori.Nama)
+                    ) : (
+                      <></>
+                    )}
                   </p>
                 </div>
                 <div className="space-y-3">

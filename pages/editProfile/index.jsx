@@ -9,11 +9,16 @@ import { getApi, getPropose } from "../api/restApi";
 import Router, { useRouter } from "next/router";
 
 export default function EditProfile() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   // getData user
-  const [user, setUser] = useState([]);
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
   const [load, setLoad] = useState(false);
+  const [user, setUser] = useState([]);
 
   const getData = async (value) => {
     try {
@@ -25,12 +30,6 @@ export default function EditProfile() {
       console.log(error);
     }
   };
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
 
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
