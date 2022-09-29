@@ -24,7 +24,13 @@ export default function EditProfile() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      password: "",
+      passwordConfirmation: "",
+    },
+  });
   // getData user
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
@@ -336,7 +342,7 @@ export default function EditProfile() {
                       *Buat Kata Sandi
                     </label>
                     <input
-                      {...register("password")}
+                      {...register("password", { required: false })}
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
                       placeholder="Masukan Kata Sandi"
                       type={"password"}
@@ -353,7 +359,7 @@ export default function EditProfile() {
                       *Ketik Ulang Kata Sandi
                     </label>
                     <input
-                      {...register("passwordConfirmation")}
+                      {...register("passwordConfirmation", { required: false })}
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
                       placeholder="Ulang Kata Sandi"
                       type={"password"}
