@@ -111,6 +111,7 @@ export default function SubmitDoc() {
                   teks={teks}
                   key={key}
                   num={key}
+                  detail={detail}
                 ></CardDocument>
               ))
             ) : (
@@ -220,12 +221,11 @@ function CardPengusul() {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
         // console.log(result.data.data);
-        setMuter(false)
+        setMuter(false);
       });
     } catch (error) {
       console.log(error);
-      setMuter(false)
-
+      setMuter(false);
     }
   };
 
@@ -326,7 +326,8 @@ function CardPengusul() {
                       .filter(
                         (sub) =>
                           sub.Id.toString() ===
-                          list[0].Subsektors.split("\n")[0][2] + list[0].Subsektors.split("\n")[0][3]
+                          list[0].Subsektors.split("\n")[0][2] +
+                            list[0].Subsektors.split("\n")[0][3]
                       )
                       .map((sub) => sub.Nama)}
                   </p>
@@ -372,16 +373,11 @@ function CardPengusul() {
   );
 }
 
-function CardDocument({ data, teks, num, props }) {
+function CardDocument({ data, teks, num, detail }) {
   var router = useRouter();
 
   const { id } = router.query;
   const [file, setFile] = React.useState("");
-  const [values, setValues] = React.useState({
-    id: data.Id,
-    proposalId: id,
-    dokumen: file,
-  });
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState({ status: false, msg: "" });
 
@@ -412,7 +408,6 @@ function CardDocument({ data, teks, num, props }) {
     }
 
     event.target.value = null;
-    setLoading(true);
 
     const fileExtension = fileObj.name.split(".").at(-1);
     const allowedFileTypes = ["pdf", "jpg", "zip"];
@@ -422,29 +417,42 @@ function CardDocument({ data, teks, num, props }) {
           ", "
         )}`
       );
-      setLoading(false);
     } else {
-      setValues((s) => ({ ...s, dokumen: fileObj }));
       // console.log(values);
-      if (values.dokumen) {
-        handleSubmit(token, values);
-      } else {
-        setLoading(false);
-      }
+      handleSubmit(token, { id: data.Id, proposalId: id, dokumen: fileObj });
     }
   }
 
   const handleSubmit = async (token, values) => {
-    // console.log(values);
+    console.log(values);
     const formData = new FormData();
+    setLoading(true);
 
     formData.append("dokumen", values);
     try {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
         // console.log(result);
         setLoading(false);
+
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
+        } else {
+          if (router.isReady) {
+            if (localStorage.getItem("token") != null) {
+              detail(localStorage.getItem("token"));
+            } else {
+              detail(sessionStorage.getItem("token"));
+            }
+            if (
+              localStorage.getItem("token") ||
+              sessionStorage.getItem("token")
+            ) {
+              // alert("You need to Log In first!")
+              return;
+            } else {
+              Router.push("/home");
+            }
+          }
         }
       });
     } catch (err) {
