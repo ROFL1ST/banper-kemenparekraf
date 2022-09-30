@@ -538,7 +538,7 @@ function CardDocument({ data, teks, num, detail }) {
               {data.FileName == "" ? (
                 <p className="lg:text-sm text-xs ">
                   File dalam bentuk{" "}
-                  <span className="font-bold">{data.Type}</span>
+                  <span className="font-bold">{data.Type} </span>
                   dengan ukuran maximal
                   <span className="text-red-500 font-semibold"> 3MB</span>
                 </p>
