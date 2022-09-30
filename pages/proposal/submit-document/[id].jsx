@@ -12,25 +12,25 @@ export default function SubmitDoc() {
     document.title = "Submit Dokumen";
   });
   const teks = [
-    { id: 1, nama: "Dokument 1: Surat Permohonan" },
-    { id: 2, nama: "Dokument 2: Proposal Ringkas" },
-    { id: 3, nama: "Dokument 3: Proposal" },
+    { id: 1, nama: "Dokument 1: " },
+    { id: 2, nama: "Dokument 2: " },
+    { id: 3, nama: "Dokument 3: " },
     {
       id: 4,
-      nama: "Dokument 4: Surat Pernyataan Tidak Terjadi Konflik Internal",
+      nama: "Dokument 4: ",
     },
     {
       id: 5,
-      nama: "Dokument 5: Surat Pernyataan Tidak Terkait Partai Politik",
+      nama: "Dokument 5: ",
     },
     {
       id: 6,
-      nama: "Dokument 6: Surat Pernyataan Bersedia Menerima Dan Memanfaatkan (dengan materai)",
+      nama: "Dokument 6: ",
     },
-    { id: 7, nama: "Dokument 7: Anggaran Biaya" },
+    { id: 7, nama: "Dokument 7: " },
     {
       id: 8,
-      nama: "Dokument 8: Legalitas Lembaga (Komunitas: Akta Notaris Lembaga Adat: Akta Notaris/Surat Pengakuan)",
+      nama: "Dokument 8: ",
     },
   ];
   const router = useRouter();
@@ -411,7 +411,7 @@ function CardDocument({ data, teks, num, detail }) {
     console.log(fileMb);
 
     if (fileMb >= 3) {
-      alert("Mohon Masukkan File Dibawah 3MB");
+      alert("Mohon Masukkan Berkas Maksimal 3MB");
     } else {
       const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
       event.target.value = null;
@@ -486,7 +486,7 @@ function CardDocument({ data, teks, num, detail }) {
             <h1 className="lg:text-sm text-xs lg:w-3/4 w-3/5">
               {teks
                 .filter((teks) => teks.id === num + 1)
-                .map((teks) => teks.nama)}
+                .map((teks) => teks.nama + data.Document)}
             </h1>
             <h1
               className={`lg:text-sm text-xs ${
