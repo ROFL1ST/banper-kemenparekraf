@@ -46,7 +46,7 @@ export default function Footer() {
           />
         </div>
       </footer>
-      <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-white">
+      <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-[#f5f5fa]">
         <a className="text-white rounded-full bg-[#142b51] p-2">
           <svg
             fill="currentColor"
