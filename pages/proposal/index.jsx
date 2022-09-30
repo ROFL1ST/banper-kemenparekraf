@@ -34,7 +34,7 @@ export default function Proposal() {
   const getList = async (auth) => {
     try {
       await getPropose("proposal?offset=0&limit=10", auth).then((result) => {
-        console.log("HAO");
+        console.log(result.data);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
             setList("");
@@ -199,7 +199,7 @@ export default function Proposal() {
 function ListPropose(data) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
-  console.log(data);
+
   const [load, setLoad] = useState(true);
 
   const [jenis, setJenis] = useState([]);
