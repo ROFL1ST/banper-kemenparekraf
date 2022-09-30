@@ -34,7 +34,7 @@ export default function Proposal() {
   const getList = async (auth) => {
     try {
       await getPropose("proposal?offset=0&limit=10", auth).then((result) => {
-        console.log("HAO");
+        console.log(result.data);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
             setList("");
@@ -84,6 +84,9 @@ export default function Proposal() {
   // check
   const [log, setLog] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
+
+  // detail
+
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -196,7 +199,7 @@ export default function Proposal() {
 function ListPropose(data) {
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
-  console.log(data);
+
   const [load, setLoad] = useState(true);
 
   const [jenis, setJenis] = useState([]);
@@ -212,7 +215,6 @@ function ListPropose(data) {
     }
   }
 
-  
   useEffect(() => {
     detail();
   }, []);
@@ -228,6 +230,52 @@ function ListPropose(data) {
     }
   }
 
+  // detail
+  // getList
+
+  const [doc, setDoc] = React.useState([]);
+  const [percent, setPercent] = React.useState("0");
+  const [have, setHave] = React.useState(0);
+  const [all, setAll] = React.useState(0);
+  async function Status(token) {
+    try {
+      await getPropose(
+        `proposal/detail?UsulanHeaderID=${data.data.Id}`,
+        token
+      ).then((result) => {
+        setDoc(result.data.data.get_usulan_detail);
+        setLoad(false);
+      });
+    } catch (error) {
+      console.log(error);
+      setLoad(false);
+    }
+  }
+  useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      Status(localStorage.getItem("token"));
+    } else {
+      Status(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const have = doc
+      .filter((doc) => doc.FileName != "")
+      .map((doc) => doc.length);
+    const all = doc.length;
+    setPercent((have.length / all) * 100);
+    // console.log((have.length / all) * 100);
+    setHave(have.length);
+    setAll(all);
+    console.log(percent);
+  }, [doc]);
   return (
     <>
       <TableCell>{data.data.Id}</TableCell>
@@ -241,7 +289,9 @@ function ListPropose(data) {
           <></>
         )}
       </TableCell>
-      <TableCell>Belum Lengkap</TableCell>
+      <TableCell>
+        {percent != 100 ? "Belum Lengkap" : "Sudah Lengkap"}
+      </TableCell>
       <TableCell>
         <div className="flex space-x-2">
           <Link href={`/proposal/submit-document/${data.data.Id}`}>
