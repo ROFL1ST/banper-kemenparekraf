@@ -406,25 +406,33 @@ function CardDocument({ data, teks, num, detail }) {
     if (!fileObj) {
       return false;
     }
-    const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
-    event.target.value = null;
-    const fileExtension = fileObj.name.split(".").at(-1);
-    const allowedFileTypes = [data.Type.split(",")];
 
-    console.log(allowedFileTypes[0].map((i) => i.replace(regex, "")));
-    console.log(fileExtension);
-    if (
-      !allowedFileTypes[0]
-        .map((i) => i.replace(regex, ""))
-        .includes(fileExtension)
-    ) {
-      alert(
-        `File does not support. Files type must be ${allowedFileTypes[0].map(
-          (i) => i.replace(regex, "")
-        )}`
-      );
+    const fileMb = fileObj.size / 1024 ** 2;
+    console.log(fileMb);
+
+    if (fileMb >= 3) {
+      alert("Mohon Masukkan File Dibawah 3MB");
     } else {
-      handleSubmit(token, { id: data.Id, proposalId: id, dokumen: fileObj });
+      const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
+      event.target.value = null;
+      const fileExtension = fileObj.name.split(".").at(-1);
+      const allowedFileTypes = [data.Type.split(",")];
+
+      console.log(allowedFileTypes[0].map((i) => i.replace(regex, "")));
+      console.log(fileExtension);
+      if (
+        !allowedFileTypes[0]
+          .map((i) => i.replace(regex, ""))
+          .includes(fileExtension)
+      ) {
+        alert(
+          `Berkas Tidak Di Dukung. Tipe Berkas Harus ${allowedFileTypes[0].map(
+            (i) => i.replace(regex, "")
+          )}`
+        );
+      } else {
+        handleSubmit(token, { id: data.Id, proposalId: id, dokumen: fileObj });
+      }
     }
   }
 
