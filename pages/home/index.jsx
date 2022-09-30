@@ -108,15 +108,17 @@ export default function Dashboard() {
                   <CardBeritaLoading />
                   <CardBeritaLoading />
                 </>
-              ) : data.berita.length != 1 ? (
-                data.berita.map((i, key) => <CardBerita key={key} data={i} />)
               ) : (
-                <>
-                  {data.berita.map((i, key) => (
-                    <CardBerita key={key} data={i} />
-                  ))}
-                  <CardForOneBerita />
-                </>
+                data.berita.map((i, key) => (
+                  <div key={key}>
+                    <div className="md:flex hidden">
+                      <CardBerita data={i} />
+                    </div>
+                    <div className="flex md:hidden">
+                      <CardBeritaMobile data={i} />
+                    </div>
+                  </div>
+                ))
               )
             ) : (
               <h1>No Data</h1>
@@ -247,11 +249,11 @@ function CardBerita({ data }) {
                 {formatter.format(Date.parse(data.CreatedAt))}
               </small>
               {data.Judul.length > MAX_LENGTHtitle ? (
-                <h3 className="my-3 font-bold capitalize lg:h-5 h-12 text-sm lg:text-sm 2xl:text-base">
+                <h3 className="my-3 font-bold capitalize h-auto text-sm lg:text-sm 2xl:text-base">
                   {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
                 </h3>
               ) : (
-                <h3 className="my-3 font-bold capitalize lg:h-5 h-12 text-ellipsis lg:text-sm 2xl:text-base">
+                <h3 className="my-3 font-bold capitalize h-auto text-ellipsis lg:text-sm 2xl:text-base">
                   {data.Judul}
                 </h3>
               )}
@@ -260,6 +262,56 @@ function CardBerita({ data }) {
               </div>
             </div>
             <small className="text-xs font-semibold text-blue-900">
+              {data.NamaKota}
+            </small>
+          </div>
+        </div>
+      </Link>
+    </>
+  );
+}
+
+function CardBeritaMobile({ data }) {
+  const MAX_LENGTHtitle = 40;
+  const MAX_LENGTHdetail = 125;
+  const detail =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus ligula nec ultricies faucibus. Sed eleifend accumsan turpis id semper. Morbi et faucibus nisi. Cras in mauris at est bibendum dapibus at ac metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ultricies tincidunt aliquam. Nullam vestibulum metus sed metus bibendum porttitor. Nunc venenatis libero eget ante mollis gravida. Ut dictum ac justo nec molestie. Donec nec felis luctus tortor egestas accumsan. Maecenas laoreet auctor porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique magna non lobortis vestibulum.";
+
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+  return (
+    <>
+      <Link href={`/berita/Detail/${data.Id}`}>
+        <div className="bg-[#f5f5fa] w-full h-80 rounded-2xl">
+          <div
+            className="w-full h-1/2 bg-cover rounded-t-2xl bg-center"
+            style={{
+              backgroundImage: `url(${data.foto})`,
+            }}
+          ></div>
+          <div className="px-5 py-1">
+            <small className="text-xs font-bold text-gray-500">
+              {formatter.format(Date.parse(data.CreatedAt))}
+            </small>
+            {data.Judul.length > MAX_LENGTHtitle ? (
+              <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-base pr-20">
+                {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
+                <Link
+                  href={`/berita/Detail/${data.Id}`}
+                  className="text-blue-600 text-sm font-medium cursor-pointer"
+                >
+                  Read more
+                </Link>
+              </h3>
+            ) : (
+              <h3 className="my-3 font-bold capitalize h-16 text-ellipsis lg:text-sm 2xl:text-base pr-20">
+                {data.Judul}
+              </h3>
+            )}
+            <small className="text-xs font-bold text-blue-900">
               {data.NamaKota}
             </small>
           </div>
