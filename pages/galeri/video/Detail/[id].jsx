@@ -167,7 +167,7 @@ function Card({ data, setLoading }) {
   };
   const text = "Lorem Ipsum dadwadsadwaasdsawasdadwa";
   const MAX_LENGTH = 27;
-  const MAX_LENGTH_MOBILE = 30;
+  const MAX_LENGTH_MOBILE = 27;
 
   return (
     <>
@@ -184,17 +184,17 @@ function Card({ data, setLoading }) {
             src={data.thumbnail}
             alt=""
           />
-          <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-14 gap-y-12">
+          <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-14 gap-y-10">
             <div className="lg:flex hidden">
               {text.length > MAX_LENGTH ? (
-                <p className="font-bold lg:text-sm text-xs w-11/12 ">
+                <p className="font-bold text-sm  w-11/12 ">
                   {`${text.substring(0, MAX_LENGTH)} ...`}
                 </p>
               ) : (
-                <p className="font-bold lg:text-sm text-xsw-11/12 ">{text}</p>
+                <p className="font-bold text-sm w-11/12 ">{text}</p>
               )}
             </div>
-            <p className="font-bold lg:hidden flex lg:text-sm text-xs w-11/12">
+            <p className="font-bold lg:hidden flex text-sm  w-11/12">
               {text.length > MAX_LENGTH_MOBILE
                 ? `${text.substring(0, MAX_LENGTH_MOBILE)} ...`
                 : text}

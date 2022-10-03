@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Navbar from "../components/navbar";
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from "react";
 import Menu from "./menu/menu";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
@@ -24,7 +24,8 @@ export default function Berita() {
   const getData = async (sort, sub_id, prov_id, limit = 15) => {
     try {
       let respond = await getApi(
-        `news?limit=${limit}&${sub_id !== undefined && `subsektorId=${sub_id}`
+        `news?limit=${limit}&${
+          sub_id !== undefined && `subsektorId=${sub_id}`
         }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
       );
       setData(respond.data.data);
@@ -57,7 +58,9 @@ export default function Berita() {
       <Menu data={data} getData={getData} setLoading={setLoading} />
       <div className="pb-20 xl:px-20 lg:px-20 px-10 flex justify-between ">
         <div className="p-4  w-1/2 h-80 bg-gray-300 mr-5 rounded-lg">
-          <h2 className="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-left">Filter By</h2>
+          <h2 className="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-left">
+            Filter By
+          </h2>
           <div className="flex justify-start   px-4 :px-6 items-center gap-x-3 pb-5">
             <input
               type="checkbox"
@@ -67,28 +70,53 @@ export default function Berita() {
               required
               className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-800  focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
             />
-           <ul class="space-y-2">
-				<li>
-					<button type="button" class="flex items-center w-full p-2 text-base font-normal text-black   " >
+            <ul class="space-y-2">
+              <li>
+                <button
+                  type="button"
+                  class="flex items-center w-full p-2 text-base font-normal text-black   "
+                >
                   Provinsi
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>
-            </button>
-					<ul  class="hidden py-2 space-y-2">
-						<li>
-							<a href="#"
-								class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Products</a>
-						</li>
-						<li>
-							<a href="#"
-								class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Billing</a>
-						</li>
-						<li>
-							<a href="#"
-								class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Invoice</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
+                  <svg
+                    class="w-6 h-6"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                    ></path>
+                  </svg>
+                </button>
+                <ul class="hidden py-2 space-y-2">
+                  <li>
+                    <a
+                      href="#"
+                      class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
+                    >
+                      Products
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
+                    >
+                      Billing
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="#"
+                      class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11"
+                    >
+                      Invoice
+                    </a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 mt-10">
