@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Navbar from "../components/navbar";
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from "react";
 import MenuSort from "./menu/menu";
 import { Menu } from "@headlessui/react";
 import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
@@ -13,12 +13,13 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import axios from "axios";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
+import MenuProvinsi from "./menu/menuProvinsi";
+import MenuSubsector from "./menu/menuSubsector";
 const MAX_LENGTH = 60;
 
 export default function Berita() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
-  const [menu1, setMenu1] = React.useState(false);
-  const [menu2, setMenu2] = React.useState(false);
   const [open, setOpen] = useState(false);
   const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
   const [data, setData] = useState([]);
@@ -28,11 +29,11 @@ export default function Berita() {
   const { sort, type, sub_id } = query;
   var router = useRouter();
 
-
-  const getData = async (sort, sub_id, prov_id, limit = 15) => {
+  const getData = async (sort, sub_id, prov_id, limit = 12) => {
     try {
       let respond = await getApi(
-        `news?limit=${limit}&${sub_id !== undefined && `subsektorId=${sub_id}`
+        `news?limit=${limit}&${
+          sub_id !== undefined && `subsektorId=${sub_id}`
         }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
       );
       setData(respond.data.data);
@@ -64,12 +65,17 @@ export default function Berita() {
     <>
       <Navbar open={open} setOpen={setOpen} />
       <MenuSort data={data} getData={getData} setLoading={setLoading} />
-      <div className="pb-20 xl:px-20 lg:px-20 px-10 flex justify-between ">
-        <div className="p-4  w-1/2 h-80 bg-gray-300 mr-5 rounded-lg">
-          <h2 className="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-left">Filter By</h2>
-          <DropdownFilter navbarOpen={navbarOpen} menu1={menu1} setMenu1={setMenu1} menu2={menu2} setMenu2={setMenu2} />
+      <div className="pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10">
+        <div className="py-4 px-10  w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
+          <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
+            Filter By
+          </h2>
+          <div className="flex flex-col gap-y-3 pb-20">
+            <MenuProvinsi type={"Provinsi"} />
+            <MenuSubsector type={"Subsector"} />
+          </div>
         </div>
-        <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 mt-10">
+        <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 ">
           {loading ? (
             loadingLength.map((i, key) => <CardLoading key={key} />)
           ) : data.length == 0 ? (
@@ -269,82 +275,6 @@ function Modal({ open, setOpen, cancelButtonRef }) {
           </div>
         </Dialog>
       </Transition.Root>
-    </>
-  );
-}
-
-function DropdownFilter({ menu1, setMenu1, menu2, setMenu2 }) {
-  return (
-    <>
-      <div onClick={() => setMenu1(!menu1)} className="flex space-x-3">
-        <div
-          className={
-            "cursor-pointer flex items-center space-x-1" +
-            (menu1
-              ? "bg-white rounded-full text-black-900 bg-opacity-70 "
-              : "")
-          }
-        >
-          <input
-            type="checkbox"
-            id=""
-            name=""
-            defaultChecked={false}
-            required
-            className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
-          />
-          Provinsi
-          <ChevronDownIcon
-            className="ml-2 -mr-1 h-5 w-5 "
-            aria-hidden="true"
-          />
-        </div>
-      </div>
-      <div
-        className={`${menu1 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
-      >
-        <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
-          <div
-            className={
-              "cursor-pointer flex items-center space-x-1" +
-              (menu2
-                ? "bg-white rounded-full text-black-900 bg-opacity-70 "
-                : "")
-            }
-          >
-            <input
-              type="checkbox"
-              id=""
-              name=""
-              defaultChecked={false}
-              required
-              className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
-            />
-            Aceh
-            <ChevronDownIcon
-              className="ml-2 -mr-1 h-5 w-5 "
-              aria-hidden="true"
-            />
-          </div>
-        </div>
-        <div
-          className={`${menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
-        >
-          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-black">
-          <input
-              type="checkbox"
-              id=""
-              name=""
-              defaultChecked={false}
-              required
-              className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
-            />
-          Sabang
-          
-        </button>
-        </div>
-      </div>
-
     </>
   );
 }

@@ -8,11 +8,16 @@ import { getApi } from "../../api/restApi";
 import { useEffect } from "react";
 import { useState } from "react";
 import Link from "next/link";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
-export default function MenuSubsector({ getData, setLoading }) {
+export default function MenuSubsector({ type }) {
+  const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
+
+  const [menu1, setMenu1] = useState(false);
+
+  // getData
   const [subsector, setSubsector] = useState([]);
   const [load, setLoad] = useState(true);
-  const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
 
   const getSubsector = async () => {
     try {
@@ -30,77 +35,87 @@ export default function MenuSubsector({ getData, setLoading }) {
   }, []);
   return (
     <>
-      <div className="flex justify-center  mt-9  items-center ml-5 ">
-        <Swiper
-          className="w-screen"
-          slidesPerView={"auto"}
-          spaceBetween={15}
-          freeMode={true}
-          modules={[FreeMode, Pagination]}
-        >
-          {!load ? (
-            subsector?.map((i, key) => (
-              <SwiperSlide className=" menu" key={key}>
-                <Button
-                  nama={i.Nama}
-                  id={i.Id}
-                  getData={getData}
-                  setLoading={setLoading}
-                />
-              </SwiperSlide>
-            ))
-          ) : (
-            <>
-              <div className=" space-x-5">
-                {loadingLength.map((i, key) => (
-                  <SwiperSlide key={key} className="animate-pulse menu">
-                    <ButtonLoading />
-                  </SwiperSlide>
-                ))}
-              </div>
-            </>
-          )}
-        </Swiper>
+      {/* Filter 1 */}
+      <div className="flex flex-col space-y-2 space-x-7">
+        <div className={"cursor-pointer flex items-center space-x-1"}>
+          <input
+            type="checkbox"
+            id=""
+            name=""
+            defaultChecked={false}
+            required
+            className="form-check-input appearance-none h-4.5 w-4.5 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
+          />
+          <div
+            className="inline-flex items-center justify-between w-full"
+            onClick={() => setMenu1(!menu1)}
+          >
+            <p >{type}</p>
+            {menu1 ? (
+              <ChevronUpIcon
+                className="ml-2 -mr-1 h-5 w-5 "
+                aria-hidden="true"
+              />
+            ) : (
+              <ChevronDownIcon
+                className="ml-2 -mr-1 h-5 w-5 "
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        </div>
+        {menu1 ? (
+          <>
+            {!load ? (
+              subsector.map((i, key) => <Filter2 data={i} key={key} />)
+            ) : (
+              <></>
+            )}
+          </>
+        ) : (
+          <></>
+        )}
       </div>
+
+      {/* Filter 1 */}
     </>
   );
 }
 
-function Button({ nama, id, getData, setLoading }) {
-  const { query } = useRouter();
-  const { sort, type, sub_id } = query;
-  const { pathname } = useRouter();
-  // console.log(sub_id)
+function Filter2({ data }) {
+  const [menu2, setMenu2] = useState(false);
 
   return (
-    <Link href={`/berita?type=${type}&sort=terbaru&sub_id=${id}`}>
-      <button
-        onClick={() => {
-          // Router.push(`/berita?type=${type}&sort=${sort}&sub_id=${id}`);
-          getData("terbaru", `${id}`);
-          // setLoading(true);
-        }}
-        className={`
-       ${
-         sub_id === `${id}`
-           ? "bg-blue-900 bg-opacity-80 py-2 rounded-full px-5 text-white font-semibold"
-           : "bg-gray-400  bg-opacity-80 px-5 py-2 text-sm rounded-full text-white font-semibold "
-       }`}
-      >
-        {nama}
-      </button>
-    </Link>
-  );
-}
-
-function ButtonLoading({}) {
-  // console.log(sub_id)
-
-  return (
-    <button
-     
-      className={`
-       ${"bg-blue-900 bg-opacity-80 py-4 rounded-full px-16 text-white font-semibold"}`}
-    ></button>
+    <>
+      <div className="flex flex-col space-y-2 space-x-3">
+        <div className={"cursor-pointer flex items-center space-x-1"}>
+          <input
+            type="checkbox"
+            id=""
+            name=""
+            defaultChecked={false}
+            required
+            className="form-check-input appearance-none h-4.5 w-4.5 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
+          />
+          <div
+            className="inline-flex items-center justify-between w-full"
+            onClick={() => setMenu2(!menu2)}
+          >
+            <p>{data.Nama}</p>
+            {menu2 ? (
+              <ChevronUpIcon
+                className="ml-2 -mr-1 h-5 w-5 "
+                aria-hidden="true"
+              />
+            ) : (
+              <ChevronDownIcon
+                className="ml-2 -mr-1 h-5 w-5 "
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
