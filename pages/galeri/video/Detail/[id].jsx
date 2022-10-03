@@ -75,7 +75,7 @@ export default function Detail() {
         <div className="right 2xl:w-1/4 lg:w-1/3 w-full h-full  flex flex-col lg:px-0 px-5">
           <div className="border-b-2 mb-7 border-gray-300 flex lg:hidden"></div>
           <div className="space-y-5 ">
-            {!loading ? (
+            {!loading && video ? (
               list.map((i, key) =>
                 video.id === i.id ? (
                   <></>
