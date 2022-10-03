@@ -73,7 +73,7 @@ export default function Detail() {
           </>
         )}
         <div className="left lg:w-1/4 w-full h-full  flex flex-col">
-        <div className="border-b-2 mb-7 border-gray-300 flex lg:hidden"></div>
+          <div className="border-b-2 mb-7 border-gray-300 flex lg:hidden"></div>
 
           <div className="space-y-5 ">
             {!loading ? (
@@ -166,6 +166,8 @@ function Card({ data, setLoading }) {
   };
   const text = "Lorem Ipsum dadwadsadwaasdsawasdadwa";
   const MAX_LENGTH = 27;
+  const MAX_LENGTH_MOBILE = 27;
+
   return (
     <>
       <Link href={`/galeri/video/Detail/${data.id}`}>
@@ -174,22 +176,24 @@ function Card({ data, setLoading }) {
             viewss();
             setLoading(true);
           }}
-          className="w-full h-[9rem] rounded-xl bg-gray-100 flex cursor-pointer justify-between gap-x-0"
+          className="w-full h-[10rem] rounded-xl lg:bg-gray-100 flex cursor-pointer justify-between gap-x-0"
         >
           <img className="w-1/2 right" src={data.thumbnail} alt="" />
-          <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-16 gap-y-10">
+          <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-14 gap-y-10">
             <div className="lg:flex hidden">
               {text.length > MAX_LENGTH ? (
-                <h3 className="font-bold text-sm w-11/12 ">
+                <p className="font-bold text-sm w-11/12 ">
                   {`${text.substring(0, MAX_LENGTH)} ...`}
-                </h3>
+                </p>
               ) : (
-                <h3 className="font-bold text-sm w-11/12 ">{text}</h3>
+                <p className="font-bold text-sm w-11/12 ">{text}</p>
               )}
             </div>
-            <h3 className="font-bold text-sm w-11/12 lg:hidden flex ">
-              {text}
-            </h3>
+            <p className="font-bold lg:hidden flex text-sm w-11/12">
+              {text.length > MAX_LENGTH_MOBILE
+                ? `${text.substring(0, MAX_LENGTH_MOBILE)} ...`
+                : text}
+            </p>
             <p className="text-xs">200 views</p>
           </div>
         </div>
