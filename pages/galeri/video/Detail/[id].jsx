@@ -119,7 +119,7 @@ function Video({ data }) {
         <h1 className="text-xl font-bold pb-2">Lorem Ipsum</h1>
         <p className="text-xs">100 views • 22 August 2022</p>
         <div className="border-b-2 pt-2 border-black"></div>
-        <p className="pt-10 text-sm w-3/4">
+        <p className="pt-10 text-sm lg:w-3/4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
           soluta nulla ratione qui iure delectus provident placeat corporis
           corrupti laudantium voluptas ex non cupiditate voluptatem cumque amet
