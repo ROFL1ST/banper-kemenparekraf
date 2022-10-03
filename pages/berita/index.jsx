@@ -27,13 +27,12 @@ export default function Berita() {
   const { query } = useRouter();
   const { sort, type, sub_id } = query;
   var router = useRouter();
-  
+
 
   const getData = async (sort, sub_id, prov_id, limit = 15) => {
     try {
       let respond = await getApi(
-        `news?limit=${limit}&${
-          sub_id !== undefined && `subsektorId=${sub_id}`
+        `news?limit=${limit}&${sub_id !== undefined && `subsektorId=${sub_id}`
         }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
       );
       setData(respond.data.data);
@@ -68,10 +67,10 @@ export default function Berita() {
       <div className="pb-20 xl:px-20 lg:px-20 px-10 flex justify-between ">
         <div className="p-4  w-1/2 h-80 bg-gray-300 mr-5 rounded-lg">
           <h2 className="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-left">Filter By</h2>
-         <DropdownFilter navbarOpen={navbarOpen} />
+          <DropdownFilter navbarOpen={navbarOpen} menu1={menu1} setMenu1={setMenu1} menu2={menu2} setMenu2={setMenu2} />
         </div>
         <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 mt-10">
-          {loading  ? (
+          {loading ? (
             loadingLength.map((i, key) => <CardLoading key={key} />)
           ) : data.length == 0 ? (
             <p>TIdak Ada Data</p>
@@ -274,34 +273,54 @@ function Modal({ open, setOpen, cancelButtonRef }) {
   );
 }
 
-function DropdownFilter({navbarOpen}) {
+function DropdownFilter({ menu1, setMenu1, menu2, setMenu2 }) {
   return (
     <>
+      <div onClick={() => setMenu1(!menu1)} className="flex space-x-3">
+        <div
+          className={
+            "cursor-pointer flex items-center space-x-1" +
+            (menu1
+              ? "bg-white rounded-full text-black-900 bg-opacity-70 "
+              : "")
+          }
+        >
+          <input
+            type="checkbox"
+            id=""
+            name=""
+            defaultChecked={false}
+            required
+            className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
+          />
+          Provinsi
+          <ChevronDownIcon
+            className="ml-2 -mr-1 h-5 w-5 "
+            aria-hidden="true"
+          />
+        </div>
+      </div>
       <div
-        className={
-          "z-30 rounded-b-2xl flex flex-col fixed xl:hidden lg:hidden w-full pt-32 bg-blue-400 bg-opacity-20 backdrop-blur-lg drop-shadow-lg pb-5 text-sm space-y-3 px-10 text-white" +
-          (navbarOpen ? " flex" : " hidden")
-        }
+        className={`${menu1 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
       >
-        <Link href={"/home"}>
-          <p
-            className={`cursor-pointer  ${
-              pathname === "/home" ? "text-blue-900 font-bold" : "font-medium "
-            }`}
-          >
-            Home
-          </p>
-        </Link>
-        <div onClick={() => setMenu1(!menu1)} className="flex space-x-3">
+        <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
           <div
             className={
               "cursor-pointer flex items-center space-x-1" +
-              (menu1
-                ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
+              (menu2
+                ? "bg-white rounded-full text-black-900 bg-opacity-70 "
                 : "")
             }
           >
-            Mekanisme Pendaftaran
+            <input
+              type="checkbox"
+              id=""
+              name=""
+              defaultChecked={false}
+              required
+              className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
+            />
+            Aceh
             <ChevronDownIcon
               className="ml-2 -mr-1 h-5 w-5 "
               aria-hidden="true"
@@ -309,181 +328,26 @@ function DropdownFilter({navbarOpen}) {
           </div>
         </div>
         <div
-          className={`${menu1 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
+          className={`${menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"}`}
         >
-          <button className=" group flex w-full items-center rounded-md  px-2 py-2  text-sm text-white">
-            {pathname != "/home" ? (
-              <Link href={"/home#faq"}>F.A.Q</Link>
-            ) : (
-              <a href="#faq">F.A.Q</a>
-            )}
-          </button>
-
-          <a href={juknisUrl}>
-            <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-              Unduh Juknis
-            </button>
-          </a>
-
-          <a href={templateUrl}>
-            <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
-              Unduh Template
-            </button>
-          </a>
+          <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-black">
+          <input
+              type="checkbox"
+              id=""
+              name=""
+              defaultChecked={false}
+              required
+              className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
+            />
+          Sabang
+          
+        </button>
         </div>
-
-        <Link href={"/berita?type=berita&sort=terbaru"}>
-          <p
-            className={`cursor-pointer  ${
-              pathname === "/berita" ? "text-blue-900 font-bold" : "font-medium"
-            }`}
-          >
-            Berita
-          </p>
-        </Link>
-        <Link href={"/galeri"}>
-          <p
-            className={`cursor-pointer  ${
-              pathname === "/galeri" ||
-              pathname === "/galeri/foto/selengkapnya" ||
-              pathname === "/galeri/video/selengkapnya"
-                ? "text-blue-900 font-bold"
-                : "font-medium"
-            }`}
-          >
-            Galeri
-          </p>
-        </Link>
-        {token == null || token == "undefined" || token == undefined ? (
-          <>
-            <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
-              <div
-                className={
-                  "cursor-pointer flex items-center space-x-1" +
-                  (menu2
-                    ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
-                    : "")
-                }
-              >
-                Login|Daftar
-                <ChevronDownIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-            <div
-              className={`${
-                menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"
-              }`}
-            >
-              <Link href={"/auth/login"}>
-                <button
-                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                    pathname === "/auth/login" &&
-                    "bg-white  text-blue-900 font-bold "
-                  } `}
-                >
-                  Login
-                </button>
-              </Link>
-
-              <button
-                onClick={() => {
-                  if (pathname === "/auth/daftar") {
-                    return;
-                  } else {
-                    setOpen(true);
-                  }
-                }}
-                className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                  pathname === "/auth/daftar" &&
-                  "bg-white  text-blue-900 font-bold "
-                } `}
-              >
-                Daftar
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
-              <div
-                className={
-                  "cursor-pointer flex items-center space-x-1" +
-                  (menu2
-                    ? "bg-white rounded-full text-blue-900 font-bold bg-opacity-70"
-                    : "")
-                }
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6 text-[142b51]"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                  />
-                </svg>
-                <ChevronDownIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
-              </div>
-            </div>
-            <div
-              className={`${
-                menu2 ? "flex-col gap-y-5 list-disc px-5" : "hidden"
-              }`}
-            >
-              <Link href={"/proposal"}>
-                <button
-                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                    pathname === "/proposal" &&
-                    "bg-white  text-blue-900 font-bold "
-                  } `}
-                >
-                  List Proposal
-                </button>
-              </Link>
-
-              <Link href={"/editProfile"}>
-                <button
-                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                    pathname === "/editProfile" &&
-                    "bg-white  text-blue-900 font-bold "
-                  } `}
-                >
-                  Edit Profile
-                </button>
-              </Link>
-              <button
-                onClick={() => {
-                  if (pathname === "/auth/daftar") {
-                    return;
-                  } else {
-                    setOpen(true);
-                  }
-                }}
-                className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
-                  pathname === "/auth/daftar" &&
-                  "bg-white  text-blue-900 font-bold "
-                } `}
-              >
-                Logout
-              </button>
-            </div>
-          </>
-        )}
       </div>
+
     </>
   );
-                    }
+}
 
 function Downloader({ setOpen, setCheck }) {
   const { pathname } = useRouter();
