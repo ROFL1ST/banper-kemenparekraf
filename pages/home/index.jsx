@@ -224,9 +224,6 @@ function Summary({ data }) {
 
 function CardBerita({ data }) {
   const MAX_LENGTHtitle = 40;
-  const MAX_LENGTHdetail = 125;
-  const detail =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus ligula nec ultricies faucibus. Sed eleifend accumsan turpis id semper. Morbi et faucibus nisi. Cras in mauris at est bibendum dapibus at ac metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ultricies tincidunt aliquam. Nullam vestibulum metus sed metus bibendum porttitor. Nunc venenatis libero eget ante mollis gravida. Ut dictum ac justo nec molestie. Donec nec felis luctus tortor egestas accumsan. Maecenas laoreet auctor porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique magna non lobortis vestibulum.";
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",

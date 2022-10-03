@@ -16,10 +16,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { data } from "autoprefixer";
 
 export default function Proposal() {
-  const [search, setSearch] = React.useState("");
-  const [searchResults, setSearchResults] = React.useState([]);
-  const handleSearch = (e) => setSearch(e.target.value);
-
   //
   const [open, setOpen] = useState(false);
   const [token, setToken] = React.useState("");
@@ -76,10 +72,6 @@ export default function Proposal() {
   }, [token]);
 
   // Search
-  useEffect(() => {
-    const result = list.filter((list) => list.Judul.includes(search));
-    setSearchResults(result);
-  }, [search]);
 
   // check
   const [log, setLog] = React.useState(false);
@@ -108,15 +100,6 @@ export default function Proposal() {
                     Buat Proposal Baru
                   </button>
                 </Link>
-              </div>
-              <div className="flex md:flex-row flex-col md:items-center items-start gap-x-3">
-                <p>Search</p>
-                <input
-                  type="Search"
-                  value={search}
-                  onChange={handleSearch}
-                  className="border px-3 py-3 outline-none rounded-md placeholder:text-sm"
-                />
               </div>
             </div>
             <div className="overflow-x-auto">
@@ -148,36 +131,12 @@ export default function Proposal() {
                   <TableBody>
                     {!load ? (
                       <>
-                        {!search ? (
-                          <>
-                            <TableRow>
-                              {list?.map((i, key) => (
-                                <ListPropose
-                                  getList={getList}
-                                  data={i}
-                                  key={key}
-                                />
-                              ))}
-                            </TableRow>
-                          </>
-                        ) : searchResults.length != 0 ? (
-                          <>
-                            <TableRow>
-                              {searchResults.map((i, key) => (
-                                <ListPropose
-                                  getList={getList}
-                                  data={i}
-                                  key={key}
-                                />
-                              ))}
-                            </TableRow>
-                          </>
+                        {list.length != 0 ? (
+                          list?.map((i, key) => (
+                            <ListPropose getList={getList} data={i} key={key} />
+                          ))
                         ) : (
-                          <>
-                            <TableRow className="flex justify-center ">
-                              <p>Hasil Tidak Ada</p>
-                            </TableRow>
-                          </>
+                          <p>Data Tidak Ada</p>
                         )}
                       </>
                     ) : (
@@ -220,10 +179,13 @@ function ListPropose(data) {
   }, []);
 
   // Delete
+  const [show, setShow] = React.useState(false);
+
   async function deletePropose(id, auth) {
     try {
       await getDelete(`proposal/${id}`, auth).then((result) => {
         console.log(result);
+        setShow(true);
       });
     } catch (error) {
       console.log(error);
@@ -317,6 +279,8 @@ function ListPropose(data) {
         title={data.data.Judul}
         id={data.data.Id}
         getList={data.getList}
+        setShow={setShow}
+        show={show}
       ></DeletePop>
     </>
   );
@@ -330,8 +294,9 @@ function DeletePop({
   title,
   id,
   getList,
+  show,
+  setShow,
 }) {
-  const [show, setShow] = React.useState(false);
   return (
     <>
       <Transition.Root show={open} as={Fragment}>
@@ -365,56 +330,78 @@ function DeletePop({
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3">
-                  <div className="bg-white px-4 lg:px-1  pt-5 pb-4 ">
-                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
-                      <Dialog.Title
-                        as="h3"
-                        className="text-lg md:text-xl leading-6 pb-3 font-bold text-gray-900"
-                      >
-                        Yakin Mau Hapus proposal {title}?
-                      </Dialog.Title>
+                  <div className={`${show ? "hidden" : "flex"} flex-col`}>
+                    <div className="bg-white px-4 lg:px-1  pt-5 pb-4 ">
+                      <div className="mt-3 text-center sm:mt-0  sm:text-center">
+                        <h3 className="text-lg md:text-xl leading-6 pb-3 font-bold text-gray-900">
+                          Yakin Mau Hapus proposal {title}?
+                        </h3>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="bg-gray-50 gap-x-10 px-4 py-5 lg:px-2 lg:py-3 sm:px-6 sm:flex justify-center ">
-                    <button
-                      type="button"
-                      className="close w-full inline-flex justify-center rounded-[30px] border border-gray-300 shadow-sm px-7 lg:px-6 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto lg:text-sm"
-                      onClick={() => setOpen(false)}
-                      ref={cancelButtonRef}
-                    >
-                      Decline
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (localStorage.getItem("token") != null) {
-                          deletePropose(id, localStorage.getItem("token"));
-                          getList(localStorage.getItem("token"));
-                        } else if (sessionStorage.getItem("token") != null) {
-                          deletePropose(id, sessionStorage.getItem("token"));
-                          getList(sessionStorage.getItem("token"));
-                        } else {
-                          alert("You're not real");
-                        }
-                        setOpen(false);
-                        setShow(true);
-                        setTimeout(() => {
-                          setShow(false);
-                        }, 10000);
-                      }}
-                      type="submit"
-                      className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto lg:text-sm"
-                    >
-                      Accept
-                    </button>
+                    <div className="bg-gray-50 gap-x-10 px-4 py-5 lg:px-2 lg:py-3 sm:px-6 sm:flex justify-center ">
+                      <button
+                        type="button"
+                        className="close w-full inline-flex justify-center rounded-[30px] border border-gray-300 shadow-sm px-7 lg:px-6 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-auto lg:text-sm"
+                        onClick={() => setOpen(false)}
+                        ref={cancelButtonRef}
+                      >
+                        Decline
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (localStorage.getItem("token") != null) {
+                            deletePropose(id, localStorage.getItem("token"));
+                            getList(localStorage.getItem("token"));
+                          } else if (sessionStorage.getItem("token") != null) {
+                            deletePropose(id, sessionStorage.getItem("token"));
+                            getList(sessionStorage.getItem("token"));
+                          } else {
+                            alert("You're not real");
+                          }
+                          setOpen(false);
+                          setTimeout(() => {
+                            setShow(false);
+                          }, 10000);
+                        }}
+                        type="submit"
+                        className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto lg:text-sm"
+                      >
+                        Accept
+                      </button>
+                    </div>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
           </div>
+
+          {/* result */}
+          <div className={``}>
+            <div className="bg-white px-4 lg:px-1   ">
+              <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
+                <h3 className="text-lg md:text-base leading-6  font-bold text-gray-900 flex items-center gap-x-5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
+                    />
+                  </svg>
+                  Berhasil
+                </h3>
+              </div>
+            </div>
+          </div>
+          {/* result */}
         </Dialog>
       </Transition.Root>
-      <Result show={show} setShow={setShow} cancelButtonRef={cancelButtonRef} />
     </>
   );
 }
@@ -452,32 +439,7 @@ function Result({ show, setShow, cancelButtonRef }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3">
-                  <div className="bg-white px-4 lg:px-1   ">
-                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
-                      <Dialog.Title
-                        as="h3"
-                        className="text-lg md:text-base leading-6  font-bold text-gray-900 flex items-center gap-x-5"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="w-6 h-6"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
-                          />
-                        </svg>
-                        Berhasil
-                      </Dialog.Title>
-                    </div>
-                  </div>
-                </Dialog.Panel>
+                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3"></Dialog.Panel>
               </Transition.Child>
             </div>
           </div>
