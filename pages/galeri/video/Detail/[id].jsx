@@ -64,7 +64,7 @@ export default function Detail() {
   return (
     <>
       <Navbar setOpen={setOpen} open={open} />
-      <div className="pt-32 pb-20  flex lg:flex-row flex-col h-full lg:justify-between justify-center lg:px-16 px-5 gap-x-10">
+      <div className="pt-32 pb-20  flex lg:flex-row flex-col h-full lg:justify-between justify-center 2xl:px-16 md:px-10 px-5 gap-x-10">
         {!loading ? (
           <Video data={video} />
         ) : (
@@ -72,7 +72,7 @@ export default function Detail() {
             <VideoLoading />
           </>
         )}
-        <div className="left lg:w-1/4 w-full h-full  flex flex-col">
+        <div className="right 2xl:w-1/4 lg:w-1/3 w-full h-full  flex flex-col">
           <div className="border-b-2 mb-7 border-gray-300 flex lg:hidden"></div>
 
           <div className="space-y-5 ">
@@ -108,7 +108,7 @@ function Video({ data }) {
   console.log(data);
   return (
     <>
-      <div className="right lg:w-3/4 w-full h-full flex flex-col pb-20">
+      <div className="left lg:w-3/4 w-full h-full flex flex-col pb-20">
         <iframe
           className="lg:h-[680px] h-[450px]  pb-5"
           title="yt"
@@ -178,7 +178,7 @@ function Card({ data, setLoading }) {
           }}
           className="w-full h-[10rem] rounded-xl lg:bg-gray-100 flex cursor-pointer justify-between gap-x-0"
         >
-          <img className="w-1/2 right" src={data.thumbnail} alt="" />
+          <img className="w-1/2 lg:min-w-[50%] md:min-w-[40%] min-w-[50%] right" src={data.thumbnail} alt="" />
           <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-14 gap-y-10">
             <div className="lg:flex hidden">
               {text.length > MAX_LENGTH ? (
