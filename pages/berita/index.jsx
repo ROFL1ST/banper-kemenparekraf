@@ -68,7 +68,7 @@ export default function Berita() {
       <div className="pb-20 xl:px-20 lg:px-20 px-10 flex justify-between ">
         <div className="p-4  w-1/2 h-80 bg-gray-300 mr-5 rounded-lg">
           <h2 className="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-left">Filter By</h2>
-         <DropdownFilter/>
+         <DropdownFilter navbarOpen={navbarOpen} />
         </div>
         <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 mt-10">
           {loading  ? (
@@ -274,7 +274,7 @@ function Modal({ open, setOpen, cancelButtonRef }) {
   );
 }
 
-function DropdownFilter() {
+function DropdownFilter({navbarOpen}) {
   return (
     <>
       <div
