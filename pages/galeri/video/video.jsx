@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { useRef, useState, useEffect, Fragment } from "react";
