@@ -4,7 +4,7 @@ import MenuBerita from "./menuBerita";
 import MenuProvinsi from "./menuProvinsi";
 import MenuSubsector from "./menuSubsector";
 
-export default function Menu({ getData, setLoading, data }) {
+export default function MenuSort({ getData, setLoading, data }) {
   const { query } = useRouter();
   const { sort, type } = query;
 
