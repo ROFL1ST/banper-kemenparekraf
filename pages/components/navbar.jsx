@@ -6,6 +6,7 @@ import React from "react";
 import { Menu, Transition, Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import Router, { useRouter } from "next/router";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 
 export default function Navbar({ open, setOpen }) {
   const juknisUrl =
@@ -329,10 +330,17 @@ function DropdownMekanis({ pathname, juknisUrl, templateUrl }) {
                 }`}
               >
                 Mekanisme Pendaftaran
-                <ChevronDownIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
+                {open ? (
+                  <ChevronUpIcon
+                    className="ml-2 -mr-1 h-5 w-5 "
+                    aria-hidden="true"
+                  />
+                ) : (
+                  <ChevronDownIcon
+                    className="ml-2 -mr-1 h-5 w-5 "
+                    aria-hidden="true"
+                  />
+                )}
               </Menu.Button>
             </div>
             <Transition

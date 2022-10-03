@@ -66,7 +66,7 @@ export default function Berita() {
       <Navbar open={open} setOpen={setOpen} />
       <MenuSort data={data} getData={getData} setLoading={setLoading} />
       <div className="pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10">
-        <div className="py-4 px-10  w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
+        <div className="left lg:flex hidden flex-col py-4 px-10  w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
           <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
             Filter By
           </h2>
@@ -75,7 +75,10 @@ export default function Berita() {
             <MenuSubsector type={"Subsector"} />
           </div>
         </div>
-        <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 ">
+        <div className="right grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 ">
+          {/* Bikin Disini Sidebar buat filter */}
+          {/* Bikin Disini Sidebar buat filter */}
+
           {loading ? (
             loadingLength.map((i, key) => <CardLoading key={key} />)
           ) : data.length == 0 ? (
