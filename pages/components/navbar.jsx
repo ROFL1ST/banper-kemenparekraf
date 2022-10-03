@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-
 import logo from "../assets/banper.png";
 import React from "react";
 import { Menu, Transition, Dialog } from "@headlessui/react";

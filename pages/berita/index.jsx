@@ -1,7 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Navbar from "../components/navbar";
 import { Fragment, useEffect, useRef, useState } from 'react'
-import Menu from "./menu/menu";
+import MenuSort from "./menu/menu";
+import { Menu } from "@headlessui/react";
+import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
+
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import { getApi, PutViews } from "../api/restApi";
@@ -54,42 +57,11 @@ export default function Berita() {
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
-      <Menu data={data} getData={getData} setLoading={setLoading} />
+      <MenuSort data={data} getData={getData} setLoading={setLoading} />
       <div className="pb-20 xl:px-20 lg:px-20 px-10 flex justify-between ">
         <div className="p-4  w-1/2 h-80 bg-gray-300 mr-5 rounded-lg">
           <h2 className="font-medium title-font tracking-widest text-gray-900 mb-4 text-sm text-center sm:text-left">Filter By</h2>
-          <div className="flex justify-start   px-4 :px-6 items-center gap-x-3 pb-5">
-            <input
-              type="checkbox"
-              id=""
-              name=""
-              defaultChecked={false}
-              required
-              className="form-check-input appearance-none h-4 w-4 lg:h-3 lg:w-3 border border-gray-300 rounded-sm bg-white checked:bg-gray-800  focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left cursor-pointer"
-            />
-           <ul class="space-y-2">
-				<li>
-					<button type="button" class="flex items-center w-full p-2 text-base font-normal text-black   " >
-                  Provinsi
-                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" ></path></svg>
-            </button>
-					<ul  class="hidden py-2 space-y-2">
-						<li>
-							<a href="#"
-								class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Products</a>
-						</li>
-						<li>
-							<a href="#"
-								class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Billing</a>
-						</li>
-						<li>
-							<a href="#"
-								class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 pl-11">Invoice</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-          </div>
+         <DropdownFilter/>
         </div>
         <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 mt-10">
           {loading ? (
@@ -294,6 +266,76 @@ function Modal({ open, setOpen, cancelButtonRef }) {
     </>
   );
 }
+
+function DropdownFilter() {
+  return (
+    <>
+      <Menu as="div" className="relative inline-block text-left">
+        {({ open }) => (
+          <>
+            <div>
+              <Menu.Button
+                className={` inline-flex w-full justify-center text-sm  ${
+                  open &&
+                  "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                }`}
+              >
+                Mekanisme Pendaftaran
+                <ChevronDownIcon
+                  className="ml-2 -mr-1 h-5 w-5 "
+                  aria-hidden="true"
+                />
+              </Menu.Button>
+            </div>
+            <Transition
+              show={open}
+              as={Fragment}
+              enter="transition ease-out duration-100"
+              enterFrom="transform opacity-0 scale-95"
+              enterTo="transform opacity-100 scale-100"
+              leave="transition ease-in duration-75"
+              leaveFrom="transform opacity-100 scale-100"
+              leaveTo="transform opacity-0 scale-95"
+            >
+              <Menu.Items className="absolute right-0 mt-2 w-38 origin-top-right divide-y divide-gray-100 rounded-sm bg-blue-900  bg-opacity-50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className="px-1 py-1 ">
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                        pulau
+                      </button>
+                    )}
+                  </Menu.Item>
+                </div>
+                <div className="px-1 py-1 ">
+                  <Menu.Item>
+                    {({ active }) => (
+                      
+                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          test
+                        </button>
+                   
+                    )}
+                  </Menu.Item>
+                </div>
+                <div className="px-1 py-1">
+                  <Menu.Item>
+                    {({ active }) => (
+                     
+                        <button className=" group flex w-full items-center rounded-md px-2 py-2 text-sm text-white">
+                          Unduh Template
+                        </button>
+                    )}
+                  </Menu.Item>
+                </div>
+              </Menu.Items>
+            </Transition>
+          </>
+        )}
+      </Menu>
+    </>
+  );
+                    }
 
 function Downloader({ setOpen, setCheck }) {
   const { pathname } = useRouter();
