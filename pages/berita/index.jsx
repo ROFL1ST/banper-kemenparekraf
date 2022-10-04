@@ -69,8 +69,8 @@ export default function Berita() {
             Filter By
           </h2>
           <div className="flex flex-col gap-y-3 pb-20">
-            <MenuProvinsi type={"Provinsi"} />
-            <MenuSubsector type={"Subsector"} />
+            <MenuProvinsi type={"Provinsi"} show={false} />
+            <MenuSubsector type={"Subsector"} show={true} />
           </div>
         </div>
         <Sidebar/>

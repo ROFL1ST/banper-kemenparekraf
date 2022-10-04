@@ -7,8 +7,8 @@ import { useEffect, useState, Fragment } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 
-export default function MenuSubsector({ type }) {
-  const [menu1, setMenu1] = useState(false);
+export default function MenuSubsector({ type, show }) {
+  const [menu1, setMenu1] = useState(show);
 
   // getData
   const [subsector, setSubsector] = useState([]);
