@@ -7,8 +7,8 @@ import { useEffect, useRef, useState, Fragment } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 
-export default function MenuProvinsi({ type }) {
-  const [menu1, setMenu1] = useState(false);
+export default function MenuProvinsi({ type, show }) {
+  const [menu1, setMenu1] = useState(show);
   const [load, setLoad] = useState(true);
   const [provinsi, setProvinsi] = useState([]);
 
