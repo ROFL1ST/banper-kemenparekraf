@@ -358,56 +358,59 @@ function Downloader({ setOpen, setCheck }) {
 function Sidebar({ setSide, side }) {
   return (
     <>
-      <Transition
-        show={side}
-        as={Fragment}
-        enter="transition-all ease-in duration-200"
-        enterFrom="transform w-0 "
-        enterTo="transform w-screen "
-        leave="transition ease-out duration-75"
-        leaveFrom="transform w-screen "
-        leaveTo="transform w-0 px-0"
-      >
-        <div className="top-0 fixed  z-50 bg-white w-screen h-screen px-10 pb-10 overflow-y-auto">
-          <div className="right-0 top-0 fixed bg-gray-800 w-10 h-10 flex justify-center ">
-            <button
-              onClick={() => {
-                setSide(false);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={4.5}
-                stroke="currentColor"
-                className="w-6 h-6 text-white font-extrabold  "
+      <div>
+        {" "}
+        <Transition
+          show={side}
+          as={Fragment}
+          enter="transition-all ease-in duration-200"
+          enterFrom="transform w-0 "
+          enterTo="transform w-screen "
+          leave="transition ease-out duration-75"
+          leaveFrom="transform w-screen "
+          leaveTo="transform w-0 px-0"
+        >
+          <div className="top-0 fixed  z-50 bg-white w-screen h-screen px-10 pb-10 overflow-y-auto">
+            <div className="right-0 top-0 fixed bg-gray-800 w-10 h-10 flex justify-center ">
+              <button
+                onClick={() => {
+                  setSide(false);
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <img src={logo.src} alt={"logo"} className="h-40 absolute left-5" />
-
-          <div className="mt-36">
-            {" "}
-            <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
-              Filter By
-            </h2>
-            <div className="flex flex-col gap-y-3 pb-10">
-              <MenuProvinsi type={"Provinsi"} show={false} />
-              <MenuSubsector type={"Subsector"} show={true} />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={4.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 text-white font-extrabold  "
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
             </div>
-            <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto lg:text-sm">
-              Apply Filter
-            </button>
+            <img src={logo.src} alt={"logo"} className="h-40 absolute left-5" />
+
+            <div className="mt-36">
+              {" "}
+              <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
+                Filter By
+              </h2>
+              <div className="flex flex-col gap-y-3 pb-10">
+                <MenuProvinsi type={"Provinsi"} show={false} />
+                <MenuSubsector type={"Subsector"} show={true} />
+              </div>
+              <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto lg:text-sm">
+                Apply Filter
+              </button>
+            </div>
           </div>
-        </div>
-      </Transition>
+        </Transition>
+      </div>
     </>
   );
 }
