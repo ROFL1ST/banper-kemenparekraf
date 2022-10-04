@@ -15,9 +15,13 @@ import axios from "axios";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
+import wonderful from "../assets/wonderful.png";
+
+
 const MAX_LENGTH = 60;
 
 export default function Berita() {
+  
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const [open, setOpen] = useState(false);
   const loadingLength = [1, 2, 3, 4, 5, 5, 5, 5, 5, 5, 3, 3, 3, 3, 3];
@@ -31,8 +35,7 @@ export default function Berita() {
   const getData = async (sort, sub_id, prov_id, limit = 12) => {
     try {
       let respond = await getApi(
-        `news?limit=${limit}&${
-          sub_id !== undefined && `subsektorId=${sub_id}`
+        `news?limit=${limit}&${sub_id !== undefined && `subsektorId=${sub_id}`
         }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
       );
       setData(respond.data.data);
@@ -125,7 +128,7 @@ export default function Berita() {
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
       ></Modal>
-      {side ? <Sidebar /> : <></>}
+      {side ? <Sidebar side={side} setSide={setSide} /> : <></>}
     </>
   );
 }
@@ -348,12 +351,38 @@ function Downloader({ setOpen, setCheck }) {
     </Link>
   );
 }
-function Sidebar() {
+function Sidebar({setSide,side}) {
   return (
     <>
-      <div className="top-0 right-0 fixed z-50 bg-red-500 w-screen h-screen p-10">
-        <h2 className="">Sidebar</h2>
-      </div>
+      <div className="top-0  fixed z-50 bg-white w-screen h-screen p-10 overflow-y-auto">
+        <div className="right-0 top-0 fixed bg-gray-800 ">
+          <button onClick={() => {setSide(false)}}>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={4.5} stroke="currentColor" className="w-6 h-6 text-white font-extrabold  ">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          </button>
+         
+        </div>
+        <div className="flex xl:w-1/4 lg:w-1/4 w-1/2 justify-center gap-x-4 xl:my-0 lg:my-0 my-5  items-center">
+        <img
+            className=" h-36 w-full"
+            src={wonderful.src}
+            alt={"logo"}
+          />
+        </div>
+       
+          <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
+            Filter By
+          </h2>
+          <div className="flex flex-col gap-y-3 pb-20">
+            <MenuProvinsi type={"Provinsi"} show={false} />
+            <MenuSubsector type={"Subsector"} show={true} />
+          </div>
+          <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto lg:text-sm">
+          Apply Filter
+        </button>
+        </div>
+        
       ;
     </>
   );
