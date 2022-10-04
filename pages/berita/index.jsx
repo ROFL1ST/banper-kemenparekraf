@@ -75,7 +75,7 @@ export default function Berita() {
           side ? "overflow-y-hidden" : ""
         }`}
       >
-        <div className="left lg:flex hidden flex-col py-4 px-10  w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
+        <div className="left lg:flex hidden flex-col py-4 px-10  2xl:w-1/4 w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
           <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
             Filter By
           </h2>
@@ -85,7 +85,7 @@ export default function Berita() {
           </div>
         </div>
 
-        <div className="right grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 ">
+        <div className="right grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 2xl:w-3/5 w-full">
           {/* Bikin Disini Sidebar buat filter */}
           <div
             onClick={() => setSide(!side)}
