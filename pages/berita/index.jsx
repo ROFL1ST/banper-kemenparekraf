@@ -4,7 +4,7 @@ import Navbar from "../components/navbar";
 import { Fragment, useEffect, useRef, useState } from "react";
 import MenuSort from "./menu/menu";
 import { Menu } from "@headlessui/react";
-import { ChevronDownIcon, Bars3Icon, } from "@heroicons/react/24/solid";
+import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import { getApi, PutViews } from "../api/restApi";
@@ -31,7 +31,8 @@ export default function Berita() {
   const getData = async (sort, sub_id, prov_id, limit = 12) => {
     try {
       let respond = await getApi(
-        `news?limit=${limit}&${sub_id !== undefined && `subsektorId=${sub_id}`
+        `news?limit=${limit}&${
+          sub_id !== undefined && `subsektorId=${sub_id}`
         }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
       );
       setData(respond.data.data);
@@ -59,6 +60,9 @@ export default function Berita() {
     document.title = "Berita";
   });
 
+  // sidebar
+  const [side, setSide] = useState(false);
+  console.log(side);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -73,14 +77,26 @@ export default function Berita() {
             <MenuSubsector type={"Subsector"} show={true} />
           </div>
         </div>
-        <Sidebar/>
+
         <div className="right grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 ">
           {/* Bikin Disini Sidebar buat filter */}
           <button
+            onClick={() => setSide(!side)}
             className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              />
             </svg>
           </button>
           {/* Bikin Disini Sidebar buat filter */}
@@ -109,6 +125,7 @@ export default function Berita() {
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
       ></Modal>
+      {side ? <Sidebar /> : <></>}
     </>
   );
 }
@@ -330,11 +347,14 @@ function Downloader({ setOpen, setCheck }) {
       </button>
     </Link>
   );
-  
-  
 }
-function Sidebar(){
-    <div className="top-0 right-0 fixed bg-red-500 w-full h-full p-10">
-      <h2 className="">Sidebar</h2>
-    </div>
+function Sidebar() {
+  return (
+    <>
+      <div className="top-0 right-0 fixed z-50 bg-red-500 w-screen h-screen p-10">
+        <h2 className="">Sidebar</h2>
+      </div>
+      ;
+    </>
+  );
 }
