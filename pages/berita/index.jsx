@@ -398,7 +398,7 @@ function Sidebar({ setSide, side }) {
             <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
               Filter By
             </h2>
-            <div className="flex flex-col gap-y-3 pb-20">
+            <div className="flex flex-col gap-y-3 pb-10">
               <MenuProvinsi type={"Provinsi"} show={false} />
               <MenuSubsector type={"Subsector"} show={true} />
             </div>
