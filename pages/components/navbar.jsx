@@ -7,6 +7,7 @@ import { Menu, Transition, Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import Router, { useRouter } from "next/router";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
+import { getApi } from "../api/restApi";
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
