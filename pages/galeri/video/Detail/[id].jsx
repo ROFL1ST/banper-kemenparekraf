@@ -9,9 +9,9 @@ import Navbar from "../../../components/navbar";
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function Detail() {
-  const cancelButtonRef = React.useRef(null);
 
-  const [open, setOpen] = React.useState(false);
+
+ 
   const loadingLength = [1, 2, 3, 4, 5];
 
   React.useEffect(() => {
@@ -92,6 +92,7 @@ export default function Detail() {
                     data={i}
                     getList={getList}
                     setLoading={setLoading}
+                    setLoading2={setLoading2}
                     key={key}
                   />
                 )
@@ -107,7 +108,6 @@ export default function Detail() {
         </div>
       </div>
       <Footer />
-     
     </>
   );
 }
@@ -166,7 +166,7 @@ function VideoLoading() {
   );
 }
 
-function Card({ data, setLoading }) {
+function Card({ data, setLoading, setLoading2 }) {
   const viewss = async () => {
     try {
       let respond = await PutViews(`video/${data.id}`).then((result) => {});
@@ -185,6 +185,7 @@ function Card({ data, setLoading }) {
           onClick={() => {
             viewss();
             setLoading(true);
+            setLoading2(true);
           }}
           className="w-full h-[10rem] rounded-xl lg:bg-gray-100 flex cursor-pointer justify-between gap-x-0"
         >

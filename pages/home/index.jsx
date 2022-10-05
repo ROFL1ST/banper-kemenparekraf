@@ -15,6 +15,19 @@ import { Dialog, Transition } from "@headlessui/react";
 import Galeri from "./component/Galeri";
 import Router, { useRouter } from "next/router";
 export default function Dashboard() {
+  // token
+  const [token, setToken] = useState();
+  useEffect(() => {
+    // Perform localStorage action
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    } else if (sessionStorage.getItem("token")) {
+      setToken(sessionStorage.getItem("token"));
+    } else {
+      return;
+    }
+  }, [token]);
+
   const cancelButtonRef = useRef(null);
 
   const [data, setData] = useState({ berita: {}, loading: true });
@@ -80,15 +93,26 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <button
-          onClick={() => {
-            setOpen(true);
-          }}
-          className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
-        >
-          daftar sekarang
-        </button>
-        <div className="xl:px-20 lg:px-20 px-5">
+        {token ? (
+          <button
+            onClick={() => {
+             Router.push("/proposal")
+            }}
+            className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
+          >
+            Proposal
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setOpen(true);
+            }}
+            className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
+          >
+            daftar sekarang
+          </button>
+        )}
+        <div className={`xl:px-20 lg:px-20 px-5 mt-10`}>
           <Section text={"mekanisme pendaftaran"} />
           <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. In
