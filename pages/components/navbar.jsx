@@ -805,9 +805,9 @@ function Downloader({ setOpen, setCheck }) {
   const { pathname } = useRouter();
 
   const juknisUrl =
-    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
-  const TemplateUrl =
-    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+  "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+const templateUrl =
+  "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
   const handleClick = async () => {
     try {
@@ -821,7 +821,7 @@ function Downloader({ setOpen, setCheck }) {
   };
   const handleClick2 = async () => {
     try {
-      await getApi(TemplateUrl).then((result) => {
+      await getApi(templateUrl).then((result) => {
         console.log(result);
         Router.push(pathname === "/auth/login" ? "daftar" : "auth/daftar");
       });
