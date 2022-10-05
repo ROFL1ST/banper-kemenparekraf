@@ -310,7 +310,7 @@ export default function Navbar({ open, setOpen }) {
               >
                 <Link href={"/proposal"}>
                   <button
-                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
                       pathname === "/proposal" &&
                       "bg-white  text-blue-900 font-bold "
                     } `}
@@ -321,7 +321,7 @@ export default function Navbar({ open, setOpen }) {
 
                 <Link href={"/editProfile"}>
                   <button
-                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
                       pathname === "/editProfile" &&
                       "bg-white  text-blue-900 font-bold "
                     } `}
@@ -331,13 +331,9 @@ export default function Navbar({ open, setOpen }) {
                 </Link>
                 <button
                   onClick={() => {
-                    if (pathname === "/auth/daftar") {
-                      return;
-                    } else {
-                      setOpen(true);
-                    }
+                    setLog(true);
                   }}
-                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-white  ${
+                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
                     pathname === "/auth/daftar" &&
                     "bg-white  text-blue-900 font-bold "
                   } `}

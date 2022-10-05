@@ -59,21 +59,26 @@ export default function Berita() {
       getData();
     }
   }, [router.isReady]);
-  useEffect(() => {
-    document.title = "Berita";
-  });
 
   // sidebar
   const [side, setSide] = useState(false);
   console.log(side);
+
+  useEffect(() => {
+    document.title = "Berita";
+    if (side) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  });
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
       <MenuSort data={data} getData={getData} setLoading={setLoading} />
       <div
-        className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 ${
-          side ? "overflow-y-hidden" : ""
-        }`}
+        className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 
+        `}
       >
         <div className="left lg:flex hidden flex-col py-4 px-10  2xl:w-1/4 w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
           <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
@@ -172,12 +177,6 @@ function Card({ data }) {
             {data.Judul.length > MAX_LENGTH ? (
               <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-base">
                 {`${data.Judul.substring(0, MAX_LENGTH)}    ...`}
-                <Link
-                  href={`/berita/Detail/${data.Id}`}
-                  className="text-blue-600 text-sm font-medium cursor-pointer"
-                >
-                  Read more
-                </Link>
               </h3>
             ) : (
               <h3 className="my-3 font-bold capitalize h-16 text-ellipsis lg:text-sm 2xl:text-base">
@@ -359,18 +358,17 @@ function Sidebar({ setSide, side }) {
   return (
     <>
       <div>
-        {" "}
         <Transition
           show={side}
           as={Fragment}
-          enter="transition-all ease-in duration-200"
+          enter="transition-all ease-in duration-100"
           enterFrom="transform w-0 "
           enterTo="transform w-screen "
-          leave="transition ease-out duration-75"
+          leave="transition-all ease-out duration-75"
           leaveFrom="transform w-screen "
           leaveTo="transform w-0 px-0"
         >
-          <div className="top-0 fixed  z-50 bg-white w-screen h-screen px-10 pb-10 overflow-y-auto">
+          <div className="top-0 fixed lg:hidden flex flex-col z-50 bg-white w-screen h-screen px-10  pb-10 overflow-y-auto slider">
             <div className="right-0 top-0 fixed bg-gray-800 w-10 h-10 flex justify-center ">
               <button
                 onClick={() => {
@@ -396,7 +394,6 @@ function Sidebar({ setSide, side }) {
             <img src={logo.src} alt={"logo"} className="h-40 absolute left-5" />
 
             <div className="mt-36">
-              {" "}
               <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
                 Filter By
               </h2>
@@ -404,7 +401,7 @@ function Sidebar({ setSide, side }) {
                 <MenuProvinsi type={"Provinsi"} show={false} />
                 <MenuSubsector type={"Subsector"} show={true} />
               </div>
-              <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto lg:text-sm">
+              <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-[#142b51] text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#142b51] sm:w-auto lg:text-sm">
                 Apply Filter
               </button>
             </div>
