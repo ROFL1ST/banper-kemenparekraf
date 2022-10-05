@@ -14,7 +14,7 @@ import Section from "../components/section";
 import Router, { useRouter } from "next/router";
 import { getApi, getDelete, getPropose } from "../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
-import { data } from "autoprefixer";
+import logo from "../assets/Empty-amico.png";
 
 export default function Proposal() {
   //
@@ -34,18 +34,16 @@ export default function Proposal() {
         console.log(result.data);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
-            setList("");
+            setList(result.data.data);
             return;
           } else {
             setLog(true);
-            NoToken(log, setLog, cancelButtonRef);
             localStorage.removeItem("token");
             sessionStorage.removeItem("token");
             Router.push("/home");
           }
         } else {
           setList(result.data.data);
-          console.log("HAO 2.0");
         }
         setLoad(false);
       });
@@ -79,7 +77,7 @@ export default function Proposal() {
   const cancelButtonRef = React.useRef(null);
 
   // detail
-
+  console.log(list.length);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -104,47 +102,51 @@ export default function Proposal() {
               </div>
             </div>
             <div className="overflow-x-auto">
-              {list.length == 0 ? (
-                <>
-                  <p className="flex justify-center py-20">Tidak Ada Data</p>
-                </>
+              {!load ? (
+                list.length == 0 ? (
+                  <>
+                    <img
+                      src={logo.src}
+                      className="h-96 w-auto mx-auto"
+                      alt=""
+                    />
+                  </>
+                ) : (
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className="capitalize font-bold text-blue-900">
+                          no
+                        </TableCell>
+                        <TableCell className="capitalize font-bold text-blue-900">
+                          judul
+                        </TableCell>
+                        <TableCell className="capitalize font-bold text-blue-900">
+                          jenis bantuan
+                        </TableCell>
+                        <TableCell className="capitalize font-bold text-blue-900">
+                          status
+                        </TableCell>
+                        <TableCell className="capitalize font-bold text-blue-900">
+                          actions
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {list?.map((i, key) => (
+                        <ListPropose getList={getList} data={i} key={key} />
+                      ))}
+                    </TableBody>
+                  </Table>
+                )
               ) : (
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell className="capitalize font-bold text-blue-900">
-                        no
-                      </TableCell>
-                      <TableCell className="capitalize font-bold text-blue-900">
-                        judul
-                      </TableCell>
-                      <TableCell className="capitalize font-bold text-blue-900">
-                        jenis bantuan
-                      </TableCell>
-                      <TableCell className="capitalize font-bold text-blue-900">
-                        status
-                      </TableCell>
-                      <TableCell className="capitalize font-bold text-blue-900">
-                        actions
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {!load ? (
-                      <>
-                        {list.length != 0 ? (
-                          list?.map((i, key) => (
-                            <ListPropose getList={getList} data={i} key={key} />
-                          ))
-                        ) : (
-                          <p>Data Tidak Ada</p>
-                        )}
-                      </>
-                    ) : (
-                      <></>
-                    )}
-                  </TableBody>
-                </Table>
+                <>
+                  <div className=" mx-auto items-center flex flex-col mt-10">
+                    {" "}
+                    <img src={logo.src} className="h-96 w-auto" alt="" />
+                    <p className="font-bold">Tidak ada proposal</p>
+                  </div>
+                </>
               )}
             </div>
           </div>
@@ -441,75 +443,6 @@ function Result({ show, setShow, cancelButtonRef }) {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3"></Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-    </>
-  );
-}
-function NoToken({ log, setLog, cancelButtonRef }) {
-  const { pathname } = useRouter();
-
-  return (
-    <>
-      <Transition.Root show={log} as={React.Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-50"
-          initialFocus={cancelButtonRef}
-          onClose={setLog}
-        >
-          <Transition.Child
-            as={React.Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <Transition.Child
-                as={React.Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3">
-                  <div className="bg-white px-4 lg:px-1  pt-5 pb-4 ">
-                    <div className="flex items-center justify-center">
-                      <div className="mt-3 text-center md:w-3/4 ml-4 ">
-                        <Dialog.Title
-                          as="h3"
-                          className="text-lg md:text-lg leading-6 pb-3 font-bold text-gray-900"
-                        >
-                          You Havent Loged In Yet
-                        </Dialog.Title>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="bg-gray-50 gap-x-10 px-4 py-5 lg:px-2 lg:py-3 sm:px-6 sm:flex justify-center ">
-                    <button
-                      onClick={() => {
-                        setLog(false);
-                      }}
-                      type="submit"
-                      className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto lg:text-sm"
-                    >
-                      Ok
-                    </button>
-                  </div>
-                </Dialog.Panel>
               </Transition.Child>
             </div>
           </div>

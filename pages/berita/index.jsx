@@ -70,7 +70,7 @@ export default function Berita() {
   });
   return (
     <>
-      <Navbar open={open} setOpen={setOpen} />
+      <Navbar />
       <MenuSort data={data} getData={getData} setLoading={setLoading} />
       <div
         className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 

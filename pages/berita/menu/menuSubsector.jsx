@@ -60,7 +60,15 @@ export default function MenuSubsector({ type, show }) {
           </div>
         </div>
         {!load ? (
-          subsector.map((i, key) => <Filter2 menu={menu1} data={i} key={key} subsector={subsector} load={load} />)
+          subsector.map((i, key) => (
+            <Filter2
+              menu={menu1}
+              data={i}
+              key={key}
+              subsector={subsector}
+              load={load}
+            />
+          ))
         ) : (
           <></>
         )}
@@ -74,7 +82,6 @@ export default function MenuSubsector({ type, show }) {
 function Filter2({ data, menu, subsector, load }) {
   const [menu2, setMenu2] = useState(false);
 
- 
   return (
     <>
       <Transition
