@@ -1,10 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Navbar from "../components/navbar";
 import { Fragment, useEffect, useRef, useState } from "react";
 import MenuSort from "./menu/menu";
-import { Menu } from "@headlessui/react";
-import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import { getApi, PutViews } from "../api/restApi";
@@ -12,12 +11,9 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import axios from "axios";
-import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
-import wonderful from "../assets/wonderful.png";
 import logo from "../assets/banper.png";
-
 const MAX_LENGTH = 60;
 
 export default function Berita() {
@@ -59,23 +55,28 @@ export default function Berita() {
       getData();
     }
   }, [router.isReady]);
-  useEffect(() => {
-    document.title = "Berita";
-  });
 
   // sidebar
   const [side, setSide] = useState(false);
   console.log(side);
+
+  useEffect(() => {
+    document.title = "Berita";
+    if (side) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  });
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
       <MenuSort data={data} getData={getData} setLoading={setLoading} />
       <div
-        className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 ${
-          side ? "overflow-y-hidden" : ""
-        }`}
+        className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 
+        `}
       >
-        <div className="left lg:flex hidden flex-col py-4 px-10  w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
+        <div className="left lg:flex hidden flex-col py-4 px-10  2xl:w-1/4 w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
           <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
             Filter By
           </h2>
@@ -85,7 +86,7 @@ export default function Berita() {
           </div>
         </div>
 
-        <div className="right grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 ">
+        <div className="right grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 2xl:w-3/5 w-full">
           {/* Bikin Disini Sidebar buat filter */}
           <div
             onClick={() => setSide(!side)}
@@ -172,12 +173,6 @@ function Card({ data }) {
             {data.Judul.length > MAX_LENGTH ? (
               <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-base">
                 {`${data.Judul.substring(0, MAX_LENGTH)}    ...`}
-                <Link
-                  href={`/berita/Detail/${data.Id}`}
-                  className="text-blue-600 text-sm font-medium cursor-pointer"
-                >
-                  Read more
-                </Link>
               </h3>
             ) : (
               <h3 className="my-3 font-bold capitalize h-16 text-ellipsis lg:text-sm 2xl:text-base">
@@ -358,56 +353,57 @@ function Downloader({ setOpen, setCheck }) {
 function Sidebar({ setSide, side }) {
   return (
     <>
-      <Transition
-        show={side}
-        as={Fragment}
-        enter="transition-all ease-in duration-200"
-        enterFrom="transform w-0 "
-        enterTo="transform w-screen "
-        leave="transition ease-out duration-75"
-        leaveFrom="transform w-screen "
-        leaveTo="transform w-0 px-0"
-      >
-        <div className="top-0 fixed  z-50 bg-white w-screen h-screen px-10 pb-10 overflow-y-auto">
-          <div className="right-0 top-0 fixed bg-gray-800 w-10 h-10 flex justify-center ">
-            <button
-              onClick={() => {
-                setSide(false);
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={4.5}
-                stroke="currentColor"
-                className="w-6 h-6 text-white font-extrabold  "
+      <div>
+        <Transition
+          show={side}
+          as={Fragment}
+          enter="transition-all ease-in duration-100"
+          enterFrom="transform w-0 "
+          enterTo="transform w-screen "
+          leave="transition-all ease-out duration-75"
+          leaveFrom="transform w-screen "
+          leaveTo="transform w-0 px-0"
+        >
+          <div className="top-0 fixed lg:hidden flex flex-col z-50 bg-white w-screen h-screen px-10  pb-10 overflow-y-auto slider">
+            <div className="right-0 top-0 fixed bg-gray-800 w-10 h-10 flex justify-center ">
+              <button
+                onClick={() => {
+                  setSide(false);
+                }}
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-          <img src={logo.src} alt={"logo"} className="h-40 absolute left-5" />
-
-          <div className="mt-36">
-            {" "}
-            <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
-              Filter By
-            </h2>
-            <div className="flex flex-col gap-y-3 pb-20">
-              <MenuProvinsi type={"Provinsi"} show={false} />
-              <MenuSubsector type={"Subsector"} show={true} />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={4.5}
+                  stroke="currentColor"
+                  className="w-6 h-6 text-white font-extrabold  "
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
             </div>
-            <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:w-auto lg:text-sm">
-              Apply Filter
-            </button>
+            <img src={logo.src} alt={"logo"} className="h-40 absolute left-5" />
+
+            <div className="mt-36">
+              <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
+                Filter By
+              </h2>
+              <div className="flex flex-col gap-y-3 pb-10">
+                <MenuProvinsi type={"Provinsi"} show={false} />
+                <MenuSubsector type={"Subsector"} show={true} />
+              </div>
+              <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-[#142b51] text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#142b51] sm:w-auto lg:text-sm">
+                Apply Filter
+              </button>
+            </div>
           </div>
-        </div>
-      </Transition>
+        </Transition>
+      </div>
     </>
   );
 }
