@@ -43,7 +43,7 @@ export function getDown(path_url) {
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",
-      url: DOWNLOAD_URL + path_url,
+      url: path_url,
       headers: {
         //'Authorization': 'Bearer ' + token
         "Access-Control-Allow-Origin": "*",

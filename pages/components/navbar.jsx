@@ -7,7 +7,7 @@ import { Menu, Transition, Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import Router, { useRouter } from "next/router";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
-import { getApi } from "../api/restApi";
+import { getApi, getDown } from "../api/restApi";
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false);
@@ -811,7 +811,7 @@ const templateUrl =
 
   const handleClick = async () => {
     try {
-      await getApi(juknisUrl).then((result) => {
+      await getDown(juknisUrl).then((result) => {
         console.log(result);
         handleClick2();
       });
@@ -821,7 +821,7 @@ const templateUrl =
   };
   const handleClick2 = async () => {
     try {
-      await getApi(templateUrl).then((result) => {
+      await getDown(templateUrl).then((result) => {
         console.log(result);
         Router.push(pathname === "/auth/login" ? "daftar" : "auth/daftar");
       });
