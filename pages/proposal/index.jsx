@@ -86,9 +86,9 @@ export default function Proposal() {
           backgroundImage:
             "url(https://cdn.pixabay.com/photo/2017/05/19/06/22/desk-2325627_960_720.jpg)",
         }}
-        className="bg-gray-200 w-full h-screen  bg-cover rounded-b-3xl"
+        className="bg-gray-200 w-full lg:h-screen h-full  bg-cover rounded-b-3xl"
       >
-        <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
+        <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9 lg:mb-44  rounded-b-3xl">
           <Section text={"List Proposal"}></Section>
           {/* Top */}
           <div className="mt-20 md:w-3/4 mx-auto">
@@ -105,11 +105,10 @@ export default function Proposal() {
               {!load ? (
                 list.length == 0 ? (
                   <>
-                    <img
-                      src={logo.src}
-                      className="h-96 w-auto mx-auto"
-                      alt=""
-                    />
+                    <div className=" mx-auto items-center flex flex-col mt-10 pb-20">
+                      <img src={logo.src} className="h-96 w-auto" alt="" />
+                      <p className="font-bold">Tidak ada proposal</p>
+                    </div>
                   </>
                 ) : (
                   <Table>
@@ -141,7 +140,7 @@ export default function Proposal() {
                 )
               ) : (
                 <>
-                  <div className=" mx-auto items-center flex flex-col mt-10">
+                  <div className=" mx-auto items-center flex flex-col mt-10 mb-20">
                     {" "}
                     <img src={logo.src} className="h-96 w-auto" alt="" />
                     <p className="font-bold">Tidak ada proposal</p>
