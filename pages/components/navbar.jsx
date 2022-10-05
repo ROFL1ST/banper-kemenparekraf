@@ -10,9 +10,9 @@ import { ChevronUpIcon } from "@heroicons/react/24/outline";
 
 export default function Navbar({ open, setOpen }) {
   const juknisUrl =
-    "http://128.199.242.242/home/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const templateUrl =
-    "http://128.199.242.242/home/assets/Dokumen_Banper_TA_2022.zip";
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const [menu1, setMenu1] = React.useState(false);
   const [menu2, setMenu2] = React.useState(false);
