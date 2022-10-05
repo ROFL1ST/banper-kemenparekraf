@@ -1,10 +1,9 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Navbar from "../components/navbar";
 import { Fragment, useEffect, useRef, useState } from "react";
 import MenuSort from "./menu/menu";
-import { Menu } from "@headlessui/react";
-import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import { getApi, PutViews } from "../api/restApi";
@@ -12,12 +11,9 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import axios from "axios";
-import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
-import wonderful from "../assets/wonderful.png";
 import logo from "../assets/banper.png";
-
 const MAX_LENGTH = 60;
 
 export default function Berita() {

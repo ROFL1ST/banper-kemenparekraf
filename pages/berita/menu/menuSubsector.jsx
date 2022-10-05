@@ -60,7 +60,7 @@ export default function MenuSubsector({ type, show }) {
           </div>
         </div>
         {!load ? (
-          subsector.map((i, key) => <Filter2 menu={menu1} data={i} key={key} />)
+          subsector.map((i, key) => <Filter2 menu={menu1} data={i} key={key} subsector={subsector} load={load} />)
         ) : (
           <></>
         )}
@@ -71,27 +71,10 @@ export default function MenuSubsector({ type, show }) {
   );
 }
 
-function Filter2({ data, menu }) {
+function Filter2({ data, menu, subsector, load }) {
   const [menu2, setMenu2] = useState(false);
 
-  // getData
-  const [subsector, setSubsector] = useState([]);
-  const [load, setLoad] = useState(true);
-
-  const getSubsector = async () => {
-    try {
-      await getApi("master/subsektor").then((val) => {
-        setSubsector(val.data.data);
-        setLoad(false);
-      });
-    } catch (er) {
-      console.log(er);
-      setLoad(false);
-    }
-  };
-  useEffect(() => {
-    getSubsector();
-  }, []);
+ 
   return (
     <>
       <Transition
