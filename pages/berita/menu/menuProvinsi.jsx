@@ -7,7 +7,7 @@ import { useEffect, useRef, useState, Fragment } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 
-export default function MenuProvinsi({ type, show }) {
+export default function MenuProvinsi({ type, show, handleFilters }) {
   const [menu1, setMenu1] = useState(show);
   const [load, setLoad] = useState(true);
   const [provinsi, setProvinsi] = useState([]);
@@ -58,7 +58,9 @@ export default function MenuProvinsi({ type, show }) {
           </div>
         </div>
         {!load ? (
-          provinsi.map((i, key) => <Filter2 menu={menu1} data={i} key={key} />)
+          provinsi.map((i, key) => (
+            <Filter2 menu={menu1} data={i} key={key} handleFilters={handleFilters}  />
+          ))
         ) : (
           <></>
         )}
@@ -69,7 +71,7 @@ export default function MenuProvinsi({ type, show }) {
   );
 }
 
-function Filter2({ data, menu }) {
+function Filter2({ data, menu, handleFilters }) {
   const [menu2, setMenu2] = useState(false);
 
   // kota
@@ -91,6 +93,22 @@ function Filter2({ data, menu }) {
   useEffect(() => {
     getKota();
   }, []);
+
+  const [check, setCheck] = useState([]);
+
+  const handleChange = (value) => {
+    const currentIndex = check.indexOf(value);
+    const newChecked = [...check]
+
+    if(currentIndex === -1) {
+      newChecked.push(value)
+    } else {
+      newChecked.splice(currentIndex, 1)
+    }
+    setCheck(newChecked)
+    handleFilters(newChecked)
+  };
+
   return (
     <>
       <Transition
@@ -111,6 +129,8 @@ function Filter2({ data, menu }) {
               name=""
               defaultChecked={false}
               required
+              value={check}
+              onChange={handleChange}
               className="form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
             />
             <div

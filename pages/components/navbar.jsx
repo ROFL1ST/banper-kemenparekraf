@@ -7,9 +7,9 @@ import { Menu, Transition, Dialog } from "@headlessui/react";
 import { Fragment } from "react";
 import Router, { useRouter } from "next/router";
 import { ChevronUpIcon } from "@heroicons/react/24/outline";
-import { getApi, getDown } from "../api/restApi";
+import { getDown } from "../api/restApi";
 
-export default function Navbar() {
+export default function Navbar({ click }) {
   const [open, setOpen] = React.useState(false);
   const juknisUrl =
     "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
@@ -349,7 +349,11 @@ export default function Navbar() {
       </Transition>
       {/* Mobile */}
       <LogOut log={log} setLog={setLog} cancelButtonRef={cancelButtonRef} />
-      <Modal open={open} setOpen={setOpen} cancelButtonRef={cancelButtonRef}></Modal>
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        cancelButtonRef={cancelButtonRef}
+      ></Modal>
     </>
   );
 }
@@ -805,41 +809,26 @@ function Downloader({ setOpen, setCheck }) {
   const { pathname } = useRouter();
 
   const juknisUrl =
-  "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
-const templateUrl =
-  "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+  const templateUrl =
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
-  const handleClick = async () => {
-    try {
-      await getDown(juknisUrl).then((result) => {
-        console.log(result);
-        handleClick2();
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  const handleClick = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    setCheck(false);
+    window.open(templateUrl);
+    Router.push(pathname == "/auth/login" ? "daftar" : "auth/daftar");
   };
-  const handleClick2 = async () => {
-    try {
-      await getDown(templateUrl).then((result) => {
-        console.log(result);
-        Router.push(pathname === "/auth/login" ? "daftar" : "auth/daftar");
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   return (
-    <button
-      onClick={() => {
-        setOpen(false);
-        setCheck(false);
-        handleClick();
-      }}
-      type="submit"
+    <a
+      href={juknisUrl}
+      onClick={handleClick}
       className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
     >
       Accept
-    </button>
+    </a>
   );
 }
+

@@ -1,9 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Navbar from "../components/navbar";
 import { Fragment, useEffect, useRef, useState } from "react";
 import MenuSort from "./menu/menu";
+import { Menu } from "@headlessui/react";
+import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import { getApi, PutViews } from "../api/restApi";
@@ -11,9 +12,12 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import axios from "axios";
+import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
+import wonderful from "../assets/wonderful.png";
 import logo from "../assets/banper.png";
+
 const MAX_LENGTH = 60;
 
 export default function Berita() {
@@ -68,9 +72,22 @@ export default function Berita() {
       document.body.style.overflow = "auto";
     }
   });
+
+  const [prov, setProv] = useState(0);
+  const [Filters, setFilters] = useState({
+    prov: [],
+    sub: [],
+  });
+  console.log(prov);
+
+  const handleFilters = (filters, category) => {
+    const newFilters = { ...Filters };
+
+    newFilters[category] = filters;
+  };
   return (
     <>
-      <Navbar />
+      <Navbar open={open} setOpen={setOpen} />
       <MenuSort data={data} getData={getData} setLoading={setLoading} />
       <div
         className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 
@@ -81,7 +98,11 @@ export default function Berita() {
             Filter By
           </h2>
           <div className="flex flex-col gap-y-3 pb-20">
-            <MenuProvinsi type={"Provinsi"} show={false} />
+            <MenuProvinsi
+              type={"Provinsi"}
+              show={false}
+              handleFilters={(filters) => handleFilters(filters, "")}
+            />
             <MenuSubsector type={"Subsector"} show={true} />
           </div>
         </div>
@@ -109,13 +130,13 @@ export default function Berita() {
           </div>
           {/* Bikin Disini Sidebar buat filter */}
 
-          {loading ? (
-            loadingLength.map((i, key) => <CardLoading key={key} />)
-          ) : data.length == 0 ? (
-            <p>TIdak Ada Data</p>
-          ) : (
-            data.map((i, key) => <Card data={i} key={key} />)
-          )}
+          {loading
+            ? loadingLength.map((i, key) => <CardLoading key={key} />)
+            : prov != 0
+            ? data
+                .filter((data) => data.ProvinsiID == prov)
+                .map((i, key) => <Card data={i} key={key} />)
+            : data.map((i, key) => <Card data={i} key={key} />)}
         </div>
       </div>
       <button
