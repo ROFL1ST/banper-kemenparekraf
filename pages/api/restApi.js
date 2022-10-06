@@ -179,7 +179,25 @@ function putViews(path_url) {
   });
 }
 
-
+export function activate(path_url, param) {
+  console.log(param)
+  return new Promise((resolve, reject) => {
+    var config = {
+      method: "put",
+      url: BASE_URL + path_url,
+      headers: {},
+      data: param,
+    };
+    axios(config)
+      .then(function (response) {
+        console.log("response", response);
+        resolve(response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  });
+}
 export {
   postFeed as PostFeed,
   getDelete,
