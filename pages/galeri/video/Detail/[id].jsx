@@ -9,9 +9,6 @@ import Navbar from "../../../components/navbar";
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function Detail() {
-
-
- 
   const loadingLength = [1, 2, 3, 4, 5];
 
   React.useEffect(() => {
@@ -119,7 +116,7 @@ function Video({ data }) {
         <iframe
           className="xl:h-[680px] md:h-[450px] h-[280px]  pb-5"
           title="yt"
-          src={data.url}
+          src={data.url + "?autoplay=1"}
           frameBorder={1}
           allowFullScreen
         ></iframe>
