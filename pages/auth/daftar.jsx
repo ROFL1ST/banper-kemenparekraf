@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { getApi, login } from "../api/restApi";
+import Router from "next/router";
 export default function Daftar() {
   useEffect(() => {
     document.title = "Daftar";
@@ -19,12 +20,17 @@ export default function Daftar() {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
-
+  const [erros, setError] = useState("");
   const onSubmit = async (values) => {
     setLoading(true);
     try {
       await login("register", values).then((result) => {
-        console.log(result);
+        console.log(result.data);
+        if (result.data.message == "Success") {
+          Router.push("/auth/EmailVerification");
+        } else {
+          setError(result.data.display_message);
+        }
       });
     } catch (error) {
       console.log(error);
@@ -343,8 +349,13 @@ export default function Daftar() {
                   />
                 </div>
               </div>
-
-              <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3">
+              {erros && (
+                <p className="text-red-600 font-bold text-sm px-5">{erros}</p>
+              )}
+              <button
+                type={"submit"}
+                className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3"
+              >
                 Daftar
               </button>
             </div>
