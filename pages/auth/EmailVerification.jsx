@@ -25,11 +25,16 @@ export default function EmailVer() {
     }
   };
 
-  console.log(code.map((e) => e).join(""));
+  //   console.log(code.map((e) => e).join(""));
+
+  function onPaste(event) {
+    const pasted = event.clipboardData.getData("text/plain");
+    setcode(pasted.split("").slice(0, code.length))
+  }
 
   const handleSubmit = async (values) => {
     try {
-      await login("register/activation").then((result) => {
+      await login("register/activation", values).then((result) => {
         console.log(result);
       });
     } catch (error) {
@@ -59,6 +64,7 @@ export default function EmailVer() {
                 maxLength={1}
                 type="text"
                 value={i}
+                onPaste={onPaste}
                 className="h-28 w-20 m-5 font-semibold text-5xl text-center rounded-xl border-2 border-[#627AD1]"
                 placeholder="0"
                 onChange={(e) => handleChange(e.target, index)}
