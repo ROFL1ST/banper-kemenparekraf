@@ -23,6 +23,7 @@ Enter the code below to confirm your email address.</p>
                         <input type="text" className="h-28 w-20 m-5 font-semibold text-5xl text-center rounded-xl border-2 border-[#627AD1]"placeholder="0" />
                     </div>
                     <p className="text-s text-gray-500 mt-3 text-center">If you didn’t request a code, you can safely ignore this email.</p>
+                    <button className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg flex justify-center w-3/4">Button</button>
                     <p className="text-xs text-gray-500 mt-3 text-center pt-10">Questions? <span className="text-blue-500"> We’re here to help</span></p>
 
                 </div>
