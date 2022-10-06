@@ -178,6 +178,8 @@ function putViews(path_url) {
       });
   });
 }
+
+
 export {
   postFeed as PostFeed,
   getDelete,
