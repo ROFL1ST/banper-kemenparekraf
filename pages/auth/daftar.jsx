@@ -118,6 +118,11 @@ export default function Daftar() {
                 <label className="leading-7 text-sm text-gray-600">
                   *Kategori Pengusul
                 </label>
+                {errors.Kategori && (
+                  <p className="text-red-600 font-bold text-sm">
+                    Mohon Memilih Kategori
+                  </p>
+                )}
                 <select
                   className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
     py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -127,6 +132,7 @@ export default function Daftar() {
                   id=""
                   {...register("Kategori", { required: true })}
                 >
+                  <option defaultValue={true}>Pilih Kategori Pengusul</option>
                   {!load ? (
                     kategori.map((i, key) => (
                       <option key={key} value={i.Id}>
@@ -209,6 +215,11 @@ export default function Daftar() {
                 <label className="leading-7 text-sm text-gray-600">
                   *Subsektor Utama
                 </label>
+                {errors.Subsektor && (
+                  <p className="text-red-600 font-bold text-sm">
+                    Mohon Memilih Subsektor
+                  </p>
+                )}
                 <select
                   className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
     py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -218,6 +229,7 @@ export default function Daftar() {
                   id=""
                   {...register("Subsektor", { required: true })}
                 >
+                  <option defaultValue={true}>Pilih Subsektor Utama</option>
                   {!load ? (
                     sub.map((i, key) => (
                       <option key={key} value={i.Id}>
@@ -233,6 +245,11 @@ export default function Daftar() {
                 <label className="leading-7 text-sm text-gray-600">
                   *Subsektor Pendukung
                 </label>
+                {errors.SubsektorPendukung && (
+                  <p className="text-red-600 font-bold text-sm">
+                    Mohon Memilih Subsektor Pendukung
+                  </p>
+                )}
                 <select
                   className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
     py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -242,6 +259,8 @@ export default function Daftar() {
                   id=""
                   {...register("SubsektorPendukung", { required: true })}
                 >
+                  <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+
                   {!load ? (
                     sub.map((i, key) => (
                       <option key={key} value={i.Id}>
@@ -293,6 +312,11 @@ export default function Daftar() {
                   <label className="leading-7 text-sm text-gray-600">
                     *Kota
                   </label>
+                  {errors.KotaID && (
+                    <p className="text-red-600 font-bold text-sm">
+                      Mohon Memilih Kota
+                    </p>
+                  )}
                   <select
                     className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
     py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -302,6 +326,8 @@ export default function Daftar() {
                     id=""
                     {...register("KotaID", { required: true })}
                   >
+                    <option defaultValue={true}>Pilih Kota</option>
+
                     {!load ? (
                       kota.map((i, key) => (
                         <option key={key} value={i.Id}>
