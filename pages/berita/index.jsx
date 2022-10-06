@@ -3,8 +3,6 @@ import React from "react";
 import Navbar from "../components/navbar";
 import { Fragment, useEffect, useRef, useState } from "react";
 import MenuSort from "./menu/menu";
-import { Menu } from "@headlessui/react";
-import { ChevronDownIcon, Bars3Icon } from "@heroicons/react/24/solid";
 import Footer from "../components/footer";
 import CardLoading from "./cardLoading";
 import { getApi, PutViews } from "../api/restApi";
@@ -12,11 +10,11 @@ import { useRouter } from "next/router";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import axios from "axios";
-import { ChevronUpIcon } from "@heroicons/react/24/outline";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
-import wonderful from "../assets/wonderful.png";
+
 import logo from "../assets/banper.png";
+import empty from "../assets/Empty-amico.png";
 
 const MAX_LENGTH = 60;
 
@@ -130,24 +128,33 @@ export default function Berita() {
           </div>
           {/* Bikin Disini Sidebar buat filter */}
 
-          {loading
-            ? loadingLength.map((i, key) => <CardLoading key={key} />)
-            : prov != 0
-            ? data
-                .filter((data) => data.ProvinsiID == prov)
-                .map((i, key) => <Card data={i} key={key} />)
-            : data.map((i, key) => <Card data={i} key={key} />)}
+          {loading ? (
+            loadingLength.map((i, key) => <CardLoading key={key} />)
+          ) : data.length != 0 ? (
+            data.map((i, key) => <Card data={i} key={key} />)
+          ) : (
+            <>
+              <div className="relative justify-center mx-auto   items-center flex flex-col mt-10 pb-20">
+                <img src={empty.src} className="h-96 w-auto" alt="" />
+                <p className="font-bold">Berita Tidak Tersedia</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
-      <button
-        onClick={() => {
-          let limit = 15;
-          getData(sort, sub_id, "", limit + 10);
-        }}
-        className="text-blue-700 underline mt-5 mb-10 text-sm text-center w-full"
-      >
-        more
-      </button>
+      {data.length >= 15 ? (
+        <button
+          onClick={() => {
+            let limit = 15;
+            getData(sort, sub_id, "", limit + 10);
+          }}
+          className="text-blue-700 underline mt-5 mb-10 text-sm text-center w-full"
+        >
+          more
+        </button>
+      ) : (
+        <></>
+      )}
       <Footer />
       <Modal
         open={open}
