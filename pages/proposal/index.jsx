@@ -31,6 +31,7 @@ export default function Proposal() {
   const getList = async (auth) => {
     try {
       await getPropose("proposal?offset=0&limit=10", auth).then((result) => {
+        setLoad(false);
         console.log(result.data);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
@@ -45,7 +46,6 @@ export default function Proposal() {
         } else {
           setList(result.data.data);
         }
-        setLoad(false);
       });
     } catch (error) {
       console.log(error);
@@ -140,11 +140,11 @@ export default function Proposal() {
                 )
               ) : (
                 <>
-                  <div className=" mx-auto items-center flex flex-col mt-10 mb-20">
+                  {/* <div className=" mx-auto items-center flex flex-col mt-10 mb-20">
                     {" "}
                     <img src={logo.src} className="h-96 w-auto" alt="" />
                     <p className="font-bold">Tidak ada proposal</p>
-                  </div>
+                  </div> */}
                 </>
               )}
             </div>

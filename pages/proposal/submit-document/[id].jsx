@@ -5,7 +5,8 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Section from "../../components/section";
 import Router, { useRouter } from "next/router";
-import { getApi, getPropose, postDoc } from "../../api/restApi";
+import { getApi, getPropose, postDoc, PostFeed } from "../../api/restApi";
+import { useForm } from "react-hook-form";
 
 import Loading from "../../components/Loading";
 
@@ -123,7 +124,7 @@ export default function SubmitDoc() {
             {/* Document */}
             {/* Catatan Dokument */}
             <h1 className="text-2xl md:pt-0 pt-24">Catatan Dokument</h1>
-            <Catatan />
+            {!load && doc ? <Catatan id={doc[0].UsulanHeaderID} /> : <></>}
             {/* Catatan Dokument */}
           </div>
         </div>
@@ -512,30 +513,20 @@ function CardDocument({ data, teks, num, detail }) {
               }
 `}
             >
-              {data.File == "" ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="lg:w-14 lg:h-14 w-20 h-20 text-gray-400"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
-                  />
-                </svg>
-              ) : (
-                <a href={`http://128.199.242.242/dashboard/${data.File}`}>
-                  <img
-                    src={`http://128.199.242.242/dashboard/${data.File}`}
-                    alt=""
-                    className="w-20 h-16 rounded-xl"
-                  />
-                </a>
-              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="lg:w-14 lg:h-14 w-20 h-20 text-gray-400"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                />
+              </svg>
 
               {data.FileName == "" ? (
                 <p className="lg:text-sm text-xs ">
@@ -597,20 +588,102 @@ function CardDocument({ data, teks, num, detail }) {
     </>
   );
 }
-function Catatan() {
+function Catatan({ id }) {
+  console.log(id);
+  const [loading, setLoading] = React.useState(false);
+  const [token, setToken] = React.useState("");
+  const [error, setError] = React.useState({ status: false, msg: "" });
+  const [sucess, setSucess] = React.useState({ status: false, msg: "" });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      UsulanHeaderID: id,
+    },
+  });
+
+  const onSubmit = async (values) => {
+    console.log(values);
+    setLoading(true);
+    try {
+      await PostFeed("proposal/comment", token, values, "post").then(
+        (result) => {
+          setLoading(false);
+
+          console.log(result.data);
+          console.log(values);
+          if (result.data.message != "Success") {
+            setError((s) => ({
+              ...s,
+              status: true,
+              msg: result.data.display_message,
+            }));
+            setTimeout(() => {
+              setError((s) => ({
+                ...s,
+                status: false,
+                msg: "",
+              }));
+            }, 3000);
+          } else {
+            // Router.push("/proposal");
+            setSucess((s) => ({
+              ...s,
+              msg: "Komentar Berhasil Ditambahkan",
+              status: true,
+            }));
+            setTimeout(() => {
+              setSucess((s) => ({
+                ...s,
+                status: false,
+              }));
+            }, 3000);
+          }
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  React.useEffect(() => {
+    document.title = "Submit Proposal";
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+    }
+  });
+
+  React.useEffect(() => {
+    reset({
+      Message: "",
+      UsulanHeaderID: id,
+    });
+  }, [sucess]);
   return (
     <>
-      <div className="bg-white bg-opacity-20 rounded-xl lg:px-10 px-5 py-5 shadow-xl space-y-7 md:flex md:flex-col md:justify-center ">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="bg-white bg-opacity-20 rounded-xl lg:px-10 px-5 py-5 shadow-xl space-y-7 md:flex md:flex-col md:justify-center "
+      >
         <textarea
+          {...register("Message", { required: true })}
           id="message"
           rows="4"
           className="block p-5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500  "
           placeholder="Tambahkan Komentar"
         ></textarea>
+        {sucess.status && (
+          <p className="text-green-500 font-bold text-sm">{sucess.msg}</p>
+        )}
         <button className="bg-red-500 text-white lg:w-2/5 w-full py-2 md:px-0 px-4 rounded-lg mx-auto lg:text-base text-sm">
-          Tambahkan Catatan Tambahan
+          {loading ? "Loading..." : "Tambahkan Catatan Tambahan"}
         </button>
-      </div>
+      </form>
     </>
   );
 }

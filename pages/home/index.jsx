@@ -96,7 +96,7 @@ export default function Dashboard() {
         {token ? (
           <button
             onClick={() => {
-             Router.push("/proposal")
+              Router.push("/proposal");
             }}
             className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
           >
