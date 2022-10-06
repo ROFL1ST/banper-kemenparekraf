@@ -121,7 +121,7 @@ export default function Daftar() {
                   id=""
                   {...register("Kategori", { required: true })}
                 >
-                  {!loading ? (
+                  {!load ? (
                     kategori.map((i, key) => (
                       <option key={key} value={i.Id}>
                         {i.Nama}
@@ -212,7 +212,7 @@ export default function Daftar() {
                   id=""
                   {...register("Subsektor", { required: true })}
                 >
-                  {!loading ? (
+                  {!load ? (
                     sub.map((i, key) => (
                       <option key={key} value={i.Id}>
                         {i.Nama}
@@ -236,7 +236,7 @@ export default function Daftar() {
                   id=""
                   {...register("SubsektorPendukung", { required: true })}
                 >
-                  {!loading ? (
+                  {!load ? (
                     sub.map((i, key) => (
                       <option key={key} value={i.Id}>
                         {i.Nama}
@@ -296,7 +296,7 @@ export default function Daftar() {
                     id=""
                     {...register("KotaID", { required: true })}
                   >
-                    {!loading ? (
+                    {!load ? (
                       kota.map((i, key) => (
                         <option key={key} value={i.Id}>
                           {i.NamaKota}
