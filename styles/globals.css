@@ -120,13 +120,13 @@ body {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #142b51;
+  background: #1d4481;
   border-radius: 100vh;
   border: 3px solid #f6f7ed;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #1d4481;
+  background: #142b51;
 }
 
 /* ::-webkit-scrollbar {
@@ -165,4 +165,7 @@ body {
   border-top: 4px solid #38363600; /* Black */
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
+}
+.scroll-content {
+  padding-bottom: 0 !important;
 }

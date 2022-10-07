@@ -7,17 +7,27 @@ import { useEffect, useState, useRef, Fragment } from "react";
 import Section from "../components/section";
 import building from "../assets/building.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
-import CardForOneBerita from "./component/CardForOneBerita";
 import Link from "next/link";
 import parse from "html-react-parser";
 import { getDown, getApi, download } from "../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
 
 import Galeri from "./component/Galeri";
-import { useRouter } from "next/router";
-import axios from "axios";
+import Router, { useRouter } from "next/router";
 export default function Dashboard() {
-  const [open, setOpen] = useState(false);
+  // token
+  const [token, setToken] = useState();
+  useEffect(() => {
+    // Perform localStorage action
+    if (localStorage.getItem("token")) {
+      setToken(localStorage.getItem("token"));
+    } else if (sessionStorage.getItem("token")) {
+      setToken(sessionStorage.getItem("token"));
+    } else {
+      return;
+    }
+  }, [token]);
+
   const cancelButtonRef = useRef(null);
 
   const [data, setData] = useState({ berita: {}, loading: true });
@@ -53,16 +63,17 @@ export default function Dashboard() {
   const TemplateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   useEffect(() => {
-    document.title = "Dashboard";
+    document.title = "Home";
     getData();
     getFaq();
   }, []);
   // console.log(data.berita);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
       <div className="overflow-x-hidden">
-        <Navbar open={open} setOpen={setOpen} />
+        <Navbar />
         <div
           className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
           style={{ backgroundImage: `url(${building.src})` }}
@@ -82,15 +93,26 @@ export default function Dashboard() {
           </div>
         </div>
 
-        <button
-          onClick={() => {
-            setOpen(true);
-          }}
-          className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
-        >
-          daftar sekarang
-        </button>
-        <div className="xl:px-20 lg:px-20 px-5">
+        {token ? (
+          <button
+            onClick={() => {
+              Router.push("/proposal");
+            }}
+            className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
+          >
+            Proposal
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              setOpen(true);
+            }}
+            className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white xl:px-28 lg:px-28 md:px-20 sm:px-16 px-14 rounded-xl text-xl py-6 relative xl:bottom-11 lg:bottom-11 md:bottom-36 sm:bottom-28 bottom-28"
+          >
+            daftar sekarang
+          </button>
+        )}
+        <div className={`xl:px-20 lg:px-20 px-5 mt-10`}>
           <Section text={"mekanisme pendaftaran"} />
           <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. In
@@ -108,15 +130,17 @@ export default function Dashboard() {
                   <CardBeritaLoading />
                   <CardBeritaLoading />
                 </>
-              ) : data.berita.length != 1 ? (
-                data.berita.map((i, key) => <CardBerita key={key} data={i} />)
               ) : (
-                <>
-                  {data.berita.map((i, key) => (
-                    <CardBerita key={key} data={i} />
-                  ))}
-                  <CardForOneBerita />
-                </>
+                data.berita.map((i, key) => (
+                  <div key={key}>
+                    <div className="md:flex hidden">
+                      <CardBerita data={i} />
+                    </div>
+                    <div className="flex md:hidden">
+                      <CardBeritaMobile data={i} />
+                    </div>
+                  </div>
+                ))
               )
             ) : (
               <h1>No Data</h1>
@@ -158,7 +182,7 @@ export default function Dashboard() {
                 )}
               </div>
               <div
-                className="xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[39rem] lg:h-[39rem] h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
+                className="xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[42rem] lg:h-[45rem] h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
                 style={{
                   backgroundImage:
                     "url(https://www.fitforworksg.com/wp-content/uploads/2021/07/pexels-ivan-samkov-4458554-scaled.jpg)",
@@ -222,9 +246,6 @@ function Summary({ data }) {
 
 function CardBerita({ data }) {
   const MAX_LENGTHtitle = 40;
-  const MAX_LENGTHdetail = 125;
-  const detail =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer finibus ligula nec ultricies faucibus. Sed eleifend accumsan turpis id semper. Morbi et faucibus nisi. Cras in mauris at est bibendum dapibus at ac metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque ultricies tincidunt aliquam. Nullam vestibulum metus sed metus bibendum porttitor. Nunc venenatis libero eget ante mollis gravida. Ut dictum ac justo nec molestie. Donec nec felis luctus tortor egestas accumsan. Maecenas laoreet auctor porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tristique magna non lobortis vestibulum.";
 
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
@@ -234,7 +255,7 @@ function CardBerita({ data }) {
   return (
     <>
       <Link href={`/berita/Detail/${data.Id}`}>
-        <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex">
+        <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex cursor-pointer">
           <div
             style={{
               backgroundImage: `url(${data.foto})`,
@@ -247,11 +268,11 @@ function CardBerita({ data }) {
                 {formatter.format(Date.parse(data.CreatedAt))}
               </small>
               {data.Judul.length > MAX_LENGTHtitle ? (
-                <h3 className="my-3 font-bold capitalize lg:h-5 h-12 text-sm lg:text-sm 2xl:text-base">
+                <h3 className="my-3 font-bold capitalize h-auto text-sm lg:text-sm 2xl:text-base">
                   {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
                 </h3>
               ) : (
-                <h3 className="my-3 font-bold capitalize lg:h-5 h-12 text-ellipsis lg:text-sm 2xl:text-base">
+                <h3 className="my-3 font-bold capitalize h-auto text-ellipsis lg:text-sm 2xl:text-base">
                   {data.Judul}
                 </h3>
               )}
@@ -260,6 +281,53 @@ function CardBerita({ data }) {
               </div>
             </div>
             <small className="text-xs font-semibold text-blue-900">
+              {data.NamaKota}
+            </small>
+          </div>
+        </div>
+      </Link>
+    </>
+  );
+}
+
+function CardBeritaMobile({ data }) {
+  const MAX_LENGTHtitle = 40;
+
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+  return (
+    <>
+      <Link href={`/berita/Detail/${data.Id}`}>
+        <div className="bg-[#f5f5fa] w-full h-80 rounded-2xl">
+          <div
+            className="w-full h-1/2 bg-cover rounded-t-2xl bg-center"
+            style={{
+              backgroundImage: `url(${data.foto})`,
+            }}
+          ></div>
+          <div className="px-5 py-1">
+            <small className="text-xs font-bold text-gray-500">
+              {formatter.format(Date.parse(data.CreatedAt))}
+            </small>
+            {data.Judul.length > MAX_LENGTHtitle ? (
+              <h3 className="my-3 font-bold capitalize h-16 lg:text-sm 2xl:text-base pr-20">
+                {`${data.Judul.substring(0, MAX_LENGTHtitle)}    ...`}
+                <Link
+                  href={`/berita/Detail/${data.Id}`}
+                  className="text-blue-600 text-sm font-medium cursor-pointer"
+                >
+                  Read more
+                </Link>
+              </h3>
+            ) : (
+              <h3 className="my-3 font-bold capitalize h-16 text-ellipsis lg:text-sm 2xl:text-base pr-20">
+                {data.Judul}
+              </h3>
+            )}
+            <small className="text-xs font-bold text-blue-900">
               {data.NamaKota}
             </small>
           </div>
@@ -280,13 +348,6 @@ function Modal({ open, setOpen, cancelButtonRef }) {
   const [check, setCheck] = useState(false);
 
   const handleChange = async () => {
-    // await getDown(
-    //   "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf"
-    // );
-    // await getDown(
-    //   "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip"
-    // );
-
     setCheck((current) => !current);
   };
   // console.log(check);
@@ -353,7 +414,6 @@ function Modal({ open, setOpen, cancelButtonRef }) {
                       type="checkbox"
                       id=""
                       name=""
-                      defaultChecked={false}
                       value={check}
                       onChange={handleChange}
                       required
@@ -399,41 +459,24 @@ function Downloader({ setOpen, setCheck }) {
 
   const juknisUrl =
     "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
-  const TemplateUrl =
+  const templateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
-  const handleClick = (url, filename) => {
-    axios
-      .get(url, {
-        responseType: "blob",
-      })
-      .then((res) => {
-        fileDownload(res.data, filename);
-      });
+  const handleClick = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    setCheck(false);
+    window.open(templateUrl);
+    Router.push(pathname == "/auth/login" ? "daftar" : "auth/daftar");
   };
-  const handleClick2 = (url, filename) => {
-    axios
-      .get(url, {
-        responseType: "blob",
-      })
-      .then((res) => {
-        fileDownload(res.data, filename);
-      });
-  };
+
   return (
-    <Link href={`${pathname === "/auth/login" ? "daftar" : "auth/daftar"}`}>
-      <button
-        onClick={() => {
-          setOpen(false);
-          setCheck(false);
-          handleClick(juknisUrl);
-          handleClick2(TemplateUrl);
-        }}
-        type="submit"
-        className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
-      >
-        Accept
-      </button>
-    </Link>
+    <a
+      href={juknisUrl}
+      onClick={handleClick}
+      className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
+    >
+      Accept
+    </a>
   );
 }

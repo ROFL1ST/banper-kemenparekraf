@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useRef, useState, Fragment } from "react";
 import { getGaleri } from "../../api/restApi";
 import GaleryLoading from "./GaleryLoading";
@@ -9,6 +11,7 @@ import {
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
+import Link from "next/link";
 
 export default function Galeri() {
   const [images, setImages] = useState([]);
@@ -133,27 +136,24 @@ function Video({ video, vid, loading }) {
       >
         <div className="bg-gradient-to-t from-black w-full h-full flex flex-col justify-end p-7">
           <div className="mx-auto text-white my-auto">
-            <div
-              onClick={() => {
-                setOpen1(true);
-              }}
-              className="bg-white bg-opacity-25 rounded-full xl:p-5 p-2 border-white border flex justify-center items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="lg:w-10 lg:h-10 w-5 h-5 text-white"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
-                />
-              </svg>
-            </div>
+            <Link href={`/galeri/video/Detail/${video.id}`}>
+              <div className="bg-white bg-opacity-25 rounded-full xl:p-5 p-2 border-white border flex justify-center items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="lg:w-10 lg:h-10 w-5 h-5 text-white"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                  />
+                </svg>
+              </div>
+            </Link>
           </div>
           {!load && kota ? (
             <p className="uppercase font-bold text-white xl:text-base lg:text-base md:text-sm text-sm truncate">
@@ -169,104 +169,9 @@ function Video({ video, vid, loading }) {
           <p className="text-blue-300">video</p>
         </div>
       </div>
-      {/* Modal Video */}
-      {loading ? (
-        <></>
-      ) : (
-        <VideoModal
-          data={video}
-          open={open1}
-          setOpen={setOpen1}
-          cancelButtonRef={cancelButtonRef}
-        />
-      )}
-      {/* Modal Video */}
     </>
   );
 }
-
-
-function VideoModal({ open, setOpen, cancelButtonRef, data }) {
- 
-  return (
-    <>
-      <Transition.Root show={open} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-40"
-          initialFocus={cancelButtonRef}
-          onClose={setOpen}
-        >
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <div className="lg:hidden flex absolute right-5 top-20 text-white">
-                <svg
-                  onClick={() => {
-                    setOpen(false);
-                  }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="w-6 h-6"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </div>
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="my-auto relative  overflow-hidden transform transition-all lg:w-1/2 w-11/12 h-full ">
-                  <CardModal2 data={data}></CardModal2>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-    </>
-  );
-}
-function CardModal2({ data }) {
-  // console.log(tgl);
-  return (
-    <>
-      <div className="my-auto items-center">
-        <iframe
-          className="lg:h-[500px] h-[250px] w-full"
-          title="yt"
-          src={data.url}
-          frameBorder={1}
-          allowFullScreen
-        ></iframe>
-      </div>
-    </>
-  );
-}
-
 
 function Modal({ foto, open, setOpen, cancelButtonRef }) {
   const swiperRef = useRef();
@@ -436,7 +341,9 @@ function CardModal({ img, tgl, summary, place }) {
             {tgl} | {place}
           </h1>
 
-          <p className="text-white lg:w-3/4 lg:text-sm text-xs font-thin">{summary}</p>
+          <p className="text-white lg:w-3/4 lg:text-sm text-xs font-thin">
+            {summary}
+          </p>
         </div>
       </div>
     </>

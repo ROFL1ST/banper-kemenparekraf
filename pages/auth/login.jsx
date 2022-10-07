@@ -10,7 +10,15 @@ import Router, { useRouter } from "next/router";
 import Loading from "../components/Loading";
 import { Dialog, Transition } from "@headlessui/react";
 import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
+const schema = yup
+  .object({
+    email: yup.string().email(),
+    password: yup.string().required(),
+  })
+  .required();
 export default function Login() {
   const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -30,46 +38,48 @@ export default function Login() {
   });
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
+  const [error, setError] = useState({ status: false, msg: "" });
   // login
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = async (values) => {
-    // console.log("values", values);
-    //var postImage = await login("login", values).then(result => result);
-    // let respond = await login("login", values).then(
-    //   (result) => result
-    // );
-    // console.log("respond", respond)
-    /*console.log("values", values);
-    let respond = await login("login", values).then(
-      (result) => result
-    );
-    console.log("respond", respond);
-    try {
-      await login("authentication", values).then((result) => {
-        console.log(result);
-        if (remember) {
-          localStorage.setItem("token", result.data.data.token);
-        } else {
-          sessionStorage.setItem("token", result.data.data.token);
-        }
-        Router.push("/proposal");
-      
-    } catch (err) {
-      console.log(err);
-    }*/
     setLoading(true);
     try {
-      await login("authentication", values).then((result) => {
+      await login("login", values).then((result) => {
         console.log(result);
         setLoading(false);
 
         if (result.data.message == "Failed") {
-          alert(result.data.display_message);
+          setError((s) => ({
+            ...s,
+            status: true,
+            msg: result.data.display_message,
+          }));
+          if (result.data.display_message == "error system") {
+            setError((s) => ({
+              ...s,
+              status: true,
+              msg: result.data.data.data[0].message,
+            }));
+            setTimeout(() => {
+              setError((s) => ({
+                ...s,
+                status: false,
+                msg: "",
+              }));
+            }, 3000);
+          }
+          setTimeout(() => {
+            setError((s) => ({
+              ...s,
+              status: false,
+              msg: "",
+            }));
+          }, 3000);
         } else {
           if (remember) {
             localStorage.setItem("token", result.data.data.token);
@@ -81,7 +91,7 @@ export default function Login() {
       });
     } catch (error) {
       setLoading(false);
-      alert(error)
+      alert(error);
       console.log(error);
     }
   };
@@ -89,7 +99,6 @@ export default function Login() {
     <>
       <Navbar open={open} setOpen={setOpen} />
       <Background>
-        {" "}
         <Section text={"Login"} />
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -121,7 +130,16 @@ export default function Login() {
               </span>
             )}
           </div>
-          <div className="flex space-x-2 items-center mt-5">
+          {error.status && (
+            <span className="text-red-600 font-bold text-sm mt-5">
+              {error.msg}
+            </span>
+          )}
+          <div
+            className={`flex space-x-2 items-center ${
+              error.status == false && "mt-5"
+            }`}
+          >
             <input
               value={remember}
               defaultValue={false}
@@ -332,4 +350,3 @@ function Downloader({ setOpen, setCheck }) {
     </Link>
   );
 }
-

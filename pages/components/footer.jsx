@@ -7,7 +7,8 @@ import wonderful from "../assets/wonderful.png";
 export default function Footer() {
   return (
     <>
-      <footer className="flex xl:flex-row lg:flex-row md:flex-col flex-col justify-between w-full items-center xl:px-16 lg:px-16 md:px-10 sm:px-10 px-10 pt-10 text-base">
+      <div className="bg-white w-full relative -mb-5 rounded-b-2xl h-[20px]"></div>
+      <footer className="flex xl:flex-row lg:flex-row md:flex-col flex-col justify-between w-full items-center xl:px-16 lg:px-16 md:px-10 sm:px-10 px-10 pt-10 text-base bg-[#f5f5fa]">
         <div className="xl:w-1/4 lg:w-1/4  text-left">
           <h1 className="mb-5 font-bold">Tentang</h1>
           <p>
@@ -46,7 +47,7 @@ export default function Footer() {
           />
         </div>
       </footer>
-      <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-white">
+      <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-[#f5f5fa]">
         <a className="text-white rounded-full bg-[#142b51] p-2">
           <svg
             fill="currentColor"
