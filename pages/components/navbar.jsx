@@ -818,7 +818,7 @@ function Downloader({ setOpen, setCheck }) {
     setOpen(false);
     setCheck(false);
     window.open(templateUrl);
-    Router.push(pathname == "/auth/login" ? "daftar" : "auth/daftar");
+    Router.push(pathname == "/auth/login" || pathname == "/auth/EmailVerification" ? "daftar" : "auth/daftar");
   };
 
   return (

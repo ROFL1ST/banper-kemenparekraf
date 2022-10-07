@@ -7,6 +7,7 @@ import { getGaleri, PutViews } from "../../../api/restApi";
 import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
 import { Dialog, Transition } from "@headlessui/react";
+import parse from "html-react-parser";
 
 export default function Detail() {
   const loadingLength = [1, 2, 3, 4, 5];
@@ -110,6 +111,13 @@ export default function Detail() {
 }
 
 function Video({ data }) {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+
+  const judul = data.NamaKota.toLowerCase()
   return (
     <>
       <div className="left  xl:w-3/4 lg:w-4/6 w-full h-full flex flex-col pb-20">
@@ -121,27 +129,23 @@ function Video({ data }) {
           allowFullScreen
         ></iframe>
         <div className="lg:px-0 px-5">
-          <h1 className="text-xl font-bold pb-2">Lorem Ipsum</h1>
-          <p className="text-xs">100 views • 22 August 2022</p>
+          <h1 className="text-xl font-bold pb-2 capitalize">{judul}</h1>
+          <p className="text-xs">{data.views} views •  {formatter.format(Date.parse(data.CreatedAt))}</p>
           <div className="border-b-2 pt-2 border-black"></div>
           <p className="pt-10 text-sm lg:w-3/4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-            soluta nulla ratione qui iure delectus provident placeat corporis
-            corrupti laudantium voluptas ex non cupiditate voluptatem cumque
-            amet dolorum ipsa nisi harum, possimus iusto eius aspernatur, cum
-            quasi. Consequatur minima porro magnam quaerat iste a eum tenetur
-            maiores quos rerum, sit odio, autem vel, quibusdam labore nulla
-            veritatis blanditiis. Error accusantium voluptatem voluptatum
-            perferendis totam, beatae quia soluta atque unde eaque alias
-            architecto cumque. Quaerat facilis, iure voluptatum architecto ex,
-            harum ad deleniti reiciendis culpa eos, nam dolore quod fuga
-            pariatur debitis. Corporis harum dolore magni, corrupti labore quod
-            quas placeat?
+            {data ? <Isi data={data.description}></Isi> : <>
+            </>}
           </p>
         </div>
       </div>
     </>
   );
+}
+
+function Isi(data) {
+  console.log(data)
+  const reactElement = parse(`${data.data}`);
+  return reactElement;
 }
 
 function VideoLoading() {

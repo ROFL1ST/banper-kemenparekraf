@@ -107,7 +107,7 @@ export default function EmailVer() {
               Verifikasi Alamat Email mu
             </h2>
             <p className="leading-relaxed  text-gray-600 text-center">
-              Kita telah mengirim 6 digit kode ke p@gmail.com. Mohon untuk
+              Kita telah mengirim 6 digit kode ke {sessionStorage.getItem("emailState")}. Mohon untuk
               mengisi kode dibawah untuk mengkonfirmasi Alamat Email mu.
             </p>
             <div className="flex flex-row justify-center mt-5 ">

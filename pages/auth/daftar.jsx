@@ -9,25 +9,31 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { getApi, login } from "../api/restApi";
 import Router from "next/router";
+import Loading from "../components/Loading";
 export default function Daftar() {
   useEffect(() => {
     document.title = "Daftar";
   });
 
   const {
+    getValues,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
   const [erros, setError] = useState("");
+
   const onSubmit = async (values) => {
     setLoading(true);
     try {
       await login("register", values).then((result) => {
+        setLoading(false);
+
         console.log(result.data);
         if (result.data.message == "Success") {
           Router.push("/auth/EmailVerification");
+          sessionStorage.setItem("emailState", getValues("Email"));
         } else {
           setError(result.data.display_message);
         }
@@ -83,7 +89,7 @@ export default function Daftar() {
     getSub();
     getKota();
   }, []);
-
+  console.log(getValues("Email"));
   return (
     <>
       <Navbar />
@@ -382,7 +388,7 @@ export default function Daftar() {
                 type={"submit"}
                 className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3"
               >
-                Daftar
+                {loading ? <Loading /> : "Daftar"}
               </button>
             </div>
           </form>
