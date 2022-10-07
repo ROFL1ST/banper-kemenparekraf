@@ -32,7 +32,7 @@ export default function Daftar() {
 
         console.log(result.data);
         if (result.data.message == "Success") {
-          Router.push("/auth/EmailVerification");
+          Router.push(`/auth/Verification/${getValues("Email")}`);
           sessionStorage.setItem("emailState", getValues("Email"));
         } else {
           setError(result.data.display_message);

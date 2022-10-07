@@ -1,15 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Footer from "../components/footer";
-import Navbar from "../components/navbar";
-import { activate } from "../api/restApi";
-import Lottie from "react-lottie";
-import animation1 from "../assets/lottie/1127-success.json";
-import animation2 from "../assets/lottie/14651-error-animation.json";
+import Footer from "../../components/footer";
+import Navbar from "../../components/navbar";
+import { activate } from "../../api/restApi";
+import iconSucces from "../../assets/iconmonstr-check-mark-circle-filled-240.png";
+import iconFail from "../../assets/iconmonstr-x-mark-circle-filled-240.png";
 
 import { Dialog, Transition } from "@headlessui/react";
-import Router from "next/router";
-import Loading from "../components/Loading";
+import Router, { useRouter } from "next/router";
+import Loading from "../../components/Loading";
 
 export default function EmailVer() {
   useEffect(() => {
@@ -55,7 +54,7 @@ export default function EmailVer() {
           setPlis(true);
           setTimeout(() => {
             setPlis(false);
-          }, 3000)
+          }, 3000);
         } else {
           if (result.data.message === "Success") {
             setNice(true);
@@ -76,23 +75,26 @@ export default function EmailVer() {
     }
   };
 
-  const successOption = {
-    loop: true,
-    autoplay: true,
-    animationData: animation1,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-  const wrongOption = {
-    loop: true,
-    autoplay: true,
-    animationData: animation2,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  // const successOption = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: animation1,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
+  // const wrongOption = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: animation2,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
   const cancelButtonRef = React.useRef(null);
+  var router = useRouter();
+
+  const { email } = router.query;
 
   return (
     <>
@@ -107,8 +109,8 @@ export default function EmailVer() {
               Verifikasi Alamat Email mu
             </h2>
             <p className="leading-relaxed  text-gray-600 text-center">
-              Kita telah mengirim 6 digit kode ke {sessionStorage.getItem("emailState")}. Mohon untuk
-              mengisi kode dibawah untuk mengkonfirmasi Alamat Email mu.
+              Kita telah mengirim 6 digit kode ke {email}. Mohon untuk mengisi
+              kode dibawah untuk mengkonfirmasi Alamat Email mu.
             </p>
             <div className="flex flex-row justify-center mt-5 ">
               {code.map((i, index) => (
@@ -137,7 +139,7 @@ export default function EmailVer() {
               type={"submit"}
               className="text-white bg-indigo-500 border-0 py-2 px-6 mt-4 focus:outline-none hover:bg-indigo-600 rounded text-lg flex justify-center w-3/4 mx-auto"
             >
-              {load ? <Loading/> : "Submit"}
+              {load ? <Loading /> : "Submit"}
             </button>
           </div>
         </div>
@@ -146,20 +148,13 @@ export default function EmailVer() {
         nice={nice}
         setNice={setNice}
         cancelButtonRef={cancelButtonRef}
-        successOption={successOption}
       />
       <Fail
         wrong={wrong}
         setWrong={setWrong}
         cancelButtonRef={cancelButtonRef}
-        wrongOption={wrongOption}
       />
-      <Fill
-        plis={plis}
-        setPlis={setPlis}
-        cancelButtonRef={cancelButtonRef}
-        wrongOption={wrongOption}
-      />
+      <Fill plis={plis} setPlis={setPlis} cancelButtonRef={cancelButtonRef} />
       <Footer />
     </>
   );
@@ -200,13 +195,14 @@ function Success({ nice, setNice, cancelButtonRef, successOption }) {
               >
                 <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  2xl:w-1/4 xl:w-1/4 lg:w-1/3  md:w-1/2 w-3/4  p-10">
                   <div className="flex flex-col justify-center items-center space-y-5">
-                    <Lottie
+                    {/* <Lottie
                       options={successOption}
                       width={200}
                       height={200}
                       isStopped={false}
                       isPaused={false}
-                    ></Lottie>
+                    ></Lottie> */}
+                    <img src={iconSucces.src} className="w-40" alt="" />
                     <p className="text-green-600 font-bold text-xl">
                       Berhasil <br /> Anda Akan dilarikan ke Login Page
                     </p>
@@ -256,13 +252,15 @@ function Fail({ wrong, setWrong, cancelButtonRef, wrongOption }) {
               >
                 <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  2xl:w-1/4 xl:w-1/4 lg:w-1/3  md:w-1/2 w-3/4  p-10">
                   <div className="flex flex-col justify-center items-center mx-auto space-y-5">
-                    <Lottie
+                    {/* <Lottie
                       options={wrongOption}
                       width={150}
                       height={150}
                       isStopped={false}
                       isPaused={false}
-                    ></Lottie>
+                    ></Lottie> */}
+                    <img src={iconFail.src} className="w-40" alt="" />
+
                     <p className="text-red-600 font-bold text-xl">
                       Kode OTP Salah
                     </p>
@@ -312,13 +310,15 @@ function Fill({ plis, setPlis, cancelButtonRef, wrongOption }) {
               >
                 <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8 2xl:w-1/4 xl:w-1/4 lg:w-1/3  md:w-1/2 w-3/4   p-10">
                   <div className="flex flex-col justify-center items-center space-y-5">
-                    <Lottie
+                    {/* <Lottie
                       options={wrongOption}
                       width={150}
                       height={150}
                       isStopped={false}
                       isPaused={false}
-                    ></Lottie>
+                    ></Lottie> */}
+                    <img src={iconFail.src} className="w-40" alt="" />
+
                     <p className="text-red-600 font-bold text-xl">
                       Mohon Mengisi Kode OTP dengan benar
                     </p>
