@@ -222,20 +222,20 @@ function Card({ data, setLoading, setLoading2 }) {
           {!load ? (
             <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-20 gap-y-16">
               <div className="lg:flex hidden">
-                {judul.length > MAX_LENGTH ? (
+                {video.NamaKota.length > MAX_LENGTH ? (
                   <p className="font-bold text-sm text-left capitalize">
-                    {`${judul.substring(0, MAX_LENGTH)} ...`}
+                    {`${video.NamaKota.substring(0, MAX_LENGTH)} ...`}
                   </p>
                 ) : (
                   <p className="font-bold text-sm text-left capitalize">
-                    {judul}
+                    {video.NamaKota}
                   </p>
                 )}
               </div>
               <p className="font-bold lg:hidden flex text-sm text-left capitalize">
-                {judul.length > MAX_LENGTH_MOBILE
-                  ? `${judul.substring(0, MAX_LENGTH_MOBILE)} ...`
-                  : judul}
+                {video.NamaKota.length > MAX_LENGTH_MOBILE
+                  ? `${video.NamaKota.substring(0, MAX_LENGTH_MOBILE)} ...`
+                  : video.NamaKota}
               </p>
               <p className="text-xs">{video.views} views</p>
             </div>
