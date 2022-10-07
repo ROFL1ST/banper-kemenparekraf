@@ -31,16 +31,8 @@ export default function MenuSubsector({ type, show }) {
   return (
     <>
       {/* Filter 1 */}
-      <div className="flex flex-col space-y-2 space-x-7">
+      <div className="flex flex-col space-y-2 ">
         <div className={"cursor-pointer flex items-center space-x-1"}>
-          <input
-            type="checkbox"
-            id=""
-            name=""
-            defaultChecked={false}
-            required
-            className="form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
-          />
           <div
             className="inline-flex items-center justify-between w-full"
             onClick={() => setMenu1(!menu1)}

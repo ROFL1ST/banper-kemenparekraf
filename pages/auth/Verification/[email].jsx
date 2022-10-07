@@ -109,7 +109,7 @@ export default function EmailVer() {
               Verifikasi Alamat Email mu
             </h2>
             <p className="leading-relaxed  text-gray-600 text-center">
-              Kita telah mengirim 6 digit kode ke {email}. Mohon untuk mengisi
+              Kami telah mengirim 6 digit kode ke {email}. Mohon untuk mengisi
               kode dibawah untuk mengkonfirmasi Alamat Email mu.
             </p>
             <div className="flex flex-row justify-center mt-5 ">
