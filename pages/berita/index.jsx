@@ -38,9 +38,9 @@ export default function Berita() {
   };
 
   useEffect(() => {
-    const ac = new AbortController();
     getData();
-
+    
+    const ac = new AbortController();
     return () => {
       ac.abort();
     };
