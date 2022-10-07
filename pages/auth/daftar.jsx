@@ -35,7 +35,7 @@ export default function Daftar() {
           Router.push(`/auth/Verification/${getValues("Email")}`);
           sessionStorage.setItem("emailState", getValues("Email"));
         } else {
-          setError(result.data.display_message);
+          alert(result.data.display_message);
         }
       });
     } catch (error) {
