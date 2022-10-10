@@ -257,16 +257,20 @@ function ListPropose(data) {
         <p
           className={`font-bold ${
             percent != 100
-              ? "text-black"
+              ? "text-red-500"
+              : data.data.Status == 7
+              ? "text-gray-600"
               : data.data.Status == 1
-              ? "text-yellow-600"
+              ? "text-yellow-500"
               : data.data.Status == 2
-              ? "text-green-600"
+              ? "text-green-700"
               : "text-red-500"
           }`}
         >
           {percent != 100
             ? "Belum Lengkap"
+            : data.data.Status == 7
+            ? "Lengkap"
             : data.data.Status == 1
             ? "Sedang Di Verifikasi"
             : data.data.Status == 2

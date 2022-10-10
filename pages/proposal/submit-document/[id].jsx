@@ -293,6 +293,7 @@ function CardPengusul() {
       Router.push("/home");
     }
   }, [token]);
+  // console.log(list[0].Subsektors.split("\n")[0][2]);
   return (
     <>
       <div className="bg-white bg-opacity-20 rounded-xl px-10 py-8 shadow-xl space-y-7">
@@ -321,7 +322,10 @@ function CardPengusul() {
                       .filter(
                         (sub) =>
                           sub.Id.toString() ===
-                          list[0].Subsektors.split("\n")[0][0]
+                          (list[0].Subsektors.split("\n")[0][1] == ","
+                            ? list[0].Subsektors.split("\n")[0][0]
+                            : list[0].Subsektors.split("\n")[0][0] +
+                              list[0].Subsektors.split("\n")[0][1])
                       )
                       .map((sub) => sub.Nama)}
                     ,{" "}
@@ -329,7 +333,12 @@ function CardPengusul() {
                       .filter(
                         (sub) =>
                           sub.Id.toString() ===
-                          (list[0].Subsektors.split("\n")[0][4] != undefined
+                          (list[0].Subsektors.split("\n")[0][1] == ","
+                            ? list[0].Subsektors.split("\n")[0][4] != undefined
+                              ? list[0].Subsektors.split("\n")[0][3] +
+                                list[0].Subsektors.split("\n")[0][4]
+                              : list[0].Subsektors.split("\n")[0][3]
+                            : list[0].Subsektors.split("\n")[0][4] != undefined
                             ? list[0].Subsektors.split("\n")[0][3] +
                               list[0].Subsektors.split("\n")[0][4]
                             : list[0].Subsektors.split("\n")[0][3])
@@ -451,7 +460,7 @@ function CardDocument({ data, teks, num, detail }) {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
         // console.log(result);
         setLoading(false);
-        console.log(result)
+        console.log(result);
 
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
