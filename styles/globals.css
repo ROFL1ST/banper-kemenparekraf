@@ -172,11 +172,11 @@ body {
 
 
 
-input.ceklist::before{
+/* .ceklist::before{
   content: "\2714";
   font-size: 1.5em;
   color: #fff;
   position: absolute;
   right: 1px;
   top: -5px;
-}
+} */

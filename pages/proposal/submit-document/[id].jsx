@@ -358,7 +358,11 @@ function CardPengusul() {
                         .filter((kategori) => kategori.Id == user[0].Kategori)
                         .map((kategori) => kategori.Nama)
                     ) : (
-                      <></>
+                      <>
+                        <div className="space-y-2 animate-pulse  p-5 w-3/4">
+                          <div className="text-xs font-bold h-4 w-3/4 bg-gray-300 rounded-full"></div>
+                        </div>
+                      </>
                     )}
                   </p>
                 </div>
@@ -370,7 +374,12 @@ function CardPengusul() {
                         .filter((jenis) => jenis.Id === list[0].JenisBantuanID)
                         .map((jenis) => jenis.Nama)
                     ) : (
-                      <></>
+                      <>
+                        {" "}
+                        <div className="space-y-2 animate-pulse  p-5 w-3/4">
+                          <div className="text-xs font-bold h-4 w-3/4 bg-gray-300 rounded-full"></div>
+                        </div>
+                      </>
                     )}
                   </p>
                 </div>
