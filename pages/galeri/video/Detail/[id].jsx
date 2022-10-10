@@ -2,11 +2,12 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
 import Router, { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { getGaleri, PutViews } from "../../../api/restApi";
 import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
 import { Dialog, Transition } from "@headlessui/react";
+import parse from "html-react-parser";
 
 export default function Detail() {
   const loadingLength = [1, 2, 3, 4, 5];
@@ -110,6 +111,13 @@ export default function Detail() {
 }
 
 function Video({ data }) {
+  const formatter = new Intl.DateTimeFormat("en-GB", {
+    year: "numeric",
+    month: "long",
+    day: "2-digit",
+  });
+
+  const judul = data.NamaKota.toLowerCase();
   return (
     <>
       <div className="left  xl:w-3/4 lg:w-4/6 w-full h-full flex flex-col pb-20">
@@ -121,27 +129,24 @@ function Video({ data }) {
           allowFullScreen
         ></iframe>
         <div className="lg:px-0 px-5">
-          <h1 className="text-xl font-bold pb-2">Lorem Ipsum</h1>
-          <p className="text-xs">100 views • 22 August 2022</p>
+          <h1 className="text-xl font-bold pb-2 capitalize">{judul}</h1>
+          <p className="text-xs">
+            {data.views} views • {formatter.format(Date.parse(data.CreatedAt))}
+          </p>
           <div className="border-b-2 pt-2 border-black"></div>
           <p className="pt-10 text-sm lg:w-3/4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
-            soluta nulla ratione qui iure delectus provident placeat corporis
-            corrupti laudantium voluptas ex non cupiditate voluptatem cumque
-            amet dolorum ipsa nisi harum, possimus iusto eius aspernatur, cum
-            quasi. Consequatur minima porro magnam quaerat iste a eum tenetur
-            maiores quos rerum, sit odio, autem vel, quibusdam labore nulla
-            veritatis blanditiis. Error accusantium voluptatem voluptatum
-            perferendis totam, beatae quia soluta atque unde eaque alias
-            architecto cumque. Quaerat facilis, iure voluptatum architecto ex,
-            harum ad deleniti reiciendis culpa eos, nam dolore quod fuga
-            pariatur debitis. Corporis harum dolore magni, corrupti labore quod
-            quas placeat?
+            {data ? <Isi data={data.description}></Isi> : <></>}
           </p>
         </div>
       </div>
     </>
   );
+}
+
+function Isi(data) {
+  console.log(data);
+  const reactElement = parse(`${data.data}`);
+  return reactElement;
 }
 
 function VideoLoading() {
@@ -175,6 +180,29 @@ function Card({ data, setLoading, setLoading2 }) {
   const MAX_LENGTH = 27;
   const MAX_LENGTH_MOBILE = 27;
 
+  //   data detail
+  const [load, setLoad] = React.useState(true);
+  const [video, setVideo] = React.useState();
+  const [judul, setJudul] = React.useState("");
+  async function videoDetail() {
+    try {
+      await getGaleri(`video/${data.id}`).then((result) => {
+        setVideo(result.data.data[0]);
+        setTimeout(() => {
+          setLoad(false);
+        }, 1000);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    videoDetail();
+    if (!load) {
+      setJudul(video.NamaKota.toLowerCase());
+    }
+  }, []);
   return (
     <>
       <Link href={`/galeri/video/Detail/${data.id}`}>
@@ -191,30 +219,41 @@ function Card({ data, setLoading, setLoading2 }) {
             src={data.thumbnail}
             alt=""
           />
-          <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-14 gap-y-14">
-            <div className="lg:flex hidden">
-              {text.length > MAX_LENGTH ? (
-                <p className="font-bold text-sm text-left ">
-                  {`${text.substring(0, MAX_LENGTH)} ...`}
-                </p>
-              ) : (
-                <p className="font-bold text-sm text-left">{text}</p>
-              )}
+          {!load ? (
+            <div className="left px-5 w-full py-5 flex flex-col lg:gap-y-20 gap-y-16">
+              <div className="lg:flex hidden">
+                {video.NamaKota.length > MAX_LENGTH ? (
+                  <p className="font-bold text-sm text-left capitalize">
+                    {`${video.NamaKota.substring(0, MAX_LENGTH)} ...`}
+                  </p>
+                ) : (
+                  <p className="font-bold text-sm text-left capitalize">
+                    {video.NamaKota}
+                  </p>
+                )}
+              </div>
+              <p className="font-bold lg:hidden flex text-sm text-left capitalize">
+                {video.NamaKota.length > MAX_LENGTH_MOBILE
+                  ? `${video.NamaKota.substring(0, MAX_LENGTH_MOBILE)} ...`
+                  : video.NamaKota}
+              </p>
+              <p className="text-xs">{video.views} views</p>
             </div>
-            <p className="font-bold lg:hidden flex text-sm text-left">
-              {text.length > MAX_LENGTH_MOBILE
-                ? `${text.substring(0, MAX_LENGTH_MOBILE)} ...`
-                : text}
-            </p>
-            <p className="text-xs">200 views</p>
-          </div>
+          ) : (
+            <>
+              <div className="space-y-2 animate-pulse  p-5 w-3/4">
+                <div className="text-xs font-bold h-4 w-3/4 bg-gray-300 rounded-full"></div>
+                <div className="text-xs font-bold h-4 w-1/2  bg-gray-300 rounded-full"></div>
+              </div>
+            </>
+          )}
         </div>
       </Link>
     </>
   );
 }
 
-function CardLoading(params) {
+function CardLoading() {
   return (
     <>
       <div className="w-full h-[10rem] rounded-xl bg-gray-100 flex cursor-pointer justify-between gap-x-0 animate-pulse">

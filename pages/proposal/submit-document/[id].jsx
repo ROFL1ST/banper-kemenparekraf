@@ -329,8 +329,10 @@ function CardPengusul() {
                       .filter(
                         (sub) =>
                           sub.Id.toString() ===
-                          list[0].Subsektors.split("\n")[0][2] +
-                            list[0].Subsektors.split("\n")[0][3]
+                          (list[0].Subsektors.split("\n")[0][4] != undefined
+                            ? list[0].Subsektors.split("\n")[0][3] +
+                              list[0].Subsektors.split("\n")[0][4]
+                            : list[0].Subsektors.split("\n")[0][3])
                       )
                       .map((sub) => sub.Nama)}
                   </p>
@@ -411,7 +413,7 @@ function CardDocument({ data, teks, num, detail }) {
     }
 
     const fileMb = fileObj.size / 1024 ** 2;
-    console.log(fileMb);
+    // console.log(fileMb);
 
     if (fileMb >= 3) {
       alert("Mohon Masukkan Berkas Maksimal 3MB");
@@ -421,8 +423,8 @@ function CardDocument({ data, teks, num, detail }) {
       const fileExtension = fileObj.name.split(".").at(-1);
       const allowedFileTypes = [data.Type.split(",")];
 
-      console.log(allowedFileTypes[0].map((i) => i.replace(regex, "")));
-      console.log(fileExtension);
+      // console.log(allowedFileTypes[0].map((i) => i.replace(regex, "")));
+      // console.log(fileExtension);
       if (
         !allowedFileTypes[0]
           .map((i) => i.replace(regex, ""))
@@ -440,7 +442,7 @@ function CardDocument({ data, teks, num, detail }) {
   }
 
   const handleSubmit = async (token, values) => {
-    console.log(values);
+    // console.log(values);
     const formData = new FormData();
     setLoading(true);
 
@@ -589,7 +591,7 @@ function CardDocument({ data, teks, num, detail }) {
   );
 }
 function Catatan({ id }) {
-  console.log(id);
+  // console.log(id);
   const [loading, setLoading] = React.useState(false);
   const [token, setToken] = React.useState("");
   const [error, setError] = React.useState({ status: false, msg: "" });
@@ -607,15 +609,15 @@ function Catatan({ id }) {
   });
 
   const onSubmit = async (values) => {
-    console.log(values);
+    // console.log(values);
     setLoading(true);
     try {
       await PostFeed("proposal/comment", token, values, "post").then(
         (result) => {
           setLoading(false);
 
-          console.log(result.data);
-          console.log(values);
+          // console.log(result.data);
+          // console.log(values);
           if (result.data.message != "Success") {
             setError((s) => ({
               ...s,
