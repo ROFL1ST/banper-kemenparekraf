@@ -451,6 +451,7 @@ function CardDocument({ data, teks, num, detail }) {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
         // console.log(result);
         setLoading(false);
+        console.log(result)
 
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
