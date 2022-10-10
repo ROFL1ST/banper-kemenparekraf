@@ -29,12 +29,14 @@ export default function Berita() {
   const { sort, type, sub_id } = query;
   var router = useRouter();
 
-  const getData = async (sort, sub_id, prov_id, limit = 12) => {
+  const getData = async (sort, subsektor_id, provinsi_id, limit = 12) => {
     try {
       let respond = await getApi(
         `news?limit=${limit}&${
-          sub_id !== undefined && `subsektorId=${sub_id}`
-        }&sort=${sort}&${prov_id !== undefined && `ProvinsiID=${prov_id}`}`
+          subsektor_id !== undefined && `subsektorId=${subsektor_id}`
+        }&sort=${sort}&${
+          provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
+        }`
       );
       setData(respond.data.data);
       setLoading(false);
@@ -46,7 +48,6 @@ export default function Berita() {
 
   useEffect(() => {
     getData();
-    
     const ac = new AbortController();
     return () => {
       ac.abort();
@@ -101,7 +102,7 @@ export default function Berita() {
               show={false}
               handleFilters={(filters) => handleFilters(filters, "")}
             />
-            <MenuSubsector type={"Subsector"} show={true} />
+            <MenuSubsector getData={getData} type={"Subsector"} show={true} />
           </div>
         </div>
 
@@ -161,7 +162,7 @@ export default function Berita() {
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
       ></Modal>
-      <Sidebar side={side} setSide={setSide} />
+      <Sidebar side={side} setSide={setSide} getData={getData} />
     </>
   );
 }
@@ -378,7 +379,7 @@ function Downloader({ setOpen, setCheck }) {
     </Link>
   );
 }
-function Sidebar({ setSide, side }) {
+function Sidebar({ setSide, side, getData }) {
   return (
     <>
       <div>
@@ -423,7 +424,11 @@ function Sidebar({ setSide, side }) {
               </h2>
               <div className="flex flex-col gap-y-3 pb-10">
                 <MenuProvinsi type={"Provinsi"} show={false} />
-                <MenuSubsector type={"Subsector"} show={true} />
+                <MenuSubsector
+                  getData={getData}
+                  type={"Subsector"}
+                  show={true}
+                />
               </div>
               <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-[#142b51] text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#142b51] sm:w-auto lg:text-sm">
                 Apply Filter

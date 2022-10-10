@@ -7,7 +7,7 @@ import { useEffect, useState, Fragment } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 
-export default function MenuSubsector({ type, show }) {
+export default function MenuSubsector({ type, show, getData }) {
   const [menu1, setMenu1] = useState(show);
 
   // getData
@@ -71,7 +71,7 @@ export default function MenuSubsector({ type, show }) {
   );
 }
 
-function Filter2({ data, menu, subsector, load }) {
+function Filter2({ data, menu, subsector, load, getData }) {
   const [menu2, setMenu2] = useState(false);
 
   return (
@@ -90,10 +90,13 @@ function Filter2({ data, menu, subsector, load }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              id=""
-              name=""
               defaultChecked={false}
-              required
+              onChange={(e) => {
+                if (e.target.checked) {
+                  getData()
+                } else {
+                }
+              }}
               className="form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
             />
             <div

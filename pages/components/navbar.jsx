@@ -65,7 +65,7 @@ export default function Navbar({ click }) {
                 pathname={pathname}
               />
             </div>
-            <Link href={"/berita?type=berita&sort=terbaru"}>
+            <Link href={"/berita?sort=terbaru"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
                   pathname === "/berita" || pathname === "/berita/Detail/[id]"
@@ -188,7 +188,7 @@ export default function Navbar({ click }) {
             </div>
           </Transition>
 
-          <Link href={"/berita?type=berita&sort=terbaru"}>
+          <Link href={"/berita"}>
             <p
               className={`cursor-pointer  ${
                 pathname === "/berita"
