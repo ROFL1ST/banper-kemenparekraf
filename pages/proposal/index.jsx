@@ -254,7 +254,29 @@ function ListPropose(data) {
         )}
       </TableCell>
       <TableCell>
-        {percent != 100 ? "Belum Lengkap" : "Sudah Lengkap"}
+        <p
+          className={`font-bold ${
+            percent != 100
+              ? "text-red-500"
+              : data.data.Status == 7
+              ? "text-gray-600"
+              : data.data.Status == 1
+              ? "text-yellow-500"
+              : data.data.Status == 2
+              ? "text-green-700"
+              : "text-red-500"
+          }`}
+        >
+          {percent != 100
+            ? "Belum Lengkap"
+            : data.data.Status == 7
+            ? "Lengkap"
+            : data.data.Status == 1
+            ? "Sedang Di Verifikasi"
+            : data.data.Status == 2
+            ? "Diterima"
+            : "Ditolak"}
+        </p>
       </TableCell>
       <TableCell>
         <div className="flex space-x-2">
