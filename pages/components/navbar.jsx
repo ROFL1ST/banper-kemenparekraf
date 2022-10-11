@@ -65,7 +65,7 @@ export default function Navbar({ click }) {
                 pathname={pathname}
               />
             </div>
-            <Link href={"/berita?sort=terbaru"}>
+            <Link href={"/berita"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
                   pathname === "/berita" || pathname === "/berita/Detail/[id]"

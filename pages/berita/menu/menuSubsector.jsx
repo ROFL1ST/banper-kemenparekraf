@@ -6,13 +6,15 @@ import { getApi } from "../../api/restApi";
 import { useEffect, useState, Fragment } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeState } from "../../../redux/actions";
 
 export default function MenuSubsector({ type, show, getData }) {
   const [menu1, setMenu1] = useState(show);
-
   // getData
   const [subsector, setSubsector] = useState([]);
   const [load, setLoad] = useState(true);
+  const subsektorId = [];
 
   const getSubsector = async () => {
     try {
@@ -53,7 +55,9 @@ export default function MenuSubsector({ type, show, getData }) {
         </div>
         {!load ? (
           subsector.map((i, key) => (
-            <Filter2
+            <Subsektor
+              subsektorId={subsektorId}
+              getData={getData}
               menu={menu1}
               data={i}
               key={key}
@@ -71,8 +75,10 @@ export default function MenuSubsector({ type, show, getData }) {
   );
 }
 
-function Filter2({ data, menu, subsector, load, getData }) {
+function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
   const [menu2, setMenu2] = useState(false);
+  const state = useSelector((state) => state.data);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -93,9 +99,20 @@ function Filter2({ data, menu, subsector, load, getData }) {
               defaultChecked={false}
               onChange={(e) => {
                 if (e.target.checked) {
-                  getData()
+                  subsektorId.push(data.Id);
                 } else {
+                  const index = subsektorId.indexOf(data.Id);
+                  if (index > -1) {
+                    subsektorId.splice(index, 1);
+                  }
                 }
+                dispatch(
+                  changeState({
+                    sort: state.sort,
+                    subsektor_id: subsektorId.toString(),
+                  })
+                );
+                // getData(state.sort, subsektorId.toString(), undefined);
               }}
               className="form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
             />
@@ -128,7 +145,7 @@ function Filter2({ data, menu, subsector, load, getData }) {
           {!load ? (
             subsector
               .filter((subsector) => subsector.parentId == data.Id)
-              .map((i, key) => <Filter3 menu2={menu2} data={i} key={key} />)
+              .map((i, key) => <SubSubsektor menu2={menu2} data={i} key={key} />)
           ) : (
             <></>
           )}
@@ -138,7 +155,7 @@ function Filter2({ data, menu, subsector, load, getData }) {
   );
 }
 
-function Filter3({ data, menu2 }) {
+function SubSubsektor({ data, menu2 }) {
   // const [menu3, setMenu3] = useState(false);
 
   return (

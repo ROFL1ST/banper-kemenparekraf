@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
   sort: "terbaru",
-  subsektor_id: 0,  
-  provinsi_id:0
+  subsektor_id: undefined,
+  provinsi_id: undefined,
 };
 
 export const dataInput = createSlice({
@@ -12,13 +12,13 @@ export const dataInput = createSlice({
   reducers: {
     changeState: (state, action) => {
       const data = action.payload;
-      state.sort = data.sort
-
+      state.sort = data.sort;
+      state.subsektor_id = data.subsektor_id;
     },
     resetData: (state) => {
-      state.sort = "terbaru",
-      state.subsektor_id = 0,  
-      state.provinsi_id = 0
+      state.sort = "terbaru";
+      state.provinsi_id = null;
+      state.subsektor_id = null;
     },
   },
 });

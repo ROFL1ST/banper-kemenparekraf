@@ -20,7 +20,7 @@ export function getPropose(path_url, token) {
   });
 }
 function getApi(path_url) {
-  console.log(BASE_URL + path_url);
+  // console.log(BASE_URL + path_url);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",

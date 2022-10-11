@@ -15,6 +15,7 @@ import MenuSubsector from "./menu/menuSubsector";
 
 import logo from "../assets/banper.png";
 import empty from "../assets/Empty-amico.png";
+import { useDispatch, useSelector } from "react-redux";
 
 const MAX_LENGTH = 60;
 
@@ -26,8 +27,9 @@ export default function Berita() {
   const [loading, setLoading] = useState(true);
   const cancelButtonRef = useRef(null);
   const { query } = useRouter();
-  const { sort, type, sub_id } = query;
   var router = useRouter();
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.data);
 
   const getData = async (sort, subsektor_id, provinsi_id, limit = 12) => {
     try {
@@ -61,7 +63,6 @@ export default function Berita() {
 
   // sidebar
   const [side, setSide] = useState(false);
-  console.log(side);
 
   useEffect(() => {
     document.title = "Berita";
@@ -73,14 +74,12 @@ export default function Berita() {
   });
 
   const [prov, setProv] = useState(0);
-  const [Filters, setFilters] = useState({
+  const [filters, setFilters] = useState({
     prov: [],
     sub: [],
   });
-  console.log(prov);
-
-  const handleFilters = (filters, category) => {
-    const newFilters = { ...Filters };
+  const handleFilters = (filter, category) => {
+    const newFilters = { ...filters };
 
     newFilters[category] = filters;
   };
