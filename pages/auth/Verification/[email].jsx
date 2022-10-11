@@ -130,14 +130,14 @@ export default function EmailVer() {
               ))}
             </div>
             <p className="text-s text-gray-500 mt-3 text-center">
-              If you didn’t request a code, you can safely ignore this email.
+              Jika anda tidak meminta kode, anda bisa mengabaikan email ini.
             </p>
             <button
               onClick={() => {
                 setLoad(true);
               }}
               type={"submit"}
-              className="text-white bg-indigo-500 border-0 py-2 px-6 mt-4 focus:outline-none hover:bg-indigo-600 rounded text-lg flex justify-center w-3/4 mx-auto"
+              className="text-white bg-[#142b51] border-0 py-2 px-6 mt-4 focus:outline-none hover:bg-blue-900 rounded text-lg flex justify-center w-3/4 mx-auto"
             >
               {load ? <Loading /> : "Submit"}
             </button>

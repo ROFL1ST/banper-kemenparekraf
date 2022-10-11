@@ -31,7 +31,6 @@ export default function MenuProvinsi({ type, show, handleFilters }) {
       {/* Filter 1 */}
       <div className="flex flex-col space-y-2">
         <div className={"cursor-pointer flex items-center space-x-1"}>
-          
           <div
             className="inline-flex items-center justify-between w-full"
             onClick={() => setMenu1(!menu1)}
@@ -52,7 +51,12 @@ export default function MenuProvinsi({ type, show, handleFilters }) {
         </div>
         {!load ? (
           provinsi.map((i, key) => (
-            <Filter2 menu={menu1} data={i} key={key} handleFilters={handleFilters}  />
+            <Filter2
+              menu={menu1}
+              data={i}
+              key={key}
+              handleFilters={handleFilters}
+            />
           ))
         ) : (
           <></>
@@ -91,15 +95,15 @@ function Filter2({ data, menu, handleFilters }) {
 
   const handleChange = (value) => {
     const currentIndex = check.indexOf(value);
-    const newChecked = [...check]
+    const newChecked = [...check];
 
-    if(currentIndex === -1) {
-      newChecked.push(value)
+    if (currentIndex === -1) {
+      newChecked.push(value);
     } else {
-      newChecked.splice(currentIndex, 1)
+      newChecked.splice(currentIndex, 1);
     }
-    setCheck(newChecked)
-    handleFilters(newChecked)
+    setCheck(newChecked);
+    handleFilters(newChecked);
   };
 
   return (
@@ -124,7 +128,9 @@ function Filter2({ data, menu, handleFilters }) {
               required
               value={check}
               onChange={handleChange}
-              className="form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
+              className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3 ${
+                check ? "ceklist" : ""
+              }`}
             />
             <div
               className="inline-flex items-center justify-between w-full"

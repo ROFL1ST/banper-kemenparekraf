@@ -144,173 +144,28 @@ export default function EditProfile() {
   return (
     <>
       <Navbar />
-      <Background>
-        <Section text={"Edit Profile"} />
-        {!loading ? (
-          user.map((i, key) => (
-            <form key={key} onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Nama Komunitas/ Pemerintah Daerah/ Lembaga Adat <br />
-                    (sesuai Akta/Legalitas)
-                  </label>
-                  <input
-                    {...register("NamaKomunitas", { value: i.NamaKomunitas })}
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                    placeholder="Masukan Nama Komunitas/Pemerintah Daerah/Lembaga"
-                  />
-                </div>
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Kategori Pengusul
-                  </label>
-                  <select
-                    className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
-    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
-    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
-    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    name=""
-                    id=""
-                    {...register("Kategori", { value: i.Kategori })}
-                  >
-                    {!loading ? (
-                      kategori.map((i, key) => (
-                        <option key={key} value={i.Id}>
-                          {i.Nama}
-                        </option>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </select>
-                </div>
-              </div>
-
-              <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Alamat Akta
-                  </label>
-                  <input
-                    {...register("AlamatAkta", { value: i.AlamatAkta })}
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                    placeholder="Masukan Alamat Akta"
-                  />
-                </div>
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Alamat Domisili(Bisa disamakan dengan akta)
-                  </label>
-                  <input
-                    {...register("Alamat", { value: i.Alamat })}
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
-                    placeholder=" Masukan Alamat Domisili"
-                  />
-                </div>
-              </div>
-              <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Email Komunitas
-                  </label>
-                  <input
-                    {...register("Email", { value: i.Email })}
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                    placeholder="Masukan Email Komunitas"
-                  />
-                </div>
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Nomor Telepon Komunitas
-                  </label>
-                  <input
-                    {...register("PhoneNumber", { value: i.PhoneNumber })}
-                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                    placeholder="Nomor Telepon Komunitas"
-                  />
-                </div>
-              </div>
-              <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Subsektor Utama
-                  </label>
-                  <select
-                    className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
-    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
-    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
-    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    name=""
-                    id=""
-                    {...register("Subsektor", { value: i.Subsektor })}
-                  >
-                    {!loading ? (
-                      sub.map((i, key) => (
-                        <option key={key} value={i.Id}>
-                          {i.Nama}
-                        </option>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </select>
-                </div>
-                <div className="relative flex-grow w-full">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Subsektor Pendukung
-                  </label>
-                  <select
-                    className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
-    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
-    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
-    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    name=""
-                    id=""
-                    {...register("SubsektorPendukung", {
-                      value: i.SubsektorPendukung,
-                    })}
-                  >
-                    {!loading ? (
-                      sub.map((i, key) => (
-                        <option key={key} value={i.Id}>
-                          {i.Nama}
-                        </option>
-                      ))
-                    ) : (
-                      <></>
-                    )}
-                  </select>
-                </div>
-              </div>
-              <div className="  border-10 border-b-orange-600 ">
-                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+      <Section text={"Edit Profile"} />
+      {!loading ? (
+        <>
+          <Background>
+            <Section text={"Edit Profile"}></Section>
+            {user.map((i, key) => (
+              <form key={key} onSubmit={handleSubmit(onSubmit)}>
+                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
                   <div className="relative flex-grow w-full">
                     <label className="leading-7 text-sm text-gray-600">
-                      *Email Penanggung jawab
+                      *Nama Komunitas/ Pemerintah Daerah/ Lembaga Adat <br />
+                      (sesuai Akta/Legalitas)
                     </label>
                     <input
-                      {...register("EmailPJ", { value: i.EmailPJ })}
+                      {...register("NamaKomunitas", { value: i.NamaKomunitas })}
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                      placeholder="Email Penanggung jawab"
+                      placeholder="Masukan Nama Komunitas/Pemerintah Daerah/Lembaga"
                     />
                   </div>
                   <div className="relative flex-grow w-full">
                     <label className="leading-7 text-sm text-gray-600">
-                      *Nomor Telepon Penanggung jawab
-                    </label>
-                    <input
-                      {...register("PhonePJ", { value: i.PhonePJ })}
-                      type={"number"}
-                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
-                      placeholder="Masukan Nomor Telepon Penanggung jawab"
-                    />
-                  </div>
-                </div>
-                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                  <div className="relative flex-grow w-full">
-                    <label className="leading-7 text-sm text-gray-600">
-                      *Kota
+                      *Kategori Pengusul
                     </label>
                     <select
                       className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
@@ -319,14 +174,12 @@ export default function EditProfile() {
     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                       name=""
                       id=""
-                      {...register("KotaID", {
-                        value: i.KotaID,
-                      })}
+                      {...register("Kategori", { value: i.Kategori })}
                     >
                       {!loading ? (
-                        kota.map((i, key) => (
+                        kategori.map((i, key) => (
                           <option key={key} value={i.Id}>
-                            {i.NamaKota}
+                            {i.Nama}
                           </option>
                         ))
                       ) : (
@@ -339,50 +192,202 @@ export default function EditProfile() {
                 <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                   <div className="relative flex-grow w-full">
                     <label className="leading-7 text-sm text-gray-600">
-                      *Buat Kata Sandi
+                      *Alamat Akta
                     </label>
                     <input
-                      {...register("password", { required: false })}
+                      {...register("AlamatAkta", { value: i.AlamatAkta })}
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                      placeholder="Masukan Kata Sandi"
-                      type={"password"}
+                      placeholder="Masukan Alamat Akta"
                     />
-                    {errors.passwordConfirmation && (
-                      <span className="text-red-600 font-bold text-sm">
-                        {" "}
-                        Password Harus Sama
-                      </span>
-                    )}
                   </div>
                   <div className="relative flex-grow w-full">
                     <label className="leading-7 text-sm text-gray-600">
-                      *Ketik Ulang Kata Sandi
+                      *Alamat Domisili(Bisa disamakan dengan akta)
                     </label>
                     <input
-                      {...register("passwordConfirmation", { required: false })}
+                      {...register("Alamat", { value: i.Alamat })}
                       className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
-                      placeholder="Ulang Kata Sandi"
-                      type={"password"}
+                      placeholder=" Masukan Alamat Domisili"
                     />
-                    {errors.passwordConfirmation && (
-                      <span className="text-red-600 font-bold text-sm">
-                        Password Harus Sama
-                      </span>
-                    )}
                   </div>
                 </div>
+                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                  <div className="relative flex-grow w-full">
+                    <label className="leading-7 text-sm text-gray-600">
+                      *Email Komunitas
+                    </label>
+                    <input
+                      {...register("Email", { value: i.Email })}
+                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
+                      placeholder="Masukan Email Komunitas"
+                    />
+                  </div>
+                  <div className="relative flex-grow w-full">
+                    <label className="leading-7 text-sm text-gray-600">
+                      *Nomor Telepon Komunitas
+                    </label>
+                    <input
+                      {...register("PhoneNumber", { value: i.PhoneNumber })}
+                      className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
+                      placeholder="Nomor Telepon Komunitas"
+                    />
+                  </div>
+                </div>
+                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                  <div className="relative flex-grow w-full">
+                    <label className="leading-7 text-sm text-gray-600">
+                      *Subsektor Utama
+                    </label>
+                    <select
+                      className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      name=""
+                      id=""
+                      {...register("Subsektor", { value: i.Subsektor })}
+                    >
+                      {!loading ? (
+                        sub.map((i, key) => (
+                          <option key={key} value={i.Id}>
+                            {i.Nama}
+                          </option>
+                        ))
+                      ) : (
+                        <></>
+                      )}
+                    </select>
+                  </div>
+                  <div className="relative flex-grow w-full">
+                    <label className="leading-7 text-sm text-gray-600">
+                      *Subsektor Pendukung
+                    </label>
+                    <select
+                      className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      name=""
+                      id=""
+                      {...register("SubsektorPendukung", {
+                        value: i.SubsektorPendukung,
+                      })}
+                    >
+                      {!loading ? (
+                        sub.map((i, key) => (
+                          <option key={key} value={i.Id}>
+                            {i.Nama}
+                          </option>
+                        ))
+                      ) : (
+                        <></>
+                      )}
+                    </select>
+                  </div>
+                </div>
+                <div className="  border-10 border-b-orange-600 ">
+                  <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                    <div className="relative flex-grow w-full">
+                      <label className="leading-7 text-sm text-gray-600">
+                        *Email Penanggung jawab
+                      </label>
+                      <input
+                        {...register("EmailPJ", { value: i.EmailPJ })}
+                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
+                        placeholder="Email Penanggung jawab"
+                      />
+                    </div>
+                    <div className="relative flex-grow w-full">
+                      <label className="leading-7 text-sm text-gray-600">
+                        *Nomor Telepon Penanggung jawab
+                      </label>
+                      <input
+                        {...register("PhonePJ", { value: i.PhonePJ })}
+                        type={"number"}
+                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
+                        placeholder="Masukan Nomor Telepon Penanggung jawab"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                    <div className="relative flex-grow w-full">
+                      <label className="leading-7 text-sm text-gray-600">
+                        *Kota
+                      </label>
+                      <select
+                        className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        name=""
+                        id=""
+                        {...register("KotaID", {
+                          value: i.KotaID,
+                        })}
+                      >
+                        {!loading ? (
+                          kota.map((i, key) => (
+                            <option key={key} value={i.Id}>
+                              {i.NamaKota}
+                            </option>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </select>
+                    </div>
+                  </div>
 
-                <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3">
-                  Edit
-                </button>
-              </div>
-            </form>
-          ))
-        ) : (
-          <></>
-        )}
-      </Background>
-      <Footer />
+                  <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                    <div className="relative flex-grow w-full">
+                      <label className="leading-7 text-sm text-gray-600">
+                        *Buat Kata Sandi
+                      </label>
+                      <input
+                        {...register("password", { required: false })}
+                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
+                        placeholder="Masukan Kata Sandi"
+                        type={"password"}
+                      />
+                      {errors.passwordConfirmation && (
+                        <span className="text-red-600 font-bold text-sm">
+                          {" "}
+                          Password Harus Sama
+                        </span>
+                      )}
+                    </div>
+                    <div className="relative flex-grow w-full">
+                      <label className="leading-7 text-sm text-gray-600">
+                        *Ketik Ulang Kata Sandi
+                      </label>
+                      <input
+                        {...register("passwordConfirmation", {
+                          required: false,
+                        })}
+                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
+                        placeholder="Ulang Kata Sandi"
+                        type={"password"}
+                      />
+                      {errors.passwordConfirmation && (
+                        <span className="text-red-600 font-bold text-sm">
+                          Password Harus Sama
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3">
+                    Edit
+                  </button>
+                </div>
+              </form>
+            ))}
+          </Background>
+          <Footer />
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 }
