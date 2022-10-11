@@ -57,6 +57,12 @@ export default function Add() {
     } else {
       setToken(sessionStorage.getItem("token"));
     }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+      return;
+    } else {
+      Router.push("/home");
+    }
   });
 
   // list bantuan
