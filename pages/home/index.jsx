@@ -462,18 +462,22 @@ function Downloader({ setOpen, setCheck }) {
   const templateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    setOpen(false);
-    setCheck(false);
-    window.open(templateUrl);
-    Router.push(pathname == "/auth/login" ? "daftar" : "auth/daftar");
-  };
-
   return (
     <a
-      href={juknisUrl}
-      onClick={handleClick}
+      href={templateUrl}
+      onClick={() => {
+        window.open(juknisUrl);
+
+        setOpen(false);
+        setCheck(false);
+        setTimeout(() => {
+          Router.push(
+            pathname == "/auth/login" || pathname == "/auth/EmailVerification"
+              ? "daftar"
+              : "auth/daftar"
+          );
+        }, 1000);
+      }}
       className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
     >
       Accept

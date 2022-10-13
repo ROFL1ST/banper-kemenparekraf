@@ -813,7 +813,7 @@ function Downloader({ setOpen, setCheck }) {
   const templateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
-  const handleClick = (e) => {};
+ 
 
   return (
     <a
