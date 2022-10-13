@@ -23,7 +23,7 @@ export default function Selengkapnya() {
   const [images, setImages] = React.useState({ data: {}, loading: true });
   async function imageList() {
     try {
-      await getGaleri("gallery?offset=0&limit=10").then((result) => {
+      await getGaleri("gallery").then((result) => {
         setImages((s) => ({ ...s, data: result.data.data, loading: false }));
         setPanjang(result.data.data.length);
       });

@@ -15,10 +15,10 @@ export default function Footer() {
             Presiden Joko Widodo mengatakan bahwa “Pembangunan Infrastruktur
             bertujuan untuk menumbuhkan sentra-sentra ekonomi baru yang mampu
             memberikan nilai tambah bagi daerah-daerah di seluruh penjuru tanah
-            air.
+            air. {" "}
             <Link href={"/tentang"}>
-              <span className="text-red-500 underline underline-offset-2 decoration-red-500 cursor-pointer">
-                Read more
+              <span className="text-red-500 text-sm underline underline-offset-2 decoration-red-500 cursor-pointer">
+                Baca selengkapnya
               </span>
             </Link>
           </p>
@@ -48,7 +48,7 @@ export default function Footer() {
         </div>
       </footer>
       <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-[#f5f5fa]">
-        <a className="text-white rounded-full bg-[#142b51] p-2">
+        <a href="https://www.facebook.com/ParekrafRI" className="text-white rounded-full bg-[#142b51] p-2">
           <svg
             fill="currentColor"
             strokeWidth="2"
@@ -58,7 +58,7 @@ export default function Footer() {
             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
           </svg>
         </a>
-        <a className="ml-3 text-white rounded-full bg-[#142b51] p-2">
+        <a href="https://twitter.com/Kemenparekraf?s=20&t=hGqGbY2NV6nq9jraHzfnMQ" className="ml-3 text-white rounded-full bg-[#142b51] p-2">
           <svg
             fill="currentColor"
             strokeLinecap="round"
@@ -68,7 +68,7 @@ export default function Footer() {
             <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
           </svg>
         </a>
-        <a className="ml-3 text-white rounded-full bg-[#142b51] p-2">
+        <a href="https://www.instagram.com/kemenparekraf.ri/" className="ml-3 text-white rounded-full bg-[#142b51] p-2">
           <svg
             fill="none"
             stroke="currentColor"
