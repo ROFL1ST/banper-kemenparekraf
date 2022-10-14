@@ -91,21 +91,27 @@ function Filter2({ data, menu, handleFilters }) {
     getKota();
   }, []);
 
-  const [check, setCheck] = useState([]);
+  const [check, setCheck] = useState(false);
 
-  const handleChange = (value) => {
-    const currentIndex = check.indexOf(value);
-    const newChecked = [...check];
+  // const handleChange = (value) => {
+  //   const currentIndex = check.indexOf(value);
+  //   const newChecked = [...check];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-    setCheck(newChecked);
-    handleFilters(newChecked);
+  //   if (currentIndex === -1) {
+  //     newChecked.push(value);
+  //   } else {
+  //     newChecked.splice(currentIndex, 1);
+  //   }
+  //   setCheck(newChecked);
+  //   handleFilters(newChecked);
+  // };
+  const handleChange = () => {
+    setCheck(!check);
+    setMenu2(!menu2)
+    // if (!check) {
+    //   setMenu2(false)
+    // }
   };
-
   return (
     <>
       <Transition
@@ -121,16 +127,14 @@ function Filter2({ data, menu, handleFilters }) {
         <div className="flex flex-col space-y-2 space-x-3 ">
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
-              type="checkbox"
-              id=""
-              name=""
-              defaultChecked={false}
-              required
+              type="radio"
+              id={data.Id}
+              name="provinsi"
+              // defaultChecked={false}
+              // required
               value={check}
               onChange={handleChange}
-              className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3 ${
-                check ? "ceklist" : ""
-              }`}
+              className={`form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer`}
             />
             <div
               className="inline-flex items-center justify-between w-full"
@@ -179,12 +183,12 @@ function Filter3({ data, menu2 }) {
         <div className="flex flex-col space-y-2 pl-3 ">
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
-              type="checkbox"
-              id=""
-              name=""
+              type="radio"
+              id={data.Id}
+              name="kota"
               defaultChecked={false}
               required
-              className="form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3"
+              className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
             />
             <div className="inline-flex items-center justify-between w-full">
               <p>{data.NamaKota}</p>
