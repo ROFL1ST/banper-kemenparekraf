@@ -16,7 +16,6 @@ import MenuSubsector from "./menu/menuSubsector";
 import logo from "../assets/banper.png";
 import empty from "../assets/Empty-amico.png";
 import { useDispatch, useSelector } from "react-redux";
-import SelectInput from "@mui/material/Select/SelectInput";
 import {
   FormControl,
   FormHelperText,
@@ -99,7 +98,7 @@ export default function Berita() {
         className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 
         `}
       >
-        <div className="left lg:flex hidden flex-col py-4 px-10  2xl:w-1/4 w-1/2 h-[600px]  bg-[#f5f5fa] mr-5 rounded-lg scrollbar overflow-y-auto">
+        <div className="left lg:flex hidden flex-col py-4 px-10  2xl:w-1/4 w-1/2 h-[600px]  bg-[#f5f5fa] rounded-lg  mr-5 scrollbar overflow-y-auto">
           <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
             Filter By
           </h2>
@@ -114,17 +113,20 @@ export default function Berita() {
         </div>
 
         <div className="right  2xl:w-3/5 w-full">
-          <div className=" pb-7 flex items-center lg:relative absolute lg:justify-end gap-x-2">
+          <div className=" lg:mb-7 mb-10 flex items-center lg:relative absolute lg:justify-end gap-x-2">
             <label htmlFor="" className="font-bold text-sm">
               Urutkan:
             </label>
-            <FormControl sx={{ m: 1, minWidth: 150 }}>
-              <InputLabel id="demo-simple-select-helper-label">
-                Berdasarkan....
+            <FormControl sx={{ minWidth: 150 }}>
+              <InputLabel id="demo-simple-select-autowidth-label">
+                Berdasarkan...
               </InputLabel>
-              <Select>
-                <MenuItem value={10}>Admin</MenuItem>
-                <MenuItem value={20}>User</MenuItem>
+              <Select className="rounded-xl " autoWidth label="Berdasarkan...">
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={"admin"}>Admin</MenuItem>
+                <MenuItem value={"user"}>User</MenuItem>
               </Select>
             </FormControl>
           </div>

@@ -14,11 +14,22 @@ import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
+import {
+  Box,
+  Button,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
+import MenuProvinsi from "./menu/menuProvinsi";
+import MenuSubsector from "./menu/menuSubsector";
 
 export default function Selengkapnya() {
-  const [open, setOpen] = React.useState(false);
   const [panjang, setPanjang] = React.useState(0);
-  const cancelButtonRef = React.useRef(null);
 
   const [images, setImages] = React.useState({ data: {}, loading: true });
   async function imageList() {
@@ -41,11 +52,36 @@ export default function Selengkapnya() {
 
   // const shuffledPosts = shuffleArray(data);
 
+  // sort
+  const [sort, setSort] = React.useState(false);
   return (
     <>
       <Navbar />
-
-      <div className="pt-24 lg:px-20 px-5">
+      <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5">
+        <button
+          onClick={() => {
+            setSort(true);
+          }}
+          className="flex border border-gray-400 rounded-xl px-5 py-3 gap-x-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 text-gray-400"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+            />
+          </svg>
+          <p className="text-md text-gray-400">Filter</p>
+        </button>
+      </div>
+      <div className="pt-40 lg:px-20 px-5">
         {images && !loading ? (
           <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
             {data.map((i, key) => (
@@ -65,6 +101,7 @@ export default function Selengkapnya() {
         )}
       </div>
       <Footer />
+      <Sidebar sort={sort} setSort={setSort} />
     </>
   );
 }
@@ -274,6 +311,96 @@ function CardModal({ img, tgl, summary, place }) {
 
           <p className="text-white lg:w-3/4 lg:text-sm text-sm">{summary}</p>
         </div>
+      </div>
+    </>
+  );
+}
+
+function Sidebar({ setSort, sort, getData }) {
+  return (
+    <>
+      <div>
+        <Transition
+          show={sort}
+          as={React.Fragment}
+          enter="transition-all ease-in duration-100"
+          enterFrom="transform w-0 "
+          enterTo="transform lg:w-1/4  "
+          leave="transition-all ease-out duration-75"
+          leaveFrom="transform lg:w-1/4  "
+          leaveTo="transform w-0 px-0"
+        >
+          <div className="top-0 fixed  flex flex-col z-10 bg-black  bg-opacity-60 backdrop-blur-lg drop-shadow-lg lg:w-1/4  h-full mt-[104px] px-10 py-10 pb-10 overflow-y-auto">
+            {/* Top */}
+            <div className="flex justify-between items-center mb-7">
+              <button
+                onClick={() => {
+                  setSort(false);
+                }}
+                className="flex  px-5 py-3 gap-x-4"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-8 text-white"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+                  />
+                </svg>
+                <p className="text-lg text-white">Filter</p>
+              </button>
+              <div className="   bg-gray-800 w-10 h-10 flex justify-center ">
+                <button
+                  onClick={() => {
+                    setSort(false);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={4.5}
+                    stroke="currentColor"
+                    className="w-6 h-6 text-white font-extrabold  "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            {/* Top */}
+            <div className="border-b-white border-b mb-7"></div>
+            {/* Filter */}
+            <div className="bg-[#f5f5fa] rounded-xl py-7 px-12  overflow-auto scrollbar h-3/4">
+              <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
+                Filter By
+              </h2>
+              <div className="flex flex-col gap-y-3 pb-20">
+                <MenuProvinsi
+                  type={"Provinsi"}
+                  show={false}
+                  handleFilters={(filters) => handleFilters(filters, "")}
+                />
+                <MenuSubsector
+                  getData={getData}
+                  type={"Subsector"}
+                  show={true}
+                />
+              </div>
+            </div>
+            {/* Filter */}
+          </div>
+        </Transition>
       </div>
     </>
   );
