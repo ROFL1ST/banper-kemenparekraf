@@ -16,6 +16,14 @@ import MenuSubsector from "./menu/menuSubsector";
 import logo from "../assets/banper.png";
 import empty from "../assets/Empty-amico.png";
 import { useDispatch, useSelector } from "react-redux";
+import SelectInput from "@mui/material/Select/SelectInput";
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 
 const MAX_LENGTH = 60;
 
@@ -105,41 +113,55 @@ export default function Berita() {
           </div>
         </div>
 
-        <div className="right grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 2xl:w-3/5 w-full">
-          {/* Bikin Disini Sidebar buat filter */}
-          <div
-            onClick={() => setSide(!side)}
-            className="lg:hidden flex close justify-end mb-10"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
+        <div className="right  2xl:w-3/5 w-full">
+          <div className=" pb-7 flex items-center lg:relative absolute lg:justify-end gap-x-2">
+            <label htmlFor="" className="font-bold text-sm">
+              Urutkan:
+            </label>
+            <FormControl sx={{ m: 1, minWidth: 150 }}>
+              <InputLabel id="demo-simple-select-helper-label">
+                Berdasarkan....
+              </InputLabel>
+              <Select>
+                <MenuItem value={10}>Admin</MenuItem>
+                <MenuItem value={20}>User</MenuItem>
+              </Select>
+            </FormControl>
           </div>
-          {/* Bikin Disini Sidebar buat filter */}
-
-          {loading ? (
-            loadingLength.map((i, key) => <CardLoading key={key} />)
-          ) : data.length != 0 ? (
-            data.map((i, key) => <Card data={i} key={key} />)
-          ) : (
-            <>
-              <div className="relative justify-center mx-auto   items-center flex flex-col mt-10 pb-20">
-                <img src={empty.src} className="h-96 w-auto" alt="" />
-                <p className="font-bold">Berita Tidak Tersedia</p>
-              </div>
-            </>
-          )}
+          <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3">
+            {" "}
+            {/* Bikin Disini Sidebar buat filter */}
+            <div className="lg:hidden flex close justify-end mb-10">
+              <svg
+                onClick={() => setSide(!side)}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </div>
+            {/* Bikin Disini Sidebar buat filter */}
+            {loading ? (
+              loadingLength.map((i, key) => <CardLoading key={key} />)
+            ) : data.length != 0 ? (
+              data.map((i, key) => <Card data={i} key={key} />)
+            ) : (
+              <>
+                <div className="relative justify-center mx-auto   items-center flex flex-col mt-10 pb-20">
+                  <img src={empty.src} className="h-96 w-auto" alt="" />
+                  <p className="font-bold">Berita Tidak Tersedia</p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
       {data.length >= 15 ? (
