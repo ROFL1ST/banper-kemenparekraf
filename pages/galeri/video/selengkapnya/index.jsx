@@ -29,6 +29,7 @@ export default function Selengkapnya() {
   React.useEffect(() => {
     const ac = new AbortController();
     getVideo();
+    document.title = "Video"
 
     return () => {
       ac.abort();

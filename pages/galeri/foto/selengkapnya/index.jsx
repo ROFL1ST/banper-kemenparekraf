@@ -32,6 +32,7 @@ export default function Selengkapnya() {
 
   React.useEffect(() => {
     imageList();
+    document.title = "Foto"
   }, []);
 
   const { data, loading } = images;

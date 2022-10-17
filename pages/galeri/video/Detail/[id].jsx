@@ -131,7 +131,6 @@ function Video({ data, setNama }) {
           title="yt"
           src={data.url + "?autoplay=1"}
           frameBorder={1}
-          allowFullScreen
         ></iframe>
         <div className="lg:px-0 px-5">
           <h1 className="text-xl font-bold pb-2 capitalize">{judul}</h1>
