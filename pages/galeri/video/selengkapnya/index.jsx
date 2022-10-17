@@ -231,12 +231,12 @@ function Sidebar({ setSort, sort, getData }) {
           as={React.Fragment}
           enter="transition-all ease-in duration-100"
           enterFrom="transform w-0 "
-          enterTo="transform lg:w-1/4  "
+          enterTo="transform lg:w-1/4  w-full"
           leave="transition-all ease-out duration-75"
-          leaveFrom="transform lg:w-1/4  "
+          leaveFrom="transform lg:w-1/4  w-full"
           leaveTo="transform w-0 px-0"
         >
-          <div className="top-0 fixed  flex flex-col z-30 bg-black  bg-opacity-60 backdrop-blur-lg drop-shadow-lg lg:w-1/4  h-full mt-[104px] px-10 py-10 pb-10 overflow-y-auto">
+          <div className="top-0 fixed  flex flex-col z-30 bg-black  bg-opacity-60 backdrop-blur-lg drop-shadow-lg lg:w-1/4 w-full h-full mt-[104px] px-10 py-10 pb-10 overflow-y-auto">
             {/* Top */}
             <div className="flex justify-between items-center mb-7">
               <button
