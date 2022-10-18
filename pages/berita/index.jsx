@@ -113,7 +113,7 @@ export default function Berita() {
         </div>
 
         <div className="right  2xl:w-3/5 w-full">
-          <div className=" lg:mb-7 mb-10 flex items-center lg:relative absolute lg:justify-end gap-x-2">
+          <div className=" lg:mb-7 mb-10 flex lg:flex-row flex-col lg:items-center lg:relative absolute lg:justify-end gap-x-2">
             <label htmlFor="" className="font-bold text-sm">
               Urutkan:
             </label>
@@ -130,8 +130,7 @@ export default function Berita() {
               </Select>
             </FormControl>
           </div>
-          <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3">
-            {" "}
+          <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 lg:mt-0 mt-10">
             {/* Bikin Disini Sidebar buat filter */}
             <div className="lg:hidden flex close justify-end mb-10">
               <svg

@@ -45,7 +45,7 @@ export default function Selengkapnya() {
     <>
       <Navbar />
       <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5">
-        <button
+        <div
           onClick={() => {
             setSort(true);
           }}
@@ -66,7 +66,7 @@ export default function Selengkapnya() {
             />
           </svg>
           <p className="text-md text-gray-400">Filter</p>
-        </button>
+        </div>
       </div>
       <div className="pt-40 lg:px-20 px-5">
         {images && !loading ? (
@@ -320,7 +320,7 @@ function Sidebar({ setSort, sort, getData }) {
           <div className="top-0 fixed  flex flex-col z-10 bg-black  bg-opacity-60 backdrop-blur-lg drop-shadow-lg 2xl:w-1/4 xl:w-1/3 lg:w-1/2 w-full  h-full mt-[104px] px-10 py-10 pb-10 overflow-y-auto">
             {/* Top */}
             <div className="flex justify-between items-center mb-7">
-              <button
+              <div
                 onClick={() => {
                   setSort(false);
                 }}
@@ -341,9 +341,9 @@ function Sidebar({ setSort, sort, getData }) {
                   />
                 </svg>
                 <p className="text-lg text-white">Filter</p>
-              </button>
+              </div>
               <div className="flex justify-center ">
-                <button
+                <div
                   onClick={() => {
                     setSort(false);
                   }}
@@ -360,7 +360,7 @@ function Sidebar({ setSort, sort, getData }) {
                       clipRule="evenodd"
                     />
                   </svg>
-                </button>
+                </div>
               </div>
             </div>
             {/* Top */}
