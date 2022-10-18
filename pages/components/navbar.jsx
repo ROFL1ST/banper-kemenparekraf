@@ -824,7 +824,7 @@ function Downloader({ setOpen, setCheck }) {
         setCheck(false);
         setTimeout(() => {
           const winpop = window.open(templateUrl);
-          winpop.focus();
+         
           if (!winpop || winpop.closed) {
             alert("Please Allow Pop Up");
           }
