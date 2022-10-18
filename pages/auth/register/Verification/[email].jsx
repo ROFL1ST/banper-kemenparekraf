@@ -1,14 +1,14 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Footer from "../../components/footer";
-import Navbar from "../../components/navbar";
-import { activate } from "../../api/restApi";
-import iconSucces from "../../assets/iconmonstr-check-mark-circle-filled-240.png";
-import iconFail from "../../assets/iconmonstr-x-mark-circle-filled-240.png";
+import Footer from "../../../components/footer";
+import Navbar from "../../../components/navbar";
+import { activate } from "../../../api/restApi";
+import iconSucces from "../../../assets/iconmonstr-check-mark-circle-filled-240.png";
+import iconFail from "../../../assets/iconmonstr-x-mark-circle-filled-240.png";
 
 import { Dialog, Transition } from "@headlessui/react";
 import Router, { useRouter } from "next/router";
-import Loading from "../../components/Loading";
+import Loading from "../../../components/Loading";
 
 export default function EmailVer() {
   useEffect(() => {

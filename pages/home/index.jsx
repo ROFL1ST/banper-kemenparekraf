@@ -473,8 +473,8 @@ function Downloader({ setOpen, setCheck }) {
         setTimeout(() => {
           Router.push(
             pathname == "/auth/login" || pathname == "/auth/EmailVerification"
-              ? "daftar"
-              : "auth/daftar"
+              ? "register/field"
+              : "auth/register/field"
           );
         }, 1000);
       }}
