@@ -40,6 +40,7 @@ export default function Berita() {
     subsektor_id,
     provinsi_id,
     kota_id,
+    author,
     limit = 12
   ) => {
     try {
@@ -48,7 +49,9 @@ export default function Berita() {
           subsektor_id !== undefined && `subsektorId=${subsektor_id}`
         }&sort=${sort}&${
           provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
-        }&${kota_id !== undefined && `kotaId=${kota_id}`}`
+        }&${kota_id !== undefined && `kotaId=${kota_id}`}&${
+          author !== undefined && `author=${author}`
+        }`
       );
       setData(respond.data.data);
       setLoading(false);
@@ -92,6 +95,7 @@ export default function Berita() {
 
     newFilters[category] = filters;
   };
+  const state = useSelector((state) => state.data);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -121,11 +125,20 @@ export default function Berita() {
               Urutkan:
             </label>
             <select
+              onChange={(e) => {
+                getData(
+                  state.sort,
+                  state.subsektor_id,
+                  state.provinsi_id,
+                  state.kota_id,
+                  e.target.value
+                );
+              }}
               defaultValue={"Pilih"}
               className="outline-none border px-3 py-1.5 rounded-lg "
             >
               <option value="admin">admin</option>
-              <option value="author">author</option>
+              <option value="user">user</option>
             </select>
           </div>
           <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 lg:mt-0 mt-10">
