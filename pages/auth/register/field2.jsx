@@ -124,16 +124,6 @@ export default function Field2() {
             <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
               <div className="relative flex-grow w-full">
                 <label className="leading-7 text-sm text-gray-600">
-                  *Provinsi
-                </label>
-
-                <input
-                  className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                  placeholder="Pilih Provinsi"
-                />
-              </div>
-              <div className="relative flex-grow w-full">
-                <label className="leading-7 text-sm text-gray-600">
                   *Kabupaten/Kota
                 </label>
 
@@ -142,6 +132,17 @@ export default function Field2() {
                   placeholder="Pilih Kabupaten kota"
                 />
               </div>
+              <div className="relative flex-grow w-full">
+                  <label className="leading-7 text-sm text-gray-600">
+                    *Nomor Telepon Penanggung jawab
+                  </label>
+                  <br />
+                  <input
+                    type={"number"}
+                    className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
+                    placeholder="Masukan Nomor Telepon Penanggung jawab"
+                  />
+                </div>
             </div>
 
             <div className="  border-10 border-b-orange-600 ">
@@ -169,17 +170,7 @@ export default function Field2() {
                 </div>
               </div>
               <div className="flex lg:w-2/3 2/3 sm:flex-row flex-row mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                <div className="relative flex-grow w-1/2">
-                  <label className="leading-7 text-sm text-gray-600">
-                    *Nomor Telepon Penanggung jawab
-                  </label>
-                  <br />
-                  <input
-                    type={"number"}
-                    className="lg:w-1/2 w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none  py-1 px-3 leading-8 mb-5 "
-                    placeholder="Masukan Nomor Telepon Penanggung jawab"
-                  />
-                </div>
+                
               </div>
               <div className=" border-b-yellow-400 border-b-2 h-4 lg:w-2/3 w-11/12 mx-auto m-10 "></div>
               <div className="flex lg:w-2/3 w-full sm:flex-col flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
