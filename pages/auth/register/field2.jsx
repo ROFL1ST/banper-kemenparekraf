@@ -6,12 +6,23 @@ import { useForm } from "react-hook-form";
 import { getApi, login } from "../../api/restApi";
 import { useRouter } from "next/router";
 import Router from "next/router";
+import Loading from "../../components/Loading";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function Field2() {
   const { query } = useRouter();
   const { kode } = query;
   React.useEffect(() => {
     document.title = "Formulir";
+    if (kode == undefined) {
+      Router.push("/home");
+    } else {
+      return;
+    }
   });
 
   console.log(kode);
@@ -25,6 +36,24 @@ export default function Field2() {
       kode: kode,
     },
   });
+
+  //   alert
+  const [success, setSuccess] = React.useState(false);
+
+  const [erros, setError] = React.useState("");
+  const [wrong, setWrong] = React.useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSuccess(false);
+    setWrong(false);
+  };
+
+  //
+
   const [loading, setLoading] = React.useState(false);
 
   const onSubmit = async (values) => {
@@ -35,9 +64,11 @@ export default function Field2() {
 
         console.log(result.data);
         if (result.data.message == "Success") {
+          setSuccess(true);
           Router.push(`/auth/register/field3`);
         } else {
-          alert(result.data.display_message);
+          setError(result.data.display_message);
+          setWrong(true);
         }
       });
     } catch (error) {
@@ -78,6 +109,7 @@ export default function Field2() {
 
     getKota();
   }, []);
+
   return (
     <>
       <Navbar />
@@ -287,13 +319,23 @@ export default function Field2() {
                 </div>
               </div>
               <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3">
-                Selanjutnya
+                {loading ? <Loading /> : "Selanjutnya"}
               </button>
             </div>
           </form>
         </div>
       </div>
       {/* <Footer/> */}
+      <Snackbar open={success} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Berhasil!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={wrong} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {erros}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

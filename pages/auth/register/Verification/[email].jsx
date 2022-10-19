@@ -3,10 +3,8 @@ import { useEffect, useState } from "react";
 import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
 import { activate } from "../../../api/restApi";
-import iconSucces from "../../../assets/iconmonstr-check-mark-circle-filled-240.png";
-import iconFail from "../../../assets/iconmonstr-x-mark-circle-filled-240.png";
+
 import MuiAlert from "@mui/material/Alert";
-import { Dialog, Transition } from "@headlessui/react";
 import Router, { useRouter } from "next/router";
 import Loading from "../../../components/Loading";
 import Section from "../../../components/section";
@@ -106,7 +104,8 @@ export default function EmailVer() {
       return;
     }
 
-    setOpen(false);
+    setWrong(false);
+    setNice(false);
   };
   return (
     <>
