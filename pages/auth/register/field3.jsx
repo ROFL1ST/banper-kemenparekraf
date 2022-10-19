@@ -92,7 +92,7 @@ function Utama(params) {
       getSubsub();
     }
   }, [selectedSubsector]);
-  //   console.log(selectedSubsector)
+  console.log(selectedSubsector);
   return (
     <>
       <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
@@ -142,13 +142,17 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id=""
           >
             <option defaultValue={true} value="">
-              {subsub.length != 0
-                ? "Pilih Subsektor Utama"
-                : "Mohon Pilih Subsektor Awal"}
+              {subsub.length == 0 || selectedSubsector == ""
+                ? "Mohon Pilih Subsektor Awal"
+                : "Pilih Sub"}
             </option>
             {!load ? (
               subsub
-                .filter((subsub) => subsub.parentId == selectedSubsector)
+                .filter(
+                  (subsub) =>
+                    subsub.parentId ==
+                    (selectedSubsector == "" ? undefined : selectedSubsector)
+                )
                 .map((i, key) => (
                   <option value={i.Id} key={key}>
                     {i.Nama}
@@ -171,18 +175,9 @@ function Pendukung() {
   return (
     <>
       <div className="flex flex-col lg:w-2/3 w-full  mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-        {/* 1 */}
-
         <Option1 />
         <Option2 />
-
         <Option3 />
-
-        {/* <Option2 /> */}
-
-        {/* <Option3/> */}
-
-        {/* 1 */}
       </div>
     </>
   );
