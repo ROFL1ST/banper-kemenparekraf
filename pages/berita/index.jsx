@@ -33,19 +33,22 @@ export default function Berita() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const cancelButtonRef = useRef(null);
-  const { query } = useRouter();
   var router = useRouter();
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.data);
 
-  const getData = async (sort, subsektor_id, provinsi_id, limit = 12) => {
+  const getData = async (
+    sort,
+    subsektor_id,
+    provinsi_id,
+    kota_id,
+    limit = 12
+  ) => {
     try {
       let respond = await getApi(
         `news?limit=${limit}&${
           subsektor_id !== undefined && `subsektorId=${subsektor_id}`
         }&sort=${sort}&${
           provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
-        }`
+        }&${kota_id !== undefined && `kotaId=${kota_id}`}`
       );
       setData(respond.data.data);
       setLoading(false);
@@ -54,7 +57,6 @@ export default function Berita() {
       console.log(error);
     }
   };
-
   useEffect(() => {
     getData();
     const ac = new AbortController();
@@ -104,6 +106,7 @@ export default function Berita() {
           </h2>
           <div className="flex flex-col gap-y-3 pb-20">
             <MenuProvinsi
+              getData={getData}
               type={"Provinsi"}
               show={false}
               handleFilters={(filters) => handleFilters(filters, "")}
@@ -117,18 +120,13 @@ export default function Berita() {
             <label htmlFor="" className="font-bold text-sm">
               Urutkan:
             </label>
-            <FormControl sx={{ minWidth: 150 }}>
-              <InputLabel id="demo-simple-select-autowidth-label">
-                Berdasarkan...
-              </InputLabel>
-              <Select className="rounded-xl " autoWidth label="Berdasarkan...">
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={"admin"}>Admin</MenuItem>
-                <MenuItem value={"user"}>User</MenuItem>
-              </Select>
-            </FormControl>
+            <select
+              defaultValue={"Pilih"}
+              className="outline-none border px-3 py-1.5 rounded-lg "
+            >
+              <option value="admin">admin</option>
+              <option value="author">author</option>
+            </select>
           </div>
           <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 lg:mt-0 mt-10">
             {/* Bikin Disini Sidebar buat filter */}
@@ -153,7 +151,7 @@ export default function Berita() {
             {loading ? (
               loadingLength.map((i, key) => <CardLoading key={key} />)
             ) : data.length != 0 ? (
-              data.map((i, key) => <Card data={i} key={key} />)
+              data?.map((i, key) => <Card data={i} key={key} />)
             ) : (
               <>
                 <div className="relative justify-center mx-auto   items-center flex flex-col mt-10 pb-20">
@@ -445,7 +443,11 @@ function Sidebar({ setSide, side, getData }) {
                 Filter By
               </h2>
               <div className="flex flex-col gap-y-3 pb-10">
-                <MenuProvinsi type={"Provinsi"} show={false} />
+                <MenuProvinsi
+                  type={"Provinsi"}
+                  show={false}
+                  getData={getData}
+                />
                 <MenuSubsector
                   getData={getData}
                   type={"Subsector"}

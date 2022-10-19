@@ -4,9 +4,10 @@ let initialState = {
   sort: "terbaru",
   subsektor_id: undefined,
   provinsi_id: undefined,
+  kota_id:undefined
 };
 
-export const dataInput = createSlice({
+export const beritaInfo = createSlice({
   name: "data",
   initialState: initialState,
   reducers: {
@@ -14,14 +15,11 @@ export const dataInput = createSlice({
       const data = action.payload;
       state.sort = data.sort;
       state.subsektor_id = data.subsektor_id;
-    },
-    resetData: (state) => {
-      state.sort = "terbaru";
-      state.provinsi_id = null;
-      state.subsektor_id = null;
+      state.provinsi_id = data.provinsi_id
+      state.kota_id = data.kota_id
     },
   },
 });
 
-export const { changeState, resetData } = dataInput.actions;
-export default dataInput.reducer;
+export const { changeState, resetData } = beritaInfo.actions;
+export default beritaInfo.reducer;
