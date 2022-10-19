@@ -65,7 +65,7 @@ export default function Field2() {
         console.log(result.data);
         if (result.data.message == "Success") {
           setSuccess(true);
-          Router.push(`/auth/register/field3`);
+          Router.push(`/auth/register/field3?kode=${kode}`);
         } else {
           setError(result.data.display_message);
           setWrong(true);
