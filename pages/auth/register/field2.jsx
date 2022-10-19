@@ -112,7 +112,7 @@ export default function Field2() {
                                 </div>
 
                             </div>
-                            <div className=" border-b-orange-600 border-b-2 h-4 w-3/4 mx-auto m-10 "></div>
+                            <div className=" border-b-yellow-400 border-b-2 h-4 w-3/4 mx-auto m-10 "></div>
 
                             <div className="flex lg:w-2/3 w-1/2 sm:flex-col flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
 
