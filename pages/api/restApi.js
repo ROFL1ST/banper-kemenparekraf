@@ -121,7 +121,7 @@ function postFeed(path_url, token, data, method) {
 }
 
 export function postDoc(path_url, token, data, method) {
-  console.log(data)
+  console.log(data);
   return new Promise((resolve, reject) => {
     var config = {
       method: method,
@@ -142,6 +142,7 @@ export function postDoc(path_url, token, data, method) {
   });
 }
 function login(path_url, param) {
+  console.log(param);
   return new Promise((resolve, reject) => {
     var config = {
       method: "post",
@@ -180,7 +181,7 @@ function putViews(path_url) {
 }
 
 export function activate(path_url, param) {
-  console.log(param)
+  console.log(param);
   return new Promise((resolve, reject) => {
     var config = {
       method: "put",
