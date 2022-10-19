@@ -193,33 +193,41 @@ function Pendukung() {
 function Option1() {
   return (
     <>
-    
-      <div className="relative flex gap-x-5 w-full">
-        
-        <select
-          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+      <div className="relative flex lg:flex-row flex-col gap-x-5 w-full">
+        <div className="w-full">
+          <label className="leading-7 text-sm text-gray-600">
+            *Subsektor Pendukung
+          </label>
+          <select
+            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
  border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          name=""
-          id=""
-        >
-          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-          <option value="1">hello</option>
-          <option value="2">hello2</option>
-        </select>
-        <select
-          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+            name=""
+            id=""
+          >
+            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+            <option value="1">hello</option>
+            <option value="2">hello2</option>
+          </select>
+        </div>
+        <div className="w-full">
+          <label className="leading-7 text-sm text-gray-600">
+            *Subsektor Pendukung
+          </label>
+          <select
+            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
  border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          name=""
-          id=""
-        >
-          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-          <option value="1">hello</option>
-          <option value="2">hello2</option>
-        </select>
+            name=""
+            id=""
+          >
+            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+            <option value="1">hello</option>
+            <option value="2">hello2</option>
+          </select>
+        </div>
       </div>
     </>
   );
@@ -228,7 +236,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 function Option2() {
   return (
     <>
-      <div className="relative flex gap-x-5 w-full">
+      <div className="relative flex lg:flex-row flex-col gap-x-5 w-full">
         <select
           className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -261,7 +269,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 function Option3() {
   return (
     <>
-      <div className="relative flex gap-x-5 w-full">
+      <div className="relative flex lg:flex-row flex-col gap-x-5 w-full">
         <select
           className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
