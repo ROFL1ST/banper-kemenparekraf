@@ -170,16 +170,19 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 function Pendukung() {
   return (
     <>
-      <div className="grid lg:w-2/3 w-full sm:grid-row grid-cols-2 mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+      <div className="flex flex-col lg:w-2/3 w-full  mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
         {/* 1 */}
 
-          <Option1/>
-          <Option2/>
-          {/* <Option3/> */}
+        <Option1 />
+        <Option2 />
+
+        <Option3 />
+
+        {/* <Option2 /> */}
+
+        {/* <Option3/> */}
 
         {/* 1 */}
-        
-       
       </div>
     </>
   );
@@ -187,110 +190,103 @@ function Pendukung() {
 //SUBSEKTOR PENDUKUNG 1//
 
 //SUBSEKTOR PENDUKUNG 2//
- function Option1(){
-    return(
-        <>
-        <div className="relative flex-grow w-full">
+function Option1() {
+  return (
+    <>
+    
+      <div className="relative flex gap-x-5 w-full">
         
         <select
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
  border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-          >
-            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-            <option value="1">hello</option>
-            <option value="2">hello2</option>
-          </select>
-          <select
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
- py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
- border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-          >
-            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-            <option value="1">hello</option>
-            <option value="2">hello2</option>
-          </select>
-        </div>
-
-
-        </>
-    )
- }
-
- function Option2(){
-    return(
-        <>
-        <div className="relative flex-grow w-full">
-        
+          name=""
+          id=""
+        >
+          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+          <option value="1">hello</option>
+          <option value="2">hello2</option>
+        </select>
         <select
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
  border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-          >
-            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-            <option value="1">hello</option>
-            <option value="2">hello2</option>
-          </select>
-          <select
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
- py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
- border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-          >
-            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-            <option value="1">hello</option>
-            <option value="2">hello2</option>
-          </select>
-        </div>
+          name=""
+          id=""
+        >
+          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+          <option value="1">hello</option>
+          <option value="2">hello2</option>
+        </select>
+      </div>
+    </>
+  );
+}
 
-
-        </>
-    )
- }
-
- function Option3(){
-    return(
-        <>
-        <div className="relative flex-grow w-full">
-        
+function Option2() {
+  return (
+    <>
+      <div className="relative flex gap-x-5 w-full">
         <select
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
  border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-          >
-            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-            <option value="1">hello</option>
-            <option value="2">hello2</option>
-          </select>
-          <select
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+          name=""
+          id=""
+        >
+          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+          <option value="1">hello</option>
+          <option value="2">hello2</option>
+        </select>
+        <select
+          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
  border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-          >
-            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
-            <option value="1">hello</option>
-            <option value="2">hello2</option>
-          </select>
-        </div>
+          name=""
+          id=""
+        >
+          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+          <option value="1">hello</option>
+          <option value="2">hello2</option>
+        </select>
+      </div>
+    </>
+  );
+}
 
-
-        </>
-    )
- }
+function Option3() {
+  return (
+    <>
+      <div className="relative flex gap-x-5 w-full">
+        <select
+          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+ py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+ border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          name=""
+          id=""
+        >
+          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+          <option value="1">hello</option>
+          <option value="2">hello2</option>
+        </select>
+        <select
+          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+ py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+ border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          name=""
+          id=""
+        >
+          <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+          <option value="1">hello</option>
+          <option value="2">hello2</option>
+        </select>
+      </div>
+    </>
+  );
+}
