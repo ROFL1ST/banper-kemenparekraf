@@ -97,22 +97,21 @@ function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
             <input
               type="radio"
               defaultChecked={false}
-              onChange={(e) => {
-                if (e.target.checked) {
-                  subsektorId.push(data.Id);
-                } else {
-                  const index = subsektorId.indexOf(data.Id);
-                  if (index > -1) {
-                    subsektorId.splice(index, 1);
-                  }
-                }
+              onChange={() => {
                 dispatch(
                   changeState({
                     sort: state.sort,
-                    subsektor_id: subsektorId.toString(),
+                    subsektor_id: data.Id,
+                    provinsi_id: state.provinsi_id,
+                    kota_id: state.kota_id,
                   })
                 );
-                // getData(state.sort, subsektorId.toString(), undefined);
+                getData(
+                  state.sort,
+                  state.subsektor_id,
+                  state.provinsi_id,
+                  state.kota_id
+                );
               }}
               id={data.Id}
               name="subsektor"
@@ -129,11 +128,13 @@ function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
                   .map((i, key) =>
                     menu2 ? (
                       <ChevronUpIcon
+                        key={key}
                         className="ml-2 -mr-1 h-5 w-5 "
                         aria-hidden="true"
                       />
                     ) : (
                       <ChevronDownIcon
+                        key={key}
                         className="ml-2 -mr-1 h-5 w-5 "
                         aria-hidden="true"
                       />
