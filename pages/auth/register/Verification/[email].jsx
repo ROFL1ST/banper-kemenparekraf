@@ -5,11 +5,15 @@ import Navbar from "../../../components/navbar";
 import { activate } from "../../../api/restApi";
 import iconSucces from "../../../assets/iconmonstr-check-mark-circle-filled-240.png";
 import iconFail from "../../../assets/iconmonstr-x-mark-circle-filled-240.png";
-
+import MuiAlert from "@mui/material/Alert";
 import { Dialog, Transition } from "@headlessui/react";
 import Router, { useRouter } from "next/router";
 import Loading from "../../../components/Loading";
-
+import Section from "../../../components/section";
+import { Snackbar } from "@mui/material";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function EmailVer() {
   useEffect(() => {
     document.title = "Verifikasi";
@@ -41,6 +45,8 @@ export default function EmailVer() {
   const [nice, setNice] = useState(false);
   const [wrong, setWrong] = useState(false);
   const [plis, setPlis] = useState(false);
+  const [erros, setError] = React.useState("");
+  const [success, setSuccess] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,22 +57,21 @@ export default function EmailVer() {
         setLoad(false);
         console.log(result.data);
         if (code.map((e) => e).join("").length < 6) {
-          setPlis(true);
-          setTimeout(() => {
-            setPlis(false);
-          }, 3000);
+          setWrong(true);
+          setError("Mohon Untuk Mengisi Kode OTP Dengan Benar");
         } else {
           if (result.data.message === "Success") {
             setNice(true);
+            setSuccess("Berhasil!, Anda akan di alihkan ke halaman form");
             setcode(new Array(6).fill(""));
             setTimeout(() => {
-              Router.push("/auth/login");
+              Router.push(
+                `/auth/register/field2?kode=${code.map((e) => e).join("")}`
+              );
             }, 2000);
           } else {
             setWrong(true);
-            setTimeout(() => {
-              setWrong(false);
-            }, 3000);
+            setError("Kode OTP Yang Anda Masukkan Salah");
           }
         }
       });
@@ -95,24 +100,33 @@ export default function EmailVer() {
   var router = useRouter();
 
   const { email } = router.query;
+  // pop
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+  };
   return (
     <>
       <Navbar />
       <form
         onSubmit={handleSubmit}
-        className=" px-5 py-44 mx-auto flex justify-center "
+        className=" px-5 py-44 mx-auto flex flex-col items-center justify-center "
       >
-        <div className=" bg-white rounded-lg p-8 flex flex-col  xl:w-1/2 lg:w-3/4 sm:w-11/12 mt-10  relative z-10 shadow-md border-black border-2">
+        <Section text={"Verifikasi"} />
+        <div className="  p-8 flex flex-col  xl:w-1/2 lg:w-3/4 sm:w-11/12 mt-10  relative z-10 ">
           <div>
-            <h2 className="text-gray-900 text-2xl mb-1  title-font text-center font-bold">
-              Verifikasi Alamat Email mu
+            <h2 className="text-gray-900 text-xl mb-5  title-font text-center font-medium">
+              Verifikasi Akun Email Anda
             </h2>
-            <p className="leading-relaxed  text-gray-600 text-center">
-              Kami telah mengirim 6 digit kode ke {email}. Mohon untuk mengisi
-              kode dibawah untuk mengkonfirmasi Alamat Email mu.
+            <p className="leading-relaxed text-sm  text-gray-600 text-center">
+              Kami telah mengirim 6 digit kode ke {email}.
+              <br className="lg:flex hidden" /> Mohon untuk mengisi kode dibawah
+              untuk mengkonfirmasi Alamat Email mu.
             </p>
-            <div className="flex flex-row justify-center mt-5 ">
+            <div className="flex flex-row justify-center mt-5 mb-10">
               {code.map((i, index) => (
                 <input
                   key={index}
@@ -121,214 +135,39 @@ export default function EmailVer() {
                   type="text"
                   value={i}
                   onPaste={onPaste}
-                  className="2xl:h-28 lg:h-24 lg:w-16 h-16 2xl:w-20 w-10 2xl:m-5 lg:m-3 m-1 font-semibold lg:text-5xl text-xl text-center lg:rounded-xl rounded-lg border-2 border-[#627AD1]"
-                  placeholder="0"
+                  className="2xl:h-14  lg:w-16 h-16 2xl:w-14 w-14 2xl:m-3 lg:m-3 m-2 font-semibold lg:text-2xl text-xl text-center lg:rounded-xl rounded-lg border-2 border-[#627AD1]"
+                  placeholder="__"
                   onChange={(e) => handleChange(e.target, index)}
                   onFocus={(e) => e.target.select}
                   autoFocus={index === 0} // add this line
                 />
               ))}
             </div>
-            <p className="text-s text-gray-500 mt-3 text-center">
-              Jika anda tidak meminta kode, anda bisa mengabaikan email ini.
-            </p>
+
             <button
               onClick={() => {
                 setLoad(true);
               }}
               type={"submit"}
-              className="text-white bg-[#142b51] border-0 py-2 px-6 mt-4 focus:outline-none hover:bg-blue-900 rounded text-lg flex justify-center w-3/4 mx-auto"
+              className="text-white bg-[#142b51] border-0 py-2 px-6 mt-4 focus:outline-none hover:bg-blue-900  text-lg flex justify-center w-1/2 mx-auto rounded-xl"
             >
-              {load ? <Loading /> : "Submit"}
+              {load ? <Loading /> : nice ? "Success" : "submit"}
             </button>
           </div>
         </div>
       </form>
-      <Success
-        nice={nice}
-        setNice={setNice}
-        cancelButtonRef={cancelButtonRef}
-      />
-      <Fail
-        wrong={wrong}
-        setWrong={setWrong}
-        cancelButtonRef={cancelButtonRef}
-      />
-      <Fill plis={plis} setPlis={setPlis} cancelButtonRef={cancelButtonRef} />
+
       <Footer />
-    </>
-  );
-}
-
-function Success({ nice, setNice, cancelButtonRef, successOption }) {
-  return (
-    <>
-      <Transition.Root show={nice} as={React.Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-50"
-          initialFocus={cancelButtonRef}
-          onClose={setNice}
-        >
-          <Transition.Child
-            as={React.Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <Transition.Child
-                as={React.Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  2xl:w-1/4 xl:w-1/4 lg:w-1/3  md:w-1/2 w-3/4  p-10">
-                  <div className="flex flex-col justify-center items-center space-y-5">
-                    {/* <Lottie
-                      options={successOption}
-                      width={200}
-                      height={200}
-                      isStopped={false}
-                      isPaused={false}
-                    ></Lottie> */}
-                    <img src={iconSucces.src} className="w-40" alt="" />
-                    <p className="text-green-600 font-bold text-xl">
-                      Berhasil <br /> Anda Akan dilarikan ke Login Page
-                    </p>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-    </>
-  );
-}
-
-function Fail({ wrong, setWrong, cancelButtonRef, wrongOption }) {
-  return (
-    <>
-      <Transition.Root show={wrong} as={React.Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-50"
-          initialFocus={cancelButtonRef}
-          onClose={setWrong}
-        >
-          <Transition.Child
-            as={React.Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <Transition.Child
-                as={React.Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  2xl:w-1/4 xl:w-1/4 lg:w-1/3  md:w-1/2 w-3/4  p-10">
-                  <div className="flex flex-col justify-center items-center mx-auto space-y-5">
-                    {/* <Lottie
-                      options={wrongOption}
-                      width={150}
-                      height={150}
-                      isStopped={false}
-                      isPaused={false}
-                    ></Lottie> */}
-                    <img src={iconFail.src} className="w-40" alt="" />
-
-                    <p className="text-red-600 font-bold text-xl">
-                      Kode OTP Salah
-                    </p>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-    </>
-  );
-}
-
-function Fill({ plis, setPlis, cancelButtonRef, wrongOption }) {
-  return (
-    <>
-      <Transition.Root show={plis} as={React.Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-50"
-          initialFocus={cancelButtonRef}
-          onClose={setPlis}
-        >
-          <Transition.Child
-            as={React.Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <Transition.Child
-                as={React.Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8 2xl:w-1/4 xl:w-1/4 lg:w-1/3  md:w-1/2 w-3/4   p-10">
-                  <div className="flex flex-col justify-center items-center space-y-5">
-                    {/* <Lottie
-                      options={wrongOption}
-                      width={150}
-                      height={150}
-                      isStopped={false}
-                      isPaused={false}
-                    ></Lottie> */}
-                    <img src={iconFail.src} className="w-40" alt="" />
-
-                    <p className="text-red-600 font-bold text-xl">
-                      Mohon Mengisi Kode OTP dengan benar
-                    </p>
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
+      <Snackbar open={wrong} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {erros}
+        </Alert>
+      </Snackbar>
+      <Snackbar open={nice} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          {success}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
