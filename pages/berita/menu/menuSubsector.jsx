@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -15,6 +16,8 @@ export default function MenuSubsector({ type, show, getData }) {
   const [subsector, setSubsector] = useState([]);
   const [load, setLoad] = useState(true);
   const subsektorId = [];
+  const state = useSelector((state) => state.data);
+  const dispatch = useDispatch();
 
   const getSubsector = async () => {
     try {
@@ -30,6 +33,7 @@ export default function MenuSubsector({ type, show, getData }) {
   useEffect(() => {
     getSubsector();
   }, []);
+
   return (
     <>
       {/* Filter 1 */}
@@ -96,8 +100,14 @@ function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              id=""
-              name=""
+              onChange={(e) => {
+                if (e.target.checked) {
+                  subsektorId.push(data.Id);
+                } else {
+                  subsektorId.splice(subsektorId.indexOf(data.Id), 1);
+                }
+                console.log(subsektorId);
+              }}
               defaultChecked={false}
               required
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
