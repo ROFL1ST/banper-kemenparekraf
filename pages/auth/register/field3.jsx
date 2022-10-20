@@ -78,7 +78,7 @@ export default function Field3() {
 
             <div className="  border-10 border-b-orange-600 ">
               <button
-                onClick={(e) => {}}
+                onClick={(e) => { }}
                 type={"submit"}
                 className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 md:mt-[300px] md:mb-[100px] mt-[150px] mb-[20px]  rounded-xl text-xl py-3 "
               >
@@ -160,7 +160,7 @@ function Utama({ selectedUtama, setSelectedUtama }) {
   }, [selectedSub]);
   return (
     <>
-      <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+      <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
         {/* sub1 */}
         <div className="relative flex-grow w-full">
           <label className="leading-7 text-sm text-gray-600">
@@ -229,9 +229,74 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             )}
           </select>
         </div>
-        {/* sub2 */}
+      </div>
+      <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+      <SubPen/>
       </div>
     </>
   );
 }
 // Utama
+
+function SubPen (){
+  return(
+    <>
+      <div className="relative  flex-grow w-full">
+          <label className="leading-7 text-sm text-gray-600">
+            *Subsektor Pendukung
+          </label>
+          <select
+            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+ py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+ border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            name=""
+            id=""
+          >
+            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+            <option value="1">hello</option>
+            <option value="2">hello2</option>
+          </select>
+          <select
+            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+ py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+ border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            name=""
+            id=""
+          >
+            <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+            <option value="1">hello</option>
+            <option value="2">hello2</option>
+          </select>
+        </div>
+
+          <div className="relative  flex-grow w-full">
+            <select
+              className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+ py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+ border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              name=""
+              id=""
+            >
+              <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+              <option value="1">hello</option>
+              <option value="2">hello2</option>
+            </select>
+            <select
+              className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+ py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+ border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              name=""
+              id=""
+            >
+              <option defaultValue={true}>Pilih Subsektor Pendukung</option>
+              <option value="1">hello</option>
+              <option value="2">hello2</option>
+            </select>
+          </div>
+    </>
+  )
+}
