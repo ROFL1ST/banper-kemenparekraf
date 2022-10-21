@@ -276,7 +276,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           <label className="leading-7 text-sm text-gray-600">
             *Subsektor Utama
           </label>
-          <select 
+          <select
             onChange={handleSelected}
             className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -397,8 +397,9 @@ function SubPen({ selectedPendukung, setSelectedPendukung }) {
         .map((i) => i.replace(regex, ""))
         .join(", ")
     );
-    console.log(selectedPendukung);
+    // console.log(selectedPendukung);
   }, [input]);
+  console.log(input.length)
   return (
     <>
       <div className="flex-flex-col w-full">
@@ -435,6 +436,36 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 )}
               </select>
             ))
+          ) : (
+            <></>
+          )}
+          {input.length < 4 ? (
+            <div
+              onClick={() => {
+                let newInput = Array(1).fill("");
+                setInput([...input, newInput]);
+              }}
+              className="form-select form-select-sm appearance-none  w-full  mb-5 flex justify-center gap-x-3 cursor-pointer items-center px-3
+            py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+            border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            >
+              Tambah
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </div>
           ) : (
             <></>
           )}
