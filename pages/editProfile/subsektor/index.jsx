@@ -201,6 +201,8 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
       });
     } catch (error) {
       console.log(error);
+      setLoading(false);
+
     }
   };
   //   handle
@@ -291,7 +293,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 ? "Mohon Pilih Subsektor Awal"
                 : "Pilih Sub"}
             </option>
-            {!load ? (
+            {!loading ? (
               subsub
                 .filter(
                   (subsub) =>
@@ -314,7 +316,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 }
 // Utama
 
-function SubPen({ selectedPendukung, setSelectedPendukung }) {
+function SubPen({  setSelectedPendukung }) {
   // edit
   const [token, setToken] = React.useState("");
 
@@ -323,7 +325,7 @@ function SubPen({ selectedPendukung, setSelectedPendukung }) {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        console.log(result.data.data[0]);
+        // console.log(result.data.data[0]);
       });
     } catch (error) {
       console.log(error);
@@ -373,7 +375,6 @@ function SubPen({ selectedPendukung, setSelectedPendukung }) {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    let kosong = "";
 
     if (user.length != 0) {
       if (user[0].SubsektorPendukung.length <= 2) {
@@ -399,7 +400,7 @@ function SubPen({ selectedPendukung, setSelectedPendukung }) {
     );
     // console.log(selectedPendukung);
   }, [input]);
-  console.log(input.length)
+  // console.log(input.length)
   return (
     <>
       <div className="flex-flex-col w-full">
