@@ -9,7 +9,6 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import { getApi, getPropose, login, PostFeed } from "../../api/restApi";
 import Loading from "../../components/Loading";
-const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -30,6 +29,7 @@ export default function Subsektor() {
 
   // pendukung
   const [selectedPendukung, setSelectedPendukung] = React.useState();
+  console.log(selectedPendukung)
   // error
   const [erros, setError] = React.useState(false);
   const [success, setSucess] = React.useState(false);
@@ -396,18 +396,21 @@ function SubPen({ setSelectedPendukung }) {
           setLoading(false);
         }, 3000);
       } else {
-        setInput(user[0].SubsektorPendukung.split(""));
+        setInput(user[0].SubsektorPendukung.split(",").slice(0, input.length));
         console.log(input);
+        setLoading(false);
+        console.log("HAI")
       }
     }
   }, [user]);
-
+  const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
+  console.log(input)
   React.useEffect(() => {
     setSelectedPendukung(
       input
         .filter((i) => i != "")
         .map((i) => i.replace(regex, ""))
-        .join(", ")
+        .join(",")
     );
     // console.log(selectedPendukung);
   }, [input]);
@@ -457,11 +460,13 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               >
                 Loading
-                <Loading />
+                <div className="spinner-container flex justify-center text-black">
+                  <div className="loading-spinner"></div>
+                </div>
               </div>
             </>
           )}
-          {input.length < 4 ? (
+          {input.length > 4 ? (
             <div
               onClick={() => {
                 let newInput = Array(1).fill("");

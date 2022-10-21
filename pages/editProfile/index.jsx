@@ -36,7 +36,7 @@ export default function EditProfile() {
   const [loading, setLoading] = useState(true);
   const [load, setLoad] = useState(false);
   const [user, setUser] = useState([]);
-
+  const [error, setError] = useState({ msg: "", status: false });
   const getData = async (value) => {
     try {
       await getPropose("user", value).then((result) => {

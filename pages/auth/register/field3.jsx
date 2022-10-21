@@ -95,7 +95,7 @@ export default function Field3() {
                   e.preventDefault();
                   if (
                     selectedUtama == "" ||
-                    selectedPendukung.length < 10 ||
+                    selectedPendukung == "" ||
                     selectedKlasifikasi == undefined
                   ) {
                     setError(true);
@@ -109,7 +109,7 @@ export default function Field3() {
                   }
                 }}
                 type={"submit"}
-                className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 md:mt-[300px] md:mb-[100px] mt-[50px] mb-[20px]  rounded-xl text-xl py-3 "
+                className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 md:mt-[300px] md:mb-[100px] mt-[150px] mb-[20px]  rounded-xl text-xl py-3 "
               >
                 {!loading ? "Simpan" : <Loading />}
               </button>
