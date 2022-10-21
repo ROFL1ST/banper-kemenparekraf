@@ -40,7 +40,7 @@ export default function Navbar({ click }) {
       {/* Dekstop */}
       <div className="fixed w-screen z-40">
         <div className="bg-[#142b51] h-6"></div>
-        <div className="bg-blue-400 w-full h-20 bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
+        <div className="w-full h-20 bg-blue-400   bg-opacity-20 backdrop-blur-lg drop-shadow-lg flex items-center justify-between px-4 lg:px-16">
           <Link href={"/home"}>
             <img src={logo.src} alt={"logo"} className="h-36" />
           </Link>
@@ -65,7 +65,7 @@ export default function Navbar({ click }) {
                 pathname={pathname}
               />
             </div>
-            <Link href={"/berita?type=berita&sort=terbaru"}>
+            <Link href={"/berita"}>
               <p
                 className={`hover:text-gray-900 text-sm outline-2 cursor-pointer ${
                   pathname === "/berita" || pathname === "/berita/Detail/[id]"
@@ -188,7 +188,7 @@ export default function Navbar({ click }) {
             </div>
           </Transition>
 
-          <Link href={"/berita?type=berita&sort=terbaru"}>
+          <Link href={"/berita"}>
             <p
               className={`cursor-pointer  ${
                 pathname === "/berita"
@@ -813,22 +813,31 @@ function Downloader({ setOpen, setCheck }) {
   const templateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    setOpen(false);
-    setCheck(false);
-    window.open(templateUrl);
-    Router.push(pathname == "/auth/login" || pathname == "/auth/EmailVerification" ? "daftar" : "auth/daftar");
-  };
+ 
 
   return (
     <a
-      href={juknisUrl}
-      onClick={handleClick}
+      onClick={() => {
+        window.open(juknisUrl);
+
+        setOpen(false);
+        setCheck(false);
+        setTimeout(() => {
+          const winpop = window.open(templateUrl);
+         
+          if (!winpop || winpop.closed) {
+            alert("Please Allow Pop Up");
+          }
+          Router.push(
+            pathname == "/auth/login" || pathname == "/auth/EmailVerification"
+              ? "register/field"
+              : "auth/register/field"
+          );
+        }, 1000);
+      }}
       className="close mt-3 sm:mt-0 md:mt-0 lg:mt-0 22xl:mt-0 2xl:mt-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:w-auto lg:text-sm"
     >
       Accept
     </a>
   );
 }
-

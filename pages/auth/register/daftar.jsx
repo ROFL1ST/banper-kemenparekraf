@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Background from "../components/background";
-import Footer from "../components/footer";
-import Navbar from "../components/navbar";
-import Section from "../components/section";
+import Background from "../../components/background";
+import Footer from "../../components/footer";
+import Navbar from "../../components/navbar";
+import Section from "../../components/section";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getApi, login } from "../api/restApi";
+import { getApi, login } from "../../api/restApi";
 import Router from "next/router";
-import Loading from "../components/Loading";
+import Loading from "../../components/Loading";
+
 export default function Daftar() {
   useEffect(() => {
     document.title = "Daftar";
@@ -103,7 +104,7 @@ export default function Daftar() {
         <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
           <Section text={"Daftar"} />
           <form className="mb-20" onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
+          <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
               <div className="relative flex-grow w-full">
                 <label className="leading-7 text-sm text-gray-600">
                   *Nama Komunitas/ Pemerintah Daerah/ Lembaga Adat <br />

@@ -85,6 +85,7 @@ export default function Berita() {
     }
   });
 
+  const [prov, setProv] = useState(0);
   const [filters, setFilters] = useState({
     prov: [],
     sub: [],

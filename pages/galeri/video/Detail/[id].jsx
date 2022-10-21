@@ -11,10 +11,11 @@ import parse from "html-react-parser";
 
 export default function Detail() {
   const loadingLength = [1, 2, 3, 4, 5];
+  const [nama, setNama] = React.useState("");
 
   React.useEffect(() => {
-    document.title = "Detail Video";
-  });
+    document.title = nama;
+  }, [nama]);
   //   console.log(text.length);
   var router = useRouter();
 
@@ -72,7 +73,7 @@ export default function Detail() {
       <Navbar />
       <div className="lg:pt-32 pt-[104px] pb-20  flex lg:flex-row flex-col h-full lg:justify-between justify-center 2xl:px-16 xl:px-10 lg:px-5 px-0 lg:gap-x-10 gap-x-0">
         {!loading ? (
-          <Video data={video} />
+          <Video data={video} setNama={setNama} />
         ) : (
           <>
             <VideoLoading />
@@ -110,7 +111,7 @@ export default function Detail() {
   );
 }
 
-function Video({ data }) {
+function Video({ data, setNama }) {
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
@@ -118,6 +119,10 @@ function Video({ data }) {
   });
 
   const judul = data.NamaKota.toLowerCase();
+
+  React.useEffect(() => {
+    setNama(data.NamaKota.toLowerCase());
+  }, [data]);
   return (
     <>
       <div className="left  xl:w-3/4 lg:w-4/6 w-full h-full flex flex-col pb-20">
@@ -126,7 +131,6 @@ function Video({ data }) {
           title="yt"
           src={data.url + "?autoplay=1"}
           frameBorder={1}
-          allowFullScreen
         ></iframe>
         <div className="lg:px-0 px-5">
           <h1 className="text-xl font-bold pb-2 capitalize">{judul}</h1>

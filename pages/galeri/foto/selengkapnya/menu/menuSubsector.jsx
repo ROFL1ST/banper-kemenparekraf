@@ -1,23 +1,25 @@
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { getApi } from "../../api/restApi";
-import { useEffect, useRef, useState, Fragment } from "react";
 
+import { useEffect, useState, Fragment } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeState } from "../../../redux/actions";
 
-export default function MenuProvinsi({ type, show, handleFilters, getData }) {
+import { getApi } from "../../../../api/restApi";
+
+export default function MenuSubsector({ type, show, getData }) {
   const [menu1, setMenu1] = useState(show);
+  // getData
+  const [subsector, setSubsector] = useState([]);
   const [load, setLoad] = useState(true);
-  const [provinsi, setProvinsi] = useState([]);
+  const subsektorId = [];
 
-  const getProvinsi = async () => {
+  const getSubsector = async () => {
     try {
-      await getApi("master/provinsi").then((val) => {
-        setProvinsi(val.data.data);
+      await getApi("master/subsektor").then((val) => {
+        setSubsector(val.data.data);
         setLoad(false);
       });
     } catch (er) {
@@ -26,12 +28,12 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
     }
   };
   useEffect(() => {
-    getProvinsi();
+    getSubsector();
   }, []);
   return (
     <>
       {/* Filter 1 */}
-      <div className="flex flex-col space-y-2">
+      <div className="flex flex-col space-y-2 ">
         <div className={"cursor-pointer flex items-center space-x-1"}>
           <div
             className="inline-flex items-center justify-between w-full"
@@ -52,13 +54,15 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
           </div>
         </div>
         {!load ? (
-          provinsi.map((i, key) => (
-            <Filter2
+          subsector.map((i, key) => (
+            <Subsektor
+              subsektorId={subsektorId}
               getData={getData}
               menu={menu1}
               data={i}
               key={key}
-              handleFilters={handleFilters}
+              subsector={subsector}
+              load={load}
             />
           ))
         ) : (
@@ -71,58 +75,11 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
   );
 }
 
-function Filter2({ data, menu, getData }) {
+function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
   const [menu2, setMenu2] = useState(false);
-
-  // kota
-  // getData
-  const [kota, setKota] = useState([]);
-  const [load, setLoad] = useState(true);
-
-  const getKota = async () => {
-    try {
-      await getApi(`master/kota?ProvinsiID=${data.Id}`).then((val) => {
-        setKota(val.data.data);
-        setLoad(false);
-      });
-    } catch (er) {
-      console.log(er);
-      setLoad(false);
-    }
-  };
-  useEffect(() => {
-    getKota();
-  }, []);
-
-  const [check, setCheck] = useState(false);
+  const state = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
-  // const handleChange = (value) => {
-  //   const currentIndex = check.indexOf(value);
-  //   const newChecked = [...check];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //   setCheck(newChecked);
-  //   handleFilters(newChecked);
-  // };
-  const state = useSelector((state) => state.data);
-  const handleChange = (e) => {
-    setCheck(!check);
-    setMenu2(!menu2);
-    dispatch(
-      changeState({
-        sort: state.sort,
-        subsektor_id: state.subsektor_id,
-        provinsi_id: e.target.id,
-        kota_id: state.kota_id,
-      })
-    );
-    getData(state.sort, state.subsektor_id, state.provinsi_id, state.kota_id);
-  };
   return (
     <>
       <Transition
@@ -135,7 +92,7 @@ function Filter2({ data, menu, getData }) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95 -translate-y-1"
       >
-        <div className="flex flex-col space-y-2 space-x-3 ">
+        <div className="flex flex-col space-y-2 space-x-3">
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
@@ -149,24 +106,34 @@ function Filter2({ data, menu, getData }) {
               className="inline-flex items-center justify-between w-full"
               onClick={() => setMenu2(!menu2)}
             >
-              <p>{data.NamaProvinsi}</p>
-              {menu2 ? (
-                <ChevronUpIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
+              <p>{data.Nama}</p>
+              {!load ? (
+                subsector
+                  .filter((subsector) => subsector.parentId == data.Id)
+                  .map((i, key) =>
+                    menu2 ? (
+                      <ChevronUpIcon
+                        className="ml-2 -mr-1 h-5 w-5 "
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <ChevronDownIcon
+                        className="ml-2 -mr-1 h-5 w-5 "
+                        aria-hidden="true"
+                      />
+                    )
+                  )
               ) : (
-                <ChevronDownIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
+                <></>
               )}
             </div>
           </div>
           {!load ? (
-            kota.map((i, key) => (
-              <Filter3 getData={getData} key={key} data={i} menu2={menu2} />
-            ))
+            subsector
+              .filter((subsector) => subsector.parentId == data.Id)
+              .map((i, key) => (
+                <SubSubsektor menu2={menu2} data={i} key={key} />
+              ))
           ) : (
             <></>
           )}
@@ -176,9 +143,9 @@ function Filter2({ data, menu, getData }) {
   );
 }
 
-function Filter3({ data, menu2, getData }) {
-  const state = useSelector((state) => state.data);
-  const dispatch = useDispatch();
+function SubSubsektor({ data, menu2 }) {
+  // const [menu3, setMenu3] = useState(false);
+
   return (
     <>
       <Transition
@@ -202,7 +169,7 @@ function Filter3({ data, menu2, getData }) {
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
             <div className="inline-flex items-center justify-between w-full">
-              <p>{data.NamaKota}</p>
+              <p>{data.Nama}</p>
             </div>
           </div>
         </div>

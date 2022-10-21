@@ -114,20 +114,30 @@ export default function Proposal() {
                   <Table>
                     <TableHead>
                       <TableRow>
-                        <TableCell className="capitalize font-bold text-blue-900">
-                          no
+                        <TableCell>
+                          <p className="capitalize font-bold text-blue-900">
+                            no
+                          </p>
+                        </TableCell>
+                        <TableCell>
+                          <p className="capitalize font-bold text-blue-900">
+                            judul
+                          </p>
+                        </TableCell>
+                        <TableCell>
+                          <p className="capitalize font-bold text-blue-900">
+                            jenis bantuan
+                          </p>
                         </TableCell>
                         <TableCell className="capitalize font-bold text-blue-900">
-                          judul
+                          <p className="capitalize font-bold text-blue-900">
+                            status
+                          </p>
                         </TableCell>
                         <TableCell className="capitalize font-bold text-blue-900">
-                          jenis bantuan
-                        </TableCell>
-                        <TableCell className="capitalize font-bold text-blue-900">
-                          status
-                        </TableCell>
-                        <TableCell className="capitalize font-bold text-blue-900">
-                          actions
+                          <p className="capitalize font-bold text-blue-900">
+                            actions
+                          </p>
                         </TableCell>
                       </TableRow>
                     </TableHead>
@@ -182,7 +192,6 @@ function ListPropose(data) {
 
   // Delete
   const [show, setShow] = React.useState(false);
-
   async function deletePropose(id, auth) {
     try {
       await getDelete(`proposal/${id}`, auth).then((result) => {
@@ -201,6 +210,8 @@ function ListPropose(data) {
   const [percent, setPercent] = React.useState("0");
   const [have, setHave] = React.useState(0);
   const [all, setAll] = React.useState(0);
+  const [loading, setLoading] = React.useState(true);
+
   async function Status(token) {
     try {
       await getPropose(
@@ -209,10 +220,12 @@ function ListPropose(data) {
       ).then((result) => {
         setDoc(result.data.data.get_usulan_detail);
         setLoad(false);
+        setLoading(false);
       });
     } catch (error) {
       console.log(error);
       setLoad(false);
+      setLoading(false);
     }
   }
   useEffect(() => {
@@ -250,11 +263,47 @@ function ListPropose(data) {
             .filter((jenis) => jenis.Id === data.data.JenisBantuanID)
             .map((jenis) => jenis.Nama)
         ) : (
-          <></>
+          <>
+            <div className="space-y-2 animate-pulse  p-5 w-3/4">
+              <div className="text-xs font-bold h-4 w-3/4 bg-gray-300 rounded-full"></div>
+            </div>
+          </>
         )}
       </TableCell>
       <TableCell>
-        {percent != 100 ? "Belum Lengkap" : "Sudah Lengkap"}
+        <p
+          className={`font-bold ${
+            percent != 100
+              ? "text-red-500"
+              : data.data.Status == 7
+              ? "text-gray-600"
+              : data.data.Status == 1
+              ? "text-yellow-500"
+              : data.data.Status == 2
+              ? "text-green-700"
+              : "text-red-500"
+          }`}
+        >
+          {!loading ? (
+            percent != 100 ? (
+              "Belum Lengkap"
+            ) : data.data.Status == 7 ? (
+              "Lengkap"
+            ) : data.data.Status == 1 ? (
+              "Sedang Di Verifikasi"
+            ) : data.data.Status == 2 ? (
+              "Diterima"
+            ) : (
+              "Ditolak"
+            )
+          ) : (
+            <>
+              <div className="space-y-2 animate-pulse  p-5 w-3/4">
+                <div className="text-xs font-bold h-4 w-3/4 bg-gray-300 rounded-full"></div>
+              </div>
+            </>
+          )}
+        </p>
       </TableCell>
       <TableCell>
         <div className="flex space-x-2">

@@ -8,7 +8,7 @@ html{
 }
 body {
   font-family: "Open Sans", sans-serif;
-  
+  /* background: re; */
 }
 
 /* Foto */
@@ -169,3 +169,14 @@ body {
 .scroll-content {
   padding-bottom: 0 !important;
 }
+
+
+
+/* .ceklist::before{
+  content: "\2714";
+  font-size: 1.5em;
+  color: #fff;
+  position: absolute;
+  right: 1px;
+  top: -5px;
+} */
