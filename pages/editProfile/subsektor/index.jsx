@@ -7,7 +7,7 @@ import MuiAlert from "@mui/material/Alert";
 
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
-import { getApi, getPropose, login } from "../../api/restApi";
+import { getApi, getPropose, login, PostFeed } from "../../api/restApi";
 import Loading from "../../components/Loading";
 const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
 
@@ -33,6 +33,7 @@ export default function Subsektor() {
   // error
   const [erros, setError] = React.useState(false);
   const [success, setSucess] = React.useState(false);
+  const [token, setToken] = React.useState("");
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -48,7 +49,7 @@ export default function Subsektor() {
   const handleSubmit = async (values) => {
     setLoading(true);
     try {
-      await login("register/update_subsektor", values).then((result) => {
+      await PostFeed("user", token, values, "put").then((result) => {
         console.log(result.data);
         if (result.data.message == "Success") {
           setSucess(true);
@@ -62,7 +63,20 @@ export default function Subsektor() {
       console.log(error);
     }
   };
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
 
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [token]);
   return (
     <>
       <Navbar />
@@ -102,7 +116,6 @@ export default function Subsektor() {
                     setError(true);
                   } else {
                     handleSubmit({
-                      kode: kode,
                       Subsektor: selectedUtama,
                       SubsektorPendukung: selectedPendukung,
                       subsektorId: selectedKlasifikasi,
@@ -202,7 +215,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
     } catch (error) {
       console.log(error);
       setLoading(false);
-
     }
   };
   //   handle
@@ -316,7 +328,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 }
 // Utama
 
-function SubPen({  setSelectedPendukung }) {
+function SubPen({ setSelectedPendukung }) {
   // edit
   const [token, setToken] = React.useState("");
 
@@ -375,7 +387,6 @@ function SubPen({  setSelectedPendukung }) {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-
     if (user.length != 0) {
       if (user[0].SubsektorPendukung.length <= 2) {
         setInput(user[0].SubsektorPendukung.split(""));
@@ -438,7 +449,17 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               </select>
             ))
           ) : (
-            <></>
+            <>
+              <div
+                className="form-select form-select-sm appearance-none  w-full  mb-5 flex justify-center gap-x-3 cursor-progress items-center px-3
+            py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+            border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              >
+                Loading
+                <Loading />
+              </div>
+            </>
           )}
           {input.length < 4 ? (
             <div
