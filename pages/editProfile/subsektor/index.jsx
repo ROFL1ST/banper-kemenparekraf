@@ -7,18 +7,18 @@ import MuiAlert from "@mui/material/Alert";
 
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
-import { getApi, login } from "../../api/restApi";
+import { getApi, getPropose, login } from "../../api/restApi";
 import Loading from "../../components/Loading";
 const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-export default function Field3() {
+export default function Subsektor() {
   const { query } = useRouter();
   const { kode } = query;
   React.useEffect(() => {
-    document.title = "Formulir";
+    document.title = "Edit Subsektor";
   });
   // const [state, setState] = React.useState({});
 
@@ -30,7 +30,6 @@ export default function Field3() {
 
   // pendukung
   const [selectedPendukung, setSelectedPendukung] = React.useState();
-
   // error
   const [erros, setError] = React.useState(false);
   const [success, setSucess] = React.useState(false);
@@ -84,6 +83,7 @@ export default function Field3() {
               setSelectedKlasifikasi={setSelectedKlasifikasi}
             />
             {/* Utama */}
+
             <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
               <SubPen
                 selectedPendukung={selectedPendukung}
@@ -133,7 +133,38 @@ export default function Field3() {
   );
 }
 // Utama
-function Utama({ selectedUtama, setSelectedUtama, setSelectedKlasifikasi }) {
+function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
+  // edit
+  const [token, setToken] = React.useState("");
+
+  const [user, setUser] = React.useState([]);
+  const getData = async (value) => {
+    try {
+      await getPropose("user", value).then((result) => {
+        setUser(result.data.data);
+        //  console.log(result.data.data[0]);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+      getData(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+      getData(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [token]);
   //   getData
   const [load, setLoad] = React.useState(true);
   //   sub
@@ -187,6 +218,14 @@ function Utama({ selectedUtama, setSelectedUtama, setSelectedKlasifikasi }) {
   function handleSelected(e) {
     setSelectedSub(e.target.value);
   }
+
+  React.useEffect(() => {
+    if (user.length != 0) {
+      setSelectedSubsector(user[0].Subsektor.toString());
+      setSelectedSub(user[0].subsektorId.toString());
+      console.log(selectedSubsector);
+    }
+  }, [user]);
   React.useEffect(() => {
     const utama = selectedSubsector;
     const klasifikasi = selectedSub;
@@ -199,6 +238,7 @@ function Utama({ selectedUtama, setSelectedUtama, setSelectedKlasifikasi }) {
     <>
       <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
         {/* sub1 */}
+
         <div className="relative flex-grow w-full">
           <label className="leading-7 text-sm text-gray-600">
             *Subsektor Utama
@@ -211,6 +251,7 @@ function Utama({ selectedUtama, setSelectedUtama, setSelectedKlasifikasi }) {
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             name=""
             id="sub"
+            value={selectedSubsector}
           >
             <option defaultValue={true} value="">
               Pilih Subsektor Utama
@@ -235,7 +276,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           <label className="leading-7 text-sm text-gray-600">
             *Subsektor Utama
           </label>
-          <select
+          <select 
             onChange={handleSelected}
             className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
@@ -243,6 +284,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             name=""
             id=""
+            value={selectedSub}
           >
             <option defaultValue={true} value={undefined}>
               {subsub.length == 0 || selectedSubsector == ""
@@ -273,6 +315,37 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 // Utama
 
 function SubPen({ selectedPendukung, setSelectedPendukung }) {
+  // edit
+  const [token, setToken] = React.useState("");
+
+  const [user, setUser] = React.useState([]);
+  const getData = async (value) => {
+    try {
+      await getPropose("user", value).then((result) => {
+        setUser(result.data.data);
+        console.log(result.data.data[0]);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+      getData(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+      getData(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [token]);
   //   getData
   const [load, setLoad] = React.useState(true);
   //   sub
@@ -292,93 +365,83 @@ function SubPen({ selectedPendukung, setSelectedPendukung }) {
   }, []);
 
   // input
-  const [input, setInput] = React.useState(Array(2).fill(""));
-
+  const [input, setInput] = React.useState(Array(4).fill(""));
   const handleChange = (element, index) => {
     setInput([...input.map((d, indx) => (indx === index ? element.value : d))]);
-
-    //Focus next input
   };
-  const [input2, setInput2] = React.useState(Array(2).fill(""));
-  const handleChange2 = (element, index) => {
-    setInput2([
-      ...input2.map((d, indx) => (indx === index ? element.value : d)),
-    ]);
 
-    //Focus next input
-  };
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (
-      input2.filter((i) => i != "").map((i) => i.replace(regex, "")).length !=
-        0 &&
-      input.filter((i) => i != "").map((i) => i.replace(regex, "")).length != 0
-    ) {
-      setSelectedPendukung(
-        input
-          .filter((i) => i != "")
-          .map((i) => i.replace(regex, ""))
-          .join(", ") +
-          `, ${input2
-            .filter((i) => i != "")
-            .map((i) => i.replace(regex, ""))
-            .join(", ")}`
-      );
-    } else if (
-      input.filter((i) => i != "").map((i) => i.replace(regex, "")).length != 0
-    ) {
-      setSelectedPendukung(
-        input
-          .filter((i) => i != "")
-          .map((i) => i.replace(regex, ""))
-          .join(", ")
-      );
-    } else {
-      setSelectedPendukung(
-        input2
-          .filter((i) => i != "")
-          .map((i) => i.replace(regex, ""))
-          .join(", ")
-      );
+    let kosong = "";
+
+    if (user.length != 0) {
+      if (user[0].SubsektorPendukung.length <= 2) {
+        setInput(user[0].SubsektorPendukung.split(""));
+
+        console.log(input);
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
+      } else {
+        setInput(user[0].SubsektorPendukung.split(""));
+        console.log(input);
+      }
     }
-  }, [input, input2]);
+  }, [user]);
+
+  React.useEffect(() => {
+    setSelectedPendukung(
+      input
+        .filter((i) => i != "")
+        .map((i) => i.replace(regex, ""))
+        .join(", ")
+    );
+    console.log(selectedPendukung);
+  }, [input]);
   return (
     <>
-      <div className="relative  flex-grow w-full">
+      <div className="flex-flex-col w-full">
         <label className="leading-7 text-sm text-gray-600">
           *Subsektor Pendukung
         </label>
-        {input.map((i, index) => (
-          <select
-            key={index}
-            value={i}
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+        <div className="relative  grid grid-cols-2 w-full gap-x-5">
+          {!loading ? (
+            input.map((i, index) => (
+              <select
+                key={index}
+                value={i}
+                className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
 py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
 border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-            onChange={(e) => handleChange(e.target, index)}
-          >
-            <option defaultValue={true} value={""}>
-              Pilih Subsektor Pendukung
-            </option>
-            {!load ? (
-              sub
-                .filter((sub) => sub.parentId == 0)
-                .map((i, key) => (
-                  <option value={i.Id} key={key}>
-                    {i.Nama}
-                  </option>
-                ))
-            ) : (
-              <></>
-            )}
-          </select>
-        ))}
+                name=""
+                id=""
+                onChange={(e) => handleChange(e.target, index)}
+              >
+                <option defaultValue={true} value={""}>
+                  Pilih Subsektor Pendukung
+                </option>
+                {!load ? (
+                  sub
+                    .filter((sub) => sub.parentId == 0)
+                    .map((i, key) => (
+                      <option value={i.Id} key={key}>
+                        {i.Nama}
+                      </option>
+                    ))
+                ) : (
+                  <></>
+                )}
+              </select>
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
 
-      <div className="relative  flex-grow w-full">
+      {/* <div className="relative  flex-grow w-full">
         {input2.map((i, index) => (
           <select
             onChange={(e) => handleChange2(e.target, index)}
@@ -407,7 +470,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             )}
           </select>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

@@ -132,7 +132,7 @@ export default function Field3() {
   );
 }
 // Utama
-function Utama({ selectedUtama, setSelectedUtama, setSelectedKlasifikasi }) {
+function Utama({  setSelectedUtama, setSelectedKlasifikasi }) {
   //   getData
   const [load, setLoad] = React.useState(true);
   //   sub

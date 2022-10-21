@@ -42,7 +42,6 @@ export default function EmailVer() {
   const [load, setLoad] = useState(false);
   const [nice, setNice] = useState(false);
   const [wrong, setWrong] = useState(false);
-  const [plis, setPlis] = useState(false);
   const [erros, setError] = React.useState("");
   const [success, setSuccess] = React.useState("");
 
