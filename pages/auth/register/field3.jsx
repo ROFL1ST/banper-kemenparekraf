@@ -62,7 +62,6 @@ export default function Field3() {
       console.log(error);
     }
   };
-
   return (
     <>
       <Navbar />
@@ -91,11 +90,12 @@ export default function Field3() {
             </div>
             <div className="  border-10 border-b-orange-600 ">
               <button
+                disabled={!loading ? false : true}
                 onClick={(e) => {
                   e.preventDefault();
                   if (
                     selectedUtama == "" ||
-                    selectedPendukung == "" ||
+                    selectedPendukung.length < 10 ||
                     selectedKlasifikasi == undefined
                   ) {
                     setError(true);
@@ -119,8 +119,8 @@ export default function Field3() {
       </div>
       <Footer />
       <Snackbar open={erros} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
-          Mohon Untuk Mengisi Subsektor Dengan Benar
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Mohon Untuk Mengisi Semua Subsektor
         </Alert>
       </Snackbar>
       <Snackbar open={success} autoHideDuration={3000} onClose={handleClose}>
@@ -132,7 +132,7 @@ export default function Field3() {
   );
 }
 // Utama
-function Utama({  setSelectedUtama, setSelectedKlasifikasi }) {
+function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   //   getData
   const [load, setLoad] = React.useState(true);
   //   sub
