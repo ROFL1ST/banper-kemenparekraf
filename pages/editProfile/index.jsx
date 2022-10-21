@@ -141,6 +141,7 @@ export default function EditProfile() {
     getKota();
   }, []);
 
+  // console.log(user[0].Subsektor)
   return (
     <>
       <Navbar />
