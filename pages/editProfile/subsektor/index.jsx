@@ -29,12 +29,22 @@ export default function Subsektor() {
 
   // pendukung
   const [selectedPendukung, setSelectedPendukung] = React.useState();
-  console.log(selectedPendukung)
+  console.log(selectedPendukung);
   // error
   const [erros, setError] = React.useState(false);
   const [success, setSucess] = React.useState(false);
   const [token, setToken] = React.useState("");
-
+  const [user, setUser] = React.useState([]);
+  const getData = async (value) => {
+    try {
+      await getPropose("user", value).then((result) => {
+        setUser(result.data.data);
+        //  console.log(result.data.data[0]);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -66,8 +76,10 @@ export default function Subsektor() {
   React.useEffect(() => {
     if (localStorage.getItem("token") != null) {
       setToken(localStorage.getItem("token"));
+      getData(localStorage.getItem("token"));
     } else {
       setToken(sessionStorage.getItem("token"));
+      getData(sessionStorage.getItem("token"));
     }
     if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
       // alert("You need to Log In first!")
@@ -88,7 +100,7 @@ export default function Subsektor() {
         className="bg-gray-200 w-full h-full  bg-cover rounded-b-3xl"
       >
         <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
-          <Section text={"Formulir"} />
+          <Section text={"Edit Subsektor"} />
           <form>
             {/* Utama */}
             <Utama
@@ -116,6 +128,16 @@ export default function Subsektor() {
                     setError(true);
                   } else {
                     handleSubmit({
+                      NamaKomunitas: user[0].NamaKomunitas,
+                      Kategori: user[0].Kategori,
+                      AlamatAkta: user[0].AlamatAkta,
+                      Alamat: user[0].Alamat,
+                      Email: user[0].Email,
+                      PhoneNumber: user[0].PhoneNumber,
+                      Nama: user[0].Nama,
+                      EmailPJ: user[0].EmailPJ,
+                      PhonePJ: user[0].PhonePJ,
+                      KotaID: user[0].KotaID,
                       Subsektor: selectedUtama,
                       SubsektorPendukung: selectedPendukung,
                       subsektorId: selectedKlasifikasi,
@@ -399,12 +421,12 @@ function SubPen({ setSelectedPendukung }) {
         setInput(user[0].SubsektorPendukung.split(",").slice(0, input.length));
         console.log(input);
         setLoading(false);
-        console.log("HAI")
+        console.log("HAI");
       }
     }
   }, [user]);
   const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
-  console.log(input)
+  console.log(input);
   React.useEffect(() => {
     setSelectedPendukung(
       input
