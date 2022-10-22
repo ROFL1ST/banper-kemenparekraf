@@ -135,6 +135,7 @@ export default function Subsektor() {
                       Email: user[0].Email,
                       PhoneNumber: user[0].PhoneNumber,
                       Nama: user[0].Nama,
+                      password: "",
                       EmailPJ: user[0].EmailPJ,
                       PhonePJ: user[0].PhonePJ,
                       KotaID: user[0].KotaID,
