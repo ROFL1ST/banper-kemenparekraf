@@ -7,9 +7,13 @@ import Section from "../../components/section";
 import Router, { useRouter } from "next/router";
 import { getApi, getPropose, postDoc, PostFeed } from "../../api/restApi";
 import { useForm } from "react-hook-form";
+import MuiAlert from "@mui/material/Alert";
 
 import Loading from "../../components/Loading";
-
+import { Snackbar } from "@mui/material";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function SubmitDoc() {
   React.useEffect(() => {
     document.title = "Submit Dokumen";
@@ -85,6 +89,18 @@ export default function SubmitDoc() {
     setAll(all);
   }, [doc]);
   const data = JSON.stringify(doc);
+
+  // alert
+  const [success, setSucess] = React.useState(false);
+  const [mistake, setMistake] = React.useState(false);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSucess(false);
+    setMistake(false);
+  };
   return (
     <>
       <Navbar />
@@ -115,6 +131,8 @@ export default function SubmitDoc() {
                   key={key}
                   num={key}
                   detail={detail}
+                  setSucess={setSucess}
+                  setMistake={setMistake}
                 ></CardDocument>
               ))
             ) : (
@@ -130,6 +148,16 @@ export default function SubmitDoc() {
         </div>
       </div>
       <Footer />
+      <Snackbar open={success} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Berhasil!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={mistake} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Error
+        </Alert>
+      </Snackbar>
     </>
   );
 }
@@ -396,7 +424,7 @@ function CardPengusul() {
   );
 }
 
-function CardDocument({ data, teks, num, detail }) {
+function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
   var router = useRouter();
 
   const { id } = router.query;
@@ -473,7 +501,9 @@ function CardDocument({ data, teks, num, detail }) {
 
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
+          setMistake(true)
         } else {
+          setSucess(true);
           if (router.isReady) {
             if (localStorage.getItem("token") != null) {
               detail(localStorage.getItem("token"));
@@ -495,6 +525,8 @@ function CardDocument({ data, teks, num, detail }) {
     } catch (err) {
       console.log(err);
       setLoading(false);
+      setMistake(true)
+
     }
   };
   return (

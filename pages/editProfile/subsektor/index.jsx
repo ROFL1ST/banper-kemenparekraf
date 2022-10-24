@@ -63,7 +63,9 @@ export default function Subsektor() {
         console.log(result.data);
         if (result.data.message == "Success") {
           setSucess(true);
-          Router.push("/auth/login");
+          setTimeout(() => {
+            Router.push("/proposal");
+          }, 1000);
         } else {
           setError(true);
         }
