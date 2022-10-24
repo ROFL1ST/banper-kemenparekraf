@@ -181,8 +181,8 @@ export default function Berita() {
               data?.map((i, key) => <Card data={i} key={key} />)
             ) : (
               <>
-                <div className="relative justify-center mx-auto   items-center flex flex-col mt-10 pb-20">
-                  <img src={empty.src} className="h-96 w-auto" alt="" />
+                <div className="lg:absolute relative justify-center mx-auto lg:ml-32  items-center flex flex-col mt-10 pb-20">
+                  <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
                   <p className="font-bold">Berita Tidak Tersedia</p>
                 </div>
               </>
