@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -8,13 +9,15 @@ import { Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getApi } from "../../../../api/restApi";
+import { changeState } from "../../../../../redux/actions";
 
 export default function MenuSubsector({ type, show, getData }) {
   const [menu1, setMenu1] = useState(show);
-  // getData
   const [subsector, setSubsector] = useState([]);
+  const [subsectorId, setSubsectorId] = useState([]);
   const [load, setLoad] = useState(true);
-  const subsektorId = [];
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.data);
 
   const getSubsector = async () => {
     try {
@@ -27,9 +30,20 @@ export default function MenuSubsector({ type, show, getData }) {
       setLoad(false);
     }
   };
+
   useEffect(() => {
     getSubsector();
   }, []);
+
+  useEffect(() => {
+    dispatch(
+      changeState({
+        sort: state.sort,
+        subsektor_id: subsectorId,
+      })
+    );
+  }, [subsectorId.length]);
+
   return (
     <>
       {/* Filter 1 */}
@@ -56,7 +70,8 @@ export default function MenuSubsector({ type, show, getData }) {
         {!load ? (
           subsector.map((i, key) => (
             <Subsektor
-              subsektorId={subsektorId}
+              subsectorId={subsectorId}
+              setSubsectorId={setSubsectorId}
               getData={getData}
               menu={menu1}
               data={i}
@@ -75,10 +90,15 @@ export default function MenuSubsector({ type, show, getData }) {
   );
 }
 
-function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
+function Subsektor({
+  data,
+  menu,
+  subsector,
+  load,
+  subsectorId,
+  setSubsectorId,
+}) {
   const [menu2, setMenu2] = useState(false);
-  const state = useSelector((state) => state.data);
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -96,10 +116,16 @@ function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              id=""
-              name=""
               defaultChecked={false}
-              required
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setSubsectorId((val) => [...val, data.Id]);
+                } else {
+                  setSubsectorId((prevState) =>
+                    prevState.filter((prevItem) => prevItem !== data.Id)
+                  );
+                }
+              }}
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
             <div

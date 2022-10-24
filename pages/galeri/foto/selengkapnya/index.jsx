@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect } from "react";
 import { getGaleri } from "../../../api/restApi";
 import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
@@ -13,14 +15,19 @@ import {
 import { Dialog, Transition } from "@headlessui/react";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
+import { useSelector } from "react-redux";
 
 export default function Selengkapnya() {
   const [panjang, setPanjang] = React.useState(0);
 
   const [images, setImages] = React.useState({ data: {}, loading: true });
-  async function imageList() {
+  const state = useSelector((state) => state.data);
+  async function imageList(subsektor_id = state?.subsektor_id?.toString()) {
     try {
-      await getGaleri("gallery").then((result) => {
+      console.log(subsektor_id);
+      await getGaleri(
+        `gallery?${subsektor_id !== undefined && `subsektorId=${subsektor_id}`}`
+      ).then((result) => {
         setImages((s) => ({ ...s, data: result.data.data, loading: false }));
         setPanjang(result.data.data.length);
       });
@@ -29,10 +36,13 @@ export default function Selengkapnya() {
       console.log(er);
     }
   }
+  useEffect(() => {
+    imageList();
+  }, [state?.subsektor_id?.length]);
 
   React.useEffect(() => {
     imageList();
-    document.title = "Foto"
+    document.title = "Foto";
   }, []);
 
   const { data, loading } = images;
@@ -95,7 +105,6 @@ export default function Selengkapnya() {
 function Foto({ i, foto }) {
   const [open2, setOpen2] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
-  console.log(foto);
   return (
     <>
       <div
@@ -289,7 +298,7 @@ function CardModal({ img, tgl, summary, place }) {
         <img
           className=" rounded-lg  2xl:min-w-[680px] 2xl:min-h-[443px] 2xl:max-h-[443px] md:min-w-[490px] md:min-h-[318px] md:max-h-[318px] min-w-[353px] min-h-[215px] max-h-[215px]"
           src={img}
-          alt=""
+          alt={img}
         />
         <div className=" items-center gap-y-5 flex flex-col mt-10 xl:w-1/2 lg:w-3/4 md:w-1/2  w-11/12">
           <h1 className="font-semibold text-white lg:text-lg">
