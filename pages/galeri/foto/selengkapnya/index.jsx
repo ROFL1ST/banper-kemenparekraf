@@ -16,6 +16,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
 import { useSelector } from "react-redux";
+import empty from "../../../assets/Empty-amico.png";
 
 export default function Selengkapnya() {
   const [panjang, setPanjang] = React.useState(0);
@@ -79,21 +80,30 @@ export default function Selengkapnya() {
         </div>
       </div>
       <div className="pt-40 lg:px-20 px-5">
-        {images && !loading ? (
-          <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-            {data.map((i, key) => (
-              <Foto
-                key={key}
-                foto={key}
-                i={i}
-                loading={loading}
-                panjang={panjang}
-              />
-            ))}
-          </div>
+        {data.length != 0 ? (
+          images && !loading ? (
+            <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
+              {data.map((i, key) => (
+                <Foto
+                  key={key}
+                  foto={key}
+                  i={i}
+                  loading={loading}
+                  panjang={panjang}
+                />
+              ))}
+            </div>
+          ) : (
+            <>
+              <Loading />
+            </>
+          )
         ) : (
           <>
-            <Loading />
+            <div className="relative justify-center mx-auto   items-center flex flex-col mt-10 pb-20">
+              <img src={empty.src} className="h-96 w-auto" alt="" />
+              <p className="font-bold">Foto Tidak Tersedia</p>
+            </div>
           </>
         )}
       </div>
