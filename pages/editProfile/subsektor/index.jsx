@@ -491,7 +491,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               </div>
             </>
           )}
-          {input.length > 4 ? (
+          {input.length < 4 ? (
             <div
               onClick={() => {
                 let newInput = Array(1).fill("");
