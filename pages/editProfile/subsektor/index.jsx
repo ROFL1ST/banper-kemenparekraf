@@ -446,7 +446,7 @@ function SubPen({ setSelectedPendukung }) {
         <label className="leading-7 text-sm text-gray-600">
           *Subsektor Pendukung
         </label>
-        <div className="relative  grid grid-cols-2 w-full gap-x-5">
+        <div className="relative  grid md:grid-cols-2 w-full gap-x-5">
           {!loading ? (
             input.map((i, index) => (
               <select
