@@ -53,6 +53,14 @@ export default function Berita() {
           author !== undefined && `author=${author}`
         }`
       );
+
+      console.log(`news?limit=${limit}&${
+        subsektor_id !== undefined && `subsektorId=${subsektor_id}`
+      }&sort=${sort}&${
+        provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
+      }&${kota_id !== undefined && `kotaId=${kota_id}`}&${
+        author !== undefined && `author=${author}`
+      }`);
       setData(respond.data.data);
       setLoading(false);
     } catch (error) {
