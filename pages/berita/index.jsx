@@ -33,13 +33,15 @@ export default function Berita() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const cancelButtonRef = useRef(null);
+  const state = useSelector((state) => state.data);
+
   var router = useRouter();
 
   const getData = async (
-    sort,
-    subsektor_id,
-    provinsi_id,
-    kota_id,
+    sort = state.sort,
+    subsektor_id = state.subsektor_id?.toString(),
+    provinsi_id = state.provinsi_id,
+    kota_id = state.kota_id,
     author,
     limit = 12
   ) => {
@@ -53,14 +55,15 @@ export default function Berita() {
           author !== undefined && `author=${author}`
         }`
       );
-
-      console.log(`news?limit=${limit}&${
-        subsektor_id !== undefined && `subsektorId=${subsektor_id}`
-      }&sort=${sort}&${
-        provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
-      }&${kota_id !== undefined && `kotaId=${kota_id}`}&${
-        author !== undefined && `author=${author}`
-      }`);
+      console.log(
+        `news?limit=${limit}&${
+          subsektor_id !== undefined && `subsektorId=${subsektor_id}`
+        }&sort=${sort}&${
+          provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
+        }&${kota_id !== undefined && `kotaId=${kota_id}`}&${
+          author !== undefined && `author=${author}`
+        }`
+      );
       setData(respond.data.data);
       setLoading(false);
     } catch (error) {
@@ -68,6 +71,11 @@ export default function Berita() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    getData();
+  }, [state?.subsektor_id?.length]);
+
   useEffect(() => {
     getData();
     const ac = new AbortController();
@@ -102,7 +110,6 @@ export default function Berita() {
 
     newFilters[category] = filters;
   };
-  const state = useSelector((state) => state.data);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />

@@ -42,7 +42,6 @@ export default function MenuSubsector({ type, show, getData }) {
         kota_id: state.kota_id,
       })
     );
-    getData(state.sort,state.subsektor_id?.toString(),state.provinsi_id,state.kota_id)
   }, [subsektorId.length]);
 
   return (
@@ -91,18 +90,8 @@ export default function MenuSubsector({ type, show, getData }) {
   );
 }
 
-function Subsektor({
-  data,
-  menu,
-  subsector,
-  load,
-  getData,
-  subsektorId,
-  setSubsektorId,
-}) {
+function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
   const [menu2, setMenu2] = useState(false);
-  const state = useSelector((state) => state.data);
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -122,7 +111,7 @@ function Subsektor({
               type="checkbox"
               onChange={(e) => {
                 if (e.target.checked) {
-                  setSubsektorId((val) => [data.Id,...val]);
+                  setSubsektorId((val) => [...val, data.Id]);
                 } else {
                   setSubsektorId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
