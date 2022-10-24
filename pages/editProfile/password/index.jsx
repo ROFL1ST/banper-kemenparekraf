@@ -61,12 +61,10 @@ export default function Password() {
 
   const onSubmit = async (values) => {
     setLoading(true);
-    console.log(values);
 
     try {
       await PostFeed("user/edit_password", token, values, "put").then(
         (result) => {
-          console.log(result.data);
           if (result.data.message != "Success") {
             setOpen(true);
             setError((s) => ({

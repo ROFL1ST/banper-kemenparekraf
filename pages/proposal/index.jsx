@@ -32,7 +32,6 @@ export default function Proposal() {
     try {
       await getPropose("proposal?offset=0&limit=10", auth).then((result) => {
         setLoad(false);
-        console.log(result.data);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
             setList(result.data.data);
@@ -77,7 +76,6 @@ export default function Proposal() {
   const cancelButtonRef = React.useRef(null);
 
   // detail
-  console.log(list.length);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -195,7 +193,6 @@ function ListPropose(data) {
   async function deletePropose(id, auth) {
     try {
       await getDelete(`proposal/${id}`, auth).then((result) => {
-        console.log(result);
         setShow(true);
       });
     } catch (error) {
@@ -248,10 +245,8 @@ function ListPropose(data) {
       .map((doc) => doc.length);
     const all = doc.length;
     setPercent((have.length / all) * 100);
-    // console.log((have.length / all) * 100);
     setHave(have.length);
     setAll(all);
-    console.log(percent);
   }, [doc]);
   return (
     <>

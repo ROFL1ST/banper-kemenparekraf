@@ -49,7 +49,6 @@ export default function Field3() {
     setLoading(true);
     try {
       await login("register/update_subsektor", values).then((result) => {
-        console.log(result.data);
         if (result.data.message == "Success") {
           setSucess(true);
           Router.push("/auth/login");
@@ -154,7 +153,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   //   subsub
   const [selectedSubsector, setSelectedSubsector] = React.useState();
   function handleChange(e) {
-    console.log(e.target.value);
     setSelectedSubsector(e.target.value);
   }
 
@@ -192,7 +190,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
     setSelectedUtama(utama);
     setSelectedKlasifikasi(klasifikasi);
 
-    // console.log(pendukung1);
   }, [selectedSub, selectedSubsector]);
   return (
     <>

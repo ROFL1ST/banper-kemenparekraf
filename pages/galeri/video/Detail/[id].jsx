@@ -16,7 +16,6 @@ export default function Detail() {
   React.useEffect(() => {
     document.title = nama;
   }, [nama]);
-  //   console.log(text.length);
   var router = useRouter();
 
   const { id } = router.query;
@@ -57,7 +56,6 @@ export default function Detail() {
       videoDetail();
     }
   }, [router.isReady]);
-  //   console.log(video);
   React.useEffect(() => {
     const ac = new AbortController();
 
@@ -148,7 +146,6 @@ function Video({ data, setNama }) {
 }
 
 function Isi(data) {
-  console.log(data);
   const reactElement = parse(`${data.data}`);
   return reactElement;
 }

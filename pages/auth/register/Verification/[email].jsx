@@ -32,7 +32,6 @@ export default function EmailVer() {
     }
   };
 
-  //   console.log(code.map((e) => e).join(""));
 
   function onPaste(event) {
     const pasted = event.clipboardData.getData("text/plain");
@@ -52,7 +51,6 @@ export default function EmailVer() {
         kode: code.map((e) => e).join(""),
       }).then((result) => {
         setLoad(false);
-        console.log(result.data);
         if (code.map((e) => e).join("").length < 6) {
           setWrong(true);
           setError("Mohon Untuk Mengisi Kode OTP Dengan Benar");

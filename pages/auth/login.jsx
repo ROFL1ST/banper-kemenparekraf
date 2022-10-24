@@ -50,7 +50,6 @@ export default function Login() {
     setLoading(true);
     try {
       await login("login", values).then((result) => {
-        console.log(result);
         setLoading(false);
 
         if (result.data.message == "Failed") {
@@ -202,7 +201,6 @@ function Modal({ open, setOpen, cancelButtonRef }) {
 
     setCheck((current) => !current);
   };
-  // console.log(check);
 
   return (
     <>
