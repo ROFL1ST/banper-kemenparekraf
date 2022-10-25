@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Navbar from "../components/navbar";
@@ -47,15 +48,6 @@ export default function Berita() {
   ) => {
     try {
       let respond = await getApi(
-        `news?limit=${limit}&${
-          subsektor_id !== undefined && `subsektorId=${subsektor_id}`
-        }&sort=${sort}&${
-          provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
-        }&${kota_id !== undefined && `kotaId=${kota_id}`}&${
-          author !== undefined && `author=${author}`
-        }`
-      );
-      console.log(
         `news?limit=${limit}&${
           subsektor_id !== undefined && `subsektorId=${subsektor_id}`
         }&sort=${sort}&${

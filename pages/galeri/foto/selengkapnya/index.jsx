@@ -19,14 +19,21 @@ import { useSelector } from "react-redux";
 
 export default function Selengkapnya() {
   const [panjang, setPanjang] = React.useState(0);
-
   const [images, setImages] = React.useState({ data: {}, loading: true });
   const state = useSelector((state) => state.data);
-  async function imageList(subsektor_id = state?.subsektor_id?.toString()) {
+
+  async function imageList(
+    subsektor_id = state?.subsektor_id?.toString(),
+    provinsi_id = state?.provinsi_id?.toString(),
+    kota_id = state?.kota_id?.toString()
+  ) {
     try {
-      console.log(subsektor_id);
       await getGaleri(
-        `gallery?${subsektor_id !== undefined && `subsektorId=${subsektor_id}`}`
+        `gallery?${
+          subsektor_id !== undefined && `subsektorId=${subsektor_id}`
+        }&${provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`}&${
+          kota_id !== undefined && `kotaId=${kota_id}`
+        }`
       ).then((result) => {
         setImages((s) => ({ ...s, data: result.data.data, loading: false }));
         setPanjang(result.data.data.length);
@@ -38,7 +45,11 @@ export default function Selengkapnya() {
   }
   useEffect(() => {
     imageList();
-  }, [state?.subsektor_id?.length]);
+  }, [
+    state?.subsektor_id?.length,
+    state?.provinsi_id?.length,
+    state?.kota_id?.length,
+  ]);
 
   React.useEffect(() => {
     imageList();

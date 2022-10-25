@@ -38,8 +38,10 @@ export default function MenuSubsector({ type, show, getData }) {
   useEffect(() => {
     dispatch(
       changeState({
-        sort: state.sort,
+        sort: state?.sort,
         subsektor_id: subsectorId,
+        provinsi_id: state?.provinsi_id,
+        kota_id: state?.kota_id,
       })
     );
   }, [subsectorId.length]);
@@ -90,14 +92,7 @@ export default function MenuSubsector({ type, show, getData }) {
   );
 }
 
-function Subsektor({
-  data,
-  menu,
-  subsector,
-  load,
-  subsectorId,
-  setSubsectorId,
-}) {
+function Subsektor({ data, menu, subsector, load, setSubsectorId }) {
   const [menu2, setMenu2] = useState(false);
 
   return (
@@ -139,13 +134,13 @@ function Subsektor({
                   .map((i, key) =>
                     menu2 ? (
                       <ChevronUpIcon
+                        key={key}
                         className="ml-2 -mr-1 h-5 w-5 "
-                        aria-hidden="true"
                       />
                     ) : (
                       <ChevronDownIcon
+                        key={key}
                         className="ml-2 -mr-1 h-5 w-5 "
-                        aria-hidden="true"
                       />
                     )
                   )
@@ -158,7 +153,12 @@ function Subsektor({
             subsector
               .filter((subsector) => subsector.parentId == data.Id)
               .map((i, key) => (
-                <SubSubsektor menu2={menu2} data={i} key={key} />
+                <SubSubsektor
+                  menu2={menu2}
+                  data={i}
+                  key={key}
+                  setSubsectorId={setSubsectorId}
+                />
               ))
           ) : (
             <></>
@@ -169,9 +169,7 @@ function Subsektor({
   );
 }
 
-function SubSubsektor({ data, menu2 }) {
-  // const [menu3, setMenu3] = useState(false);
-
+function SubSubsektor({ data, menu2, setSubsectorId }) {
   return (
     <>
       <Transition
@@ -188,9 +186,16 @@ function SubSubsektor({ data, menu2 }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              id=""
-              name=""
               defaultChecked={false}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setSubsectorId((val) => [...val, data.Id]);
+                } else {
+                  setSubsectorId((prevState) =>
+                    prevState.filter((prevItem) => prevItem !== data.Id)
+                  );
+                }
+              }}
               required
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
