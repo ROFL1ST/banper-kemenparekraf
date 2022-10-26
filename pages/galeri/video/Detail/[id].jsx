@@ -71,7 +71,7 @@ export default function Detail() {
       <Navbar />
       <div className="lg:pt-32 pt-[104px] pb-20  flex lg:flex-row flex-col h-full lg:justify-between justify-center 2xl:px-16 xl:px-10 lg:px-5 px-0 lg:gap-x-10 gap-x-0">
         {!loading ? (
-          <Video data={video} setNama={setNama} />
+          <Video data={video} setNama={setNama} nama={nama} />
         ) : (
           <>
             <VideoLoading />
@@ -109,14 +109,13 @@ export default function Detail() {
   );
 }
 
-function Video({ data, setNama }) {
+function Video({ data, setNama, nama }) {
   const formatter = new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
     month: "long",
     day: "2-digit",
   });
 
-  const judul = data.NamaKota.toLowerCase();
 
   React.useEffect(() => {
     setNama(data.NamaKota.toLowerCase());
@@ -131,7 +130,7 @@ function Video({ data, setNama }) {
           frameBorder={1}
         ></iframe>
         <div className="lg:px-0 px-5">
-          <h1 className="text-xl font-bold pb-2 capitalize">{judul}</h1>
+          <h1 className="text-xl font-bold pb-2 capitalize">{nama}</h1>
           <p className="text-xs">
             {data.views} views • {formatter.format(Date.parse(data.CreatedAt))}
           </p>

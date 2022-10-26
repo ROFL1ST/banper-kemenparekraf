@@ -314,7 +314,7 @@ export default function Navbar({ click }) {
                   <button
                     className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
                       pathname === "/proposal" &&
-                      "bg-white  text-blue-900 font-bold "
+                      "  text-blue-900 font-bold "
                     } `}
                   >
                     List Proposal
@@ -325,7 +325,7 @@ export default function Navbar({ click }) {
                   <button
                     className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
                       pathname === "/editProfile" &&
-                      "bg-white  text-blue-900 font-bold "
+                      "  text-blue-900 font-bold "
                     } `}
                   >
                     Edit Profile
@@ -337,7 +337,7 @@ export default function Navbar({ click }) {
                   }}
                   className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
                     pathname === "/auth/daftar" &&
-                    "bg-white  text-blue-900 font-bold "
+                    "  text-blue-900 font-bold "
                   } `}
                 >
                   Logout

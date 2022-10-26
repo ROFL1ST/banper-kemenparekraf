@@ -263,7 +263,7 @@ function Banner({ data, loading2 }) {
       {/* Banner For Dekstop */}
       {data && !loading2 ? (
         <div
-          className="xl:flex bg-no-repeat bg-cover bg-bottom hidden lg:h-[26rem] 2xl:h-[34rem] w-full justify-center rounded-3xl"
+          className="xl:flex bg-no-repeat bg-center bg-cover  hidden lg:h-[26rem] 2xl:h-[34rem] w-full justify-center rounded-3xl"
           style={{
             backgroundImage: `url("http://128.199.242.242/dashboard/assets/images/blog/${data.foto}")`,
           }}
@@ -299,11 +299,12 @@ function Banner({ data, loading2 }) {
         )}
 
         {data && !loading2 ? (
-          <img
-            src={`http://128.199.242.242/dashboard/assets/images/blog/${data.foto}`}
-            className="rounded-3xl"
-            alt="banner"
-          />
+          <div
+            style={{
+              backgroundImage: `url(http://128.199.242.242/dashboard/assets/images/blog/${data.foto})`,
+            }}
+            className="rounded-3xl min-h-[20rem] w-full banner-mobile bg-center bg-cover"
+          ></div>
         ) : (
           <div className=" w-full h-96 rounded-2xl bg-gray-300 animate-pulse"></div>
         )}
