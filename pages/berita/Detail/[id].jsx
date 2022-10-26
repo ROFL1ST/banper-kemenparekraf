@@ -105,12 +105,25 @@ export default function DetailPage() {
                   <Small_Card_Loading />
                   <Small_Card_Loading />
                 </>
-              ) : (
+              ) : items.length != 0 ? (
                 items
-                  ?.slice(0, 4)
-                  .map((i, index) => (
-                    <News_small_card data={i} key={index}></News_small_card>
+                  .filter((items) => items.Id != id)
+                  .slice(0, 3)
+                  .map((i, key) => (
+                    <div
+                      onClick={() => {
+                        // getData();
+                        setDetail((s) => ({ ...s, loading2: true }));
+
+                        // console.log("hai")
+                      }}
+                      key={key}
+                    >
+                      <News_small_card data={i} key={key}></News_small_card>
+                    </div>
                   ))
+              ) : (
+                <></>
               )}
             </div>
           </div>
@@ -123,21 +136,27 @@ export default function DetailPage() {
           </h1>
 
           <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pb-16 w-full">
-            {" "}
             {!loading2 && data ? (
-              items.slice(0, 4).map((i, key) => (
-                <div
-                  onClick={() => {
-                    // getData();
-                    setDetail((s) => ({ ...s, loading2: true }));
+              items.length != 0 ? (
+                items
+                  .filter((items) => items.Id != id)
+                  .slice(0, 4)
+                  .map((i, key) => (
+                    <div
+                      onClick={() => {
+                        // getData();
+                        setDetail((s) => ({ ...s, loading2: true }));
 
-                    // console.log("hai")
-                  }}
-                  key={key}
-                >
-                  <Card data={i} />
-                </div>
-              ))
+                        // console.log("hai")
+                      }}
+                      key={key}
+                    >
+                      <Card data={i} />
+                    </div>
+                  ))
+              ) : (
+                <></>
+              )
             ) : (
               <>
                 <DetailCardLoading />
