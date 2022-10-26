@@ -268,7 +268,7 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   React.useEffect(() => {
     if (!muat) {
       setSelectedSubsector(user[0].Subsektor.toString());
-      setSelectedSub(user[0].subsektorId.toString());
+      setSelectedSub(user[0].subsektorId);
     }
   }, [user]);
   React.useEffect(() => {
