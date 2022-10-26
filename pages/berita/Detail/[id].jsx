@@ -70,6 +70,13 @@ export default function DetailPage() {
   const [more, setMore] = React.useState(false);
   const { data, loading2 } = detail;
 
+
+  const[random, setRandom]= React.useState([])
+  React.useEffect(() => {
+    const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
+    setRandom(shuffle(items))
+    console.log(random)
+  }, [items])
   return (
     <>
       <Navbar />
@@ -105,9 +112,9 @@ export default function DetailPage() {
                   <Small_Card_Loading />
                   <Small_Card_Loading />
                 </>
-              ) : items.length != 0 ? (
-                items
-                  .filter((items) => items.Id != id)
+              ) : random.length != 0 ? (
+                random
+                  .filter((random) => random.Id != id)
                   .slice(0, 3)
                   .map((i, key) => (
                     <div
@@ -140,6 +147,7 @@ export default function DetailPage() {
               items.length != 0 ? (
                 items
                   .filter((items) => items.Id != id)
+                  .filter((items) => items.subsektorId == data.subsektorId)
                   .slice(0, 4)
                   .map((i, key) => (
                     <div
