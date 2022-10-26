@@ -29,9 +29,11 @@ export default function Subsektor() {
 
   // pendukung
   const [selectedPendukung, setSelectedPendukung] = React.useState();
-  console.log(selectedPendukung);
+
   // error
   const [erros, setError] = React.useState(false);
+  const [warn, setWarn] = React.useState(false);
+
   const [success, setSucess] = React.useState(false);
   const [token, setToken] = React.useState("");
   const [user, setUser] = React.useState([]);
@@ -39,7 +41,6 @@ export default function Subsektor() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        //  console.log(result.data.data[0]);
       });
     } catch (error) {
       console.log(error);
@@ -52,6 +53,7 @@ export default function Subsektor() {
 
     setError(false);
     setSucess(false);
+    setWarn(false);
   };
 
   const [loading, setLoading] = React.useState(false);
@@ -60,7 +62,6 @@ export default function Subsektor() {
     setLoading(true);
     try {
       await PostFeed("user", token, values, "put").then((result) => {
-        console.log(result.data);
         if (result.data.message == "Success") {
           setSucess(true);
           setTimeout(() => {
@@ -116,6 +117,7 @@ export default function Subsektor() {
               <SubPen
                 selectedPendukung={selectedPendukung}
                 setSelectedPendukung={setSelectedPendukung}
+                setWarn={setWarn}
               />
             </div>
             <div className="  border-10 border-b-orange-600 ">
@@ -167,6 +169,11 @@ export default function Subsektor() {
           Berhasil!
         </Alert>
       </Snackbar>
+      <Snackbar open={warn} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
+          Anda Hanya Bisa Mengisi Maksimal 4 subsektor pendukung
+        </Alert>
+      </Snackbar>
     </>
   );
 }
@@ -180,7 +187,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        //  console.log(result.data.data[0]);
       });
     } catch (error) {
       console.log(error);
@@ -224,7 +230,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   //   subsub
   const [selectedSubsector, setSelectedSubsector] = React.useState();
   function handleChange(e) {
-    console.log(e.target.value);
     setSelectedSubsector(e.target.value);
   }
 
@@ -262,7 +267,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
     if (user.length != 0) {
       setSelectedSubsector(user[0].Subsektor.toString());
       setSelectedSub(user[0].subsektorId.toString());
-      console.log(selectedSubsector);
     }
   }, [user]);
   React.useEffect(() => {
@@ -271,7 +275,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
     setSelectedUtama(utama);
     setSelectedKlasifikasi(klasifikasi);
 
-    // console.log(pendukung1);
   }, [selectedSub, selectedSubsector]);
   return (
     <>
@@ -353,7 +356,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 }
 // Utama
 
-function SubPen({ setSelectedPendukung }) {
+function SubPen({ setSelectedPendukung, setWarn }) {
   // edit
   const [token, setToken] = React.useState("");
 
@@ -362,7 +365,6 @@ function SubPen({ setSelectedPendukung }) {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        // console.log(result.data.data[0]);
       });
     } catch (error) {
       console.log(error);
@@ -416,20 +418,18 @@ function SubPen({ setSelectedPendukung }) {
       if (user[0].SubsektorPendukung.length <= 2) {
         setInput(user[0].SubsektorPendukung.split(""));
 
-        console.log(input);
         setTimeout(() => {
           setLoading(false);
         }, 3000);
       } else {
         setInput(user[0].SubsektorPendukung.split(",").slice(0, input.length));
-        console.log(input);
+
         setLoading(false);
-        console.log("HAI");
       }
     }
   }, [user]);
   const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
-  console.log(input);
+
   React.useEffect(() => {
     setSelectedPendukung(
       input
@@ -437,16 +437,14 @@ function SubPen({ setSelectedPendukung }) {
         .map((i) => i.replace(regex, ""))
         .join(",")
     );
-    // console.log(selectedPendukung);
   }, [input]);
-  // console.log(input.length)
   return (
     <>
       <div className="flex-flex-col w-full">
         <label className="leading-7 text-sm text-gray-600">
           *Subsektor Pendukung
         </label>
-        <div className="relative  grid grid-cols-2 w-full gap-x-5">
+        <div className="relative  grid md:grid-cols-2 w-full gap-x-5">
           {!loading ? (
             input.map((i, index) => (
               <select
@@ -491,11 +489,13 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               </div>
             </>
           )}
-          {input.length > 4 ? (
+          {input.length < 4 ? (
             <div
               onClick={() => {
                 let newInput = Array(1).fill("");
                 setInput([...input, newInput]);
+
+                
               }}
               className="form-select form-select-sm appearance-none  w-full  mb-5 flex justify-center gap-x-3 cursor-pointer items-center px-3
             py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat

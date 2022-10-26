@@ -25,7 +25,6 @@ export default function Field2() {
     }
   });
 
-  console.log(kode);
   const {
     getValues,
     register,
@@ -62,7 +61,6 @@ export default function Field2() {
       await login("register/update_formulir", values).then((result) => {
         setLoading(false);
 
-        console.log(result.data);
         if (result.data.message == "Success") {
           setSuccess(true);
           Router.push(`/auth/register/field3?kode=${kode}`);

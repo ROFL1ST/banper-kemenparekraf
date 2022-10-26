@@ -27,8 +27,7 @@ export default function Add() {
     setLoading(true);
     try {
       await PostFeed("proposal", token, values, "post").then((result) => {
-        console.log(result.data);
-        console.log(values);
+        
         if (result.data.message != "Success") {
           setError((s) => ({
             ...s,
@@ -82,7 +81,6 @@ export default function Add() {
   React.useEffect(() => {
     detail();
   }, []);
-  // console.log(jenis);
 
   return (
     <>

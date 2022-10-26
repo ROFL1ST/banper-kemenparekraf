@@ -57,7 +57,6 @@ export default function Field1() {
       await login("register", values).then((result) => {
         setLoading(false);
 
-        console.log(result.data);
         if (result.data.message == "Success") {
           Router.push(`/auth/register/Verification/${getValues("Email")}`);
           sessionStorage.setItem("emailState", getValues("Email"));

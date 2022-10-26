@@ -41,7 +41,6 @@ export default function EditProfile() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        console.log(result.data.data);
       });
     } catch (error) {
       console.log(error);
@@ -69,8 +68,6 @@ export default function EditProfile() {
     setLoad(true);
     try {
       await PostFeed("user", token, values, "put").then((result) => {
-        console.log(result.data);
-        console.log(values);
         if (result.data.message != "Success") {
           setError((s) => ({
             ...s,
@@ -141,7 +138,6 @@ export default function EditProfile() {
     getKota();
   }, []);
 
-  // console.log(user[0].Subsektor)
   return (
     <>
       <Navbar />

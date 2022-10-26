@@ -122,7 +122,6 @@ function Video({ video, vid, loading }) {
   useEffect(() => {
     detail();
   }, []);
-  // console.log(kota)
   // modal video
   const [open1, setOpen1] = useState(false);
   const cancelButtonRef = useRef(null);

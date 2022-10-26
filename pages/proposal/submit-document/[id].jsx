@@ -84,7 +84,6 @@ export default function SubmitDoc() {
       .map((doc) => doc.length);
     const all = doc.length;
     setPercent((have.length / all) * 100);
-    // console.log((have.length / all) * 100);
     setHave(have.length);
     setAll(all);
   }, [doc]);
@@ -251,7 +250,7 @@ function CardPengusul() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        // console.log(result.data.data);
+   
         setMuter(false);
       });
     } catch (error) {
@@ -321,7 +320,6 @@ function CardPengusul() {
       Router.push("/home");
     }
   }, [token]);
-  // console.log(list[0].Subsektors.split("\n")[0][2]);
   return (
     <>
       <div className="bg-white bg-opacity-20 rounded-xl px-10 py-8 shadow-xl space-y-7">
@@ -452,14 +450,12 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
     // event.preventDefault();
     const fileObj = event.target.files[0];
     setFile("value");
-    // console.log(file);
 
     if (!fileObj) {
       return false;
     }
 
     const fileMb = fileObj.size / 1024 ** 2;
-    // console.log(fileMb);
 
     if (fileMb >= 3) {
       alert("Mohon Masukkan Berkas Maksimal 3MB");
@@ -469,8 +465,7 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
       const fileExtension = fileObj.name.split(".").at(-1);
       const allowedFileTypes = [data.Type.split(",")];
 
-      // console.log(allowedFileTypes[0].map((i) => i.replace(regex, "")));
-      // console.log(fileExtension);
+  
       if (
         !allowedFileTypes[0]
           .map((i) => i.replace(regex, ""))
@@ -488,16 +483,16 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
   }
 
   const handleSubmit = async (token, values) => {
-    // console.log(values);
+   
     const formData = new FormData();
     setLoading(true);
 
     formData.append("dokumen", values);
     try {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
-        // console.log(result);
+      
         setLoading(false);
-        console.log(result);
+       
 
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
@@ -642,7 +637,7 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
   );
 }
 function Catatan({ id }) {
-  // console.log(id);
+
   const [loading, setLoading] = React.useState(false);
   const [token, setToken] = React.useState("");
   const [error, setError] = React.useState({ status: false, msg: "" });
@@ -660,15 +655,15 @@ function Catatan({ id }) {
   });
 
   const onSubmit = async (values) => {
-    // console.log(values);
+
     setLoading(true);
     try {
       await PostFeed("proposal/comment", token, values, "post").then(
         (result) => {
           setLoading(false);
 
-          // console.log(result.data);
-          // console.log(values);
+       
+      
           if (result.data.message != "Success") {
             setError((s) => ({
               ...s,
