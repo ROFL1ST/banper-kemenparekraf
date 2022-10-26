@@ -94,11 +94,15 @@ export default function Foto() {
               </Link>
             </SwiperSlide>
             {data && !loading ? (
-              data.map((i, key) => (
-                <SwiperSlide className="swiper-image" key={key}>
-                  <FotoCard data={i} />
-                </SwiperSlide>
-              ))
+              data.length != 0 ? (
+                data.map((i, key) => (
+                  <SwiperSlide className="swiper-image" key={key}>
+                    <FotoCard data={i} />
+                  </SwiperSlide>
+                ))
+              ) : (
+                <></>
+              )
             ) : (
               <>
                 <SwiperSlide className="swiper-image">
