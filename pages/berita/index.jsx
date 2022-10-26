@@ -66,7 +66,11 @@ export default function Berita() {
 
   useEffect(() => {
     getData();
-  }, [state?.subsektor_id?.length,state?.kota_id?.length,state?.provinsi_id?.length]);
+  }, [
+    state?.subsektor_id?.length,
+    state?.kota_id?.length,
+    state?.provinsi_id?.length,
+  ]);
 
   useEffect(() => {
     getData();
@@ -126,46 +130,52 @@ export default function Berita() {
         </div>
 
         <div className="right  2xl:w-3/5 w-full">
-          <div className=" lg:mb-7 mb-10 flex lg:flex-row flex-col lg:items-center lg:relative absolute lg:justify-end gap-x-2">
-            <label htmlFor="" className="font-bold text-sm">
-              Urutkan:
-            </label>
-            <select
-              onChange={(e) => {
-                getData(
-                  state.sort,
-                  state.subsektor_id,
-                  state.provinsi_id,
-                  state.kota_id,
-                  e.target.value
-                );
-              }}
-              defaultValue={"Pilih"}
-              className="outline-none border px-3 py-1.5 rounded-lg "
-            >
-              <option value="admin">admin</option>
-              <option value="user">user</option>
-            </select>
-          </div>
-          <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 lg:mt-0 mt-10">
-            {/* Bikin Disini Sidebar buat filter */}
-            <div className="lg:hidden flex close justify-end mb-10">
+          <div className="flex lg:justify-end justify-between items-center mb-10">
+            <div className=" flex lg:flex-row flex-col lg:items-center relative lg:justify-end gap-x-2">
+              <label htmlFor="" className="font-bold text-sm">
+                Urutkan:
+              </label>
+              <select
+                onChange={(e) => {
+                  getData(
+                    state.sort,
+                    state.subsektor_id,
+                    state.provinsi_id,
+                    state.kota_id,
+                    e.target.value
+                  );
+                }}
+                defaultValue={"Pilih"}
+                className="outline-none border px-3 py-1.5 rounded-lg "
+              >
+                <option value="Pilih">Pilih</option>
+                <option value="admin">admin</option>
+                <option value="user">user</option>
+              </select>
+            </div>
+            <div onClick={() => {
+              setSide(true)
+            }} className="lg:hidden mt-5 flex close justify-center items-center border border-gray-400 rounded-xl px-3 py-2 gap-x-2">
               <svg
-                onClick={() => setSide(!side)}
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 text-gray-400"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
                 />
               </svg>
+              <p className="text-sm text-gray-400">Filter</p>
             </div>
+          </div>
+          <div className="grid xl:grid-cols-3 lg:grid-cols-3 grid-cols-1 gap-3 lg:mt-0 mt-10">
+            {/* Bikin Disini Sidebar buat filter */}
+
             {/* Bikin Disini Sidebar buat filter */}
             {loading ? (
               loadingLength.map((i, key) => <CardLoading key={key} />)
@@ -432,40 +442,64 @@ function Sidebar({ setSide, side, getData }) {
           leaveFrom="transform w-screen "
           leaveTo="transform w-0 px-0"
         >
-          <div className="top-0 fixed lg:hidden flex flex-col z-50 bg-white w-screen h-screen px-10  pb-10 overflow-y-auto slider">
-            <div className="right-0 top-0 fixed bg-gray-800 w-10 h-10 flex justify-center ">
-              <button
+          <div className="top-0 fixed  flex flex-col z-10 bg-black  bg-opacity-60 backdrop-blur-lg drop-shadow-lg 2xl:w-1/4 xl:w-1/3 lg:w-1/2 w-full  h-full mt-[104px] px-10 py-10 pb-10 overflow-y-auto">
+            {/* Top */}
+            <div className="flex justify-between items-center mb-7">
+              <div
                 onClick={() => {
                   setSide(false);
                 }}
+                className="flex  px-5 py-3 gap-x-4"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={4.5}
+                  strokeWidth={1.5}
                   stroke="currentColor"
-                  className="w-6 h-6 text-white font-extrabold  "
+                  className="w-6 h-8 text-white"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
+                    d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
                   />
                 </svg>
-              </button>
+                <p className="text-lg text-white">Filter</p>
+              </div>
+              <div className="flex justify-center ">
+                <div
+                  onClick={() => {
+                    setSide(false);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-8 h-8 text-white"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm5.03 4.72a.75.75 0 010 1.06l-1.72 1.72h10.94a.75.75 0 010 1.5H10.81l1.72 1.72a.75.75 0 11-1.06 1.06l-3-3a.75.75 0 010-1.06l3-3a.75.75 0 011.06 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </div>
             </div>
-            <img src={logo.src} alt={"logo"} className="h-40 absolute left-5" />
-
-            <div className="mt-36">
-              <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  sm:text-left">
+            {/* Top */}
+            <div className="border-b-white border-b mb-7"></div>
+            {/* Filter */}
+            <div className="bg-[#f5f5fa] rounded-xl py-7 px-12  overflow-auto scrollbar h-3/4">
+              <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
                 Filter By
               </h2>
-              <div className="flex flex-col gap-y-3 pb-10">
+              <div className="flex flex-col gap-y-3 pb-20">
                 <MenuProvinsi
                   type={"Provinsi"}
                   show={false}
-                  getData={getData}
+                  handleFilters={(filters) => handleFilters(filters, "")}
                 />
                 <MenuSubsector
                   getData={getData}
@@ -473,10 +507,8 @@ function Sidebar({ setSide, side, getData }) {
                   show={true}
                 />
               </div>
-              <button className=" mt-3  bottom-0 w-full inline-flex justify-center rounded-[30px] border border-transparent shadow-sm px-7 lg:px-6 py-2 bg-[#142b51] text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#142b51] sm:w-auto lg:text-sm">
-                Apply Filter
-              </button>
             </div>
+            {/* Filter */}
           </div>
         </Transition>
       </div>
