@@ -181,14 +181,16 @@ export default function Subsektor() {
 function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   // edit
   const [token, setToken] = React.useState("");
-
+  const [muat, setMuat] = React.useState(true);
   const [user, setUser] = React.useState([]);
   const getData = async (value) => {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
+        setMuat(false);
       });
     } catch (error) {
+      setMuat(false);
       console.log(error);
     }
   };
@@ -264,7 +266,7 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   }
 
   React.useEffect(() => {
-    if (user.length != 0) {
+    if (!muat) {
       setSelectedSubsector(user[0].Subsektor.toString());
       setSelectedSub(user[0].subsektorId.toString());
     }
@@ -274,7 +276,6 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
     const klasifikasi = selectedSub;
     setSelectedUtama(utama);
     setSelectedKlasifikasi(klasifikasi);
-
   }, [selectedSub, selectedSubsector]);
   return (
     <>
@@ -494,8 +495,6 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               onClick={() => {
                 let newInput = Array(1).fill("");
                 setInput([...input, newInput]);
-
-                
               }}
               className="form-select form-select-sm appearance-none  w-full  mb-5 flex justify-center gap-x-3 cursor-pointer items-center px-3
             py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
