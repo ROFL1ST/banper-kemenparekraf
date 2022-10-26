@@ -37,7 +37,7 @@ export default function Dashboard() {
       let respond = await getApi("news?limit=2").then((result) => result);
       setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setData((s) => ({ ...s, loading: false }));
     }
   };
@@ -120,9 +120,7 @@ export default function Dashboard() {
           </p>
           <Section text={"Berita"} />
           <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
-            {data.berita.length != 0 ||
-            data.berita != undefined ||
-            data.berita != [] ? (
+            {data.berita.length != 0 ? (
               data.loading ? (
                 <>
                   <CardBeritaLoading />

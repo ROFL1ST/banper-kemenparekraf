@@ -206,33 +206,7 @@ export default function DetailPage() {
               </div>
             </>
           )}
-          <div
-            onClick={() => {
-              if (items.length < 9) {
-                alert("Content is max");
-              } else {
-                setMore(true);
-                return;
-              }
-            }}
-          >
-            {data && !loading2 ? (
-              <h1
-                className={` justify-center items-center text-blue-900 underline  cursor-pointer ${
-                  items
-                    .filter((items) => items.Id != id)
-                    .filter((items) => items.subsektorId == data.subsektorId)
-                    .length != 0
-                    ? "flex"
-                    : "hidden"
-                }`}
-              >
-                More
-              </h1>
-            ) : (
-              <></>
-            )}
-          </div>
+        
         </div>
         {/* bottom content */}
       </div>
