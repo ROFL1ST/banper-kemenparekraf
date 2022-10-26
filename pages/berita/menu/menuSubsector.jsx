@@ -154,7 +154,12 @@ function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
             subsector
               .filter((subsector) => subsector.parentId == data.Id)
               .map((i, key) => (
-                <SubSubsektor menu2={menu2} data={i} key={key} />
+                <SubSubsektor
+                  menu2={menu2}
+                  data={i}
+                  key={key}
+                  setSubsektorId={setSubsektorId}
+                />
               ))
           ) : (
             <></>
@@ -165,7 +170,7 @@ function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
   );
 }
 
-function SubSubsektor({ data, menu2 }) {
+function SubSubsektor({ data, menu2, setSubsektorId }) {
   return (
     <>
       <Transition
@@ -183,7 +188,15 @@ function SubSubsektor({ data, menu2 }) {
             <input
               type="checkbox"
               defaultChecked={false}
-              required
+              onClick={(e) => {
+                if (e.target.checked) {
+                  setSubsektorId((val) => [...val, data.Id]);
+                } else {
+                  setSubsektorId((prevState) =>
+                    prevState.filter((prevItem) => prevItem !== data.Id)
+                  );
+                }
+              }}
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
             <div className="inline-flex items-center justify-between w-full">

@@ -66,7 +66,7 @@ export default function Berita() {
 
   useEffect(() => {
     getData();
-  }, [state?.subsektor_id?.length]);
+  }, [state?.subsektor_id?.length,state?.kota_id?.length,state?.provinsi_id?.length]);
 
   useEffect(() => {
     getData();
