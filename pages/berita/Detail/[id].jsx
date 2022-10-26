@@ -48,9 +48,10 @@ export default function DetailPage() {
       console.log(error);
     }
   };
+  const { data, loading2 } = detail;
 
   React.useEffect(() => {
-    document.title = "Detail";
+    document.title = data?.Judul ?? "";
   });
   React.useEffect(() => {
     if (router.isReady) {
@@ -68,7 +69,6 @@ export default function DetailPage() {
     };
   }, [router]);
   const [more, setMore] = React.useState(false);
-  const { data, loading2 } = detail;
 
   const [random, setRandom] = React.useState([]);
   React.useEffect(() => {
