@@ -13,17 +13,9 @@ import Link from "next/link";
 import axios from "axios";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
-
-import logo from "../assets/banper.png";
 import empty from "../assets/Empty-amico.png";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { useSelector } from "react-redux";
+
 
 const MAX_LENGTH = 60;
 

@@ -10,7 +10,7 @@ import Router, { useRouter } from "next/router";
 import Small_Card_Loading from "./component/Small_Card_Loading";
 import DetailCardLoading from "./component/detailCardLoading";
 import { Dialog, Transition } from "@headlessui/react";
-
+import empty from "../../assets/Empty-amico.png";
 import { getApi } from "../../api/restApi";
 import Link from "next/link";
 import axios from "axios";
@@ -70,13 +70,13 @@ export default function DetailPage() {
   const [more, setMore] = React.useState(false);
   const { data, loading2 } = detail;
 
-
-  const[random, setRandom]= React.useState([])
+  const [random, setRandom] = React.useState([]);
   React.useEffect(() => {
-    const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
-    setRandom(shuffle(items))
-    console.log(random)
-  }, [items])
+    const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+    setRandom(shuffle(items));
+    console.log(random);
+  }, [items]);
+
   return (
     <>
       <Navbar />
@@ -142,38 +142,70 @@ export default function DetailPage() {
             Berita Terkait
           </h1>
 
-          <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pb-16 w-full">
-            {!loading2 && data ? (
-              items.length != 0 ? (
+          {!loading2 && data ? (
+            <div
+              className={`pt-16   pb-16 w-full ${
                 items
                   .filter((items) => items.Id != id)
                   .filter((items) => items.subsektorId == data.subsektorId)
-                  .slice(0, 4)
-                  .map((i, key) => (
-                    <div
-                      onClick={() => {
-                        // getData();
-                        setDetail((s) => ({ ...s, loading2: true }));
+                  .length != 0
+                  ? "grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4"
+                  : ""
+              }`}
+            >
+              {!loading2 && data ? (
+                items
+                  .filter((items) => items.Id != id)
+                  .filter((items) => items.subsektorId == data.subsektorId)
+                  .length != 0 ? (
+                  items
+                    .filter((items) => items.Id != id)
+                    .filter((items) => items.subsektorId == data.subsektorId)
+                    .slice(0, 4)
+                    .map((i, key) => (
+                      <div
+                        onClick={() => {
+                          // getData();
+                          setDetail((s) => ({ ...s, loading2: true }));
 
-                        // console.log("hai")
-                      }}
-                      key={key}
-                    >
-                      <Card data={i} />
+                          // console.log("hai")
+                        }}
+                        key={key}
+                      >
+                        <Card data={i} />
+                      </div>
+                    ))
+                ) : (
+                  <>
+                    <div className=" relative justify-center mx-auto items-center flex flex-col mt-10 pb-20">
+                      <img
+                        src={empty.src}
+                        className="lg:h-96 h-72 w-auto"
+                        alt=""
+                      />
+                      <p className="font-bold">Berita Terkait Tidak Tersedia</p>
                     </div>
-                  ))
+                  </>
+                )
               ) : (
-                <></>
-              )
-            ) : (
-              <>
+                <>
+                  <DetailCardLoading />
+                  <DetailCardLoading />
+                  <DetailCardLoading />
+                  <DetailCardLoading />
+                </>
+              )}
+            </div>
+          ) : (
+            <>
+              <div className="grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pt-16   pb-16 w-full">
                 <DetailCardLoading />
                 <DetailCardLoading />
                 <DetailCardLoading />
                 <DetailCardLoading />
-              </>
-            )}
-          </div>
+              </div>
+            </>
+          )}
           <div
             onClick={() => {
               if (items.length < 9) {
@@ -184,9 +216,22 @@ export default function DetailPage() {
               }
             }}
           >
-            <h1 className="flex justify-center items-center text-blue-900 underline  cursor-pointer">
-              More
-            </h1>
+            {data && !loading2 ? (
+              <h1
+                className={` justify-center items-center text-blue-900 underline  cursor-pointer ${
+                  items
+                    .filter((items) => items.Id != id)
+                    .filter((items) => items.subsektorId == data.subsektorId)
+                    .length != 0
+                    ? "flex"
+                    : "hidden"
+                }`}
+              >
+                More
+              </h1>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         {/* bottom content */}
