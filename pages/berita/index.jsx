@@ -140,7 +140,7 @@ export default function Berita() {
                 defaultValue={"Pilih"}
                 className="outline-none border px-3 py-1.5 rounded-lg "
               >
-                <option value="Pilih">Pilih</option>
+                <option value="Pilih">Semua</option>
                 <option value="admin">admin</option>
                 <option value="user">user</option>
               </select>

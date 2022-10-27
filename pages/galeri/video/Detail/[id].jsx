@@ -14,8 +14,8 @@ export default function Detail() {
   const [nama, setNama] = React.useState("");
 
   React.useEffect(() => {
-    document.title = nama;
-  }, [nama]);
+    document.title = nama?? "Video";
+  });
   var router = useRouter();
 
   const { id } = router.query;

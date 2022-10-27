@@ -5,20 +5,14 @@ import React from "react";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import parse from "html-react-parser";
-
 import Router, { useRouter } from "next/router";
 import Small_Card_Loading from "./component/Small_Card_Loading";
 import DetailCardLoading from "./component/detailCardLoading";
-import { Dialog, Transition } from "@headlessui/react";
 import empty from "../../assets/Empty-amico.png";
 import { getApi } from "../../api/restApi";
 import Link from "next/link";
-import axios from "axios";
 
 export default function DetailPage() {
-  const [open, setOpen] = React.useState(false);
-  const cancelButtonRef = React.useRef(null);
-
   const [loading, setLoading] = React.useState(true);
   const [items, setItem] = React.useState([]);
   const [detail, setDetail] = React.useState({ data: {}, loading2: true });
@@ -38,7 +32,6 @@ export default function DetailPage() {
   };
 
   const getList = async () => {
-    const url = "http://128.199.242.242/api/news";
     try {
       let respond = await getApi("news").then((result) => result);
       setItem(respond.data.data);
@@ -51,7 +44,7 @@ export default function DetailPage() {
   const { data, loading2 } = detail;
 
   React.useEffect(() => {
-    document.title = data?.Judul ?? "";
+    document.title = data?.Judul ?? "Detail";
   });
   React.useEffect(() => {
     if (router.isReady) {
@@ -68,7 +61,6 @@ export default function DetailPage() {
       ac.abort();
     };
   }, [router]);
-  const [more, setMore] = React.useState(false);
 
   const [random, setRandom] = React.useState([]);
   React.useEffect(() => {
