@@ -126,10 +126,14 @@ function Provinsi({ data, menu, setSubsectorId: setProvinsiId, setKotaId }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setProvinsiId((val) => [...val, data.Id]);
+                  setMenu2(true);
+
                 } else {
                   setProvinsiId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
+                  setMenu2(false);
+
                 }
               }}
               defaultChecked={false}

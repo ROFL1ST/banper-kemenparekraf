@@ -110,10 +110,14 @@ function Subsektor({ data, menu, subsector, load, setSubsectorId }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setSubsectorId((val) => [...val, data.Id]);
+                  setMenu2(true);
+
                 } else {
                   setSubsectorId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
+                  setMenu2(false);
+
                 }
               }}
               type="checkbox"
