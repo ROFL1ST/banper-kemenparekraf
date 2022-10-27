@@ -1,23 +1,23 @@
 import { Snackbar } from "@mui/material";
 import Router, { useRouter } from "next/router";
 import React from "react";
-import { getApi, login } from "../../api/restApi";
-import Footer from "../../components/footer";
-import Navbar from "../../components/navbar";
 import Section from "../../components/section";
 import { useForm } from "react-hook-form";
 import MuiAlert from "@mui/material/Alert";
+
+import Navbar from "../../components/navbar";
+import Footer from "../../components/footer";
+import { getApi, getPropose, login, PostFeed } from "../../api/restApi";
 import Loading from "../../components/Loading";
-const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-export default function Field3() {
+export default function Subsektor() {
   const { query } = useRouter();
   const { kode } = query;
   React.useEffect(() => {
-    document.title = "Formulir";
+    document.title = "Edit Subsektor";
   });
   // const [state, setState] = React.useState({});
 
@@ -32,8 +32,20 @@ export default function Field3() {
 
   // error
   const [erros, setError] = React.useState(false);
-  const [success, setSucess] = React.useState(false);
+  const [warn, setWarn] = React.useState(false);
 
+  const [success, setSucess] = React.useState(false);
+  const [token, setToken] = React.useState("");
+  const [user, setUser] = React.useState([]);
+  const getData = async (value) => {
+    try {
+      await getPropose("user", value).then((result) => {
+        setUser(result.data.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -41,6 +53,7 @@ export default function Field3() {
 
     setError(false);
     setSucess(false);
+    setWarn(false);
   };
 
   const [loading, setLoading] = React.useState(false);
@@ -48,10 +61,12 @@ export default function Field3() {
   const handleSubmit = async (values) => {
     setLoading(true);
     try {
-      await login("register/update_subsektor", values).then((result) => {
+      await PostFeed("user", token, values, "put").then((result) => {
         if (result.data.message == "Success") {
           setSucess(true);
-          Router.push("/auth/login");
+          setTimeout(() => {
+            Router.push("/proposal");
+          }, 1000);
         } else {
           setError(true);
         }
@@ -61,6 +76,22 @@ export default function Field3() {
       console.log(error);
     }
   };
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+      getData(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+      getData(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [token]);
   return (
     <>
       <Navbar />
@@ -72,7 +103,7 @@ export default function Field3() {
         className="bg-gray-200 w-full h-full  bg-cover rounded-b-3xl"
       >
         <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
-          <Section text={"Formulir"} />
+          <Section text={"Edit Subsektor"} />
           <form>
             {/* Utama */}
             <Utama
@@ -81,15 +112,16 @@ export default function Field3() {
               setSelectedKlasifikasi={setSelectedKlasifikasi}
             />
             {/* Utama */}
+
             <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
               <SubPen
                 selectedPendukung={selectedPendukung}
                 setSelectedPendukung={setSelectedPendukung}
+                setWarn={setWarn}
               />
             </div>
             <div className="  border-10 border-b-orange-600 ">
               <button
-                disabled={!loading ? false : true}
                 onClick={(e) => {
                   e.preventDefault();
                   if (
@@ -100,7 +132,17 @@ export default function Field3() {
                     setError(true);
                   } else {
                     handleSubmit({
-                      kode: kode,
+                      NamaKomunitas: user[0].NamaKomunitas,
+                      Kategori: user[0].Kategori,
+                      AlamatAkta: user[0].AlamatAkta,
+                      Alamat: user[0].Alamat,
+                      Email: user[0].Email,
+                      PhoneNumber: user[0].PhoneNumber,
+                      Nama: user[0].Nama,
+                      password: "",
+                      EmailPJ: user[0].EmailPJ,
+                      PhonePJ: user[0].PhonePJ,
+                      KotaID: user[0].KotaID,
                       Subsektor: selectedUtama,
                       SubsektorPendukung: selectedPendukung,
                       subsektorId: selectedKlasifikasi,
@@ -118,8 +160,8 @@ export default function Field3() {
       </div>
       <Footer />
       <Snackbar open={erros} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Mohon Untuk Mengisi Semua Subsektor
+        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
+          Mohon Untuk Mengisi Subsektor Dengan Benar
         </Alert>
       </Snackbar>
       <Snackbar open={success} autoHideDuration={3000} onClose={handleClose}>
@@ -127,11 +169,48 @@ export default function Field3() {
           Berhasil!
         </Alert>
       </Snackbar>
+      <Snackbar open={warn} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
+          Anda Hanya Bisa Mengisi Maksimal 4 subsektor pendukung
+        </Alert>
+      </Snackbar>
     </>
   );
 }
 // Utama
 function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
+  // edit
+  const [token, setToken] = React.useState("");
+  const [muat, setMuat] = React.useState(true);
+  const [user, setUser] = React.useState([]);
+  const getData = async (value) => {
+    try {
+      await getPropose("user", value).then((result) => {
+        setUser(result.data.data);
+        setMuat(false);
+      });
+    } catch (error) {
+      setMuat(false);
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+      getData(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+      getData(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [token]);
   //   getData
   const [load, setLoad] = React.useState(true);
   //   sub
@@ -167,6 +246,7 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
       });
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
   //   handle
@@ -184,17 +264,24 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   function handleSelected(e) {
     setSelectedSub(e.target.value);
   }
+
+  React.useEffect(() => {
+    if (!muat) {
+      setSelectedSubsector(user[0].Subsektor.toString());
+      setSelectedSub(user[0].subsektorId);
+    }
+  }, [user]);
   React.useEffect(() => {
     const utama = selectedSubsector;
     const klasifikasi = selectedSub;
     setSelectedUtama(utama);
     setSelectedKlasifikasi(klasifikasi);
-
   }, [selectedSub, selectedSubsector]);
   return (
     <>
       <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
         {/* sub1 */}
+
         <div className="relative flex-grow w-full">
           <label className="leading-7 text-sm text-gray-600">
             *Subsektor Utama
@@ -207,6 +294,7 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             name=""
             id="sub"
+            value={selectedSubsector}
           >
             <option defaultValue={true} value="">
               Pilih Subsektor Utama
@@ -239,13 +327,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             name=""
             id=""
+            value={selectedSub}
           >
             <option defaultValue={true} value={undefined}>
               {subsub.length == 0 || selectedSubsector == ""
                 ? "Mohon Pilih Subsektor Awal"
                 : "Pilih Sub"}
             </option>
-            {!load ? (
+            {!loading ? (
               subsub
                 .filter(
                   (subsub) =>
@@ -268,7 +357,37 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
 }
 // Utama
 
-function SubPen({ selectedPendukung, setSelectedPendukung }) {
+function SubPen({ setSelectedPendukung, setWarn }) {
+  // edit
+  const [token, setToken] = React.useState("");
+
+  const [user, setUser] = React.useState([]);
+  const getData = async (value) => {
+    try {
+      await getPropose("user", value).then((result) => {
+        setUser(result.data.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    if (localStorage.getItem("token") != null) {
+      setToken(localStorage.getItem("token"));
+      getData(localStorage.getItem("token"));
+    } else {
+      setToken(sessionStorage.getItem("token"));
+      getData(sessionStorage.getItem("token"));
+    }
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      return;
+    } else {
+      Router.push("/home");
+    }
+  }, [token]);
   //   getData
   const [load, setLoad] = React.useState(true);
   //   sub
@@ -288,93 +407,123 @@ function SubPen({ selectedPendukung, setSelectedPendukung }) {
   }, []);
 
   // input
-  const [input, setInput] = React.useState(Array(2).fill(""));
-
+  const [input, setInput] = React.useState(Array(4).fill(""));
   const handleChange = (element, index) => {
     setInput([...input.map((d, indx) => (indx === index ? element.value : d))]);
-
-    //Focus next input
   };
-  const [input2, setInput2] = React.useState(Array(2).fill(""));
-  const handleChange2 = (element, index) => {
-    setInput2([
-      ...input2.map((d, indx) => (indx === index ? element.value : d)),
-    ]);
 
-    //Focus next input
-  };
+  const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (
-      input2.filter((i) => i != "").map((i) => i.replace(regex, "")).length !=
-        0 &&
-      input.filter((i) => i != "").map((i) => i.replace(regex, "")).length != 0
-    ) {
-      setSelectedPendukung(
-        input
-          .filter((i) => i != "")
-          .map((i) => i.replace(regex, ""))
-          .join(", ") +
-          `, ${input2
-            .filter((i) => i != "")
-            .map((i) => i.replace(regex, ""))
-            .join(", ")}`
-      );
-    } else if (
-      input.filter((i) => i != "").map((i) => i.replace(regex, "")).length != 0
-    ) {
-      setSelectedPendukung(
-        input
-          .filter((i) => i != "")
-          .map((i) => i.replace(regex, ""))
-          .join(", ")
-      );
-    } else {
-      setSelectedPendukung(
-        input2
-          .filter((i) => i != "")
-          .map((i) => i.replace(regex, ""))
-          .join(", ")
-      );
+    if (user.length != 0) {
+      if (user[0].SubsektorPendukung.length <= 2) {
+        setInput(user[0].SubsektorPendukung.split(""));
+
+        setTimeout(() => {
+          setLoading(false);
+        }, 3000);
+      } else {
+        setInput(user[0].SubsektorPendukung.split(",").slice(0, input.length));
+
+        setLoading(false);
+      }
     }
-  }, [input, input2]);
+  }, [user]);
+  const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
+
+  React.useEffect(() => {
+    setSelectedPendukung(
+      input
+        .filter((i) => i != "")
+        .map((i) => i.replace(regex, ""))
+        .join(",")
+    );
+  }, [input]);
   return (
     <>
-      <div className="relative  flex-grow w-full">
+      <div className="flex-flex-col w-full">
         <label className="leading-7 text-sm text-gray-600">
           *Subsektor Pendukung
         </label>
-        {input.map((i, index) => (
-          <select
-            key={index}
-            value={i}
-            className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+        <div className="relative  grid md:grid-cols-2 w-full gap-x-5">
+          {!loading ? (
+            input.map((i, index) => (
+              <select
+                key={index}
+                value={i}
+                className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
 py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
 border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            name=""
-            id=""
-            onChange={(e) => handleChange(e.target, index)}
-          >
-            <option defaultValue={true} value={""}>
-              Pilih Subsektor Pendukung
-            </option>
-            {!load ? (
-              sub
-                .filter((sub) => sub.parentId == 0)
-                .map((i, key) => (
-                  <option value={i.Id} key={key}>
-                    {i.Nama}
-                  </option>
-                ))
-            ) : (
-              <></>
-            )}
-          </select>
-        ))}
+                name=""
+                id=""
+                onChange={(e) => handleChange(e.target, index)}
+              >
+                <option defaultValue={true} value={""}>
+                  Pilih Subsektor Pendukung
+                </option>
+                {!load ? (
+                  sub
+                    .filter((sub) => sub.parentId == 0)
+                    .map((i, key) => (
+                      <option value={i.Id} key={key}>
+                        {i.Nama}
+                      </option>
+                    ))
+                ) : (
+                  <></>
+                )}
+              </select>
+            ))
+          ) : (
+            <>
+              <div
+                className="form-select form-select-sm appearance-none  w-full  mb-5 flex justify-center gap-x-3 cursor-progress items-center px-3
+            py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+            border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              >
+                Loading
+                <div className="spinner-container flex justify-center text-black">
+                  <div className="loading-spinner"></div>
+                </div>
+              </div>
+            </>
+          )}
+          {input.length < 4 ? (
+            <div
+              onClick={() => {
+                let newInput = Array(1).fill("");
+                setInput([...input, newInput]);
+              }}
+              className="form-select form-select-sm appearance-none  w-full  mb-5 flex justify-center gap-x-3 cursor-pointer items-center px-3
+            py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+            border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
+            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            >
+              Tambah
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
 
-      <div className="relative  flex-grow w-full">
+      {/* <div className="relative  flex-grow w-full">
         {input2.map((i, index) => (
           <select
             onChange={(e) => handleChange2(e.target, index)}
@@ -403,7 +552,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             )}
           </select>
         ))}
-      </div>
+      </div> */}
     </>
   );
 }

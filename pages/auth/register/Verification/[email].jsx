@@ -32,7 +32,6 @@ export default function EmailVer() {
     }
   };
 
-  //   console.log(code.map((e) => e).join(""));
 
   function onPaste(event) {
     const pasted = event.clipboardData.getData("text/plain");
@@ -42,7 +41,6 @@ export default function EmailVer() {
   const [load, setLoad] = useState(false);
   const [nice, setNice] = useState(false);
   const [wrong, setWrong] = useState(false);
-  const [plis, setPlis] = useState(false);
   const [erros, setError] = React.useState("");
   const [success, setSuccess] = React.useState("");
 
@@ -53,7 +51,6 @@ export default function EmailVer() {
         kode: code.map((e) => e).join(""),
       }).then((result) => {
         setLoad(false);
-        console.log(result.data);
         if (code.map((e) => e).join("").length < 6) {
           setWrong(true);
           setError("Mohon Untuk Mengisi Kode OTP Dengan Benar");

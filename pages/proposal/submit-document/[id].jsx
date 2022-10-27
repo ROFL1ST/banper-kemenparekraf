@@ -7,9 +7,13 @@ import Section from "../../components/section";
 import Router, { useRouter } from "next/router";
 import { getApi, getPropose, postDoc, PostFeed } from "../../api/restApi";
 import { useForm } from "react-hook-form";
+import MuiAlert from "@mui/material/Alert";
 
 import Loading from "../../components/Loading";
-
+import { Snackbar } from "@mui/material";
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function SubmitDoc() {
   React.useEffect(() => {
     document.title = "Submit Dokumen";
@@ -80,11 +84,22 @@ export default function SubmitDoc() {
       .map((doc) => doc.length);
     const all = doc.length;
     setPercent((have.length / all) * 100);
-    // console.log((have.length / all) * 100);
     setHave(have.length);
     setAll(all);
   }, [doc]);
   const data = JSON.stringify(doc);
+
+  // alert
+  const [success, setSucess] = React.useState(false);
+  const [mistake, setMistake] = React.useState(false);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSucess(false);
+    setMistake(false);
+  };
   return (
     <>
       <Navbar />
@@ -115,6 +130,8 @@ export default function SubmitDoc() {
                   key={key}
                   num={key}
                   detail={detail}
+                  setSucess={setSucess}
+                  setMistake={setMistake}
                 ></CardDocument>
               ))
             ) : (
@@ -123,13 +140,23 @@ export default function SubmitDoc() {
 
             {/* Document */}
             {/* Catatan Dokument */}
-            <h1 className="text-2xl md:pt-0 pt-24">Catatan Dokument</h1>
-            {!load && doc ? <Catatan id={doc[0].UsulanHeaderID} /> : <></>}
+            {/* <h1 className="text-2xl md:pt-0 pt-24">Catatan Dokumen</h1> */}
+            {/* {!load && doc ? <Catatan id={doc[0].UsulanHeaderID} /> : <></>} */}
             {/* Catatan Dokument */}
           </div>
         </div>
       </div>
       <Footer />
+      <Snackbar open={success} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Berhasil!
+        </Alert>
+      </Snackbar>
+      <Snackbar open={mistake} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          Error
+        </Alert>
+      </Snackbar>
     </>
   );
 }
@@ -223,7 +250,7 @@ function CardPengusul() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        // console.log(result.data.data);
+   
         setMuter(false);
       });
     } catch (error) {
@@ -293,7 +320,6 @@ function CardPengusul() {
       Router.push("/home");
     }
   }, [token]);
-  // console.log(list[0].Subsektors.split("\n")[0][2]);
   return (
     <>
       <div className="bg-white bg-opacity-20 rounded-xl px-10 py-8 shadow-xl space-y-7">
@@ -396,7 +422,7 @@ function CardPengusul() {
   );
 }
 
-function CardDocument({ data, teks, num, detail }) {
+function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
   var router = useRouter();
 
   const { id } = router.query;
@@ -424,14 +450,12 @@ function CardDocument({ data, teks, num, detail }) {
     // event.preventDefault();
     const fileObj = event.target.files[0];
     setFile("value");
-    // console.log(file);
 
     if (!fileObj) {
       return false;
     }
 
     const fileMb = fileObj.size / 1024 ** 2;
-    // console.log(fileMb);
 
     if (fileMb >= 3) {
       alert("Mohon Masukkan Berkas Maksimal 3MB");
@@ -441,8 +465,7 @@ function CardDocument({ data, teks, num, detail }) {
       const fileExtension = fileObj.name.split(".").at(-1);
       const allowedFileTypes = [data.Type.split(",")];
 
-      // console.log(allowedFileTypes[0].map((i) => i.replace(regex, "")));
-      // console.log(fileExtension);
+  
       if (
         !allowedFileTypes[0]
           .map((i) => i.replace(regex, ""))
@@ -467,13 +490,15 @@ function CardDocument({ data, teks, num, detail }) {
     formData.append("dokumen", values);
     try {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
-        // console.log(result);
+      
         setLoading(false);
-        console.log(result);
+       
 
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
+          setMistake(true)
         } else {
+          setSucess(true);
           if (router.isReady) {
             if (localStorage.getItem("token") != null) {
               detail(localStorage.getItem("token"));
@@ -495,6 +520,8 @@ function CardDocument({ data, teks, num, detail }) {
     } catch (err) {
       console.log(err);
       setLoading(false);
+      setMistake(true)
+
     }
   };
   return (
@@ -610,7 +637,7 @@ function CardDocument({ data, teks, num, detail }) {
   );
 }
 function Catatan({ id }) {
-  // console.log(id);
+
   const [loading, setLoading] = React.useState(false);
   const [token, setToken] = React.useState("");
   const [error, setError] = React.useState({ status: false, msg: "" });
@@ -628,15 +655,15 @@ function Catatan({ id }) {
   });
 
   const onSubmit = async (values) => {
-    // console.log(values);
+
     setLoading(true);
     try {
       await PostFeed("proposal/comment", token, values, "post").then(
         (result) => {
           setLoading(false);
 
-          // console.log(result.data);
-          // console.log(values);
+       
+      
           if (result.data.message != "Success") {
             setError((s) => ({
               ...s,

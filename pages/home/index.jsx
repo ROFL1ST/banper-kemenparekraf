@@ -35,10 +35,9 @@ export default function Dashboard() {
     try {
       //let respond = await axios.get(url, config);
       let respond = await getApi("news?limit=2").then((result) => result);
-      // console.log(respond.data.data, "hai");
       setData((s) => ({ ...s, berita: respond.data.data, loading: false }));
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       setData((s) => ({ ...s, loading: false }));
     }
   };
@@ -67,7 +66,6 @@ export default function Dashboard() {
     getData();
     getFaq();
   }, []);
-  // console.log(data.berita);
   const [open, setOpen] = useState(false);
 
   return (
@@ -122,9 +120,7 @@ export default function Dashboard() {
           </p>
           <Section text={"Berita"} />
           <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
-            {data.berita.length != 0 ||
-            data.berita != undefined ||
-            data.berita != [] ? (
+            {data.berita.length != 0 ? (
               data.loading ? (
                 <>
                   <CardBeritaLoading />
@@ -239,7 +235,6 @@ function Question({ text, sub }) {
 }
 function Summary({ data }) {
   const reactElement = parse(`${data}`);
-  // console.log(reactElement);
 
   return reactElement;
 }
@@ -339,7 +334,6 @@ function CardBeritaMobile({ data }) {
 
 function IsiBerita({ data }) {
   const reactElement = parse(`${data.substring(0, 449)}`);
-  // console.log(reactElement);
 
   return reactElement;
 }
@@ -350,7 +344,6 @@ function Modal({ open, setOpen, cancelButtonRef }) {
   const handleChange = async () => {
     setCheck((current) => !current);
   };
-  // console.log(check);
 
   return (
     <>

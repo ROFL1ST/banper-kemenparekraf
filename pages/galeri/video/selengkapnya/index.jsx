@@ -1,22 +1,32 @@
-import axios from "axios";
-import Link from "next/link";
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { getGaleri } from "../../../api/restApi";
 import Footer from "../../../components/footer";
 import Navbar from "../../../components/navbar";
 import Loading from "../loading";
-import { Dialog, Transition } from "@headlessui/react";
-import Router, { useRouter } from "next/router";
+import { Transition } from "@headlessui/react";
+import Router from "next/router";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
+import { useSelector } from "react-redux";
 
 export default function Selengkapnya() {
-  const [open, setOpen] = React.useState(false);
-  const cancelButtonRef = React.useRef(null);
   const [videoData, setVideoData] = React.useState({ data: {}, loading: true });
-  async function getVideo() {
+  const state = useSelector((state) => state.data);
+
+  async function getVideo(
+    subsektor_id = state?.subsektor_id?.toString(),
+    provinsi_id = state?.provinsi_id?.toString(),
+    kota_id = state?.kota_id?.toString()
+  ) {
     try {
-      await getGaleri("video?offset=0&limit=10").then((result) => {
+      await getGaleri(
+        `video?offset=0&limit=10&${
+          subsektor_id !== undefined ? `subsektorId=${subsektor_id}` : ""
+        }&${provinsi_id !== undefined ? `ProvinsiID=${provinsi_id}` : ""}&${
+          kota_id !== undefined ? `kotaId=${kota_id}` : ""
+        }`
+      ).then((result) => {
         setVideoData((s) => ({ ...s, data: result.data.data, loading: false }));
       });
     } catch (error) {
@@ -24,20 +34,26 @@ export default function Selengkapnya() {
       setVideoData((s) => ({ ...s, loading: true }));
     }
   }
-  // console.log(videoData.data);
+
+  useEffect(() => {
+    getVideo();
+  }, [
+    state?.subsektor_id?.length,
+    state?.provinsi_id?.length,
+    state?.kota_id?.length,
+  ]);
 
   React.useEffect(() => {
     const ac = new AbortController();
     getVideo();
-    document.title = "Video"
+    document.title = "Video";
 
     return () => {
       ac.abort();
     };
   }, []);
-  const { data, loading } = videoData;
 
-  // sort
+  const { data, loading } = videoData;
   const [sort, setSort] = React.useState(false);
 
   return (
@@ -70,7 +86,7 @@ export default function Selengkapnya() {
       <div className="pt-40 lg:px-20 px-5">
         <div className="grid xl:grid-cols-3 mb-10 gap-4  mt-10">
           {data && !loading ? (
-            videoData.data.map((i, key) => <CardVideo key={key} data={i} />)
+            videoData?.data?.map((i, key) => <CardVideo key={key} data={i} />)
           ) : (
             <>
               <Loading />
@@ -123,7 +139,6 @@ function CardVideo({ data }) {
   React.useEffect(() => {
     detail();
   }, []);
-  console.log(kota);
 
   // hover
   const [isHovering, setIsHovering] = React.useState(false);

@@ -94,11 +94,15 @@ export default function Foto() {
               </Link>
             </SwiperSlide>
             {data && !loading ? (
-              data.map((i, key) => (
-                <SwiperSlide className="swiper-image" key={key}>
-                  <FotoCard data={i} />
-                </SwiperSlide>
-              ))
+              data.length != 0 ? (
+                data.map((i, key) => (
+                  <SwiperSlide className="swiper-image" key={key}>
+                    <FotoCard data={i} />
+                  </SwiperSlide>
+                ))
+              ) : (
+                <></>
+              )
             ) : (
               <>
                 <SwiperSlide className="swiper-image">
@@ -153,7 +157,7 @@ function FotoCard({ data }) {
         onClick={() => {
           setOpen(true);
         }}
-        className="lg:h-96 2xl:h-[30rem] h-96 rounded-2xl w-full bg-cover bg-center shadow-2xl"
+        className="lg:h-96 2xl:min-h-[30rem]  h-96 rounded-2xl w-full bg-cover bg-center shadow-2xl"
         style={{
           backgroundImage: `url(${data.images[0]["images"]})`,
         }}

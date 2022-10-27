@@ -32,7 +32,6 @@ export default function Proposal() {
     try {
       await getPropose("proposal?offset=0&limit=10", auth).then((result) => {
         setLoad(false);
-        console.log(result.data);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
             setList(result.data.data);
@@ -77,7 +76,6 @@ export default function Proposal() {
   const cancelButtonRef = React.useRef(null);
 
   // detail
-  console.log(list.length);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -195,7 +193,6 @@ function ListPropose(data) {
   async function deletePropose(id, auth) {
     try {
       await getDelete(`proposal/${id}`, auth).then((result) => {
-        console.log(result);
         setShow(true);
       });
     } catch (error) {
@@ -248,10 +245,8 @@ function ListPropose(data) {
       .map((doc) => doc.length);
     const all = doc.length;
     setPercent((have.length / all) * 100);
-    // console.log((have.length / all) * 100);
     setHave(have.length);
     setAll(all);
-    console.log(percent);
   }, [doc]);
   return (
     <>
@@ -457,45 +452,3 @@ function DeletePop({
   );
 }
 
-function Result({ show, setShow, cancelButtonRef }) {
-  return (
-    <>
-      <Transition.Root show={show} as={Fragment}>
-        <Dialog
-          as="div"
-          className="relative z-50"
-          initialFocus={cancelButtonRef}
-          onClose={setShow}
-        >
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-75 transition-opacity" />
-          </Transition.Child>
-
-          <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                enterTo="opacity-100 translate-y-0 sm:scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-                leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              >
-                <Dialog.Panel className="my-auto relative bg-white rounded-[30px] text-center overflow-hidden shadow-xl transform transition-all sm:my-8  xl:w-1/5 lg:w-1/4 md:w-2/5 sm:w-1/2 w-3/4  p-3"></Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition.Root>
-    </>
-  );
-}

@@ -5,20 +5,14 @@ import React from "react";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import parse from "html-react-parser";
-
 import Router, { useRouter } from "next/router";
 import Small_Card_Loading from "./component/Small_Card_Loading";
 import DetailCardLoading from "./component/detailCardLoading";
-import { Dialog, Transition } from "@headlessui/react";
-
+import empty from "../../assets/Empty-amico.png";
 import { getApi } from "../../api/restApi";
 import Link from "next/link";
-import axios from "axios";
 
 export default function DetailPage() {
-  const [open, setOpen] = React.useState(false);
-  const cancelButtonRef = React.useRef(null);
-
   const [loading, setLoading] = React.useState(true);
   const [items, setItem] = React.useState([]);
   const [detail, setDetail] = React.useState({ data: {}, loading2: true });
@@ -38,7 +32,6 @@ export default function DetailPage() {
   };
 
   const getList = async () => {
-    const url = "http://128.199.242.242/api/news";
     try {
       let respond = await getApi("news").then((result) => result);
       setItem(respond.data.data);
@@ -48,9 +41,10 @@ export default function DetailPage() {
       console.log(error);
     }
   };
+  const { data, loading2 } = detail;
 
   React.useEffect(() => {
-    document.title = "Detail";
+    document.title = data?.Judul ?? "Detail";
   });
   React.useEffect(() => {
     if (router.isReady) {
@@ -67,8 +61,13 @@ export default function DetailPage() {
       ac.abort();
     };
   }, [router]);
-  const [more, setMore] = React.useState(false);
-  const { data, loading2 } = detail;
+
+  const [random, setRandom] = React.useState([]);
+  React.useEffect(() => {
+    const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
+    setRandom(shuffle(items));
+    console.log(random);
+  }, [items]);
 
   return (
     <>
@@ -105,12 +104,25 @@ export default function DetailPage() {
                   <Small_Card_Loading />
                   <Small_Card_Loading />
                 </>
-              ) : (
-                items
-                  ?.slice(0, 4)
-                  .map((i, index) => (
-                    <News_small_card data={i} key={index}></News_small_card>
+              ) : random.length != 0 ? (
+                random
+                  .filter((random) => random.Id != id)
+                  .slice(0, 3)
+                  .map((i, key) => (
+                    <div
+                      onClick={() => {
+                        // getData();
+                        setDetail((s) => ({ ...s, loading2: true }));
+
+                        // console.log("hai")
+                      }}
+                      key={key}
+                    >
+                      <News_small_card data={i} key={key}></News_small_card>
+                    </div>
                   ))
+              ) : (
+                <></>
               )}
             </div>
           </div>
@@ -122,45 +134,71 @@ export default function DetailPage() {
             Berita Terkait
           </h1>
 
-          <div className="pt-16  grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pb-16 w-full">
-            {" "}
-            {!loading2 && data ? (
-              items.slice(0, 4).map((i, key) => (
-                <div
-                  onClick={() => {
-                    // getData();
-                    setDetail((s) => ({ ...s, loading2: true }));
+          {!loading2 && data ? (
+            <div
+              className={`pt-16   pb-16 w-full ${
+                items
+                  .filter((items) => items.Id != id)
+                  .filter((items) => items.subsektorId == data.subsektorId)
+                  .length != 0
+                  ? "grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4"
+                  : ""
+              }`}
+            >
+              {!loading2 && data ? (
+                items
+                  .filter((items) => items.Id != id)
+                  .filter((items) => items.subsektorId == data.subsektorId)
+                  .length != 0 ? (
+                  items
+                    .filter((items) => items.Id != id)
+                    .filter((items) => items.subsektorId == data.subsektorId)
+                    .slice(0, 4)
+                    .map((i, key) => (
+                      <div
+                        onClick={() => {
+                          // getData();
+                          setDetail((s) => ({ ...s, loading2: true }));
 
-                    // console.log("hai")
-                  }}
-                  key={key}
-                >
-                  <Card data={i} />
-                </div>
-              ))
-            ) : (
-              <>
+                          // console.log("hai")
+                        }}
+                        key={key}
+                      >
+                        <Card data={i} />
+                      </div>
+                    ))
+                ) : (
+                  <>
+                    <div className=" relative justify-center mx-auto items-center flex flex-col mt-10 pb-20">
+                      <img
+                        src={empty.src}
+                        className="lg:h-96 h-72 w-auto"
+                        alt=""
+                      />
+                      <p className="font-bold">Berita Terkait Tidak Tersedia</p>
+                    </div>
+                  </>
+                )
+              ) : (
+                <>
+                  <DetailCardLoading />
+                  <DetailCardLoading />
+                  <DetailCardLoading />
+                  <DetailCardLoading />
+                </>
+              )}
+            </div>
+          ) : (
+            <>
+              <div className="grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pt-16   pb-16 w-full">
                 <DetailCardLoading />
                 <DetailCardLoading />
                 <DetailCardLoading />
                 <DetailCardLoading />
-              </>
-            )}
-          </div>
-          <div
-            onClick={() => {
-              if (items.length < 9) {
-                alert("Content is max");
-              } else {
-                setMore(true);
-                return;
-              }
-            }}
-          >
-            <h1 className="flex justify-center items-center text-blue-900 underline  cursor-pointer">
-              More
-            </h1>
-          </div>
+              </div>
+            </>
+          )}
+        
         </div>
         {/* bottom content */}
       </div>
@@ -263,7 +301,7 @@ function Banner({ data, loading2 }) {
       {/* Banner For Dekstop */}
       {data && !loading2 ? (
         <div
-          className="xl:flex bg-no-repeat bg-cover bg-bottom hidden lg:h-[26rem] 2xl:h-[34rem] w-full justify-center rounded-3xl"
+          className="xl:flex bg-no-repeat bg-center bg-cover  hidden lg:h-[26rem] 2xl:h-[34rem] w-full justify-center rounded-3xl"
           style={{
             backgroundImage: `url("http://128.199.242.242/dashboard/assets/images/blog/${data.foto}")`,
           }}
@@ -299,11 +337,12 @@ function Banner({ data, loading2 }) {
         )}
 
         {data && !loading2 ? (
-          <img
-            src={`http://128.199.242.242/dashboard/assets/images/blog/${data.foto}`}
-            className="rounded-3xl"
-            alt="banner"
-          />
+          <div
+            style={{
+              backgroundImage: `url(http://128.199.242.242/dashboard/assets/images/blog/${data.foto})`,
+            }}
+            className="rounded-3xl min-h-[20rem] w-full banner-mobile bg-center bg-cover"
+          ></div>
         ) : (
           <div className=" w-full h-96 rounded-2xl bg-gray-300 animate-pulse"></div>
         )}

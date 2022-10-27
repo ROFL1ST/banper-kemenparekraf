@@ -37,26 +37,7 @@ export default function Field1() {
     setOpen(false);
   };
 
-  const action = (
-    <React.Fragment>
-      <button onClick={handleClose}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={4.5}
-          stroke="currentColor"
-          className="w-6 h-6 text-white font-extrabold  "
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
-    </React.Fragment>
-  );
+
   //
   React.useEffect(() => {
     document.title = "Daftar";
@@ -76,7 +57,6 @@ export default function Field1() {
       await login("register", values).then((result) => {
         setLoading(false);
 
-        console.log(result.data);
         if (result.data.message == "Success") {
           Router.push(`/auth/register/Verification/${getValues("Email")}`);
           sessionStorage.setItem("emailState", getValues("Email"));

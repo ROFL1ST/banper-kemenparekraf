@@ -15,10 +15,9 @@ export default function MenuSubsector({ type, show, getData }) {
   // getData
   const [subsector, setSubsector] = useState([]);
   const [load, setLoad] = useState(true);
-  const subsektorId = [];
+  const [subsektorId, setSubsektorId] = useState([]);
   const state = useSelector((state) => state.data);
   const dispatch = useDispatch();
-
   const getSubsector = async () => {
     try {
       await getApi("master/subsektor").then((val) => {
@@ -33,6 +32,17 @@ export default function MenuSubsector({ type, show, getData }) {
   useEffect(() => {
     getSubsector();
   }, []);
+
+  useEffect(() => {
+    dispatch(
+      changeState({
+        sort: state.sort,
+        subsektor_id: subsektorId,
+        provinsi_id: state.provinsi_id,
+        kota_id: state.kota_id,
+      })
+    );
+  }, [subsektorId.length]);
 
   return (
     <>
@@ -58,17 +68,20 @@ export default function MenuSubsector({ type, show, getData }) {
           </div>
         </div>
         {!load ? (
-          subsector.map((i, key) => (
-            <Subsektor
-              subsektorId={subsektorId}
-              getData={getData}
-              menu={menu1}
-              data={i}
-              key={key}
-              subsector={subsector}
-              load={load}
-            />
-          ))
+          subsector
+            .filter((subsector) => subsector.parentId == 0)
+            .map((i, key) => (
+              <Subsektor
+                setSubsektorId={setSubsektorId}
+                subsektorId={subsektorId}
+                getData={getData}
+                menu={menu1}
+                data={i}
+                key={key}
+                subsector={subsector}
+                load={load}
+              />
+            ))
         ) : (
           <></>
         )}
@@ -79,10 +92,8 @@ export default function MenuSubsector({ type, show, getData }) {
   );
 }
 
-function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
+function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
   const [menu2, setMenu2] = useState(false);
-  const state = useSelector((state) => state.data);
-  const dispatch = useDispatch();
 
   return (
     <>
@@ -102,11 +113,15 @@ function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
               type="checkbox"
               onChange={(e) => {
                 if (e.target.checked) {
-                  subsektorId.push(data.Id);
+                  setSubsektorId((val) => [...val, data.Id]);
+                  setMenu2(true)
                 } else {
-                  subsektorId.splice(subsektorId.indexOf(data.Id), 1);
+                  setSubsektorId((prevState) =>
+                    prevState.filter((prevItem) => prevItem !== data.Id)
+                  );
+                  setMenu2(false)
+
                 }
-                console.log(subsektorId);
               }}
               defaultChecked={false}
               required
@@ -144,7 +159,12 @@ function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
             subsector
               .filter((subsector) => subsector.parentId == data.Id)
               .map((i, key) => (
-                <SubSubsektor menu2={menu2} data={i} key={key} />
+                <SubSubsektor
+                  menu2={menu2}
+                  data={i}
+                  key={key}
+                  setSubsektorId={setSubsektorId}
+                />
               ))
           ) : (
             <></>
@@ -155,9 +175,7 @@ function Subsektor({ data, menu, subsector, load, getData, subsektorId }) {
   );
 }
 
-function SubSubsektor({ data, menu2 }) {
-  // const [menu3, setMenu3] = useState(false);
-
+function SubSubsektor({ data, menu2, setSubsektorId }) {
   return (
     <>
       <Transition
@@ -174,10 +192,16 @@ function SubSubsektor({ data, menu2 }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              id=""
-              name=""
               defaultChecked={false}
-              required
+              onClick={(e) => {
+                if (e.target.checked) {
+                  setSubsektorId((val) => [...val, data.Id]);
+                } else {
+                  setSubsektorId((prevState) =>
+                    prevState.filter((prevItem) => prevItem !== data.Id)
+                  );
+                }
+              }}
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
             <div className="inline-flex items-center justify-between w-full">

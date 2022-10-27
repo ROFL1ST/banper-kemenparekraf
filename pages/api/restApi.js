@@ -99,7 +99,7 @@ function getDelete(path_url, token) {
   });
 }
 function postFeed(path_url, token, data, method) {
-  console.log(token);
+  console.log(data, token);
   return new Promise((resolve, reject) => {
     var config = {
       method: method,

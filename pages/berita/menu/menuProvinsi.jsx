@@ -13,6 +13,21 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
   const [menu1, setMenu1] = useState(show);
   const [load, setLoad] = useState(true);
   const [provinsi, setProvinsi] = useState([]);
+  const state = useSelector((state) => state.data);
+  const [provinsiId, setProvinsiId] = useState([]);
+  const [kotaId, setKotaId] = useState([]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      changeState({
+        sort: state.sort,
+        provinsi_id: provinsiId,
+        kota_id: kotaId,
+        subsektor_id: state.subsektor_id,
+      })
+    );
+  }, [provinsiId.length, kotaId.length]);
 
   const getProvinsi = async () => {
     try {
@@ -53,7 +68,9 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
         </div>
         {!load ? (
           provinsi.map((i, key) => (
-            <Filter2
+            <Provinsi
+              setProvinsiId={setProvinsiId}
+              setKotaId={setKotaId}
               getData={getData}
               menu={menu1}
               data={i}
@@ -71,11 +88,8 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
   );
 }
 
-function Filter2({ data, menu, getData }) {
+function Provinsi({ data, menu, getData, setKotaId, setProvinsiId }) {
   const [menu2, setMenu2] = useState(false);
-
-  // kota
-  // getData
   const [kota, setKota] = useState([]);
   const [load, setLoad] = useState(true);
 
@@ -94,35 +108,6 @@ function Filter2({ data, menu, getData }) {
     getKota();
   }, []);
 
-  const [check, setCheck] = useState(false);
-  const dispatch = useDispatch();
-
-  // const handleChange = (value) => {
-  //   const currentIndex = check.indexOf(value);
-  //   const newChecked = [...check];
-
-  //   if (currentIndex === -1) {
-  //     newChecked.push(value);
-  //   } else {
-  //     newChecked.splice(currentIndex, 1);
-  //   }
-  //   setCheck(newChecked);
-  //   handleFilters(newChecked);
-  // };
-  const state = useSelector((state) => state.data);
-  const handleChange = (e) => {
-    setCheck(!check);
-    setMenu2(!menu2);
-    dispatch(
-      changeState({
-        sort: state.sort,
-        subsektor_id: state.subsektor_id,
-        provinsi_id: e.target.id,
-        kota_id: state.kota_id,
-      })
-    );
-    getData(state.sort, state.subsektor_id, state.provinsi_id, state.kota_id);
-  };
   return (
     <>
       <Transition
@@ -139,8 +124,19 @@ function Filter2({ data, menu, getData }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              id=""
-              name=""
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setProvinsiId((val) => [...val, data.Id]);
+                  setMenu2(true)
+
+                } else {
+                  setProvinsiId((prevState) =>
+                    prevState.filter((prevItem) => prevItem !== data.Id)
+                  );
+                  setMenu2(false)
+
+                }
+              }}
               defaultChecked={false}
               required
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
@@ -165,7 +161,7 @@ function Filter2({ data, menu, getData }) {
           </div>
           {!load ? (
             kota.map((i, key) => (
-              <Filter3 getData={getData} key={key} data={i} menu2={menu2} />
+              <Kota getData={getData} key={key} data={i} menu2={menu2} setKotaId={setKotaId} />
             ))
           ) : (
             <></>
@@ -176,9 +172,7 @@ function Filter2({ data, menu, getData }) {
   );
 }
 
-function Filter3({ data, menu2, getData }) {
-  const state = useSelector((state) => state.data);
-  const dispatch = useDispatch();
+function Kota({ data, menu2,setKotaId }) {
   return (
     <>
       <Transition
@@ -195,9 +189,16 @@ function Filter3({ data, menu2, getData }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              id=""
-              name=""
               defaultChecked={false}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setKotaId((val) => [...val, data.Id]);
+                } else {
+                  setKotaId((prevState) =>
+                    prevState.filter((prevItem) => prevItem !== data.Id)
+                  );
+                }
+              }}
               required
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
