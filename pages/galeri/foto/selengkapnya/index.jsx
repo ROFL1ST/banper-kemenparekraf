@@ -401,11 +401,11 @@ function Sidebar({ setSort, sort, getData }) {
                 Filter By
               </h2>
               <div className="flex flex-col gap-y-3 pb-20">
-                {/* <MenuProvinsi
+                <MenuProvinsi
                   type={"Provinsi"}
                   show={false}
                   handleFilters={(filters) => handleFilters(filters, "")}
-                /> */}
+                />
                 <MenuSubsector
                   getData={getData}
                   type={"Subsector"}
