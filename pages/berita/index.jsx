@@ -44,6 +44,7 @@ export default function Berita() {
     limit = 12
   ) => {
     try {
+      console.log("subsektor_id", subsektor_id)
       let respond = await getApi(
         `news?limit=${limit}&${
           subsektor_id !== undefined && `subsektorId=${subsektor_id}`
@@ -53,6 +54,7 @@ export default function Berita() {
           author !== undefined && `author=${author}`
         }`
       );
+      console.log("respond", respond);
       setData(respond.data.data);
       setLoading(false);
     } catch (error) {
