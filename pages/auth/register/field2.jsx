@@ -59,8 +59,6 @@ export default function Field2() {
     setLoading(true);
     try {
       await login("register/update_formulir", values).then((result) => {
-        setLoading(false);
-
         if (result.data.message == "Success") {
           setSuccess(true);
           Router.push(`/auth/register/field3?kode=${kode}`);
@@ -68,6 +66,7 @@ export default function Field2() {
           setError(result.data.display_message);
           setWrong(true);
         }
+        setLoading(false);
       });
     } catch (error) {
       console.log(error);

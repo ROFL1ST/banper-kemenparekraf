@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, forwardRef } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
@@ -8,10 +8,14 @@ import { useForm } from "react-hook-form";
 import { getApi, getPropose, PostFeed } from "../api/restApi";
 import Router, { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
+import MuiAlert from "@mui/material/Alert";
 
 import * as yup from "yup";
 import Loading from "../components/Loading";
-
+import { Snackbar } from "@mui/material";
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function EditProfile() {
   // getData user
   const [token, setToken] = useState("");
@@ -19,6 +23,7 @@ export default function EditProfile() {
   const [load, setLoad] = useState(false);
   const [user, setUser] = useState([]);
   const [error, setError] = useState({ msg: "", status: false });
+  const [success, setSuccess] = useState(false);
   const getData = async (value) => {
     try {
       await getPropose("user", value).then((result) => {
@@ -47,8 +52,10 @@ export default function EditProfile() {
     }
   }, [token]);
 
+  const [muat, setMuat] = useState(false);
   const onSubmit = async (values) => {
-    setLoad(true);
+    // setLoad(true);
+    setMuat(true);
     try {
       await PostFeed("user", token, values, "put").then((result) => {
         if (result.data.message != "Success") {
@@ -65,11 +72,16 @@ export default function EditProfile() {
             }));
           }, 3000);
         } else {
-          Router.push("/proposal");
+          setSuccess(true);
+          setMuat(false);
+          setTimeout(() => {
+            Router.push("/proposal");
+          }, 500);
         }
       });
     } catch (error) {
       console.log(error);
+      setMuat(false);
     }
   };
 
@@ -134,6 +146,14 @@ export default function EditProfile() {
       password: "",
     },
   });
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setError({ ...s, status: false });
+  };
   return (
     <>
       <Navbar />
@@ -335,13 +355,16 @@ export default function EditProfile() {
                     <button
                       onClick={() => {
                         setValue("Subsektor", user[0].Subsektor);
-                        setValue("SubsektorPendukung", user[0].SubsektorPendukung)
-                        setValue("subsektorId", user[0].subsektorId)
+                        setValue(
+                          "SubsektorPendukung",
+                          user[0].SubsektorPendukung
+                        );
+                        setValue("subsektorId", user[0].subsektorId);
                       }}
                       type={"submit"}
                       className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 lg:w-auto w-full justify-center mt-5 rounded-xl text-xl py-3"
                     >
-                      Edit
+                      {muat ? <Loading /> : "Edit"}
                     </button>
                   </div>
                 </div>
@@ -375,6 +398,28 @@ export default function EditProfile() {
           )}
         </Background>
         <Footer />
+        <Snackbar
+          open={error.status}
+          autoHideDuration={3000}
+          onClose={handleClose}
+        >
+          <Alert
+            onClose={handleClose}
+            severity="warning"
+            sx={{ width: "100%" }}
+          >
+            Mohon Untuk Mengisi Subsektor Dengan Benar
+          </Alert>
+        </Snackbar>
+        <Snackbar open={success} autoHideDuration={3000} onClose={handleClose}>
+          <Alert
+            onClose={handleClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Berhasil!
+          </Alert>
+        </Snackbar>
       </>
     </>
   );

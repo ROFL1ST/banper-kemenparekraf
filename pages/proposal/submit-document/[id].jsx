@@ -143,7 +143,6 @@ export default function SubmitDoc() {
             {/* <h1 className="text-2xl md:pt-0 pt-24">Catatan Dokumen</h1> */}
             {/* {!load && doc ? <Catatan id={doc[0].UsulanHeaderID} /> : <></>} */}
             {/* Catatan Dokument */}
-
           </div>
         </div>
       </div>
@@ -251,7 +250,7 @@ function CardPengusul() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-   
+
         setMuter(false);
       });
     } catch (error) {
@@ -423,7 +422,7 @@ function CardPengusul() {
   );
 }
 
-function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
+function CardDocument({ data, teks, num, detail, setSucess, setMistake }) {
   var router = useRouter();
 
   const { id } = router.query;
@@ -466,7 +465,6 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
       const fileExtension = fileObj.name.split(".").at(-1);
       const allowedFileTypes = [data.Type.split(",")];
 
-  
       if (
         !allowedFileTypes[0]
           .map((i) => i.replace(regex, ""))
@@ -491,13 +489,11 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
     formData.append("dokumen", values);
     try {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
-      
         setLoading(false);
-       
 
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
-          setMistake(true)
+          setMistake(true);
         } else {
           setSucess(true);
           if (router.isReady) {
@@ -521,8 +517,7 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
     } catch (err) {
       console.log(err);
       setLoading(false);
-      setMistake(true)
-
+      setMistake(true);
     }
   };
   return (
@@ -598,6 +593,7 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
                   accept={`${data.Type}`}
                 />
                 <button
+                  disabled={loading ? true : false}
                   onClick={handleClick}
                   className="bg-blue-900 lg:py-3 py-2 lg:text-base text-xs my-auto items-center lg:px-4 px-3 rounded-md text-white font-semibold "
                 >
@@ -638,7 +634,6 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
   );
 }
 function Catatan({ id }) {
-
   const [loading, setLoading] = React.useState(false);
   const [token, setToken] = React.useState("");
   const [error, setError] = React.useState({ status: false, msg: "" });
@@ -656,15 +651,12 @@ function Catatan({ id }) {
   });
 
   const onSubmit = async (values) => {
-
     setLoading(true);
     try {
       await PostFeed("proposal/comment", token, values, "post").then(
         (result) => {
           setLoading(false);
 
-       
-      
           if (result.data.message != "Success") {
             setError((s) => ({
               ...s,
