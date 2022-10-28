@@ -73,9 +73,6 @@ export default function DetailPage() {
     <>
       <Navbar />
       <div className="items-center flex h-full flex-col pb-10 pt-32 2xl:w-2/3 lg:w-11/12 mx-auto">
-        <button onClick={() => Router.back()}>
-          <ArrowLeftCircleIcon className="h-8 w-8 text-blue-900 mb-5" />
-        </button>
         <Banner data={data} loading2={loading2} />
         {/* Content */}
         <div className="relative pt-16 flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
@@ -198,7 +195,6 @@ export default function DetailPage() {
               </div>
             </>
           )}
-        
         </div>
         {/* bottom content */}
       </div>
