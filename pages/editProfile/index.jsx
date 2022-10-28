@@ -12,26 +12,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Loading from "../components/Loading";
 
-const schema = yup
-  .object({
-    password: yup.string().required(),
-    passwordConfirmation: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match"),
-  })
-  .required();
 export default function EditProfile() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-    defaultValues: {
-      password: "",
-      passwordConfirmation: "",
-    },
-  });
   // getData user
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(true);
@@ -139,7 +120,20 @@ export default function EditProfile() {
     getSub();
     getKota();
   }, []);
-
+  console.log(user.length);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      Subsektor: "",
+      subsektorId: "",
+      SubsektorPendukung: "",
+      password: "",
+    },
+  });
   return (
     <>
       <Navbar />
@@ -337,17 +331,28 @@ export default function EditProfile() {
                       </svg>
                     </div>
                   </div>
-                 <div className="sm:px-0 px-5">
-                 <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 lg:w-auto w-full justify-center mt-5 rounded-xl text-xl py-3">
-                    Edit
-                  </button>
-                 </div>
+                  <div className="sm:px-0 px-5">
+                    <button
+                      onClick={() => {
+                        setValue("Subsektor", user[0].Subsektor);
+                        setValue("SubsektorPendukung", user[0].SubsektorPendukung)
+                        setValue("subsektorId", user[0].subsektorId)
+                      }}
+                      type={"submit"}
+                      className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 lg:w-auto w-full justify-center mt-5 rounded-xl text-xl py-3"
+                    >
+                      Edit
+                    </button>
+                  </div>
                 </div>
               </form>
             ))
           ) : (
             <>
-              <div role="status" className="flex justify-center items-center p-60">
+              <div
+                role="status"
+                className="flex justify-center items-center p-60"
+              >
                 <svg
                   aria-hidden="true"
                   className="mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
