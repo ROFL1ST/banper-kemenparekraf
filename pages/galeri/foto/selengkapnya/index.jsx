@@ -66,7 +66,7 @@ export default function Selengkapnya() {
   return (
     <>
       <Navbar />
-      <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5">
+      <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5 z-20">
         <div
           onClick={() => {
             setSort(true);
@@ -111,7 +111,7 @@ export default function Selengkapnya() {
           )
         ) : (
           <>
-            <div className="relative justify-center mx-auto   items-center flex flex-col mt-10 pb-20">
+            <div className="relative justify-center mx-auto   items-center flex flex-col py-60 z-10">
               <img src={empty.src} className="h-96 w-auto" alt="" />
               <p className="font-bold">Foto Tidak Tersedia</p>
             </div>

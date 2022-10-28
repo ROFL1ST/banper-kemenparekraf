@@ -9,7 +9,7 @@ import Router from "next/router";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
 import { useSelector } from "react-redux";
-
+import empty from "../../../assets/Empty-amico.png";
 export default function Selengkapnya() {
   const [videoData, setVideoData] = React.useState({ data: {}, loading: true });
   const state = useSelector((state) => state.data);
@@ -86,7 +86,18 @@ export default function Selengkapnya() {
       <div className="pt-40 lg:px-20 px-5">
         <div className="grid xl:grid-cols-3 mb-10 gap-4  mt-10">
           {data && !loading ? (
-            videoData?.data?.map((i, key) => <CardVideo key={key} data={i} />)
+            videoData?.data.length != 0 ? (
+              videoData?.data?.map((i, key) => <CardVideo key={key} data={i} />)
+            ) : (
+              <>
+                <div className="relative  justify-center items-center flex flex-col mt-10 pb-20"></div>
+                <div className="relative  justify-center items-center flex flex-col mt-10 pb-20">
+                  <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
+                  <p className="font-bold">Berita Tidak Tersedia</p>
+                </div>
+                <div className="relative  justify-center items-center flex flex-col mt-10 pb-20"></div>
+              </>
+            )
           ) : (
             <>
               <Loading />
