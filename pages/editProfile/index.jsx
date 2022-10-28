@@ -337,7 +337,7 @@ export default function EditProfile() {
                       </svg>
                     </div>
                   </div>
-                 <div className="lg:px-0 px-5">
+                 <div className="sm:px-0 px-5">
                  <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 lg:w-auto w-full justify-center mt-5 rounded-xl text-xl py-3">
                     Edit
                   </button>
