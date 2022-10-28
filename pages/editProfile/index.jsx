@@ -189,7 +189,7 @@ export default function EditProfile() {
                   </div>
                 </div>
 
-                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                   <div className="relative flex-grow w-full">
                     <label className="leading-7 text-sm text-gray-600">
                       *Alamat Akta
@@ -211,7 +211,7 @@ export default function EditProfile() {
                     />
                   </div>
                 </div>
-                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                   <div className="relative flex-grow w-full">
                     <label className="leading-7 text-sm text-gray-600">
                       *Email Komunitas
@@ -235,7 +235,7 @@ export default function EditProfile() {
                 </div>
 
                 <div className="  border-10 border-b-orange-600 ">
-                  <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                  <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                     <div className="relative flex-grow w-full">
                       <label className="leading-7 text-sm text-gray-600">
                         *Email Penanggung jawab
@@ -258,7 +258,7 @@ export default function EditProfile() {
                       />
                     </div>
                   </div>
-                  <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                  <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                     <div className="relative flex-grow w-full">
                       <label className="leading-7 text-sm text-gray-600">
                         *Kota
@@ -287,7 +287,7 @@ export default function EditProfile() {
                     </div>
                   </div>
 
-                  <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                  <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                     <div
                       onClick={() => {
                         Router.push("/editProfile/subsektor");
@@ -337,9 +337,11 @@ export default function EditProfile() {
                       </svg>
                     </div>
                   </div>
-                  <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3">
+                 <div className="lg:px-0 px-5">
+                 <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 lg:w-auto w-full justify-center mt-5 rounded-xl text-xl py-3">
                     Edit
                   </button>
+                 </div>
                 </div>
               </form>
             ))
