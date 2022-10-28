@@ -312,7 +312,7 @@ export default function Navbar({ click }) {
               >
                 <Link href={"/proposal"}>
                   <button
-                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
+                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm   ${
                       pathname === "/proposal" &&
                       "  text-blue-900 font-bold "
                     } `}
@@ -323,7 +323,7 @@ export default function Navbar({ click }) {
 
                 <Link href={"/editProfile"}>
                   <button
-                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
+                    className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm   ${
                       pathname === "/editProfile" &&
                       "  text-blue-900 font-bold "
                     } `}
@@ -335,7 +335,7 @@ export default function Navbar({ click }) {
                   onClick={() => {
                     setLog(true);
                   }}
-                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm text-black  ${
+                  className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm   ${
                     pathname === "/auth/daftar" &&
                     "  text-blue-900 font-bold "
                   } `}
