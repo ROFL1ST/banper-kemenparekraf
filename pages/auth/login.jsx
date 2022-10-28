@@ -169,7 +169,14 @@ export default function Login() {
               )}
             </button>
 
-            <p className="text-xs text-red-500 md:my-9 my-5">Lupa password</p>
+            <p
+              className="text-xs text-red-500 md:my-9 my-5 underline cursor-pointer"
+              onClick={() => {
+                Router.push("/auth/forgotPassword/field1");
+              }}
+            >
+              Lupa password
+            </p>
             <p className="text-xs">
               Belum punya akun?{" "}
               <span className="text-red-500 font-semibold underline">

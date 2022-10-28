@@ -137,12 +137,13 @@ export default function SubmitDoc() {
             ) : (
               <></>
             )}
-
             {/* Document */}
+
             {/* Catatan Dokument */}
             {/* <h1 className="text-2xl md:pt-0 pt-24">Catatan Dokumen</h1> */}
             {/* {!load && doc ? <Catatan id={doc[0].UsulanHeaderID} /> : <></>} */}
             {/* Catatan Dokument */}
+
           </div>
         </div>
       </div>

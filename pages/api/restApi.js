@@ -161,6 +161,26 @@ function login(path_url, param) {
   });
 }
 
+function forgot(path_url, param) {
+  console.log(param);
+  return new Promise((resolve, reject) => {
+    var config = {
+      method: "put",
+      url: BASE_URL + path_url,
+      headers: {},
+      data: param,
+    };
+    axios(config)
+      .then(function (response) {
+        console.log("response", response);
+        resolve(response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
+  });
+}
+
 function putViews(path_url) {
   return new Promise((resolve, reject) => {
     var config = {
@@ -206,4 +226,5 @@ export {
   getGaleri,
   getApi,
   login,
+  forgot
 };
