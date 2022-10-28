@@ -236,7 +236,7 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
   }
 
   const [loading, setLoading] = React.useState(true);
-
+  console.log(user[0]);
   const [subsub, setSubsub] = React.useState([]);
   const getSubsub = async () => {
     try {
@@ -267,7 +267,7 @@ function Utama({ setSelectedUtama, setSelectedKlasifikasi }) {
 
   React.useEffect(() => {
     if (!muat) {
-      setSelectedSubsector(user[0].Subsektor.toString());
+      setSelectedSubsector(user[0].Subsektor);
       setSelectedSub(user[0].subsektorId);
     }
   }, [user]);
@@ -415,7 +415,8 @@ function SubPen({ setSelectedPendukung, setWarn }) {
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    if (user.length != 0) {
+    if (user[0] != undefined) {
+     if (user[0].SubsektorPendukung != null) {
       if (user[0].SubsektorPendukung.length <= 2) {
         setInput(user[0].SubsektorPendukung.split(""));
 
@@ -427,8 +428,13 @@ function SubPen({ setSelectedPendukung, setWarn }) {
 
         setLoading(false);
       }
+     }
+    } else if (user[0] == undefined) {
+      setInput(Array(1).fill(""));
+      setLoading(false);
+
     }
-  }, [user]);
+  }, [user[0]]);
   const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
 
   React.useEffect(() => {
