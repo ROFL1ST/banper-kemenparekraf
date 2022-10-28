@@ -484,7 +484,7 @@ function CardDocument({ data, teks, num, detail,  setSucess, setMistake }) {
   }
 
   const handleSubmit = async (token, values) => {
-   
+    console.log(values);
     const formData = new FormData();
     setLoading(true);
 
