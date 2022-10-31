@@ -138,7 +138,7 @@ function Provinsi({ data, menu, setSubsectorId: setProvinsiId, setKotaId }) {
             />
             <div
               className="inline-flex items-center justify-between w-full"
-              onClick={() => setMenu2(!menu2)}
+             
             >
               <p>{data.NamaProvinsi}</p>
               {menu2 ? (

@@ -129,7 +129,7 @@ function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
             />
             <div
               className="inline-flex items-center justify-between w-full"
-              onClick={() => setMenu2(!menu2)}
+             
             >
               <p>{data.Nama}</p>
               {!load ? (
