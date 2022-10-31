@@ -230,6 +230,7 @@ function Card({ data }) {
           onClick={() => {
             viewss();
           }}
+          draggable="true"
           className="bg-[#f5f5fa] w-full h-80 rounded-2xl"
         >
           <div

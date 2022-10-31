@@ -283,13 +283,13 @@ function ListPropose(data) {
             percent != 100 ? (
               "Belum Lengkap"
             ) : data.data.Status == 7 ? (
-              "Lengkap"
+              "Dokumen Lengkap"
             ) : data.data.Status == 1 ? (
               "Sedang Di Verifikasi"
             ) : data.data.Status == 2 ? (
-              "Diterima"
+              "Proposal Diterima"
             ) : (
-              "Ditolak"
+              "Proposal Ditolak"
             )
           ) : (
             <>

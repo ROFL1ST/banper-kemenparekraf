@@ -66,7 +66,7 @@ export default function Selengkapnya() {
   return (
     <>
       <Navbar />
-      <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5 z-20">
+      <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5 z-10">
         <div
           onClick={() => {
             setSort(true);

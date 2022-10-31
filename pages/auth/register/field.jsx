@@ -71,6 +71,12 @@ export default function Field1() {
       });
     } catch (error) {
       console.log(error);
+      setLoading(false);
+
+      setError(result.data.display_message);
+      setTimeout(() => {
+        setOpen(true);
+      }, 100);
     }
   };
 

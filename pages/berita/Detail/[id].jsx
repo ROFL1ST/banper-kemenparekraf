@@ -35,9 +35,7 @@ export default function DetailPage() {
     try {
       let respond = await getApi("news").then((result) => result);
       setItem(respond.data.data);
-      setLoading(false);
     } catch (error) {
-      setLoading(false);
       console.log(error);
     }
   };
@@ -66,6 +64,8 @@ export default function DetailPage() {
   React.useEffect(() => {
     const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
     setRandom(shuffle(items));
+    setLoading(false);
+
     console.log(random);
   }, [items]);
 
@@ -95,7 +95,7 @@ export default function DetailPage() {
           </div>
           <div className="content-right w-1/4 xl:flex lg:flex hidden flex-col ">
             <div className="space-y-5">
-              {loading && !data ? (
+              {loading ? (
                 <>
                   <Small_Card_Loading />
                   <Small_Card_Loading />

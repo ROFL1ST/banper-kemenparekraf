@@ -123,7 +123,7 @@ function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
 
                 }
               }}
-              defaultChecked={false}
+              // defaultChecked={false}
               required
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
@@ -192,7 +192,7 @@ function SubSubsektor({ data, menu2, setSubsektorId }) {
           <div className={"cursor-pointer flex items-center space-x-1"}>
             <input
               type="checkbox"
-              defaultChecked={false}
+              // defaultChecked={false}
               onClick={(e) => {
                 if (e.target.checked) {
                   setSubsektorId((val) => [...val, data.Id]);
