@@ -429,11 +429,7 @@ function SubPen({ setSelectedPendukung, setWarn }) {
         setLoading(false);
       }
      }
-    } else if (user[0] == undefined) {
-      setInput(Array(1).fill(""));
-      setLoading(false);
-
-    }
+    } 
   }, [user[0]]);
   const regex = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|.<>\/?~]/g;
 
