@@ -107,7 +107,7 @@ export default function Berita() {
         className={`pb-20 xl:px-20 lg:px-20 px-10 flex justify-between mt-10 
         `}
       >
-        <div className="left lg:flex hidden flex-col py-4 px-10  2xl:w-1/4 w-1/2 h-[600px]  bg-[#f5f5fa] rounded-lg  mr-5 scrollbar overflow-y-auto">
+        <div className="left lg:flex hidden flex-col py-4 px-10  2xl:w-1/4 xl:w-1/3 w-1/2 h-[600px]  bg-[#f5f5fa] rounded-lg  mr-5 scrollbar overflow-y-auto">
           <h2 className="font-semibold text-base tracking-widest text-gray-900 mb-10  text-center sm:text-left">
             Filter By
           </h2>

@@ -119,7 +119,7 @@ export default function Dashboard() {
             consequatur libero. Necessitatibus, consequatur?
           </p>
           <Section text={"Berita"} />
-          <div className="flex xl:flex-row lg:flex-row md:flex-col flex-col items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
+          <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
             {data.berita.length != 0 ? (
               data.loading ? (
                 <>
@@ -250,7 +250,7 @@ function CardBerita({ data }) {
   return (
     <>
       <Link href={`/berita/Detail/${data.Id}`}>
-        <div className="w-full h-[19rem] rounded-xl bg-gray-100 flex cursor-pointer">
+        <div className="min-w-[100%] h-[19rem] rounded-xl bg-gray-100 flex cursor-pointer">
           <div
             style={{
               backgroundImage: `url(${data.foto})`,
