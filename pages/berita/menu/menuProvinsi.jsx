@@ -9,7 +9,13 @@ import { Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeState } from "../../../redux/actions";
 
-export default function MenuProvinsi({ type, show, handleFilters, getData }) {
+export default function MenuProvinsi({
+  type,
+  show,
+  handleFilters,
+  getData,
+  setLoading,
+}) {
   const [menu1, setMenu1] = useState(show);
   const [load, setLoad] = useState(true);
   const [provinsi, setProvinsi] = useState([]);
@@ -76,6 +82,7 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
               data={i}
               key={key}
               handleFilters={handleFilters}
+              setLoading={setLoading}
             />
           ))
         ) : (
@@ -88,7 +95,14 @@ export default function MenuProvinsi({ type, show, handleFilters, getData }) {
   );
 }
 
-function Provinsi({ data, menu, getData, setKotaId, setProvinsiId }) {
+function Provinsi({
+  data,
+  menu,
+  getData,
+  setKotaId,
+  setProvinsiId,
+  setLoading,
+}) {
   const [menu2, setMenu2] = useState(false);
   const [kota, setKota] = useState([]);
   const [load, setLoad] = useState(true);
@@ -128,11 +142,13 @@ function Provinsi({ data, menu, getData, setKotaId, setProvinsiId }) {
                 if (e.target.checked) {
                   setProvinsiId((val) => [...val, data.Id]);
                   setMenu2(true);
+                  setLoading(true);
                 } else {
                   setProvinsiId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
                   setMenu2(false);
+                  setLoading(true);
                 }
               }}
               defaultChecked={false}
@@ -162,6 +178,7 @@ function Provinsi({ data, menu, getData, setKotaId, setProvinsiId }) {
                 data={i}
                 menu2={menu2}
                 setKotaId={setKotaId}
+                setLoading={setLoading}
               />
             ))
           ) : (
@@ -173,7 +190,7 @@ function Provinsi({ data, menu, getData, setKotaId, setProvinsiId }) {
   );
 }
 
-function Kota({ data, menu2, setKotaId }) {
+function Kota({ data, menu2, setKotaId, setLoading }) {
   return (
     <>
       <Transition
@@ -194,10 +211,12 @@ function Kota({ data, menu2, setKotaId }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setKotaId((val) => [...val, data.Id]);
+                  setLoading(true);
                 } else {
                   setKotaId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
+                  setLoading(true);
                 }
               }}
               required

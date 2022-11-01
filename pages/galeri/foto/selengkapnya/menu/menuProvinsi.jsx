@@ -11,7 +11,7 @@ import { getApi } from "../../../../api/restApi";
 import { useDispatch, useSelector } from "react-redux";
 import { changeState } from "../../../../../redux/actions";
 
-export default function MenuProvinsi({ type, show, handleFilters }) {
+export default function MenuProvinsi({ type, show, handleFilters, setImages }) {
   const [menu1, setMenu1] = useState(show);
   const [load, setLoad] = useState(true);
   const [provinsi, setProvinsi] = useState([]);
@@ -77,6 +77,7 @@ export default function MenuProvinsi({ type, show, handleFilters }) {
               data={i}
               key={key}
               handleFilters={handleFilters}
+              setImages={setImages}
             />
           ))
         ) : (
@@ -88,7 +89,13 @@ export default function MenuProvinsi({ type, show, handleFilters }) {
   );
 }
 
-function Provinsi({ data, menu, setSubsectorId: setProvinsiId, setKotaId }) {
+function Provinsi({
+  data,
+  menu,
+  setSubsectorId: setProvinsiId,
+  setKotaId,
+  setImages,
+}) {
   const [menu2, setMenu2] = useState(false);
   const [kota, setKota] = useState([]);
   const [load, setLoad] = useState(true);
@@ -126,20 +133,21 @@ function Provinsi({ data, menu, setSubsectorId: setProvinsiId, setKotaId }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setProvinsiId((val) => [...val, data.Id]);
+                  setImages((s) => ({ ...s, loading: true }));
+                  setMenu2(true);
                 } else {
                   setProvinsiId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
+                  setImages((s) => ({ ...s, loading: true }));
+                  setMenu2(false);
                 }
               }}
               defaultChecked={false}
               required
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
-            <div
-              className="inline-flex items-center justify-between w-full"
-             
-            >
+            <div className="inline-flex items-center justify-between w-full">
               <p>{data.NamaProvinsi}</p>
               {menu2 ? (
                 <ChevronUpIcon
@@ -156,7 +164,13 @@ function Provinsi({ data, menu, setSubsectorId: setProvinsiId, setKotaId }) {
           </div>
           {!load ? (
             kota.map((i, key) => (
-              <Kota key={key} data={i} menu2={menu2} setKotaId={setKotaId} />
+              <Kota
+                key={key}
+                data={i}
+                menu2={menu2}
+                setKotaId={setKotaId}
+                setImages={setImages}
+              />
             ))
           ) : (
             <></>
@@ -167,7 +181,7 @@ function Provinsi({ data, menu, setSubsectorId: setProvinsiId, setKotaId }) {
   );
 }
 
-function Kota({ data, menu2: kota, setKotaId }) {
+function Kota({ data, menu2: kota, setKotaId, setImages }) {
   return (
     <>
       <Transition
@@ -188,12 +202,12 @@ function Kota({ data, menu2: kota, setKotaId }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setKotaId((val) => [...val, data.Id]);
-                  setMenu2(true);
+                  setImages((s) => ({ ...s, loading: true }));
                 } else {
                   setKotaId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
-                  setMenu2(false);
+                  setImages((s) => ({ ...s, loading: true }));
                 }
               }}
               required

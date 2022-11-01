@@ -55,7 +55,7 @@ export default function Selengkapnya() {
 
   const { data, loading } = videoData;
   const [sort, setSort] = React.useState(false);
-
+  console.log("provinsi", state?.provinsi_id?.toString());
   return (
     <>
       <Navbar />
@@ -86,8 +86,9 @@ export default function Selengkapnya() {
       <div className="pt-40 lg:px-20 px-5">
         <div className="grid xl:grid-cols-3 mb-10 gap-4  mt-10">
           {data && !loading ? (
-            videoData?.data.length != 0 ? (
-              videoData?.data?.map((i, key) => <CardVideo key={key} data={i} />)
+            videoData?.data.length != 0 ||
+            videoData?.data.length != undefined ? (
+              data?.map((i, key) => <CardVideo key={key} data={i} />)
             ) : (
               <>
                 <div className="relative  justify-center items-center flex flex-col mt-10 pb-20"></div>

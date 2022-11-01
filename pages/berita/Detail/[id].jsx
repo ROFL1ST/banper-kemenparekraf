@@ -75,7 +75,7 @@ export default function DetailPage() {
       <div className="items-center flex h-full flex-col pb-10 pt-32 2xl:w-2/3 lg:w-11/12 mx-auto">
         <Banner data={data} loading2={loading2} />
         {/* Content */}
-        <div className="relative pt-16 flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
+        <div className="relative pt-10 lg:pt-16 flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
           <div className="content-left xl:w-11/12 lg:w-11/12 flex flex-col">
             {/* detail text */}
             <div className="xl:w-11/12 lg:w-11/12 w-full text-base pb-10">
@@ -337,7 +337,7 @@ function Banner({ data, loading2 }) {
             style={{
               backgroundImage: `url(http://128.199.242.242/dashboard/assets/images/blog/${data.foto})`,
             }}
-            className="rounded-3xl min-h-[20rem] w-full banner-mobile bg-center bg-cover"
+            className="rounded-3xl min-h-[13rem] w-full banner-mobile bg-center bg-cover"
           ></div>
         ) : (
           <div className=" w-full h-96 rounded-2xl bg-gray-300 animate-pulse"></div>

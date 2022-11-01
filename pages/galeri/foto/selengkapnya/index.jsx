@@ -119,7 +119,7 @@ export default function Selengkapnya() {
         )}
       </div>
       <Footer />
-      <Sidebar sort={sort} setSort={setSort} />
+      <Sidebar sort={sort} setSort={setSort} setImages={setImages} />
     </>
   );
 }
@@ -333,7 +333,7 @@ function CardModal({ img, tgl, summary, place }) {
   );
 }
 
-function Sidebar({ setSort, sort, getData }) {
+function Sidebar({ setSort, sort, getData, setImages }) {
   return (
     <>
       <div>
@@ -405,11 +405,14 @@ function Sidebar({ setSort, sort, getData }) {
                   type={"Provinsi"}
                   show={false}
                   handleFilters={(filters) => handleFilters(filters, "")}
+                  setImages={setImages}
                 />
                 <MenuSubsector
                   getData={getData}
                   type={"Subsector"}
                   show={true}
+                  setImages={setImages}
+
                 />
               </div>
             </div>

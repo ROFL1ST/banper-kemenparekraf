@@ -60,7 +60,7 @@ export function getDown(path_url) {
 }
 
 function getGaleri(path_url) {
-  // console.log("BASE_URL + path_url", BASE_URL + path_url);
+  console.log("BASE_URL + path_url", BASE_URL + path_url);
   return new Promise((resolve, reject) => {
     var config = {
       method: "get",

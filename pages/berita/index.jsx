@@ -16,7 +16,6 @@ import MenuSubsector from "./menu/menuSubsector";
 import empty from "../assets/Empty-amico.png";
 import { useSelector } from "react-redux";
 
-
 const MAX_LENGTH = 60;
 
 export default function Berita() {
@@ -39,7 +38,7 @@ export default function Berita() {
     limit = 12
   ) => {
     try {
-      console.log("subsektor_id", subsektor_id)
+      console.log("subsektor_id", subsektor_id);
       let respond = await getApi(
         `news?limit=${limit}&${
           subsektor_id !== undefined && `subsektorId=${subsektor_id}`
@@ -118,8 +117,14 @@ export default function Berita() {
               type={"Provinsi"}
               show={false}
               handleFilters={(filters) => handleFilters(filters, "")}
+              setLoading={setLoading}
             />
-            <MenuSubsector getData={getData} type={"Subsector"} show={true} />
+            <MenuSubsector
+              getData={getData}
+              type={"Subsector"}
+              show={true}
+              setLoading={setLoading}
+            />
           </div>
         </div>
 
@@ -147,9 +152,12 @@ export default function Berita() {
                 <option value="user">user</option>
               </select>
             </div>
-            <div onClick={() => {
-              setSide(true)
-            }} className="lg:hidden mt-5 flex close justify-center items-center border border-gray-400 rounded-xl px-3 py-2 gap-x-2">
+            <div
+              onClick={() => {
+                setSide(true);
+              }}
+              className="lg:hidden mt-5 flex close justify-center items-center border border-gray-400 rounded-xl px-3 py-2 gap-x-2"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
