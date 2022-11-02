@@ -6,7 +6,10 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Fab
+
 } from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
@@ -145,6 +148,7 @@ export default function Proposal() {
                       ))}
                     </TableBody>
                   </Table>
+
                 )
               ) : (
                 <>
@@ -155,11 +159,21 @@ export default function Proposal() {
                   </div> */}
                 </>
               )}
+
             </div>
+          
           </div>
+          <div className="bottom-16 right-16 fixed h-20 w-20 rounded-full bg-blue-600 " >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 flex items-center text-white">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+</svg>
+
+         </div>
           {/* Top */}
         </div>
+      
       </div>
+      
       <Footer />
     </>
   );
@@ -267,17 +281,16 @@ function ListPropose(data) {
       </TableCell>
       <TableCell>
         <p
-          className={`font-bold ${
-            percent != 100
+          className={`font-bold ${percent != 100
               ? "text-red-500"
               : data.data.Status == 7
-              ? "text-gray-600"
-              : data.data.Status == 1
-              ? "text-yellow-500"
-              : data.data.Status == 2
-              ? "text-green-700"
-              : "text-red-500"
-          }`}
+                ? "text-gray-600"
+                : data.data.Status == 1
+                  ? "text-yellow-500"
+                  : data.data.Status == 2
+                    ? "text-green-700"
+                    : "text-red-500"
+            }`}
         >
           {!loading ? (
             percent != 100 ? (
