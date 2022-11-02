@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link";
+
 import {
   Table,
   TableHead,
@@ -90,13 +91,32 @@ export default function Proposal() {
           <Section text={"List Proposal"}></Section>
           {/* Top */}
           <div className="mt-20 md:w-3/4 mx-auto">
-            <div className="md:justify-between flex md:flex-row flex-col gap-y-10 pb-5  md:items-center">
+            <div className="gap-x-10 justify-between flex md:flex-row flex-col gap-y-10 pb-5  md:items-center">
               <div>
                 <Link href={"/proposal/submit-proposal"}>
                   <button className="bg-blue-900 py-2 px-5 rounded-md text-white font-semibold w-full">
                     Buat Proposal Baru
                   </button>
                 </Link>
+              </div>
+              <div>
+                <button className="bg-blue-900 py-2 pl-5 pr-2 rounded-md text-white font-semibold w-full flex gap-x-5 justify-center items-center">
+                  <p>Tulis Berita</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
             <div className="overflow-x-auto">
@@ -451,4 +471,5 @@ function DeletePop({
     </>
   );
 }
+
 

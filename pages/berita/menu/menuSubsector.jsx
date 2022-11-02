@@ -114,44 +114,30 @@ function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setSubsektorId((val) => [...val, data.Id]);
-                  setMenu2(true)
+                  setMenu2(true);
                 } else {
                   setSubsektorId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
-                  setMenu2(false)
-
+                  setMenu2(false);
                 }
               }}
               // defaultChecked={false}
               required
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
             />
-            <div
-              className="inline-flex items-center justify-between w-full"
-             
-            >
+            <div className="inline-flex items-center justify-between w-full">
               <p>{data.Nama}</p>
-              {!load ? (
-                subsector
-                  .filter((subsector) => subsector.parentId == data.Id)
-                  .map((i, key) =>
-                    menu2 ? (
-                      <ChevronUpIcon
-                        key={key}
-                        className="ml-2 -mr-1 h-5 w-5 "
-                        aria-hidden="true"
-                      />
-                    ) : (
-                      <ChevronDownIcon
-                        key={key}
-                        className="ml-2 -mr-1 h-5 w-5 "
-                        aria-hidden="true"
-                      />
-                    )
-                  )
+              {menu2 ? (
+                <ChevronUpIcon
+                  className="ml-2 -mr-1 h-5 w-5 "
+                  aria-hidden="true"
+                />
               ) : (
-                <></>
+                <ChevronDownIcon
+                  className="ml-2 -mr-1 h-5 w-5 "
+                  aria-hidden="true"
+                />
               )}
             </div>
           </div>
