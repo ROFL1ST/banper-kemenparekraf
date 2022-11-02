@@ -7,10 +7,8 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  Fab
-
+  Fab,
 } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
 import React, { useEffect, useState, useRef, Fragment } from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
@@ -19,7 +17,11 @@ import Router, { useRouter } from "next/router";
 import { getApi, getDelete, getPropose } from "../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
 import logo from "../assets/Empty-amico.png";
-
+import { Listbox } from "@headlessui/react";
+import {
+  ChevronDownIcon,
+  ChevronUpDownIcon,
+} from "@heroicons/react/24/outline";
 export default function Proposal() {
   //
   const [open, setOpen] = useState(false);
@@ -79,7 +81,19 @@ export default function Proposal() {
   const [log, setLog] = React.useState(false);
   const cancelButtonRef = React.useRef(null);
 
-  // detail
+  // submit Berita dan gallery
+
+  const pilihan = [
+    {
+      id: 1,
+      name: "Tambah Berita",
+      url: "https://docs.google.com/forms/d/e/1FAIpQLSebtUc_5nCYZC_7pkPulfHCyj3Mtkg5Z6TUFEp6PAb4w5ducw/viewform",
+    },
+    { id: 2, name: "Tambah Foto", url: "" },
+    { id: 3, name: "Tambah Video", url: "" },
+  ];
+
+  const [selectedChoice, setSelectedChoice] = React.useState(pilihan[0]);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -103,23 +117,57 @@ export default function Proposal() {
                 </Link>
               </div>
               <div>
-                <button className="bg-blue-900 py-2 pl-5 pr-2 rounded-md text-white font-semibold w-full flex gap-x-5 justify-center items-center">
-                  <p>Tulis Berita</p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-                    />
-                  </svg>
-                </button>
+                <Listbox value={selectedChoice} onChange={setSelectedChoice}>
+                  <div className="relative mt-1">
+                    <Listbox.Button className="bg-blue-900 py-2 pl-5 pr-10 rounded-md text-white font-semibold w-full flex justify-between items-center">
+                      <span className="block truncate">Tambah Konten</span>
+                      <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                        <ChevronDownIcon
+                          className="h-5 w-5 text-white"
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </Listbox.Button>
+                    <Transition
+                      as={Fragment}
+                      leave="transition ease-in duration-100"
+                      leaveFrom="opacity-100"
+                      leaveTo="opacity-0"
+                    >
+                      <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-blue-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-white">
+                        {pilihan.map((pilihan, id) => (
+                          <Listbox.Option
+                            key={id}
+                            className={({ active }) =>
+                              `relative cursor-default select-none py-2 pl-6 pr-4 ${
+                                active
+                                  ? "bg-blue-100 text-blue-900"
+                                  : "text-white "
+                              }`
+                            }
+                            value={pilihan}
+                          >
+                            {({ selectedChoice }) => (
+                              <>
+                                <a href={pilihan.url}>
+                                  <span
+                                    className={`block truncate ${
+                                      selectedChoice
+                                        ? "font-medium"
+                                        : "font-normal"
+                                    }`}
+                                  >
+                                    {pilihan.name}
+                                  </span>
+                                </a>
+                              </>
+                            )}
+                          </Listbox.Option>
+                        ))}
+                      </Listbox.Options>
+                    </Transition>
+                  </div>
+                </Listbox>
               </div>
             </div>
             <div className="overflow-x-auto">
@@ -168,7 +216,6 @@ export default function Proposal() {
                       ))}
                     </TableBody>
                   </Table>
-
                 )
               ) : (
                 <>
@@ -179,21 +226,12 @@ export default function Proposal() {
                   </div> */}
                 </>
               )}
-
             </div>
-          
           </div>
-          <div className="bottom-16 right-16 fixed h-20 w-20 rounded-full bg-blue-600 " >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 flex items-center text-white">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-</svg>
 
-         </div>
           {/* Top */}
         </div>
-      
       </div>
-      
       <Footer />
     </>
   );
@@ -301,16 +339,17 @@ function ListPropose(data) {
       </TableCell>
       <TableCell>
         <p
-          className={`font-bold ${percent != 100
+          className={`font-bold ${
+            percent != 100
               ? "text-red-500"
               : data.data.Status == 7
-                ? "text-gray-600"
-                : data.data.Status == 1
-                  ? "text-yellow-500"
-                  : data.data.Status == 2
-                    ? "text-green-700"
-                    : "text-red-500"
-            }`}
+              ? "text-gray-600"
+              : data.data.Status == 1
+              ? "text-yellow-500"
+              : data.data.Status == 2
+              ? "text-green-700"
+              : "text-red-500"
+          }`}
         >
           {!loading ? (
             percent != 100 ? (
@@ -484,5 +523,3 @@ function DeletePop({
     </>
   );
 }
-
-
