@@ -90,6 +90,17 @@ export default function Navbar({ click }) {
                 Galeri
               </p>
             </Link>
+            <Link href={"/direktori"}>
+              <p
+                className={`hover:text-gray-900 text-sm outline-2 cursor-pointer  ${
+                  pathname === "/direktori"
+                    ? "bg-white px-5 py-1 rounded-full text-blue-900 font-bold"
+                    : ""
+                } `}
+              >
+                Direktori
+              </p>
+            </Link>
             <div className="cursor-pointer flex items-center space-x-1 md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400">
               {token == null || token == "undefined" || token == undefined ? (
                 <DropdownLD setOpen={setOpen} pathname={pathname} />
@@ -212,6 +223,17 @@ export default function Navbar({ click }) {
               Galeri
             </p>
           </Link>
+          <Link href={"/direktori"}>
+            <p
+              className={`cursor-pointer  ${
+                pathname === "/direktori"
+                  ? "text-blue-900 font-bold"
+                  : "font-semibold"
+              }`}
+            >
+              Direktori
+            </p>
+          </Link>
           {token == null || token == "undefined" || token == undefined ? (
             <>
               <div onClick={() => setMenu2(!menu2)} className="flex space-x-3">
@@ -313,8 +335,7 @@ export default function Navbar({ click }) {
                 <Link href={"/proposal"}>
                   <button
                     className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm   ${
-                      pathname === "/proposal" &&
-                      "  text-blue-900 font-bold "
+                      pathname === "/proposal" && "  text-blue-900 font-bold "
                     } `}
                   >
                     List Proposal
@@ -336,8 +357,7 @@ export default function Navbar({ click }) {
                     setLog(true);
                   }}
                   className={`group flex justify-start w-full items-center rounded-md px-2 py-1 text-sm   ${
-                    pathname === "/auth/daftar" &&
-                    "  text-blue-900 font-bold "
+                    pathname === "/auth/daftar" && "  text-blue-900 font-bold "
                   } `}
                 >
                   Logout
@@ -813,8 +833,6 @@ function Downloader({ setOpen, setCheck }) {
   const templateUrl =
     "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
- 
-
   return (
     <a
       onClick={() => {
@@ -824,7 +842,7 @@ function Downloader({ setOpen, setCheck }) {
         setCheck(false);
         setTimeout(() => {
           const winpop = window.open(templateUrl);
-         
+
           if (!winpop || winpop.closed) {
             alert("Please Allow Pop Up");
           }

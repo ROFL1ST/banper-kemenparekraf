@@ -97,95 +97,103 @@ export default function Login() {
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
-      <Background>
-        <Section text={"Login"} />
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5 2xl:space-y-10 lg:space-y-5 space-y-3  mx-auto"
-        >
-          <div className="grid gap-y-2">
-            <label htmlFor="usename">Username atau Email</label>
-            <input
-              {...register("email", { required: true })}
-              type="text"
-              className="border px-4 outline-none h-9 rounded-md "
-            />
-            {errors.email && (
-              <span className="text-red-600 font-bold text-sm">
-                Please fill it with your email
-              </span>
-            )}
-          </div>
-          <div className="grid gap-y-2">
-            <label htmlFor="usename">Password</label>
-            <input
-              {...register("password", { required: true })}
-              type="password"
-              className="border px-4 outline-none h-9 rounded-md "
-            />
-            {errors.password && (
-              <span className="text-red-600 font-bold text-sm">
-                Please fill it with your password
-              </span>
-            )}
-          </div>
-          {error.status && (
-            <span className="text-red-600 font-bold text-sm mt-5">
-              {error.msg}
-            </span>
-          )}
-          <div
-            className={`flex space-x-2 items-center ${
-              error.status == false && "mt-5"
-            }`}
+      <div
+        style={{
+          backgroundImage:
+            "url(https://cdn.pixabay.com/photo/2017/05/19/06/22/desk-2325627_960_720.jpg)",
+        }}
+        className="bg-gray-200 w-full  bg-cover rounded-b-3xl"
+      >
+        <div className="bg-white w-full h-screen bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
+          <Section text={"Login"} />
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mt-10 2xl:w-1/2 xl:w-3/5 lg:w-3/4 sm:w-3/5 2xl:space-y-10 lg:space-y-5 space-y-3 pb-5 mx-auto"
           >
-            <input
-              value={remember}
-              defaultValue={false}
-              onChange={handleChange}
-              type="checkbox"
-              name=""
-              id=""
-            />
-            <label className="text-xs" htmlFor="remember_setting">
-              Remember me
-            </label>
-          </div>
-          <div className="flex flex-col justify-center lg:px-72">
-            <button
-              type="submit"
-              className={`bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full ${
-                loading && "animate-pulse"
+            <div className="grid gap-y-2">
+              <label htmlFor="usename">Username atau Email</label>
+              <input
+                {...register("email", { required: true })}
+                type="text"
+                className="border px-4 outline-none h-9 rounded-md "
+              />
+              {errors.email && (
+                <span className="text-red-600 font-bold text-sm">
+                  Please fill it with your email
+                </span>
+              )}
+            </div>
+            <div className="grid gap-y-2">
+              <label htmlFor="usename">Password</label>
+              <input
+                {...register("password", { required: true })}
+                type="password"
+                className="border px-4 outline-none h-9 rounded-md "
+              />
+              {errors.password && (
+                <span className="text-red-600 font-bold text-sm">
+                  Please fill it with your password
+                </span>
+              )}
+            </div>
+            {error.status && (
+              <span className="text-red-600 font-bold text-sm mt-5">
+                {error.msg}
+              </span>
+            )}
+            <div
+              className={`flex space-x-2 items-center ${
+                error.status == false && "mt-5"
               }`}
             >
-              {loading ? (
-                <>
-                  <div className="mx-auto">
-                    <Loading />
-                  </div>
-                </>
-              ) : (
-                "Login"
-              )}
-            </button>
+              <input
+                value={remember}
+                defaultValue={false}
+                onChange={handleChange}
+                type="checkbox"
+                name=""
+                id=""
+              />
+              <label className="text-xs" htmlFor="remember_setting">
+                Remember me
+              </label>
+            </div>
+            <div className="flex flex-col justify-center lg:px-72">
+              <button
+                type="submit"
+                className={`bg-blue-900 py-2 rounded-full text-white font-semibold mt-5 w-full ${
+                  loading && "animate-pulse"
+                }`}
+              >
+                {loading ? (
+                  <>
+                    <div className="mx-auto">
+                      <Loading />
+                    </div>
+                  </>
+                ) : (
+                  "Login"
+                )}
+              </button>
 
-            <p
-              className="text-xs text-red-500 md:my-9 my-5 underline cursor-pointer"
-              onClick={() => {
-                Router.push("/auth/forgotPassword/field1");
-              }}
-            >
-              Lupa password
-            </p>
-            <p className="text-xs">
-              Belum punya akun?{" "}
-              <span className="text-red-500 font-semibold underline">
-                <Link href={"/auth/daftar"}>Daftar disini</Link>
-              </span>
-            </p>
-          </div>
-        </form>
-      </Background>
+              <p
+                className="text-xs text-red-500 md:my-9 my-5 underline cursor-pointer"
+                onClick={() => {
+                  Router.push("/auth/forgotPassword/field1");
+                }}
+              >
+                Lupa password
+              </p>
+              <p className="text-xs">
+                Belum punya akun?{" "}
+                <span className="text-red-500 font-semibold underline">
+                  <Link href={"register/field"}>Daftar disini</Link>
+                </span>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
       <Footer />
       <Modal
         open={open}

@@ -117,7 +117,7 @@ export default function Field2() {
         }}
         className="bg-gray-200 w-full h-full  bg-cover rounded-b-3xl"
       >
-        <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
+        <div className="bg-white w-full h-screen bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
           <Section text={"Formulir"} />
           <form onSubmit={handleSubmit(onSubmit)} className="mb-20">
             <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">

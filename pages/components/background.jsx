@@ -10,7 +10,7 @@ export default function Background({ children }) {
         }}
         className="bg-gray-200 w-full  bg-cover rounded-b-3xl"
       >
-        <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
+        <div className="bg-white w-full h-screen bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
           {children}
         </div>
       </div>

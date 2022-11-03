@@ -88,7 +88,7 @@ export default function Field1() {
           backgroundImage:
             "url(https://cdn.pixabay.com/photo/2017/05/19/06/22/desk-2325627_960_720.jpg)",
         }}
-        className="bg-gray-200 w-full h-full  bg-cover rounded-b-3xl"
+        className="bg-gray-200 w-full h-screen  bg-cover rounded-b-3xl"
       >
         <form
           onSubmit={handleSubmit(onSubmit)}
