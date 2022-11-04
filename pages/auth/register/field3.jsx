@@ -348,7 +348,7 @@ function SubPen({
 
   // subsektor pendukung
   // 1
-  const [pendukung1, setPendukung1] = React.useState();
+  const [pendukung1, setPendukung1] = React.useState("");
   function handleChange1(e) {
     setPendukung1(e.target.value);
   }
@@ -356,7 +356,7 @@ function SubPen({
 
   // 2
 
-  const [pendukung2, setPendukung2] = React.useState();
+  const [pendukung2, setPendukung2] = React.useState("");
   function handleChange2(e) {
     setPendukung2(e.target.value);
   }
@@ -365,7 +365,7 @@ function SubPen({
 
   // 3
 
-  const [pendukung3, setPendukung3] = React.useState();
+  const [pendukung3, setPendukung3] = React.useState("");
   function handleChange3(e) {
     setPendukung3(e.target.value);
   }
@@ -374,20 +374,20 @@ function SubPen({
 
   // klasifikasi
   // 1
-  const [klasifikasi1, setKlasifikasi1] = React.useState();
+  const [klasifikasi1, setKlasifikasi1] = React.useState("");
   function handleSelected(e) {
     setKlasifikasi1(e.target.value);
   }
   // 1
 
   // 2
-  const [klasifikasi2, setKlasifikasi2] = React.useState();
+  const [klasifikasi2, setKlasifikasi2] = React.useState("");
   function handleSelected2(e) {
     setKlasifikasi2(e.target.value);
   }
   // 2
   // 3
-  const [klasifikasi3, setKlasifikasi3] = React.useState();
+  const [klasifikasi3, setKlasifikasi3] = React.useState("");
   function handleSelected3(e) {
     setKlasifikasi3(e.target.value);
   }

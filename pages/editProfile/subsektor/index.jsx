@@ -466,7 +466,7 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
 
   // subsektor pendukung
   // 1
-  const [pendukung1, setPendukung1] = React.useState();
+  const [pendukung1, setPendukung1] = React.useState("");
   function handleChange1(e) {
     setPendukung1(e.target.value);
   }
@@ -474,7 +474,7 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
 
   // 2
 
-  const [pendukung2, setPendukung2] = React.useState();
+  const [pendukung2, setPendukung2] = React.useState("");
   function handleChange2(e) {
     setPendukung2(e.target.value);
   }
@@ -483,7 +483,7 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
 
   // 3
 
-  const [pendukung3, setPendukung3] = React.useState();
+  const [pendukung3, setPendukung3] = React.useState("");
   function handleChange3(e) {
     setPendukung3(e.target.value);
   }
@@ -492,20 +492,20 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
 
   // klasifikasi
   // 1
-  const [klasifikasi1, setKlasifikasi1] = React.useState();
+  const [klasifikasi1, setKlasifikasi1] = React.useState("");
   function handleSelected(e) {
     setKlasifikasi1(e.target.value);
   }
   // 1
 
   // 2
-  const [klasifikasi2, setKlasifikasi2] = React.useState();
+  const [klasifikasi2, setKlasifikasi2] = React.useState("");
   function handleSelected2(e) {
     setKlasifikasi2(e.target.value);
   }
   // 2
   // 3
-  const [klasifikasi3, setKlasifikasi3] = React.useState();
+  const [klasifikasi3, setKlasifikasi3] = React.useState("");
   function handleSelected3(e) {
     setKlasifikasi3(e.target.value);
   }
@@ -523,17 +523,17 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
         console.log(pendukung1);
         setPendukung1(support[0]);
       } else {
-        setPendukung1(undefined);
+        setPendukung1("");
       }
       if (support[1] != undefined) {
         setPendukung2(support[1]);
       } else {
-        setPendukung2(undefined);
+        setPendukung2("");
       }
       if (support[2] != undefined) {
         setPendukung3(support[2]);
       } else {
-        setPendukung3(undefined);
+        setPendukung3("");
       }
       //  pendukung
 
@@ -542,17 +542,17 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
       if (classification[0] != undefined) {
         setKlasifikasi1(classification[0]);
       } else {
-        setKlasifikasi1(undefined);
+        setKlasifikasi1("");
       }
       if (classification[1] != undefined) {
         setKlasifikasi2(classification[1]);
       } else {
-        setKlasifikasi2(undefined);
+        setKlasifikasi2("");
       }
       if (classification[2] != undefined) {
         setKlasifikasi3(classification[2]);
       } else {
-        setKlasifikasi3(undefined);
+        setKlasifikasi3("");
       }
 
       // klasifikasi
