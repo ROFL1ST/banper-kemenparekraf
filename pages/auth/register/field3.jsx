@@ -499,10 +499,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
       {/* klasifikasi */}
       <div className="relative  flex-grow w-full">
         <select
-          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+          className={`form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
- border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+ border border-solid  rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${
+            pendukung1 != "" && klasifikasi1 == ""
+              ? "border-red-500"
+              : "border-gray-300"
+          }`}
           name=""
           id=""
           onChange={handleSelected}
@@ -527,10 +531,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           )}
         </select>
         <select
-          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+          className={`form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
- border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+ border border-solid  rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${
+            pendukung2 != "" && klasifikasi2 == ""
+              ? "border-red-500"
+              : "border-gray-300"
+          }`}
           name=""
           id=""
           onChange={handleSelected2}
@@ -555,10 +563,14 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           )}
         </select>
         <select
-          className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+          className={`form-select form-select-sm appearance-none block w-full  mb-5   px-3
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
- border border-solid border-gray-300 rounded  transition ease-in-out   m-0  
-focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+ border border-solid  rounded  transition ease-in-out   m-0  
+focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${
+            pendukung3 != ""   && klasifikasi3 == ""
+              ? "border-red-500"
+              : "border-gray-300"
+          }`}
           name=""
           id=""
           onChange={handleSelected3}
