@@ -197,8 +197,8 @@ export default function Berita() {
       {data.length >= 15 ? (
         <button
           onClick={() => {
-            let limit = 15;
-            getData(sort, sub_id, "", limit + 10);
+            let limit = 12;
+            getData(sort, sub_id, "", limit + 12);
           }}
           className="text-blue-700 underline mt-5 mb-10 text-sm text-center w-full"
         >
