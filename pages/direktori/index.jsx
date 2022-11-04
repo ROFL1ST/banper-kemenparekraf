@@ -59,51 +59,36 @@ export default function Direktori() {
                       Test
                     </td>
 
-                    <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                      Test
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border-t-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                      Test
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">
-                      Test
-                    </td>
-                    <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3 text-lg text-gray-900">
-                      test
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                   <td class="w-10 text-center">
+              <input name="plan" type="button"/>
+            </td>
+
+                </tr>
+                <tr>
+                  <td className="border-t-2 border-gray-200 px-4 py-3">Test</td>
+                  <td className="border-t-2 border-gray-200 px-4 py-3">Test</td>
+                  <td className="border-t-2 border-gray-200 px-4 py-3">Test</td>
+                  <td className="border-t-2 border-gray-200 px-4 py-3">Test</td>
+                   <td class="w-10 text-center">
+              <input name="plan" type="button"/>
+            </td>
+
+                </tr>
+                <tr>
+                  <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">Test</td>
+                  <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">Test</td>
+                  <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">Test</td>
+                  <td className="border-t-2 border-b-2 border-gray-200 px-4 py-3">Test</td>
+                  <td class="w-10 text-center">
+              <input name="plan" type="button"/>
+            </td>
+
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
        
-      </div>
       <Footer />
     </>
   );
