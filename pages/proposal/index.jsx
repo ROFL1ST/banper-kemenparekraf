@@ -22,6 +22,7 @@ import {
   ChevronDownIcon,
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
+import Loading from "../components/Loading";
 export default function Proposal() {
   //
   const [open, setOpen] = useState(false);
@@ -219,11 +220,9 @@ export default function Proposal() {
                 )
               ) : (
                 <>
-                  {/* <div className=" mx-auto items-center flex flex-col mt-10 mb-20">
-                    {" "}
-                    <img src={logo.src} className="h-96 w-auto" alt="" />
-                    <p className="font-bold">Tidak ada proposal</p>
-                  </div> */}
+                  <div className="spinner-container flex justify-center">
+                    <div className="loading-spinner text-red-400"></div>
+                  </div>
                 </>
               )}
             </div>

@@ -14,6 +14,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import Galeri from "./component/Galeri";
 import Router, { useRouter } from "next/router";
+
 export default function Dashboard() {
   // token
   const [token, setToken] = useState();

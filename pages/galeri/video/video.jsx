@@ -137,8 +137,6 @@ export default function Video() {
 }
 
 function CardVideo({ data }) {
-  const [open, setOpen] = useState(false);
-  const cancelButtonRef = useRef(null);
   const viewss = async () => {
     // const url = `http://128.199.242.242/api/video/${data.id}`;
     try {
@@ -166,7 +164,7 @@ function CardVideo({ data }) {
   useEffect(() => {
     detail();
   }, []);
-  console.log(kota);
+ 
 
   // hover
   const [isHovering, setIsHovering] = useState(false);
