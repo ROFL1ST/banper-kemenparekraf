@@ -228,8 +228,8 @@ function Modal({ foto, open, setOpen, cancelButtonRef }) {
           </Transition.Child>
 
           <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <div className="cursor-pointer flex absolute xl:right-[19.5rem] lg:right-10 right-5 top-20 text-white">
+            <div className="flex items-end md:pt-32 md:pb-28 md:my-0 py-32 justify-center min-h-full p-4 text-center ">
+              <div className="cursor-pointer flex absolute xl:right-[19.5rem] lg:right-10 right-5 2xl:top-16 top-10 text-white">
                 <svg
                   onClick={() => {
                     setOpen(false);
@@ -257,7 +257,7 @@ function Modal({ foto, open, setOpen, cancelButtonRef }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-4/5 w-full justify-center ">
+                <Dialog.Panel className=" relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all  justify-center ">
                   {foto && !loading ? (
                     <div
                       className={`${
@@ -329,7 +329,7 @@ function Modal({ foto, open, setOpen, cancelButtonRef }) {
 function CardModal({ img, tgl, summary, place }) {
   return (
     <>
-      <div className="my-auto items-center flex flex-col justify-center">
+      <div className=" items-center flex flex-col justify-center">
         <img
           className=" rounded-lg  2xl:min-w-[680px] 2xl:min-h-[443px] 2xl:max-h-[443px] md:min-w-[490px] md:min-h-[318px] md:max-h-[318px] min-w-[353px] min-h-[215px] max-h-[215px]"
           src={img}
@@ -340,7 +340,7 @@ function CardModal({ img, tgl, summary, place }) {
             {tgl} | {place}
           </h1>
 
-          <p className="text-white lg:w-3/4 lg:text-sm text-xs font-thin">
+          <p className="text-white lg:w-3/4 md:w-full sm:w-1/2 w-4/5  2xl:text-sm text-xs font-extralight">
             {summary}
           </p>
         </div>
