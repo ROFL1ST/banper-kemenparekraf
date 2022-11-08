@@ -133,6 +133,7 @@ function Subsektor({ data, menu, subsector, load, setSubsectorId }) {
               {!load ? (
                 subsector
                   .filter((subsector) => subsector.parentId == data.Id)
+                  .slice(0,1)
                   .map((i, key) =>
                     menu2 ? (
                       <ChevronUpIcon

@@ -7,9 +7,11 @@ import { useEffect, useRef, useState, Fragment } from "react";
 
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
-import { getApi } from "../../../../api/restApi";
+// import { getApi } from "../../../../api/restApi";
 import { useDispatch, useSelector } from "react-redux";
-import { changeState } from "../../../../../redux/actions";
+// import { changeState } from "../../../../../redux/actions";
+import { getApi } from "../../api/restApi";
+import { changeState } from "../../../redux/actions";
 
 export default function MenuProvinsi({ type, show, handleFilters, setImages }) {
   const [menu1, setMenu1] = useState(show);

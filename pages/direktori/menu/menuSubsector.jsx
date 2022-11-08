@@ -8,8 +8,10 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 import { Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getApi } from "../../../../api/restApi";
-import { changeState } from "../../../../../redux/actions";
+// import { getApi } from "../../../../api/restApi";
+// import { changeState } from "../../../../../redux/actions";
+import { getApi } from "../../api/restApi";
+import { changeState } from "../../../redux/actions";
 
 export default function MenuSubsector({ type, show, getData, setImages }) {
   const [menu1, setMenu1] = useState(show);
@@ -133,6 +135,7 @@ function Subsektor({ data, menu, subsector, load, setSubsectorId, setImages }) {
               {!load ? (
                 subsector
                   .filter((subsector) => subsector.parentId == data.Id)
+                  .slice(0,1)
                   .map((i, key) =>
                     menu2 ? (
                       <ChevronUpIcon

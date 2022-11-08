@@ -128,16 +128,25 @@ function Subsektor({ data, menu, subsector, load, setSubsektorId }) {
             />
             <div className="inline-flex items-center justify-between w-full">
               <p>{data.Nama}</p>
-              {menu2 ? (
-                <ChevronUpIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
+              {!load ? (
+                subsector
+                  .filter((subsector) => subsector.parentId == data.Id)
+                  .slice(0, 1)
+                  .map((i, key) =>
+                    menu2 ? (
+                      <ChevronUpIcon
+                        key={key}
+                        className="ml-2 -mr-1 h-5 w-5 "
+                      />
+                    ) : (
+                      <ChevronDownIcon
+                        key={key}
+                        className="ml-2 -mr-1 h-5 w-5 "
+                      />
+                    )
+                  )
               ) : (
-                <ChevronDownIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
+                <></>
               )}
             </div>
           </div>
