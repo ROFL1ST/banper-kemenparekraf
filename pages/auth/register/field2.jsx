@@ -117,7 +117,7 @@ export default function Field2() {
         }}
         className="bg-gray-200 w-full h-full  bg-cover rounded-b-3xl"
       >
-        <div className="bg-white w-full h-screen bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
+        <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9  rounded-b-3xl">
           <Section text={"Formulir"} />
           <form onSubmit={handleSubmit(onSubmit)} className="mb-20">
             <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
@@ -317,14 +317,17 @@ export default function Field2() {
                   />
                 </div>
               </div>
-              <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold flex mx-auto text-white md:px-28 px-12 mt-5 rounded-xl text-xl py-3">
-                {loading ? <Loading /> : "Selanjutnya"}
-              </button>
+              <div className="flex mx-auto pt-10 pb-5 justify-center">
+                <button className="bg-red-600 hover:bg-red-500 capitalize font-semibold  text-white lg:w-1/4 w-11/12  rounded-xl text-xl py-3 ">
+                  {loading ? <Loading /> : "Selanjutnya"}
+                </button>
+              </div>
             </div>
           </form>
         </div>
       </div>
       {/* <Footer/> */}
+      <Footer />
       <Snackbar open={success} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
           Berhasil!
