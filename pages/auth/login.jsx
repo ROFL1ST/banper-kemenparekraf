@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useEffect, useState, useRef, Fragment } from "react";
+import { useEffect, useState, useRef, Fragment, forwardRef } from "react";
 import Background from "../components/background";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
@@ -12,7 +12,12 @@ import { Dialog, Transition } from "@headlessui/react";
 import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import MuiAlert from "@mui/material/Alert";
+import { Snackbar } from "@mui/material";
 
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const schema = yup
   .object({
     email: yup.string().email(),
@@ -94,6 +99,16 @@ export default function Login() {
       console.log(error);
     }
   };
+
+  // alert
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setError((s) => ({ ...s, status: false }));
+  };
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -136,16 +151,8 @@ export default function Login() {
                 </span>
               )}
             </div>
-            {error.status && (
-              <span className="text-red-600 font-bold text-sm mt-5">
-                {error.msg}
-              </span>
-            )}
-            <div
-              className={`flex space-x-2 items-center ${
-                error.status == false && "mt-5"
-              }`}
-            >
+
+            <div className={`flex space-x-2 items-center `}>
               <input
                 value={remember}
                 defaultValue={false}
@@ -187,7 +194,7 @@ export default function Login() {
               <p className="text-xs">
                 Belum punya akun?{" "}
                 <span className="text-red-500 font-semibold underline">
-                  <Link href={"register/field"}>Daftar disini</Link>
+                  <Link href={"/auth/register/field"}>Daftar disini</Link>
                 </span>
               </p>
             </div>
@@ -200,6 +207,15 @@ export default function Login() {
         setOpen={setOpen}
         cancelButtonRef={cancelButtonRef}
       ></Modal>
+      <Snackbar
+        open={error.status}
+        autoHideDuration={6000}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+          {error.msg}
+        </Alert>
+      </Snackbar>
     </>
   );
 }

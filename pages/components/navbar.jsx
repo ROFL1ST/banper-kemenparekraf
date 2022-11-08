@@ -280,7 +280,7 @@ export default function Navbar({ click }) {
 
                   <button
                     onClick={() => {
-                      if (pathname === "/auth/daftar") {
+                      if (pathname === "auth/register/field") {
                         return;
                       } else {
                         setOpen(true);
