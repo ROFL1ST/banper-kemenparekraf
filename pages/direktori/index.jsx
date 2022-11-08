@@ -6,12 +6,38 @@ export default function Direktori() {
   React.useEffect(() => {
     document.title = "Direktori";
   });
+  const [sort, setSort] = React.useState(false);
+
   return (
     <>
       <Navbar />
+      <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5 z-10">
+        <div
+          onClick={() => {
+            setSort(true);
+          }}
+          className="flex border border-gray-400 rounded-xl px-5 py-3 gap-x-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 text-gray-400"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
+            />
+          </svg>
+          <p className="text-md text-gray-400">Filter</p>
+        </div>
+      </div>  
       <section className="text-gray-600 body-font">
         <div className="px-5 py-24 mx-auto">
-          <div className="lg:w-2/3 w-full mx-auto mt-16 overflow-auto">
+          <div className="lg:w-2/3 w-full mx-auto mt-32 overflow-auto">
             <table className="table-auto w-full text-left whitespace-no-wrap">
               <thead>
                 <tr>
