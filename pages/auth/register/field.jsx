@@ -37,7 +37,6 @@ export default function Field1() {
     setOpen(false);
   };
 
-
   //
   React.useEffect(() => {
     document.title = "Daftar";
@@ -170,7 +169,23 @@ export default function Field1() {
       {/* <Footer/> */}
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {erros}
+          {erros ==
+          "Email Anda sudah terdaftar, Ada perubahan keamanan system, Kami menyarankan untuk reset password" ? (
+            <p>
+              Email Anda sudah terdaftar, Ada perubahan keamanan system, Kami
+              menyarankan untuk{" "}
+              <span
+                className="underline cursor-pointer"
+                onClick={() => {
+                  Router.push("/auth/forgotPassword/field1");
+                }}
+              >
+                reset password
+              </span>
+            </p>
+          ) : (
+            erros
+          )}
         </Alert>
       </Snackbar>
     </>
