@@ -73,10 +73,10 @@ export default function Direktori() {
                     Komunitas
                   </th>
                   <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                    Email
+                    Subsektor
                   </th>
-                  <th className="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br items-center mx-auto text-center pr-16">
-                    Actions
+                  <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                    Email
                   </th>
                 </tr>
               </thead>
@@ -101,21 +101,14 @@ function Isi({ data, no }) {
   return (
     <>
       <tr>
-        <td className="px-4 py-3">{no + 1}</td>
-        <td className="px-4 py-3">
+        <td className="px-4 py-3 text-sm lg:text-base">{no + 1}</td>
+        <td className="px-4 py-3 text-sm lg:text-base">
           {data.Nama == "undefined" ? "Tidak Ada Nama" : data.Nama}
         </td>
-        <td className="px-4 py-3">{data.NamaKomunitas}</td>
+        <td className="px-4 py-3 text-sm lg:text-base">{data.NamaKomunitas}</td>
+        <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
 
-        <td className="px-4 py-3">{data.Email}</td>
-        <td className="border-t-2 border-b-2 border-gray-200 w-10 mx-auto">
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1.5 text-center flex justify-center dark:bg-blue-600 dark:hover:bg-blue-700 "
-          >
-            Detail
-          </button>
-        </td>
+        <td className="px-4 py-3 text-sm lg:text-base">{data.Email}</td>
       </tr>
     </>
   );
