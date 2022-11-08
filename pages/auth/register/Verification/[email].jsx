@@ -72,6 +72,9 @@ export default function EmailVer() {
       });
     } catch (error) {
       console.log(error);
+      setLoad(false);
+      setWrong(true);
+      setError("Kesalahan Jaringan")
     }
   };
 

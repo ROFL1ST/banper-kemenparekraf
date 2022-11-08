@@ -194,11 +194,13 @@ export default function Field2() {
                   </option>
 
                   {!load ? (
-                    kota.map((i, key) => (
-                      <option key={key} value={i.Id}>
-                        {i.NamaKota}
-                      </option>
-                    ))
+                    kota
+                      .sort((a, b) => a.NamaKota.localeCompare(b.NamaKota))
+                      .map((i, key) => (
+                        <option key={key} value={i.Id}>
+                          {i.NamaKota}
+                        </option>
+                      ))
                   ) : (
                     <></>
                   )}

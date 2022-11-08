@@ -132,7 +132,7 @@ export default function Berita() {
           <div className="flex lg:justify-end justify-between items-center mb-10">
             <div className=" flex lg:flex-row flex-col lg:items-center relative lg:justify-end gap-x-2">
               <label htmlFor="" className="font-bold text-sm">
-                Urutkan:
+                Sumber:
               </label>
               <select
                 onChange={(e) => {
@@ -148,8 +148,8 @@ export default function Berita() {
                 className="outline-none border px-3 py-1.5 rounded-lg "
               >
                 <option value="Pilih">Semua</option>
-                <option value="admin">admin</option>
-                <option value="user">user</option>
+                <option value="admin">Pengumuman</option>
+                <option value="user">UMKM</option>
               </select>
             </div>
             <div
