@@ -66,7 +66,7 @@ export default function DetailPage() {
     setRandom(shuffle(items));
     setLoading(false);
 
-    console.log(random);
+  
   }, [items]);
 
   return (
@@ -111,7 +111,7 @@ export default function DetailPage() {
                         // getData();
                         setDetail((s) => ({ ...s, loading2: true }));
 
-                        // console.log("hai")
+                     
                       }}
                       key={key}
                     >
@@ -157,7 +157,7 @@ export default function DetailPage() {
                           // getData();
                           setDetail((s) => ({ ...s, loading2: true }));
 
-                          // console.log("hai")
+                      
                         }}
                         key={key}
                       >
@@ -287,7 +287,7 @@ function News_small_card({ data }) {
 
 function Isi({ data }) {
   const reactElement = parse(`${data}`);
-  //   console.log(reactElement[0]);
+
   return reactElement;
 }
 

@@ -141,7 +141,7 @@ function CardVideo({ data }) {
     // const url = `http://128.199.242.242/api/video/${data.id}`;
     try {
       let respond = await PutViews(`video/${data.id}`).then((result) => result);
-      console.log("berhasil");
+     
     } catch (error) {
       console.log(error);
     }

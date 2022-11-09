@@ -132,7 +132,7 @@ export default function EditProfile() {
     getSub();
     getKota();
   }, []);
-  console.log(user.length);
+  // console.log(user.length);
   const {
     register,
     handleSubmit,

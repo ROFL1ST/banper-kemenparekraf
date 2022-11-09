@@ -137,24 +137,24 @@ export default function Subsektor() {
                       selectedPendukung[0] != "" &&
                       selectedPendukungKlasifikasi[0] == ""
                     ) {
-                      console.log("Tidak Terisi Dengan benar");
+                      // console.log("Tidak Terisi Dengan benar");
                       setError(true);
                     } else if (
                       selectedPendukung[1] != "" &&
                       selectedPendukungKlasifikasi[1] == ""
                     ) {
-                      console.log("Tidak Terisi Dengan benar 2");
+                      // console.log("Tidak Terisi Dengan benar 2");
                       setError(true);
                     } else if (
                       selectedPendukung[2] != "" &&
                       selectedPendukungKlasifikasi[2] == ""
                     ) {
-                      console.log("Tidak terisi dengan benar 3");
+                      // console.log("Tidak terisi dengan benar 3");
                       setError(true);
                     } else {
-                      console.log(
-                        "Terisi dengan benar atau tidak terisi dengan benar"
-                      );
+                      // console.log(
+                      //   "Terisi dengan benar atau tidak terisi dengan benar"
+                      // );
                       handleSubmit({
                         NamaKomunitas: user[0].NamaKomunitas,
                         Kategori: user[0].Kategori,
@@ -520,7 +520,7 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
       const classification = user[0].SubsektorPendukungid.split(",");
       //  pendukung
       if (support[0] != undefined) {
-        console.log(pendukung1);
+        // console.log(pendukung1);
         setPendukung1(support[0]);
       } else {
         setPendukung1("");

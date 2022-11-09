@@ -161,7 +161,7 @@ function Modal({ open, setOpen, cancelButtonRef }) {
 
     setCheck((current) => !current);
   };
-  // console.log(check);
+
 
   return (
     <>

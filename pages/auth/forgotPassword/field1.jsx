@@ -42,7 +42,7 @@ export default function Field1() {
     setLoad(true);
     try {
       await login("login/forgot_password", values).then((result) => {
-        console.log(result);
+        
         setLoad(false);
         if (result.data.message == "Failed") {
           setError(true);

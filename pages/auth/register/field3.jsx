@@ -105,24 +105,24 @@ export default function Field3() {
                       selectedPendukung[0] != "" &&
                       selectedPendukungKlasifikasi[0] == ""
                     ) {
-                      console.log("Tidak Terisi Dengan benar");
+                      // console.log("Tidak Terisi Dengan benar");
                       setError(true);
                     } else if (
                       selectedPendukung[1] != "" &&
                       selectedPendukungKlasifikasi[1] == ""
                     ) {
-                      console.log("Tidak Terisi Dengan benar 2");
+                      // console.log("Tidak Terisi Dengan benar 2");
                       setError(true);
                     } else if (
                       selectedPendukung[2] != "" &&
                       selectedPendukungKlasifikasi[2] == ""
                     ) {
-                      console.log("Tidak terisi dengan benar 3");
+                      // console.log("Tidak terisi dengan benar 3");
                       setError(true);
                     } else {
-                      console.log(
-                        "Terisi dengan benar atau tidak terisi dengan benar"
-                      );
+                      // console.log(
+                      //   "Terisi dengan benar atau tidak terisi dengan benar"
+                      // );
                       handleSubmit({
                         kode: kode,
                         Subsektor: selectedUtama,
