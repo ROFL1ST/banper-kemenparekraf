@@ -7,7 +7,7 @@ import { Transition } from "@headlessui/react";
 import { getApi } from "../api/restApi";
 import { useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-
+import empty from  "../assets/Empty-amico.png"
 export default function Direktori() {
   const state = useSelector((state) => state.data);
 
@@ -86,41 +86,54 @@ export default function Direktori() {
           <div className=" px-10 lg:px-52 py-24 mx-auto h-full">
             <div className=" mt-40 overflow-x-auto ">
               {!load ? (
-                <InfiniteScroll
-                  dataLength={list.length}
-                  style={{ display: "flex", flexDirection: "column-reverse" }} //To put endMessage and loader to the top.
-                  // inverse={true} //
-                  hasMore={true}
-                  next={fetchData}
-                  scrollableTarget="scrollableDiv"
-                >
-                  <table className="table-auto w-full text-left whitespace-no-wrap ">
-                    <thead>
-                      <tr>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl text-center">
-                          No
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Nama Pengusul
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Komunitas
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Subsektor
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Email
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {list.map((i, key) => (
-                        <Isi key={key} data={i} no={key} />
-                      ))}
-                    </tbody>
-                  </table>
-                </InfiniteScroll>
+                list.length != 0 ? (
+                  <InfiniteScroll
+                    dataLength={list.length}
+                    style={{ display: "flex", flexDirection: "column-reverse" }} //To put endMessage and loader to the top.
+                    // inverse={true} //
+                    hasMore={true}
+                    next={fetchData}
+                    scrollableTarget="scrollableDiv"
+                  >
+                    <table className="table-auto w-full text-left whitespace-no-wrap ">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl text-center">
+                            No
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Nama Pengusul
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Komunitas
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Subsektor
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Email
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {list.map((i, key) => (
+                          <Isi key={key} data={i} no={key} />
+                        ))}
+                      </tbody>
+                    </table>
+                  </InfiniteScroll>
+                ) : (
+                  <>
+                    <div className=" relative justify-center mx-auto lg:ml-32  items-center flex flex-col mt-10 pb-20">
+                      <img
+                        src={empty.src}
+                        className="lg:h-96 h-72 w-auto"
+                        alt=""
+                      />
+                      <p className="font-bold">Direktori Tidak Tersedia</p>
+                    </div>
+                  </>
+                )
               ) : (
                 <>
                   <div
