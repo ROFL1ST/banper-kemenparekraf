@@ -79,7 +79,7 @@ export default function MenuProvinsi({ type, show, handleFilters, setImages }) {
               data={i}
               key={key}
               handleFilters={handleFilters}
-              setImages={setImages}
+            
             />
           ))
         ) : (
@@ -135,13 +135,13 @@ function Provinsi({
               onChange={(e) => {
                 if (e.target.checked) {
                   setProvinsiId((val) => [...val, data.Id]);
-                  setImages((s) => ({ ...s, loading: true }));
+              
                   setMenu2(true);
                 } else {
                   setProvinsiId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
-                  setImages((s) => ({ ...s, loading: true }));
+              
                   setMenu2(false);
                 }
               }}
@@ -171,7 +171,7 @@ function Provinsi({
                 data={i}
                 menu2={menu2}
                 setKotaId={setKotaId}
-                setImages={setImages}
+              
               />
             ))
           ) : (
@@ -204,12 +204,12 @@ function Kota({ data, menu2: kota, setKotaId, setImages }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setKotaId((val) => [...val, data.Id]);
-                  setImages((s) => ({ ...s, loading: true }));
+              
                 } else {
                   setKotaId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
-                  setImages((s) => ({ ...s, loading: true }));
+              
                 }
               }}
               required

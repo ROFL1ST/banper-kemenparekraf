@@ -82,7 +82,7 @@ export default function MenuSubsector({ type, show, getData, setImages }) {
               key={key}
               subsector={subsector}
               load={load}
-              setImages={setImages}
+             
             />
           ))
         ) : (
@@ -95,7 +95,7 @@ export default function MenuSubsector({ type, show, getData, setImages }) {
   );
 }
 
-function Subsektor({ data, menu, subsector, load, setSubsectorId, setImages }) {
+function Subsektor({ data, menu, subsector, load, setSubsectorId }) {
   const [menu2, setMenu2] = useState(false);
 
   return (
@@ -119,13 +119,13 @@ function Subsektor({ data, menu, subsector, load, setSubsectorId, setImages }) {
                 if (e.target.checked) {
                   setSubsectorId((val) => [...val, data.Id]);
                   setMenu2(true);
-                  setImages((s) => ({ ...s, loading: true }));
+                 
                 } else {
                   setSubsectorId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
                   setMenu2(false);
-                  setImages((s) => ({ ...s, loading: true }));
+                 
                 }
               }}
               className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
@@ -163,7 +163,7 @@ function Subsektor({ data, menu, subsector, load, setSubsectorId, setImages }) {
                   data={i}
                   key={key}
                   setSubsectorId={setSubsectorId}
-                  setImages={setImages}
+                  
                 />
               ))
           ) : (
@@ -175,7 +175,7 @@ function Subsektor({ data, menu, subsector, load, setSubsectorId, setImages }) {
   );
 }
 
-function SubSubsektor({ data, menu2, setSubsectorId, setImages }) {
+function SubSubsektor({ data, menu2, setSubsectorId }) {
   return (
     <>
       <Transition
@@ -196,12 +196,12 @@ function SubSubsektor({ data, menu2, setSubsectorId, setImages }) {
               onChange={(e) => {
                 if (e.target.checked) {
                   setSubsectorId((val) => [...val, data.Id]);
-                  setImages((s) => ({ ...s, loading: true }));
+                 
                 } else {
                   setSubsectorId((prevState) =>
                     prevState.filter((prevItem) => prevItem !== data.Id)
                   );
-                  setImages((s) => ({ ...s, loading: true }));
+                 
                 }
               }}
               required
