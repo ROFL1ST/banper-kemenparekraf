@@ -7,7 +7,8 @@ import { Transition } from "@headlessui/react";
 import { getApi } from "../api/restApi";
 import { useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import empty from  "../assets/Empty-amico.png"
+import empty from "../assets/Empty-amico.png";
+import Link from "next/link";
 export default function Direktori() {
   const state = useSelector((state) => state.data);
 
@@ -83,7 +84,7 @@ export default function Direktori() {
           </div>
         </div>
         <section className="text-gray-600 body-font">
-          <div className=" px-10 lg:px-52 py-24 mx-auto h-full">
+          <div className=" px-10 lg:px-44 py-24 mx-auto h-full">
             <div className=" mt-40 overflow-x-auto ">
               {!load ? (
                 list.length != 0 ? (
@@ -112,6 +113,12 @@ export default function Direktori() {
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             Email
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
+                            Jumlah Postingan
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
+                            Detail
                           </th>
                         </tr>
                       </thead>
@@ -180,8 +187,17 @@ function Isi({ data, no }) {
         </td>
         <td className="px-4 py-3 text-sm lg:text-base">{data.NamaKomunitas}</td>
         <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
-
         <td className="px-4 py-3 text-sm lg:text-base">{data.Email}</td>
+        <td className="px-4 py-3 text-sm lg:text-base text-center">
+          {data.Trcount}
+        </td>
+        <td className="px-4 py-3 text-sm lg:text-base text-center">
+          <Link href={`/direktori/Detail/${data.Email}`}>
+            <button className="px-3 py-1 bg-blue-900 rounded-lg text-white">
+              Detail
+            </button>
+          </Link>
+        </td>
       </tr>
     </>
   );
