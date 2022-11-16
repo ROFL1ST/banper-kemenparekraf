@@ -32,7 +32,9 @@ export default function Direktori() {
           subsektor_id !== undefined && `subsektorId=${subsektor_id}`
         }&sort=${sort}&${
           provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
-        }&${kota_id !== undefined && `kotaId=${kota_id}`}`
+        }&${
+          kota_id !== undefined && `kotaId=${kota_id}`
+        } &orderBy=order by Trcount desc`
       ).then((result) => {
         setList(result.data.data);
         setLoad(false);

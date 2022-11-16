@@ -213,7 +213,22 @@ export default function Login() {
         onClose={handleClose}
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          {error.msg}
+          {error.msg ==
+          "Kami telah melakukan pembaharuan sistem, silahkan ganti password Anda" ? (
+            <p>
+              Kami telah melakukan pembaharuan sistem, silahkan ganti{" "}
+              <span
+                className="underline cursor-pointer"
+                onClick={() => {
+                  Router.push("/auth/forgotPassword/field1");
+                }}
+              >
+                password anda
+              </span>
+            </p>
+          ) : (
+            error.msg
+          )}
         </Alert>
       </Snackbar>
     </>

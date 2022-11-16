@@ -36,7 +36,7 @@ export default function Footer() {
           </p>
           <Link href={""}>
           <p className="text-gray-500 pt-10">
-           Contact Us
+           Berikan Feedback : <a href=""></a>
           </p>
           </Link>
          

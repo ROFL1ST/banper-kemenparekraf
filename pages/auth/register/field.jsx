@@ -170,17 +170,17 @@ export default function Field1() {
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
           {erros ==
-          "Email Anda sudah terdaftar, Ada perubahan keamanan system, Kami menyarankan untuk reset password" ? (
+          "Email Anda sudah terdaftar. Kami telah melakukan pembaharuan sistem, silahkan ganti password Anda" ? (
             <p>
-              Email Anda sudah terdaftar, Ada perubahan keamanan system, Kami
-              menyarankan untuk{" "}
+              Email Anda sudah terdaftar. Kami telah melakukan pembaharuan sistem,
+              silahkan ganti{" "}
               <span
                 className="underline cursor-pointer"
                 onClick={() => {
                   Router.push("/auth/forgotPassword/field1");
                 }}
               >
-                reset password
+                password anda
               </span>
             </p>
           ) : (
