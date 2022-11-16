@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import empty from "../assets/Empty-amico.png";
 import Link from "next/link";
-export default function Direktori() {
+export default function Direktori(limit) {
   const state = useSelector((state) => state.data);
 
   React.useEffect(() => {
@@ -19,7 +19,7 @@ export default function Direktori() {
 
   const [list, setList] = React.useState([]);
   const [load, setLoad] = React.useState(true);
-
+  // const [limit, setLimit] = React.useState()
   const getData = async (
     subsektor_id = state.subsektor_id?.toString(),
     provinsi_id = state.provinsi_id,
@@ -53,10 +53,7 @@ export default function Direktori() {
     state?.provinsi_id?.length,
   ]);
 
-  const fetchData = () => {
-    let limit = 12;
-    getData(sort, sub_id, "", limit + 12);
-  };
+  
   return (
     <>
       <Navbar />
@@ -90,47 +87,38 @@ export default function Direktori() {
             <div className=" mt-40 overflow-x-auto ">
               {!load ? (
                 list.length != 0 ? (
-                  <InfiniteScroll
-                    dataLength={list.length}
-                    style={{ display: "flex", flexDirection: "column-reverse" }} //To put endMessage and loader to the top.
-                    // inverse={true} //
-                    hasMore={true}
-                    next={fetchData}
-                    scrollableTarget="scrollableDiv"
-                  >
-                    <table className="table-auto w-full text-left whitespace-no-wrap ">
-                      <thead>
-                        <tr>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl text-center">
-                            No
-                          </th>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Nama Pengusul
-                          </th>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Komunitas
-                          </th>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Subsektor
-                          </th>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                            Email
-                          </th>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
-                            Jumlah Postingan
-                          </th>
-                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
-                            Detail
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {list.map((i, key) => (
-                          <Isi key={key} data={i} no={key} />
-                        ))}
-                      </tbody>
-                    </table>
-                  </InfiniteScroll>
+                  <table className="table-auto w-full text-left whitespace-no-wrap ">
+                    <thead>
+                      <tr>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl text-center">
+                          No
+                        </th>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                          Nama Pengusul
+                        </th>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                          Komunitas
+                        </th>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                          Subsektor
+                        </th>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                          Email
+                        </th>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
+                          Jumlah Postingan
+                        </th>
+                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
+                          Detail
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {list.map((i, key) => (
+                        <Isi key={key} data={i} no={key} />
+                      ))}
+                    </tbody>
+                  </table>
                 ) : (
                   <>
                     <div className=" relative justify-center mx-auto lg:ml-32  items-center flex flex-col mt-10 pb-20">
@@ -169,6 +157,20 @@ export default function Direktori() {
                   </div>
                 </>
               )}
+              <p
+                className="flex justify-center underline text-blue-900 items-center mt-10 cursor-pointer"
+                onClick={() => {
+                  let limit = 12;
+                  getData(
+                    state.subsektor_id?.toString(),
+                    state.provinsi_id,
+                    state.kota_id,
+                    limit + 12
+                  );
+                }}
+              >
+                More
+              </p>
             </div>
           </div>
         </section>

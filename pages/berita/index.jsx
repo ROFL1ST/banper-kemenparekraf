@@ -38,7 +38,6 @@ export default function Berita() {
     limit = 12
   ) => {
     try {
-     
       let respond = await getApi(
         `news?limit=${limit}&${
           subsektor_id !== undefined && `subsektorId=${subsektor_id}`
@@ -48,7 +47,7 @@ export default function Berita() {
           author !== undefined && `author=${author}`
         }`
       );
-     
+
       setData(respond.data.data);
       setLoading(false);
     } catch (error) {
@@ -198,7 +197,12 @@ export default function Berita() {
         <button
           onClick={() => {
             let limit = 12;
-            getData(sort, sub_id, "", limit + 12);
+            getData(
+              state.subsektor_id?.toString(),
+              state.provinsi_id,
+              state.kota_id,
+              limit + 12
+            );
           }}
           className="text-blue-700 underline mt-5 mb-10 text-sm text-center w-full"
         >
@@ -283,7 +287,6 @@ function Modal({ open, setOpen, cancelButtonRef }) {
 
     setCheck((current) => !current);
   };
-
 
   return (
     <>
