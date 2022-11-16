@@ -28,26 +28,35 @@ export default function Footer() {
           </p>
         </div>
         <div className="text-left xl:w-1/4 lg:w-1/4 xl:mt-0 lg:mt-0 mt-10  mb-10">
+        <h1 className="mb-5 font-bold">Hubungi Kami</h1>
           <p className="text-[#242424] font-semibold">
             Direktorat Infrastruktur Ekonomi Kreatif Deputi Bidang Pengembangan
             Destinasi dan Infrastruktur Kementerian Pariwisata dan Ekonomi
             Kreatif / Badan Pariwisata dan Ekonomi Kreatif
           </p>
+          <Link href={""}>
+          <p className="text-gray-500 pt-10">
+           Contact Us
+          </p>
+          </Link>
+         
         </div>
         <div className="flex xl:w-1/4 lg:w-1/4 w-1/2 justify-center gap-x-4 xl:my-0 lg:my-0 my-5  items-center">
           <img
             className="2xl:h-32 lg:h-20 h-20"
             src={kemenparekraf.src}
             alt={"logo"}
-          />
+          />  
           <img
             className="2xl:h-32 lg:h-20 h-20"
             src={wonderful.src}
             alt={"logo"}
           />
+          
         </div>
+        
       </footer>
-      <div className="mx-auto px-5 pb-5 flex justify-center items-center rounded-b-lg bg-[#f5f5fa]">
+      <div className="mx-auto px-5 pb-5 pt-10 flex justify-center items-center rounded-b-lg bg-[#f5f5fa]">
         <a href="https://www.facebook.com/ParekrafRI" className="text-white rounded-full bg-[#142b51] p-2">
           <svg
             fill="currentColor"
@@ -80,6 +89,7 @@ export default function Footer() {
             <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
           </svg>
         </a>
+        
       </div>
       <div className="bg-[#142b51]">
         <div className="mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row justify-center items-center">
