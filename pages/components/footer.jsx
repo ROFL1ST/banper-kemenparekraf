@@ -37,7 +37,9 @@ export default function Footer() {
           <Link href={""}>
             <p className="text-gray-500 pt-10">
               Berikan Feedback :{" "}
-              <a href="mailto:banper@kemenparekraf.go.id">
+              <a href="" onClick={() => {
+                window.open("mailto:banper@kemenparekraf.go.id")
+              }}>
                 banper@kemenparekraf.go.id
               </a>
             </p>
