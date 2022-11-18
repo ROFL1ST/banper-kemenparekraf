@@ -95,7 +95,9 @@ export default function Direktori(limit) {
             <Listbox value={selectedChoice} onChange={setSelectedChoice}>
               <div className="relative mt-1">
                 <Listbox.Button className="bg-blue-900 py-2 pl-5 pr-10 rounded-md text-white font-semibold w-full flex justify-between items-center">
-                  <span className="block truncate">{selectedChoice.name ?? "Urutkan Berdasarkan"}</span>
+                  <span className="block truncate">
+                    {selectedChoice.name ?? "Urutkan Berdasarkan"}
+                  </span>
                   <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                     <ChevronDownIcon
                       className="h-5 w-5 text-white"
@@ -159,6 +161,9 @@ export default function Direktori(limit) {
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             Subsektor
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Klasifikasi
                           </th>
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             Email
@@ -250,6 +255,8 @@ function Isi({ data, no }) {
         </td>
         <td className="px-4 py-3 text-sm lg:text-base">{data.NamaKomunitas}</td>
         <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
+        <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
+
         <td className="px-4 py-3 text-sm lg:text-base">{data.Email}</td>
         <td className="px-4 py-3 text-sm lg:text-base text-center">
           {data.Trcount}

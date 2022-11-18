@@ -69,6 +69,7 @@ export default function Detail() {
                 className="h-40 w-40 rounded-full  mx-auto bg-cover "
                 src="https://dummyimage.com/720x400"
               />
+              <p className="mt-20 text-base">{detail.Alamat}</p>
             </div>
           </div>
           <div className="px-5 py-24 mx-auto pt-8">
