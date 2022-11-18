@@ -8,8 +8,15 @@ import {
   TableCell,
   TableBody,
   Fab,
+  Snackbar,
 } from "@mui/material";
-import React, { useEffect, useState, useRef, Fragment } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  Fragment,
+  forwardRef,
+} from "react";
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import Section from "../components/section";
@@ -23,6 +30,11 @@ import {
   ChevronUpDownIcon,
 } from "@heroicons/react/24/outline";
 import Loading from "../components/Loading";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function Proposal() {
   //
   const [open, setOpen] = useState(false);
@@ -59,13 +71,35 @@ export default function Proposal() {
     }
   };
 
+  // user
+  const [user, setUser] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const getUser = async (auth) => {
+    try {
+      await getPropose("user", auth).then((result) => {
+        console.log(result.data.data);
+        setUser(result.data.data[0]);
+        setLoading(false);
+        if (user.Nama == "undefined" && user.NamaKomunitas == "undefined") {
+          setError(true);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
       setToken(localStorage.getItem("token"));
       getList(localStorage.getItem("token"));
+      getUser(localStorage.getItem("token"));
     } else {
       setToken(sessionStorage.getItem("token"));
       getList(sessionStorage.getItem("token"));
+      getUser(sessionStorage.getItem("token"));
     }
     if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
       // alert("You need to Log In first!")
@@ -80,7 +114,13 @@ export default function Proposal() {
 
   // check
   const [log, setLog] = React.useState(false);
-  const cancelButtonRef = React.useRef(null);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setError(false);
+  };
 
   // submit Berita dan gallery
 
@@ -232,6 +272,19 @@ export default function Proposal() {
         </div>
       </div>
       <Footer />
+      <Snackbar open={error} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
+          Mohon Untuk Mengisi Profil Anda Dengan Benar Pada Halaman{" "}
+          <span
+            className="underline cursor-pointer"
+            onClick={() => {
+              Router.push("/editProfile");
+            }}
+          >
+            Edit Profile
+          </span>
+        </Alert>
+      </Snackbar>
     </>
   );
 }
