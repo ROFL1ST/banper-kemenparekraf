@@ -3,12 +3,13 @@ import Navbar from "../components/navbar";
 import Footer from "../components/footer";
 import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
-import { Transition } from "@headlessui/react";
+import { Listbox, Transition } from "@headlessui/react";
 import { getApi } from "../api/restApi";
 import { useSelector } from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import empty from "../assets/Empty-amico.png";
 import Link from "next/link";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 export default function Direktori(limit) {
   const state = useSelector((state) => state.data);
 
@@ -53,12 +54,21 @@ export default function Direktori(limit) {
     state?.provinsi_id?.length,
   ]);
 
-  
+  //
+  const pilihan = [
+    {
+      id: 1,
+      name: "Sortir A-Z",
+    },
+    { id: 2, name: "Sortir Z-A" },
+  ];
+  const [selectedChoice, setSelectedChoice] = React.useState(pilihan[0]);
+
   return (
     <>
       <Navbar />
       <div id="scrollableDiv">
-        <div className="fixed w-full mt-[104px] flex items-center  bg-white lg:px-40 py-[19px] px-5 z-10">
+        <div className="fixed w-full mt-[104px] flex items-center justify-between bg-white lg:px-40 py-[19px] px-5 z-10">
           <div
             onClick={() => {
               setSort(true);
@@ -81,44 +91,107 @@ export default function Direktori(limit) {
             </svg>
             <p className="text-md text-gray-400">Filter</p>
           </div>
+          <div>
+            <Listbox value={selectedChoice} onChange={setSelectedChoice}>
+              <div className="relative mt-1">
+                <Listbox.Button className="bg-blue-900 py-2 pl-5 pr-10 rounded-md text-white font-semibold w-full flex justify-between items-center">
+                  <span className="block truncate">{selectedChoice.name ?? "Urutkan Berdasarkan"}</span>
+                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                    <ChevronDownIcon
+                      className="h-5 w-5 text-white"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </Listbox.Button>
+                <Transition
+                  as={React.Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-blue-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-white">
+                    {pilihan.map((pilihan, id) => (
+                      <Listbox.Option
+                        key={id}
+                        className={({ active }) =>
+                          `relative cursor-default select-none py-2 pl-6 pr-4 ${
+                            active ? "bg-blue-100 text-blue-900" : "text-white "
+                          }`
+                        }
+                        value={pilihan}
+                      >
+                        {({ selectedChoice }) => (
+                          <>
+                            <span
+                              className={`block truncate ${
+                                selectedChoice ? "font-medium" : "font-normal"
+                              }`}
+                            >
+                              {pilihan.name}
+                            </span>
+                          </>
+                        )}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </div>
+            </Listbox>
+          </div>
         </div>
         <section className="text-gray-600 body-font">
           <div className=" px-10 lg:px-44 py-24 mx-auto h-full">
             <div className=" mt-40 overflow-x-auto ">
               {!load ? (
                 list.length != 0 ? (
-                  <table className="table-auto w-full text-left whitespace-no-wrap ">
-                    <thead>
-                      <tr>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl text-center">
-                          No
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Nama Pengusul
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Komunitas
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Subsektor
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
-                          Email
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
-                          Jumlah Postingan
-                        </th>
-                        <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
-                          Detail
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {list.map((i, key) => (
-                        <Isi key={key} data={i} no={key} />
-                      ))}
-                    </tbody>
-                  </table>
+                  <>
+                    <table className="table-auto w-full text-left whitespace-no-wrap ">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl text-center">
+                            No
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Nama Pengusul
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Komunitas
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Subsektor
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
+                            Email
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
+                            Jumlah Postingan
+                          </th>
+                          <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 text-center">
+                            Detail
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {list.map((i, key) => (
+                          <Isi key={key} data={i} no={key} />
+                        ))}
+                      </tbody>
+                    </table>
+                    <p
+                      className="flex justify-center underline text-blue-900 items-center mt-10 cursor-pointer"
+                      onClick={() => {
+                        let limit = 12;
+                        getData(
+                          state.subsektor_id?.toString(),
+                          state.provinsi_id,
+                          state.kota_id,
+                          limit + 12
+                        );
+                      }}
+                    >
+                      More
+                    </p>
+                  </>
                 ) : (
                   <>
                     <div className=" relative justify-center mx-auto lg:ml-32  items-center flex flex-col mt-10 pb-20">
@@ -157,20 +230,6 @@ export default function Direktori(limit) {
                   </div>
                 </>
               )}
-              <p
-                className="flex justify-center underline text-blue-900 items-center mt-10 cursor-pointer"
-                onClick={() => {
-                  let limit = 12;
-                  getData(
-                    state.subsektor_id?.toString(),
-                    state.provinsi_id,
-                    state.kota_id,
-                    limit + 12
-                  );
-                }}
-              >
-                More
-              </p>
             </div>
           </div>
         </section>
