@@ -81,7 +81,7 @@ export default function Proposal() {
         console.log(result.data.data);
         setUser(result.data.data[0]);
         setLoading(false);
-        if (user.Nama == "undefined" && user.NamaKomunitas == "undefined") {
+        if (user.Nama == null && user.NamaKomunitas == null) {
           setError(true);
         }
       });

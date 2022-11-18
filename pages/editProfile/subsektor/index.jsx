@@ -516,46 +516,48 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
 
   React.useEffect(() => {
     if (!muat) {
-      const support = user[0].SubsektorPendukung.split(",");
-      const classification = user[0].SubsektorPendukungid.split(",");
-      //  pendukung
-      if (support[0] != undefined) {
-        // console.log(pendukung1);
-        setPendukung1(support[0]);
-      } else {
-        setPendukung1("");
-      }
-      if (support[1] != undefined) {
-        setPendukung2(support[1]);
-      } else {
-        setPendukung2("");
-      }
-      if (support[2] != undefined) {
-        setPendukung3(support[2]);
-      } else {
-        setPendukung3("");
-      }
-      //  pendukung
+      if (user[0].SubsektorPendukung != null) {
+        const support = user[0].SubsektorPendukung.split(",");
+        const classification = user[0].SubsektorPendukungid.split(",");
+        //  pendukung
+        if (support[0] != undefined) {
+          // console.log(pendukung1);
+          setPendukung1(support[0]);
+        } else {
+          setPendukung1("");
+        }
+        if (support[1] != undefined) {
+          setPendukung2(support[1]);
+        } else {
+          setPendukung2("");
+        }
+        if (support[2] != undefined) {
+          setPendukung3(support[2]);
+        } else {
+          setPendukung3("");
+        }
+        //  pendukung
 
-      // klasifikasi
+        // klasifikasi
 
-      if (classification[0] != undefined) {
-        setKlasifikasi1(classification[0]);
-      } else {
-        setKlasifikasi1("");
-      }
-      if (classification[1] != undefined) {
-        setKlasifikasi2(classification[1]);
-      } else {
-        setKlasifikasi2("");
-      }
-      if (classification[2] != undefined) {
-        setKlasifikasi3(classification[2]);
-      } else {
-        setKlasifikasi3("");
-      }
+        if (classification[0] != undefined) {
+          setKlasifikasi1(classification[0]);
+        } else {
+          setKlasifikasi1("");
+        }
+        if (classification[1] != undefined) {
+          setKlasifikasi2(classification[1]);
+        } else {
+          setKlasifikasi2("");
+        }
+        if (classification[2] != undefined) {
+          setKlasifikasi3(classification[2]);
+        } else {
+          setKlasifikasi3("");
+        }
 
-      // klasifikasi
+        // klasifikasi
+      } 
     }
     setLoading(false);
   }, [user[0]]);
