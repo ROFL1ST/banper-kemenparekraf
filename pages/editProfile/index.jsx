@@ -190,6 +190,9 @@ export default function EditProfile() {
                       id=""
                       {...register("Kategori", { value: i.Kategori })}
                     >
+                      <option value={""} defaultValue={true}>
+                        Pilih Kategori Pengusul
+                      </option>
                       {!loading ? (
                         kategori.map((i, key) => (
                           <option key={key} value={i.Id}>
@@ -288,6 +291,10 @@ export default function EditProfile() {
                           value: i.KotaID,
                         })}
                       >
+                        <option value={""} defaultValue={true}>
+                          Pilih Kota
+                        </option>
+
                         {!loading ? (
                           kota.map((i, key) => (
                             <option key={key} value={i.Id}>
