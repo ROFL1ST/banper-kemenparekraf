@@ -65,10 +65,10 @@ export default function Detail() {
               <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 pt-10">
                 {detail.NamaKomunitas ?? "Nama Tidak Tersedia"}
               </h1>
-              <img
+              {/* <img
                 className="h-40 w-40 rounded-full  mx-auto bg-cover "
                 src="https://dummyimage.com/720x400"
-              />
+              /> */}
               <p className="mt-20 text-base">{detail.Alamat}</p>
             </div>
           </div>
