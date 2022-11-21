@@ -156,7 +156,7 @@ export default function Direktori(limit) {
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             Nama Komunitas
                           </th>
-                         
+
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             Subsektor
                           </th>
@@ -254,9 +254,13 @@ function Isi({ data, no }) {
             ? "Tidak Ada Nama Komunitas"
             : data.NamaKomunitas}
         </td>
-        
+
         <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
-        <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
+        <td className="px-4 py-3 text-sm lg:text-base">
+          {data.Klasifikasi == null
+            ? "Tidak Ada Klasifikasi"
+            : data.Klasifikasi}
+        </td>
 
         <td className="px-4 py-3 text-sm lg:text-base">{data.Email}</td>
         <td className="px-4 py-3 text-sm lg:text-base text-center">
