@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
@@ -10,8 +12,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import empty from "../assets/Empty-amico.png";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-export default function Direktori(limit) {
+
+export default function Direktori() {
   const state = useSelector((state) => state.data);
+  const pilihan = [
+    {
+      id: 1,
+      name: "Sortir A-Z",
+    },
+    { id: 2, name: "Sortir Z-A" },
+  ];
+  const [selectedChoice, setSelectedChoice] = React.useState(pilihan[0]);
 
   React.useEffect(() => {
     document.title = "Direktori";
@@ -20,12 +31,11 @@ export default function Direktori(limit) {
 
   const [list, setList] = React.useState([]);
   const [load, setLoad] = React.useState(true);
-  // const [limit, setLimit] = React.useState()
+  const [limit, setLimit] = React.useState(12);
   const getData = async (
     subsektor_id = state.subsektor_id?.toString(),
     provinsi_id = state.provinsi_id,
-    kota_id = state.kota_id,
-    limit = 12
+    kota_id = state.kota_id
   ) => {
     try {
       await getApi(
@@ -35,7 +45,9 @@ export default function Direktori(limit) {
           provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
         }&${
           kota_id !== undefined && `kotaId=${kota_id}`
-        } &orderBy=order by Trcount desc`
+        } &orderBy=order by u.NamaKomunitas ${
+          selectedChoice.name === "Sortir A-Z" ? "asc" : "desc"
+        }`
       ).then((result) => {
         setList(result.data.data);
         setLoad(false);
@@ -52,17 +64,10 @@ export default function Direktori(limit) {
     state?.subsektor_id?.length,
     state?.kota_id?.length,
     state?.provinsi_id?.length,
+    selectedChoice,
   ]);
 
   //
-  const pilihan = [
-    {
-      id: 1,
-      name: "Sortir A-Z",
-    },
-    { id: 2, name: "Sortir Z-A" },
-  ];
-  const [selectedChoice, setSelectedChoice] = React.useState(pilihan[0]);
 
   return (
     <>
@@ -156,7 +161,7 @@ export default function Direktori(limit) {
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             Nama Komunitas
                           </th>
-                         
+
                           <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">
                             Subsektor
                           </th>
@@ -183,12 +188,11 @@ export default function Direktori(limit) {
                     <p
                       className="flex justify-center underline text-blue-900 items-center mt-10 cursor-pointer"
                       onClick={() => {
-                        let limit = 12;
                         getData(
                           state.subsektor_id?.toString(),
                           state.provinsi_id,
                           state.kota_id,
-                          limit + 12
+                          setLimit(limit + 12)
                         );
                       }}
                     >
@@ -254,9 +258,13 @@ function Isi({ data, no }) {
             ? "Tidak Ada Nama Komunitas"
             : data.NamaKomunitas}
         </td>
-        
+
         <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
-        <td className="px-4 py-3 text-sm lg:text-base">{data.Subsektor}</td>
+        <td className="px-4 py-3 text-sm lg:text-base">
+          {data.Klasifikasi == null
+            ? "Tidak Ada Klasifikasi"
+            : data.Klasifikasi}
+        </td>
 
         <td className="px-4 py-3 text-sm lg:text-base">{data.Email}</td>
         <td className="px-4 py-3 text-sm lg:text-base text-center">
