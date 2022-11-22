@@ -26,7 +26,7 @@ export default function Berita() {
   const [loading, setLoading] = useState(true);
   const cancelButtonRef = useRef(null);
   const state = useSelector((state) => state.data);
-
+  const [limit, setLimit] = useState(12);
   var router = useRouter();
 
   const getData = async (
@@ -34,8 +34,7 @@ export default function Berita() {
     subsektor_id = state.subsektor_id?.toString(),
     provinsi_id = state.provinsi_id,
     kota_id = state.kota_id,
-    author,
-    limit = 12
+    author
   ) => {
     try {
       let respond = await getApi(
@@ -196,12 +195,11 @@ export default function Berita() {
       {data.length >= 15 ? (
         <button
           onClick={() => {
-            let limit = 12;
             getData(
               state.subsektor_id?.toString(),
               state.provinsi_id,
               state.kota_id,
-              limit + 12
+              setLimit(limit + 12)
             );
           }}
           className="text-blue-700 underline mt-5 mb-10 text-sm text-center w-full"
