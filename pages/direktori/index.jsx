@@ -13,7 +13,7 @@ import empty from "../assets/Empty-amico.png";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
-export default function Direktori(limit) {
+export default function Direktori() {
   const state = useSelector((state) => state.data);
   const pilihan = [
     {
@@ -31,12 +31,11 @@ export default function Direktori(limit) {
 
   const [list, setList] = React.useState([]);
   const [load, setLoad] = React.useState(true);
-  // const [limit, setLimit] = React.useState()
+  const [limit, setLimit] = React.useState(12);
   const getData = async (
     subsektor_id = state.subsektor_id?.toString(),
     provinsi_id = state.provinsi_id,
-    kota_id = state.kota_id,
-    limit = 12
+    kota_id = state.kota_id
   ) => {
     try {
       await getApi(
@@ -189,12 +188,11 @@ export default function Direktori(limit) {
                     <p
                       className="flex justify-center underline text-blue-900 items-center mt-10 cursor-pointer"
                       onClick={() => {
-                        let limit = 12;
                         getData(
                           state.subsektor_id?.toString(),
                           state.provinsi_id,
                           state.kota_id,
-                          limit + 12
+                          setLimit(limit + 12)
                         );
                       }}
                     >
