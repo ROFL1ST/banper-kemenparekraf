@@ -107,100 +107,107 @@ export default function Direktori() {
             <p className="text-md text-gray-400">Filter</p>
           </div>
           <div>
-            <Listbox value={selectedChoice} onChange={setSelectedChoice}>
-              <div className="relative mt-1">
-                <Listbox.Button className="bg-blue-900 py-2 pl-5 pr-10 rounded-md text-white font-semibold w-full flex justify-between items-center">
-                  <span className="block truncate">
-                    {selectedChoice.name ?? "Urutkan Berdasarkan"}
-                  </span>
-                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                    <ChevronDownIcon
-                      className="h-5 w-5 text-white"
-                      aria-hidden="true"
-                    />
-                  </span>
-                </Listbox.Button>
-                <Transition
-                  as={React.Fragment}
-                  leave="transition ease-in duration-100"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-blue-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-white">
-                    {pilihan.map((pilihan, id) => (
-                      <Listbox.Option
-                        key={id}
-                        className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-6 pr-4 ${
-                            active ? "bg-blue-100 text-blue-900" : "text-white "
-                          }`
-                        }
-                        value={pilihan}
-                      >
-                        {({ selectedChoice }) => (
-                          <>
-                            <span
-                              className={`block truncate ${
-                                selectedChoice ? "font-medium" : "font-normal"
-                              }`}
-                            >
-                              {pilihan.name}
-                            </span>
-                          </>
-                        )}
-                      </Listbox.Option>
-                    ))}
-                  </Listbox.Options>
-                </Transition>
-              </div>
-            </Listbox>
-            <Listbox value={selectedChoice2} onChange={setSelectedChoice2}>
-              <div className="relative mt-1">
-                <Listbox.Button className="bg-blue-900 py-2 pl-5 pr-10 rounded-md text-white font-semibold w-full flex justify-between items-center">
-                  <span className="block truncate">
-                    {selectedChoice2.name ?? "Urutkan Berdasarkan"}
-                  </span>
-                  <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                    <ChevronDownIcon
-                      className="h-5 w-5 text-white"
-                      aria-hidden="true"
-                    />
-                  </span>
-                </Listbox.Button>
-                <Transition
-                  as={React.Fragment}
-                  leave="transition ease-in duration-100"
-                  leaveFrom="opacity-100"
-                  leaveTo="opacity-0"
-                >
-                  <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-blue-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-white">
-                    {berdasarkan.map((berdasarkan, id) => (
-                      <Listbox.Option
-                        key={id}
-                        className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-6 pr-4 ${
-                            active ? "bg-blue-100 text-blue-900" : "text-white "
-                          }`
-                        }
-                        value={berdasarkan}
-                      >
-                        {({ selectedChoice }) => (
-                          <>
-                            <span
-                              className={`block truncate ${
-                                selectedChoice ? "font-medium" : "font-normal"
-                              }`}
-                            >
-                              {berdasarkan.name}
-                            </span>
-                          </>
-                        )}
-                      </Listbox.Option>
-                    ))}
-                  </Listbox.Options>
-                </Transition>
-              </div>
-            </Listbox>
+            <div className="flex gap-x-2">
+              {" "}
+              <Listbox value={selectedChoice} onChange={setSelectedChoice}>
+                <div className="relative mt-1">
+                  <Listbox.Button className="bg-blue-900 py-2 pl-5 pr-10 rounded-md text-white font-semibold w-full flex justify-between items-center">
+                    <span className="block truncate">
+                      {selectedChoice.name ?? "Urutkan Berdasarkan"}
+                    </span>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <ChevronDownIcon
+                        className="h-5 w-5 text-white"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Listbox.Button>
+                  <Transition
+                    as={React.Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-blue-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-white">
+                      {pilihan.map((pilihan, id) => (
+                        <Listbox.Option
+                          key={id}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-6 pr-4 ${
+                              active
+                                ? "bg-blue-100 text-blue-900"
+                                : "text-white "
+                            }`
+                          }
+                          value={pilihan}
+                        >
+                          {({ selectedChoice }) => (
+                            <>
+                              <span
+                                className={`block truncate ${
+                                  selectedChoice ? "font-medium" : "font-normal"
+                                }`}
+                              >
+                                {pilihan.name}
+                              </span>
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+              <Listbox value={selectedChoice2} onChange={setSelectedChoice2}>
+                <div className="relative mt-1">
+                  <Listbox.Button className="bg-blue-900 py-2 pl-5 pr-10 rounded-md text-white font-semibold w-full flex justify-between items-center">
+                    <span className="block truncate">
+                      {selectedChoice2.name ?? "Urutkan Berdasarkan"}
+                    </span>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <ChevronDownIcon
+                        className="h-5 w-5 text-white"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Listbox.Button>
+                  <Transition
+                    as={React.Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-blue-900 py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm text-white">
+                      {berdasarkan.map((berdasarkan, id) => (
+                        <Listbox.Option
+                          key={id}
+                          className={({ active }) =>
+                            `relative cursor-default select-none py-2 pl-6 pr-4 ${
+                              active
+                                ? "bg-blue-100 text-blue-900"
+                                : "text-white "
+                            }`
+                          }
+                          value={berdasarkan}
+                        >
+                          {({ selectedChoice }) => (
+                            <>
+                              <span
+                                className={`block truncate ${
+                                  selectedChoice ? "font-medium" : "font-normal"
+                                }`}
+                              >
+                                {berdasarkan.name}
+                              </span>
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+            </div>
           </div>
         </div>
         <section className="text-gray-600 body-font">
