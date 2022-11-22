@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
@@ -10,8 +12,17 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import empty from "../assets/Empty-amico.png";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+
 export default function Direktori(limit) {
   const state = useSelector((state) => state.data);
+  const pilihan = [
+    {
+      id: 1,
+      name: "Sortir A-Z",
+    },
+    { id: 2, name: "Sortir Z-A" },
+  ];
+  const [selectedChoice, setSelectedChoice] = React.useState(pilihan[0]);
 
   React.useEffect(() => {
     document.title = "Direktori";
@@ -35,7 +46,9 @@ export default function Direktori(limit) {
           provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
         }&${
           kota_id !== undefined && `kotaId=${kota_id}`
-        } &orderBy=order by Trcount desc`
+        } &orderBy=order by u.NamaKomunitas ${
+          selectedChoice.name === "Sortir A-Z" ? "asc" : "desc"
+        }`
       ).then((result) => {
         setList(result.data.data);
         setLoad(false);
@@ -52,17 +65,10 @@ export default function Direktori(limit) {
     state?.subsektor_id?.length,
     state?.kota_id?.length,
     state?.provinsi_id?.length,
+    selectedChoice,
   ]);
 
   //
-  const pilihan = [
-    {
-      id: 1,
-      name: "Sortir A-Z",
-    },
-    { id: 2, name: "Sortir Z-A" },
-  ];
-  const [selectedChoice, setSelectedChoice] = React.useState(pilihan[0]);
 
   return (
     <>
