@@ -9,7 +9,9 @@ export default function Feedback() {
                 position: 'fixed',
                 bottom: 16,
                 right: 16,
-            }} >
+            }} onClick={() => {
+                window.open("mailto:banper@kemenparekraf.go.id")
+            }}>
                 <FeedbackIcon />
                 
             </Fab>
