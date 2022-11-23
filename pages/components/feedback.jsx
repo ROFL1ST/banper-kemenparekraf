@@ -1,6 +1,6 @@
 import React from "react";
 import Fab from '@mui/material/Fab';
-import AddIcon from '@mui/icons-material/Add';
+import FeedbackIcon from '@mui/icons-material/Feedback';
 
 export default function Feedback() {
     return (
@@ -10,7 +10,7 @@ export default function Feedback() {
                 bottom: 16,
                 right: 16,
             }} >
-                <AddIcon />
+                <FeedbackIcon />
                 
             </Fab>
         </div>
