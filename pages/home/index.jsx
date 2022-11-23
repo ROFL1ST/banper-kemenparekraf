@@ -5,6 +5,7 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import { useEffect, useState, useRef, Fragment } from "react";
 import Section from "../components/section";
+import Feedback from "../components/feedback";
 import building from "../assets/building.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import Link from "next/link";
@@ -197,6 +198,7 @@ export default function Dashboard() {
           </div>
         </div>
         {/* faq */}
+        <Feedback/>
         <Footer />
         <Modal
           open={open}
