@@ -31,6 +31,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Loading from "../components/Loading";
 import MuiAlert from "@mui/material/Alert";
+import Feedback from "../components/feedback";
 
 const Alert = forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -272,6 +273,8 @@ export default function Proposal() {
         </div>
       </div>
       <Footer />
+      <Feedback/>
+
       <Snackbar open={error} autoHideDuration={3000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
           Mohon Untuk Mengisi Profil Anda Dengan Benar Pada Halaman{" "}

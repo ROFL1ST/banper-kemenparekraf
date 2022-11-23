@@ -7,6 +7,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import axios from "axios";
+import Feedback from "../components/feedback";
 
 export default function Berita() {
   const [open, setOpen] = React.useState(false);
@@ -24,6 +25,7 @@ export default function Berita() {
         <Video />
       </div>
       <Footer />
+      <Feedback/>
     
     </>
   );

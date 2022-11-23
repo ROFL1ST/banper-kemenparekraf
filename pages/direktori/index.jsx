@@ -12,6 +12,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import empty from "../assets/Empty-amico.png";
 import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import Feedback from "../components/feedback";
 
 export default function Direktori() {
   const state = useSelector((state) => state.data);
@@ -306,6 +307,8 @@ export default function Direktori() {
         </section>
       </div>
       <Footer />
+      <Feedback/>
+
       <Sidebar sort={sort} setSort={setSort} getData={getData} />
     </>
   );

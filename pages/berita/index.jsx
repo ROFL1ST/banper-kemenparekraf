@@ -15,6 +15,7 @@ import MenuProvinsi from "./menu/menuProvinsi";
 import MenuSubsector from "./menu/menuSubsector";
 import empty from "../assets/Empty-amico.png";
 import { useSelector } from "react-redux";
+import Feedback from "../components/feedback";
 
 const MAX_LENGTH = 60;
 
@@ -210,6 +211,8 @@ export default function Berita() {
         <></>
       )}
       <Footer />
+      <Feedback/>
+
       <Modal
         open={open}
         setOpen={setOpen}
