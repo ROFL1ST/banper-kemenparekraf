@@ -5,12 +5,14 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 export default function Feedback() {
     return (
         <div>
-            <Fab color="primary" sx={{
+            <Fab size="large" color="primary" sx={{
+                height: 60,
+                width: 60,
                 position: 'fixed',
                 bottom: 16,
                 right: 16,
             }} >
-                <FeedbackIcon />
+                <FeedbackIcon sx={{height:35, width:35,}}  />
                 
             </Fab>
         </div>
