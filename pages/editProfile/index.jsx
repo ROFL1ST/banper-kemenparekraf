@@ -306,6 +306,29 @@ export default function EditProfile() {
                         )}
                       </select>
                     </div>
+                    <div className="relative flex-grow w-full">
+                      <label className="leading-7 text-sm text-gray-600">
+                        *Apakah Anda Pernah Menerima Banper Sebelum nya?
+                      </label>
+                      <select
+                        className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                        name=""
+                        id=""
+                        {...register("isPenerima", {
+                          value: i.isPenerima,
+                        })}
+                      >
+                        <option value={""} defaultValue={true}>
+                          Pilih Jawaban
+                        </option>
+
+                        <option value="Sudah">Sudah</option>
+                        <option value="Belum">Belum</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">

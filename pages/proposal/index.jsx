@@ -73,17 +73,30 @@ export default function Proposal() {
   };
 
   // user
-  const [user, setUser] = useState([]);
+
+  const [count, setCount] = useState(3);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const getUser = async (auth) => {
     try {
       await getPropose("user", auth).then((result) => {
         console.log(result.data.data);
-        setUser(result.data.data[0]);
+
         setLoading(false);
-        if (user.Nama == null && user.NamaKomunitas == null) {
+        console.log(result.data.data[0].NamaKomunitas);
+        if (
+          result.data.data[0].Nama != null ||
+          result.data.data[0].NamaKomunitas != null ||
+          result.data.data[0].Subsektor != null ||
+          result.data.data[0].PhoneNumber != null
+        ) {
+          setError(false);
+        } else {
           setError(true);
+
+          setTimeout(() => {
+            Router.push("/editProfile");
+          }, 3000);
         }
       });
     } catch (error) {
@@ -91,6 +104,10 @@ export default function Proposal() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    count > 0 && setTimeout(() => setCount(count - 1), 1000);
+  }, [count]);
 
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
@@ -273,19 +290,16 @@ export default function Proposal() {
         </div>
       </div>
       <Footer />
-      <Feedback/>
+      <Feedback />
 
       <Snackbar open={error} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
-          Mohon Untuk Mengisi Profil Anda Dengan Benar Pada Halaman{" "}
-          <span
-            className="underline cursor-pointer"
-            onClick={() => {
-              Router.push("/editProfile");
-            }}
-          >
-            Edit Profile
-          </span>
+        <Alert
+          onClose={handleClose}
+          severity="warning"
+          sx={{ width: "100%", fontSize: "large" }}
+        >
+          Profile Anda Belum Lengkap, Anda Akan Di Alihkan ke Halaman Edit
+          Profile dalam {count} Untuk Mengisi Profile Anda.
         </Alert>
       </Snackbar>
     </>

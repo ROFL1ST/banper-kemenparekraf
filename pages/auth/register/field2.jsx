@@ -261,7 +261,36 @@ export default function Field2() {
                   />
                 </div>
               </div>
-              <div className="flex lg:w-2/3 2/3 sm:flex-row flex-row mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end"></div>
+              <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                <div className="relative flex-col w-1/2">
+                  <label className="leading-7 text-sm text-gray-600">
+                    *Apakah Anda Pernah Menerima Banper Sebelum nya?
+                  </label>
+                  {errors.isPenerima && (
+                    <p className="text-red-600 font-bold text-sm">
+                      Mohon Untuk Memilih Jawaban
+                    </p>
+                  )}
+                  <select
+                    className="form-select form-select-sm appearance-none block w-full  mb-5   px-3
+    py-2.5  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
+    border border-solid border-gray-300 rounded  transition ease-in-out   m-0
+    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    name=""
+                    id=""
+                    {...register("isPenerima", { required: true })}
+                  >
+                    <option value={""} defaultValue={true}>
+                      Pilih Jawaban
+                    </option>
+
+                    <option value="Sudah">Sudah</option>
+                    <option value="Belum">Belum</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* <div className="flex lg:w-2/3 2/3 sm:flex-row flex-row mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end"></div> */}
               <div className=" border-b-yellow-400 border-b-2 h-4 lg:w-2/3 w-11/12 mx-auto m-10 "></div>
               <div className="flex lg:w-2/3 w-full sm:flex-col flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                 <div className="relative flex-grow w-full">
