@@ -212,7 +212,11 @@ export default function Login() {
         autoHideDuration={6000}
         onClose={handleClose}
       >
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          sx={{ width: "100%", fontSize: "larger" }}
+        >
           {error.msg ==
           "Kami telah melakukan pembaharuan sistem, silahkan ganti password Anda" ? (
             <p>
