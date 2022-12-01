@@ -30,7 +30,9 @@ export default function Detail() {
   };
 
   React.useEffect(() => {
-    getData();
+    if (router.isReady) {
+      getData();
+    }
   }, [router.isReady]);
 
   const [content, setContent] = React.useState([]);
@@ -51,7 +53,9 @@ export default function Detail() {
   };
 
   React.useEffect(() => {
-    getDetail();
+    if (router.isReady) {
+      getDetail();
+    }
   }, [router.isReady]);
 
   return (
