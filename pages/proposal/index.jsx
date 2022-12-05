@@ -164,7 +164,7 @@ export default function Proposal() {
         className="bg-gray-200 w-full lg:h-screen h-full  bg-cover rounded-b-3xl"
       >
         <div className="bg-white w-full h-full bg-opacity-90 lg:pt-32 lg:p-0 p-60 px-9 lg:mb-44  rounded-b-3xl">
-          <Section text={"List Proposal"}></Section>
+          <Section text={"Beranda"}></Section>
           {/* Top */}
           <div className="mt-20 md:w-3/4 mx-auto">
             <div className="gap-x-10 justify-between flex md:flex-row flex-col gap-y-10 pb-5  md:items-center">
@@ -208,17 +208,18 @@ export default function Proposal() {
                           >
                             {({ selectedChoice }) => (
                               <>
-                                <a href={pilihan.url}>
-                                  <span
-                                    className={`block truncate ${
-                                      selectedChoice
-                                        ? "font-medium"
-                                        : "font-normal"
-                                    }`}
-                                  >
-                                    {pilihan.name}
-                                  </span>
-                                </a>
+                                <span
+                                  onClick={() => {
+                                    window.open(pilihan.url);
+                                  }}
+                                  className={`block truncate cursor-pointer ${
+                                    selectedChoice
+                                      ? "font-medium"
+                                      : "font-normal"
+                                  }`}
+                                >
+                                  {pilihan.name}
+                                </span>
                               </>
                             )}
                           </Listbox.Option>

@@ -338,7 +338,7 @@ export default function Navbar({ click }) {
                       pathname === "/proposal" && "  text-blue-900 font-bold "
                     } `}
                   >
-                    List Proposal
+                    Beranda
                   </button>
                 </Link>
 
@@ -580,7 +580,7 @@ function DropdownPeople({ setOpen, pathname, log, setLog }) {
                           : ""
                       } `}
                     >
-                      List Proposal
+                      Beranda
                     </button>
                   )}
                 </Menu.Item>
