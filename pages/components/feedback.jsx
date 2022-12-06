@@ -14,7 +14,7 @@ export default function Feedback() {
                 fontSize: 12,
                 fontWeight: 600,
             }}  onClick={() => {
-                window.open("mailto:banper@kemenparekraf.go.id")
+                window.open("https://form.kemenparekraf.go.id/kritik-dan-saran-untuk-situs-web-banper-kemenparekraf-go-id")
             }} >
                 <FeedbackIcon sx={{height:25, width:35,}}  />
                 Hubungi Kami

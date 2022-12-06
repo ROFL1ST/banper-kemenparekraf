@@ -80,10 +80,8 @@ export default function Proposal() {
   const getUser = async (auth) => {
     try {
       await getPropose("user", auth).then((result) => {
-        console.log(result.data.data);
-
         setLoading(false);
-        console.log(result.data.data[0].NamaKomunitas);
+
         if (
           result.data.data[0].Nama != null ||
           result.data.data[0].NamaKomunitas != null ||
@@ -146,13 +144,39 @@ export default function Proposal() {
     {
       id: 1,
       name: "Tambah Berita",
-      url: "https://docs.google.com/forms/d/e/1FAIpQLSebtUc_5nCYZC_7pkPulfHCyj3Mtkg5Z6TUFEp6PAb4w5ducw/viewform",
+      url: "https://form.kemenparekraf.go.id/penambahan-berita-untuk-banper-kemenparekraf-go-id",
     },
-    { id: 2, name: "Tambah Foto", url: "" },
-    { id: 3, name: "Tambah Video", url: "" },
+    {
+      id: 2,
+      name: "Tambah Galeri",
+      url: "https://form.kemenparekraf.go.id/penambahan-foto-dan-video-untuk-banper-kemenparekraf-go-id",
+    },
   ];
 
   const [selectedChoice, setSelectedChoice] = React.useState(pilihan[0]);
+
+  const [propose, setPropose] = React.useState(false);
+  const [memuat, setMemuat] = React.useState(true);
+  const getCondition = async () => {
+    try {
+      await getApi("master/usulan").then((result) => {
+        console.log(result.data.data[0]);
+        setMemuat(false);
+        if (result.data.data[0].isUsulan == 1) {
+          setPropose(true);
+        } else {
+          setPropose(false);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+      setMemuat(false);
+    }
+  };
+
+  React.useEffect(() => {
+    getCondition();
+  }, []);
   return (
     <>
       <Navbar open={open} setOpen={setOpen} />
@@ -169,11 +193,17 @@ export default function Proposal() {
           <div className="mt-20 md:w-3/4 mx-auto">
             <div className="gap-x-10 justify-between flex md:flex-row flex-col gap-y-10 pb-5  md:items-center">
               <div>
-                <Link href={"/proposal/submit-proposal"}>
-                  <button className="bg-blue-900 py-2 px-5 rounded-md text-white font-semibold w-full">
-                    Buat Proposal Baru
-                  </button>
-                </Link>
+                <button
+                  onClick={() => {
+                    if (propose == true) {
+                      Router.push("/proposal/submit-proposal");
+                    }
+                  }}
+                  disabled={propose == true ? false : true}
+                  className={`bg-blue-900 py-2 px-5 rounded-md text-white font-semibold w-full ${propose == true ? "" : "opacity-70 cursor-not-allowed"}`}
+                >
+                  Buat Proposal Baru
+                </button>
               </div>
               <div>
                 <Listbox value={selectedChoice} onChange={setSelectedChoice}>
