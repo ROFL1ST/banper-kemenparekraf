@@ -14,7 +14,7 @@ export default function Detail() {
   const [nama, setNama] = React.useState("");
 
   React.useEffect(() => {
-    document.title = nama?? "Video";
+    document.title = nama ?? "Video";
   });
   var router = useRouter();
 
@@ -59,8 +59,10 @@ export default function Detail() {
   React.useEffect(() => {
     const ac = new AbortController();
 
-    getList();
-    videoDetail();
+    if (router.isReady) {
+      getList();
+      videoDetail();
+    }
 
     return () => {
       ac.abort();
@@ -115,7 +117,6 @@ function Video({ data, setNama, nama }) {
     month: "long",
     day: "2-digit",
   });
-
 
   React.useEffect(() => {
     setNama(data.NamaKota.toLowerCase());
