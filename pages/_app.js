@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
         <Head>
           <link
             rel="shortcut icon"
-            href="https://banper.kemenparekraf.go.id/assets/images/index.png"
+            href="https://banper.kemenparekraf.go.id/index.png"
           ></link>
         </Head>
         <Component {...pageProps} />
