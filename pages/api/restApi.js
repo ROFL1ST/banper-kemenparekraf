@@ -3,6 +3,9 @@ import * as axios from "axios";
 //const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
 const BASE_URL = "https://banper.kemenparekraf.go.id/api/";
 const DOWNLOAD_URL = "https://banper.kemenparekraf.go.id/dashboard/";
+//const BASE_URL = "http://128.199.242.242/api/";
+const PROD_URL = "http://banper.kemenparekraf.go.id/api/";
+//const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
 export function getPropose(path_url, token) {
   return new Promise((resolve, reject) => {
     var config = {
@@ -69,6 +72,7 @@ function getGaleri(path_url) {
       url: BASE_URL + path_url,
       headers: {
         //'Authorization': 'Bearer ' + token
+        // "Access-Control-Allow-Origin": "*",
       },
     };
     axios(config)
@@ -228,5 +232,5 @@ export {
   getGaleri,
   getApi,
   login,
-  forgot
+  forgot,
 };

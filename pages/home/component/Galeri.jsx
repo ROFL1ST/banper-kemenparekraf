@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
 import Link from "next/link";
-
+import empty from "../../assets/Empty-amico.png";
 export default function Galeri() {
   const [images, setImages] = useState([]);
   const [videos, setVideos] = useState([]);
@@ -45,26 +45,44 @@ export default function Galeri() {
     videoList();
   }, []);
 
+  console.log(images);
+
   return (
     <>
       {!loading ? (
-        <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
-          {/* foto */}
-          {images?.map((i, key) => (
-            <Foto key={key} foto={key} data={i} />
-          ))}
-          {/* foto */}
+        images.length != 0 && videos.length != 0 ? (
+          <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
+            {/* foto */}
+            {images?.map((i, key) => (
+              <Foto key={key} foto={key} data={i} />
+            ))}
+            {/* foto */}
 
-          {/* video */}
-          {videos?.map((i, vid) => (
-            <Video video={i} vid={vid} key={vid} />
-          ))}
-          {/* video */}
-        </div>
+            {/* video */}
+            {videos?.map((i, vid) => (
+              <Video video={i} vid={vid} key={vid} />
+            ))}
+            {/* video */}
+          </div>
+        ) : (
+          <>
+            <div className="flex relative flex-col justify-center items-center mb-10 mt-5">
+              <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
+              <p className="font-bold">Galeri Tidak Tersedia</p>
+            </div>
+          </>
+        )
       ) : (
         <>
           <GaleryLoading />
         </>
+      )}
+      {images.length < 2 && videos.length < 2? (
+        <></>
+      ) : (
+        <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
+          <Link href={"/galeri"}>see more</Link>
+        </div>
       )}
     </>
   );
@@ -258,7 +276,7 @@ function Modal({ foto, open, setOpen, cancelButtonRef }) {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className=" relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all  justify-center ">
-                  {foto && !loading ? (
+                  {data && !loading ? (
                     <div
                       className={`${
                         data[0]["images"].length !== 1 ? "flex" : "hidden"
