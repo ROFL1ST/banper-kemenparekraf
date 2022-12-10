@@ -141,7 +141,10 @@ export default function Dashboard() {
                 ))
               )
             ) : (
-              <h1>No Data</h1>
+              <div className="flex relative flex-col justify-center items-center">
+                <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
+                <p className="font-bold">Galeri Tidak Tersedia</p>
+              </div>
             )}
           </div>
           <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
@@ -149,9 +152,7 @@ export default function Dashboard() {
           </div>
           <Section text={"Galeri"} />
           <Galeri />
-          <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
-            <Link href={"/galeri"}>see more</Link>
-          </div>
+          
         </div>
         {/* faq */}
         <div
@@ -198,7 +199,7 @@ export default function Dashboard() {
           </div>
         </div>
         {/* faq */}
-        <Feedback/>
+        <Feedback />
         <Footer />
         <Modal
           open={open}
