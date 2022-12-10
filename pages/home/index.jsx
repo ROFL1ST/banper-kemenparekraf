@@ -128,7 +128,7 @@ export default function Dashboard() {
                   <CardBeritaLoading />
                   <CardBeritaLoading />
                 </>
-              ) : (
+              ) : data.berita.length != 0 ? (
                 data.berita.map((i, key) => (
                   <div key={key}>
                     <div className="md:flex hidden">
@@ -139,6 +139,8 @@ export default function Dashboard() {
                     </div>
                   </div>
                 ))
+              ) : (
+                <></>
               )
             ) : (
               <div className="flex relative flex-col justify-center items-center">
@@ -152,7 +154,6 @@ export default function Dashboard() {
           </div>
           <Section text={"Galeri"} />
           <Galeri />
-          
         </div>
         {/* faq */}
         <div
