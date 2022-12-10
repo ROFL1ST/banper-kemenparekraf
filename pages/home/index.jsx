@@ -144,9 +144,9 @@ export default function Dashboard() {
                 <></>
               )
             ) : (
-              <div className="flex relative flex-col justify-center items-center">
+              <div className="flex relative flex-col justify-center items-center mb-10 mt-5">
                 <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
-                <p className="font-bold">Galeri Tidak Tersedia</p>
+                <p className="font-bold">Berita Tidak Tersedia</p>
               </div>
             )}
           </div>
