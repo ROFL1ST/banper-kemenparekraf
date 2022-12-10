@@ -45,6 +45,8 @@ export default function Galeri() {
     videoList();
   }, []);
 
+  console.log(images)
+
   return (
     <>
       {!loading ? (
@@ -258,7 +260,7 @@ function Modal({ foto, open, setOpen, cancelButtonRef }) {
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
                 <Dialog.Panel className=" relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all  justify-center ">
-                  {foto && !loading ? (
+                  {data && !loading ? (
                     <div
                       className={`${
                         data[0]["images"].length !== 1 ? "flex" : "hidden"
