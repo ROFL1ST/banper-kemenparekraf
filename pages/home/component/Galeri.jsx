@@ -45,7 +45,7 @@ export default function Galeri() {
     videoList();
   }, []);
 
-  console.log(images);
+  console.log(images.length);
 
   return (
     <>
