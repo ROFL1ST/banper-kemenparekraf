@@ -7,6 +7,7 @@ import { useEffect, useState, useRef, Fragment } from "react";
 import Section from "../components/section";
 import Feedback from "../components/feedback";
 import building from "../assets/building.png";
+import empty from "../assets/Empty-amico.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import Link from "next/link";
 import parse from "html-react-parser";
@@ -60,9 +61,9 @@ export default function Dashboard() {
   // juknis
 
   const juknisUrl =
-    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+    "https://banper.kemenparekraf.go.id/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const TemplateUrl =
-    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   useEffect(() => {
     document.title = "Home";
     getData();
