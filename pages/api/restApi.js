@@ -1,6 +1,8 @@
 import * as axios from "axios";
-const BASE_URL = "http://128.199.242.242/api/";
-const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
+//const BASE_URL = "http://128.199.242.242/api/";
+//const DOWNLOAD_URL = "http://128.199.242.242/dashboard/";
+const BASE_URL = "https://banper.kemenparekraf.go.id/api/";
+const DOWNLOAD_URL = "https://banper.kemenparekraf.go.id/dashboard/";
 export function getPropose(path_url, token) {
   return new Promise((resolve, reject) => {
     var config = {
