@@ -116,10 +116,7 @@ export default function Dashboard() {
         <div className={`xl:px-20 lg:px-20 px-5 mt-10`}>
           <Section text={"mekanisme pendaftaran"} />
           <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-            voluptatibus rem illo accusamus, earum adipisci aliquam dolorem
-            dolor assumenda aperiam sed vel molestiae eos quibusdam explicabo
-            consequatur libero. Necessitatibus, consequatur?
+          Pembangunan Kepariwisataan dan Ekonomi Kreatif dijalankan sesuai dengan Arah Kebijakan yang tertuang dalam Sembilan Agenda Prioritas (NAWACITA) Presiden, yaitu yang pertama Membangun Indonesia dari pinggiran dengan memperkuat daerah dan desa dalam kerangka Negara Kesatuan, dan yang kedua Mewujudkan kemandirian ekonomi dengan menggerakkan sektor-sektor strategis ekonomi domestik.
           </p>
           <Section text={"Berita"} />
           <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
