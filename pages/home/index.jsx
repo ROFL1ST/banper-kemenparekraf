@@ -65,10 +65,13 @@ export default function Dashboard() {
   const TemplateUrl =
     "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2022.zip";
   useEffect(() => {
-    document.title = "Home";
     getData();
     getFaq();
   }, []);
+
+  useEffect(() => {
+    document.title = "Home";
+  });
   const [open, setOpen] = useState(false);
 
   return (
