@@ -116,37 +116,42 @@ export default function Dashboard() {
         <div className={`xl:px-20 lg:px-20 px-5 mt-10`}>
           <Section text={"mekanisme pendaftaran"} />
           <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
-          Pembangunan Kepariwisataan dan Ekonomi Kreatif dijalankan sesuai dengan Arah Kebijakan yang tertuang dalam Sembilan Agenda Prioritas (NAWACITA) Presiden, yaitu yang pertama Membangun Indonesia dari pinggiran dengan memperkuat daerah dan desa dalam kerangka Negara Kesatuan, dan yang kedua Mewujudkan kemandirian ekonomi dengan menggerakkan sektor-sektor strategis ekonomi domestik.
+            Pembangunan Kepariwisataan dan Ekonomi Kreatif dijalankan sesuai
+            dengan Arah Kebijakan yang tertuang dalam Sembilan Agenda Prioritas
+            (NAWACITA) Presiden, yaitu yang pertama Membangun Indonesia dari
+            pinggiran dengan memperkuat daerah dan desa dalam kerangka Negara
+            Kesatuan, dan yang kedua Mewujudkan kemandirian ekonomi dengan
+            menggerakkan sektor-sektor strategis ekonomi domestik.
           </p>
           <Section text={"Berita"} />
-          <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
-            {data.berita.length != 0 ? (
-              data.loading ? (
-                <>
-                  <CardBeritaLoading />
-                  <CardBeritaLoading />
-                </>
-              ) : data.berita.length != 0 ? (
-                data.berita.map((i, key) => (
-                  <div key={key}>
-                    <div className="md:flex hidden">
-                      <CardBerita data={i} />
-                    </div>
-                    <div className="flex md:hidden">
-                      <CardBeritaMobile data={i} />
-                    </div>
-                  </div>
-                ))
-              ) : (
-                <></>
-              )
-            ) : (
-              <div className="flex relative flex-col justify-center items-center mb-10 mt-5">
-                <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
-                <p className="font-bold">Berita Tidak Tersedia</p>
+
+          {data.loading ? (
+            <>
+              <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
+                <CardBeritaLoading />
+                <CardBeritaLoading />
               </div>
-            )}
-          </div>
+            </>
+          ) : data.berita.length != 0 ? (
+            <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
+              {data.berita.map((i, key) => (
+                <div key={key}>
+                  <div className="md:flex hidden">
+                    <CardBerita data={i} />
+                  </div>
+                  <div className="flex md:hidden">
+                    <CardBeritaMobile data={i} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex relative flex-col justify-center items-center mb-10 mt-5">
+              <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
+              <p className="font-bold">Berita Tidak Tersedia</p>
+            </div>
+          )}
+
           <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
             <Link href={"/berita?type=berita&sort=terbaru"}>see more</Link>
           </div>
