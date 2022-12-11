@@ -133,18 +133,29 @@ export default function Dashboard() {
               </div>
             </>
           ) : data.berita.length != 0 ? (
-            <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
-              {data.berita.map((i, key) => (
-                <div key={key}>
-                  <div className="md:flex hidden">
-                    <CardBerita data={i} />
+            <>
+              <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
+                {data.berita.map((i, key) => (
+                  <div key={key}>
+                    <div className="md:flex hidden">
+                      <CardBerita data={i} />
+                    </div>
+                    <div className="flex md:hidden">
+                      <CardBeritaMobile data={i} />
+                    </div>
                   </div>
-                  <div className="flex md:hidden">
-                    <CardBeritaMobile data={i} />
-                  </div>
+                ))}
+              </div>
+              {data.berita.length < 2 ? (
+                <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
+                  <Link href={"/berita?type=berita&sort=terbaru"}>
+                    see more
+                  </Link>
                 </div>
-              ))}
-            </div>
+              ) : (
+                <></>
+              )}
+            </>
           ) : (
             <div className="flex relative flex-col justify-center items-center mb-10 mt-5">
               <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
@@ -152,9 +163,6 @@ export default function Dashboard() {
             </div>
           )}
 
-          <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
-            <Link href={"/berita?type=berita&sort=terbaru"}>see more</Link>
-          </div>
           <Section text={"Galeri"} />
           <Galeri />
         </div>
