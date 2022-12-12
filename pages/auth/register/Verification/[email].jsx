@@ -19,7 +19,7 @@ export default function EmailVer() {
       // alert("You need to Log In first!")
 
       return Router.push("/home");
-    } 
+    }
   });
   //   const {
   //     register,
@@ -27,6 +27,8 @@ export default function EmailVer() {
   //     formState: { errors },
   //   } = useForm();
   const [code, setcode] = useState(new Array(6).fill(""));
+
+ 
   const handleChange = (element, index) => {
     setcode([...code.map((d, indx) => (indx === index ? element.value : d))]);
 
@@ -141,6 +143,7 @@ export default function EmailVer() {
                   className="2xl:h-14  lg:w-16 lg:h-16 sm:h-10 h-9 2xl:w-14 sm:w-9 w-8 2xl:m-3 lg:m-3 m-2 font-semibold lg:text-2xl text-base text-center lg:rounded-xl rounded-lg border-2 border-[#627AD1]"
                   placeholder="__"
                   onChange={(e) => handleChange(e.target, index)}
+                  onKeyDown={(e) => e.key}
                   onFocus={(e) => e.target.select}
                   autoFocus={index === 0} // add this line
                 />
