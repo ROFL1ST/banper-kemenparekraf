@@ -43,7 +43,7 @@ export default function Login() {
     if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
       // alert("You need to Log In first!")
 
-      Router.push("/home");
+      Router.push("/proposal");
     }
   });
   const [open, setOpen] = useState(false);
