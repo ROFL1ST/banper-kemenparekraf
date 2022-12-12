@@ -134,7 +134,7 @@ export default function EmailVer() {
                   type="text"
                   value={i}
                   onPaste={onPaste}
-                  className="2xl:h-14  lg:w-16 h-16 2xl:w-14 w-14 2xl:m-3 lg:m-3 m-2 font-semibold lg:text-2xl text-xl text-center lg:rounded-xl rounded-lg border-2 border-[#627AD1]"
+                  className="2xl:h-14  lg:w-16 lg:h-16 sm:h-10 h-9 2xl:w-14 sm:w-8 w-6 2xl:m-3 lg:m-3 m-2 font-semibold lg:text-2xl text-base text-center lg:rounded-xl rounded-lg border-2 border-[#627AD1]"
                   placeholder="__"
                   onChange={(e) => handleChange(e.target, index)}
                   onFocus={(e) => e.target.select}
@@ -148,7 +148,7 @@ export default function EmailVer() {
                 setLoad(true);
               }}
               type={"submit"}
-              className="text-white bg-[#142b51] border-0 py-2 px-6 mt-4 focus:outline-none hover:bg-blue-900  text-lg flex justify-center w-1/2 mx-auto rounded-xl"
+              className="text-white bg-[#142b51] border-0 py-2 px-6 mt-4 focus:outline-none hover:bg-blue-900  text-lg flex justify-center md:w-1/2 w-full mx-auto rounded-xl"
             >
               {load ? <Loading /> : nice ? "Success" : "submit"}
             </button>
