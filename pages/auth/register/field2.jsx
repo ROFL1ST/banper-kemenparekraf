@@ -262,7 +262,7 @@ export default function Field2() {
                 </div>
               </div>
               <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                <div className="relative flex-col w-1/2">
+                <div className="relative flex-col lg:w-1/2 w-full">
                   <label className="leading-7 text-sm text-gray-600">
                     *Apakah Anda Pernah Menerima Banper Sebelum nya?
                   </label>
