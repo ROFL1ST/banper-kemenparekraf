@@ -20,6 +20,11 @@ export default function Field2() {
     document.title = "Formulir";
     if (kode == undefined) {
       Router.push("/home");
+    } else if (
+      localStorage.getItem("token") ||
+      sessionStorage.getItem("token")
+    ) {
+      Router.push("/home");
     } else {
       return;
     }

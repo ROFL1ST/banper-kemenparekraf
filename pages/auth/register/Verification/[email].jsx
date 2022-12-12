@@ -15,6 +15,11 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function EmailVer() {
   useEffect(() => {
     document.title = "Verifikasi";
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      return Router.push("/home");
+    } 
   });
   //   const {
   //     register,
@@ -31,7 +36,6 @@ export default function EmailVer() {
       element.nextSibling.focus();
     }
   };
-
 
   function onPaste(event) {
     const pasted = event.clipboardData.getData("text/plain");
@@ -74,7 +78,7 @@ export default function EmailVer() {
       console.log(error);
       setLoad(false);
       setWrong(true);
-      setError("Kesalahan Jaringan")
+      setError("Kesalahan Jaringan");
     }
   };
 

@@ -18,6 +18,16 @@ export default function Field3() {
   const { kode } = query;
   React.useEffect(() => {
     document.title = "Formulir";
+    if (kode == undefined) {
+      Router.push("/home");
+    } else if (
+      localStorage.getItem("token") ||
+      sessionStorage.getItem("token")
+    ) {
+      Router.push("/home");
+    } else {
+      return;
+    }
   });
   // const [state, setState] = React.useState({});
 
@@ -567,7 +577,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${
  py-2.5 text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat
  border border-solid  rounded  transition ease-in-out   m-0  
 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ${
-            pendukung3 != ""   && klasifikasi3 == ""
+            pendukung3 != "" && klasifikasi3 == ""
               ? "border-red-500"
               : "border-gray-300"
           }`}

@@ -40,6 +40,11 @@ export default function Login() {
   1;
   useEffect(() => {
     document.title = "Login";
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      Router.push("/home");
+    }
   });
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);

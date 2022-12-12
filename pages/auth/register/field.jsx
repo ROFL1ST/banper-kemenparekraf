@@ -40,6 +40,11 @@ export default function Field1() {
   //
   React.useEffect(() => {
     document.title = "Daftar";
+    if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
+      // alert("You need to Log In first!")
+
+      Router.push("/home");
+    }
   });
   const {
     getValues,
@@ -168,12 +173,16 @@ export default function Field1() {
       </div>
       {/* <Footer/> */}
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error" sx={{ width: "100%", fontSize: "larger" }}>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          sx={{ width: "100%", fontSize: "larger" }}
+        >
           {erros ==
           "Email Anda sudah terdaftar. Kami telah melakukan pembaharuan sistem, silahkan ganti password Anda" ? (
             <p>
-              Email Anda sudah terdaftar. Kami telah melakukan pembaharuan sistem,
-              silahkan ganti{" "}
+              Email Anda sudah terdaftar. Kami telah melakukan pembaharuan
+              sistem, silahkan ganti{" "}
               <span
                 className="underline cursor-pointer"
                 onClick={() => {
