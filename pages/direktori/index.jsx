@@ -259,6 +259,7 @@ export default function Direktori() {
                           state.kota_id,
                           setLimit(limit + 12)
                         );
+                        setLoad(true);
                       }}
                     >
                       More
@@ -307,7 +308,7 @@ export default function Direktori() {
         </section>
       </div>
       <Footer />
-      <Feedback/>
+      <Feedback />
 
       <Sidebar sort={sort} setSort={setSort} getData={getData} />
     </>
