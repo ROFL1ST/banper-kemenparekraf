@@ -78,6 +78,7 @@ export default function Video() {
               modules={{ Pagination }}
               scrollbar={{ draggable: true }}
               breakpoints={{
+                
                 640: {
                   slidesPerView: 1,
                   spaceBetween: 10,

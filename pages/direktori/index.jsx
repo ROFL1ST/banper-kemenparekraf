@@ -55,7 +55,7 @@ export default function Direktori() {
           provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
         }&${
           kota_id !== undefined && `kotaId=${kota_id}`
-        } &orderBy=order by u.NamaKomunitas ${
+        }&orderBy=order by u.NamaKomunitas ${
           selectedChoice.name === "Sortir A-Z" ? "asc" : "desc"
         }, Trcount ${selectedChoice2.name == "Terbanyak" ? "asc" : "desc"}`
       ).then((result) => {
@@ -89,7 +89,7 @@ export default function Direktori() {
             onClick={() => {
               setSort(true);
             }}
-            className="flex border border-gray-400 rounded-xl px-5 py-3 gap-x-2"
+            className="flex border border-blue-900 rounded-xl px-5 py-3 gap-x-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -97,7 +97,7 @@ export default function Direktori() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6 text-gray-400"
+              className="w-6 h-6 text-blue-900"
             >
               <path
                 strokeLinecap="round"
@@ -105,7 +105,7 @@ export default function Direktori() {
                 d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"
               />
             </svg>
-            <p className="text-md text-gray-400">Filter</p>
+            <p className="text-md text-blue-900">Filter</p>
           </div>
           <div>
             <div className="flex gap-x-2">
