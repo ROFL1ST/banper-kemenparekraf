@@ -18,7 +18,7 @@ export default function EmailVer() {
     if (localStorage.getItem("token") || sessionStorage.getItem("token")) {
       // alert("You need to Log In first!")
 
-      return Router.push("/home");
+      Router.push("/home");
     }
   });
   //   const {
@@ -34,7 +34,7 @@ export default function EmailVer() {
     setState(event.key);
   };
   const [code, setcode] = useState(new Array(6).fill(""));
-  console.log(state)
+  console.log(state);
 
   const handleChange = (element, index) => {
     setcode([...code.map((d, indx) => (indx === index ? element.value : d))]);
