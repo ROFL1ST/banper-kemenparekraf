@@ -168,11 +168,9 @@ function PercentBox({ percent, have, all }) {
         <h1 className="lg:pb-10 pb-5 lg:text-base text-sm">
           {have} dari {all} Syarat Terselesaikan
         </h1>
-        <div className="flex flex-col">
-          <div className="flex lg:justify-center justify-between lg:gap-x-56 gap-x-0 lg:text-base sm:text-sm">
-            <h1>0%</h1>
-            <h1>50%</h1>
-            <h1>100%</h1>
+        <div className="flex flex-col lg:w-3/5 w-full">
+          <div className="flex justify-end ">
+            <h1>{percent}%</h1>
           </div>
           <Progress_bar bgcolor={"#142b51"} height={15} progress={percent} />
         </div>
