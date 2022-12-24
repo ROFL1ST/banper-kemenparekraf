@@ -206,11 +206,13 @@ const Progress_bar = ({ bgcolor, progress, height }) => {
   };
 
   return (
-    <div style={Parentdiv}>
-      <div style={Childdiv}>
-        <span style={progresstext}></span>
+    <>
+      <div style={Parentdiv}>
+        <div style={Childdiv}>
+          <span style={progresstext}></span>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 function CardPengusul() {

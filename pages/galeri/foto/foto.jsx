@@ -159,7 +159,7 @@ function FotoCard({ data }) {
         }}
         className="lg:h-96 2xl:min-h-[30rem]  h-96 rounded-2xl w-full bg-cover bg-center shadow-2xl"
         style={{
-          backgroundImage: `url(${data.images[0]})`,
+          backgroundImage: `url(${data.images[0].images})`,
         }}
       >
         <div className="w-full h-full bg-black bg-opacity-25 px-5 py-5 rounded-2xl flex flex-col justify-end">
@@ -344,7 +344,7 @@ function CardModal({ img, tgl, summary, place }) {
           </h1>
 
           <p className="text-white lg:w-3/4 md:w-full sm:w-1/2 w-4/5  2xl:text-sm text-xs font-extralight">
-            {summary}
+            {summary.substring(0, 250)}
           </p>
         </div>
       </div>

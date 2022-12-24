@@ -131,9 +131,9 @@ function Foto({ i, foto }) {
       <div
         style={{ backgroundImage: `url(${i.images[0].images})` }}
         className={`${
-          foto === 0 && "col-span-2 row-span-2 h-[650px]"
+          foto === 0 && "col-span-2 row-span-2 max-h-[650px] min-h-[650px]"
         } bg-gray-300  w-full min-h-[310px] bg-cover bg-center object-contain ${
-          foto === 7 && "col-span-2 row-span-2 h-[650px] justify-end"
+          foto === 7 && "col-span-2 row-span-2 max-h-[650px] min-h-[650px]"
         }`}
       >
         <div
@@ -214,8 +214,8 @@ function Modal({ foto, open2, setOpen2, cancelButtonRef }) {
           </Transition.Child>
 
           <div className="fixed z-10 inset-0 overflow-y-auto">
-            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
-              <div className="cursor-pointer flex absolute xl:right-[19.5rem] lg:right-10 right-5 top-20 text-white">
+            <div className="flex items-end md:pt-32 md:pb-28 md:my-0 py-32 justify-center min-h-full p-4 text-center ">
+              <div className="cursor-pointer flex absolute xl:right-[19.5rem] lg:right-10 right-5 2xl:top-16 top-10 text-white">
                 <svg
                   onClick={() => {
                     setOpen2(false);
@@ -243,7 +243,7 @@ function Modal({ foto, open2, setOpen2, cancelButtonRef }) {
                 leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                 leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
               >
-                <Dialog.Panel className="my-auto relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all lg:w-4/5 w-full justify-center ">
+                <Dialog.Panel className=" relative flex lg:gap-x-20 lg:space-y-0 space-y-20  text-center overflow-hidden transform transition-all  justify-center ">
                   {foto && !loading ? (
                     <div
                       className={`${
@@ -263,10 +263,6 @@ function Modal({ foto, open2, setOpen2, cancelButtonRef }) {
                     centeredSlides={true}
                     slidesPerView={"auto"}
                     spaceBetween={30}
-                    pagination={{
-                      clickable: true,
-                    }}
-                    modules={[Pagination]}
                     onSwiper={(swiper) => {
                       swiperRef.current = swiper;
                     }}
@@ -326,7 +322,9 @@ function CardModal({ img, tgl, summary, place }) {
             {tgl} | {place}
           </h1>
 
-          <p className="text-white lg:w-3/4 lg:text-sm text-sm">{summary}</p>
+          <p className="text-white lg:w-3/4 lg:text-sm text-sm">
+            {summary.substring(0, 250)}
+          </p>
         </div>
       </div>
     </>
@@ -412,7 +410,6 @@ function Sidebar({ setSort, sort, getData, setImages }) {
                   type={"Subsector"}
                   show={true}
                   setImages={setImages}
-
                 />
               </div>
             </div>

@@ -77,7 +77,7 @@ export default function Galeri() {
           <GaleryLoading />
         </>
       )}
-      {images.length < 2 && videos.length < 2? (
+      {images.length < 2 && videos.length < 2 ? (
         <></>
       ) : (
         <div className="flex justify-center text-blue-700 underline mt-5 mb-10 text-sm">
@@ -95,10 +95,10 @@ function Foto({ data, foto }) {
   return (
     <>
       <div
-        style={{ backgroundImage: `url(${data.images[0]})` }}
+        style={{ backgroundImage: `url(${data.images[0].images})` }}
         className={`${
           foto === 0 && "col-span-2"
-        } bg-gray-300 xl:h-80 h-72 w-full bg-cover bg-center`}
+        } bg-gray-300 xl:h-80 h-72 lg:w-full bg-cover bg-center`}
       >
         <div
           onClick={() => {
