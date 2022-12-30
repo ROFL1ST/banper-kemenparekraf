@@ -172,6 +172,7 @@ function Subsektor({ data, menu, subsector, load, setSubsectorId }) {
 }
 
 function SubSubsektor({ data, menu2, setSubsectorId }) {
+  
   return (
     <>
       {/* <Transition
