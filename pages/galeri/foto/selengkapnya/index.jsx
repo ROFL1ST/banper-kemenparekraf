@@ -132,7 +132,7 @@ function Foto({ i, foto }) {
         style={{ backgroundImage: `url(${i.images[0].images})` }}
         className={`${
           foto === 0 && "col-span-2 row-span-2 max-h-[650px] min-h-[650px]"
-        } bg-gray-300  w-full min-h-[310px] bg-cover bg-center object-contain ${
+        } bg-gray-300  w-full lg:min-h-[650px] min-h-[310px] bg-cover bg-center object-contain ${
           foto === 7 && "col-span-2 row-span-2 max-h-[650px] min-h-[650px]"
         }`}
       >
