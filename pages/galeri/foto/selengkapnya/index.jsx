@@ -323,7 +323,7 @@ function CardModal({ img, tgl, summary, place }) {
           </h1>
 
           <p className="text-white lg:w-3/4 lg:text-sm text-sm">
-            {summary.substring(0, 250)}
+            {summary}
           </p>
         </div>
       </div>
