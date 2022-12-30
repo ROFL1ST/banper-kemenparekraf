@@ -88,11 +88,7 @@ export default function Dashboard() {
             </h1>
             <p className="mt-7 mb-3">
               Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan
-              Sarana Ruang Kreatif.
-            </p>
-            <p>
-              Pengajuan dan penerimaan proposal mulai tanggal 08 November sampai
-              dengan 08 Desember 2021 jam 23.59
+              Sarana Ruang Kreatif
             </p>
           </div>
         </div>
@@ -119,12 +115,10 @@ export default function Dashboard() {
         <div className={`xl:px-20 lg:px-20 px-5 mt-10`}>
           <Section text={"mekanisme pendaftaran"} />
           <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
-            Pembangunan Kepariwisataan dan Ekonomi Kreatif dijalankan sesuai
-            dengan Arah Kebijakan yang tertuang dalam Sembilan Agenda Prioritas
-            (NAWACITA) Presiden, yaitu yang pertama Membangun Indonesia dari
-            pinggiran dengan memperkuat daerah dan desa dalam kerangka Negara
-            Kesatuan, dan yang kedua Mewujudkan kemandirian ekonomi dengan
-            menggerakkan sektor-sektor strategis ekonomi domestik.
+            1. Mendaftar akun di situs https:// banper.kemenparekraf.go.id 2.
+            Mengunggah (upload) proposal ke situs 3. Mengikuti ketentuan sesuai
+            petunjuk teknis dan menggunakan template yang disediakan 4.
+            Mengirimkan proposal pada rentang waktu yang telah ditentukan
           </p>
           <Section text={"Berita"} />
 

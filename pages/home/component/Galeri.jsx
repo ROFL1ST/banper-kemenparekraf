@@ -295,10 +295,6 @@ function Modal({ foto, open, setOpen, cancelButtonRef }) {
                     centeredSlides={true}
                     slidesPerView={"auto"}
                     spaceBetween={30}
-                    pagination={{
-                      clickable: true,
-                    }}
-                    modules={[Pagination]}
                     onSwiper={(swiper) => {
                       swiperRef.current = swiper;
                     }}

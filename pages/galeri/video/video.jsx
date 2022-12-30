@@ -51,8 +51,9 @@ export default function Video() {
             Video
           </h1>
           <p className="text-white text-center my-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-            repudiandae officia veritatis dignissimos fugit nihil error
+            Video kegiatan pelaku ekonomi kreatif di seluruh Indonesia, baik
+            yang sudah pernah menerima Banper Infrastruktur Ekraf ataupun yang
+            belum.
           </p>
           <div className="flex justify-center space-x-3 mb-7">
             <button onClick={() => swiperRef2.current.slidePrev()}>
@@ -78,7 +79,6 @@ export default function Video() {
               modules={{ Pagination }}
               scrollbar={{ draggable: true }}
               breakpoints={{
-                
                 640: {
                   slidesPerView: 1,
                   spaceBetween: 10,
@@ -142,7 +142,6 @@ function CardVideo({ data }) {
     // const url = `http://128.199.242.242/api/video/${data.id}`;
     try {
       let respond = await PutViews(`video/${data.id}`).then((result) => result);
-     
     } catch (error) {
       console.log(error);
     }
@@ -165,7 +164,6 @@ function CardVideo({ data }) {
   useEffect(() => {
     detail();
   }, []);
- 
 
   // hover
   const [isHovering, setIsHovering] = useState(false);

@@ -52,8 +52,9 @@ export default function Foto() {
               Foto
             </h1>
             <p className="text-white text-center my-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-              repudiandae officia veritatis dignissimos fugit nihil error
+              Foto kegiatan pelaku ekonomi kreatif di seluruh Indonesia, baik
+              yang sudah pernah menerima Banper Infrastruktur Ekraf ataupun yang
+              belum.
             </p>
           </div>
           <Swiper
@@ -84,8 +85,9 @@ export default function Foto() {
                 Foto
               </h1>
               <p className="text-white my-3 lg:text-sm 2xl:text-lg 2xl:w-3/4">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                necessitatibus? Quidem doloribus ex iure.
+                Foto kegiatan pelaku ekonomi kreatif di seluruh Indonesia, baik
+                yang sudah pernah menerima Banper Infrastruktur Ekraf ataupun
+                yang belum.
               </p>
               <Link href={"/galeri/foto/selengkapnya"}>
                 <button className="bg-[#2e619c] bg-opacity-90 text-white px-5 py-2 2xl:py-3 rounded-full lg:text-sm 2xl:text-base font-semibold mt-10">
@@ -280,8 +282,6 @@ function Modal({ foto, open, setOpen, cancelButtonRef }) {
                     centeredSlides={true}
                     slidesPerView={"auto"}
                     spaceBetween={30}
-                   
-                   
                     onSwiper={(swiper) => {
                       swiperRef.current = swiper;
                     }}
@@ -342,7 +342,7 @@ function CardModal({ img, tgl, summary, place }) {
           </h1>
 
           <p className="text-white lg:w-3/4 md:w-full sm:w-1/2 w-4/5  2xl:text-sm text-xs font-extralight">
-            {summary.substring(0, 250)}
+            {summary}
           </p>
         </div>
       </div>

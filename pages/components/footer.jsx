@@ -12,10 +12,11 @@ export default function Footer() {
         <div className="xl:w-1/4 lg:w-1/4  text-left">
           <h1 className="mb-5 font-bold">Tentang</h1>
           <p>
-            Presiden Joko Widodo mengatakan bahwa “Pembangunan Infrastruktur
-            bertujuan untuk menumbuhkan sentra-sentra ekonomi baru yang mampu
-            memberikan nilai tambah bagi daerah-daerah di seluruh penjuru tanah
-            air.{" "}
+            Program Bantuan Pemerintah (Banper) Infrastruktur Ekonomi Kreatif
+            merupakan fasilitasi ruang kreatif yang diberikan sebagai stimulan
+            kepada pelaku ekonomi kreatif dalam melakukan aktivitasnya, dalam
+            bentuk barang yang berkaitan dengan kebutuhan subsektor ekonomi
+            kreatif.
             <Link href={"/tentang"}>
               <span className="text-red-500 text-sm underline underline-offset-2 decoration-red-500 cursor-pointer">
                 Baca selengkapnya
@@ -27,13 +28,16 @@ export default function Footer() {
             Email : info@kotakreatif.id
           </p>
           <p className="text-gray-500 pt-5">
-              Berikan Feedback :{" "}
-              <a href="" onClick={() => {
-                window.open("mailto:banper@kemenparekraf.go.id")
-              }}>
-                banper@kemenparekraf.go.id
-              </a>
-            </p>
+            Berikan Feedback :{" "}
+            <a
+              href=""
+              onClick={() => {
+                window.open("mailto:banper@kemenparekraf.go.id");
+              }}
+            >
+              banper@kemenparekraf.go.id
+            </a>
+          </p>
         </div>
         <div className="text-left xl:w-1/4 lg:w-1/4 xl:mt-0 lg:mt-0 mt-10  mb-10">
           <h1 className="mb-5 font-bold">Hubungi Kami</h1>
@@ -42,7 +46,6 @@ export default function Footer() {
             Destinasi dan Infrastruktur Kementerian Pariwisata dan Ekonomi
             Kreatif / Badan Pariwisata dan Ekonomi Kreatif
           </p>
-          
         </div>
         <div className="flex xl:w-1/4 lg:w-1/4 w-1/2 justify-center gap-x-4 xl:my-0 lg:my-0 my-5  items-center">
           <img
