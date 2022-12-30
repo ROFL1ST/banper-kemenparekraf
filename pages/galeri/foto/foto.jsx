@@ -148,7 +148,6 @@ export default function Foto() {
 }
 
 function FotoCard({ data }) {
-  // console.log(data);
   const [open, setOpen] = useState(false);
   const cancelButtonRef = useRef(null);
   return (
@@ -163,7 +162,6 @@ function FotoCard({ data }) {
         }}
       >
         <div className="w-full h-full bg-black bg-opacity-25 px-5 py-5 rounded-2xl flex flex-col justify-end">
-          {" "}
           <h1 className="text-white font-semibold">{data.title}</h1>
         </div>
       </div>
