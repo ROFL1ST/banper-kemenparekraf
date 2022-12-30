@@ -32,9 +32,10 @@ export default function Tentang() {
     { id: 17, nama: "televisi dan radio" },
   ]);
   const juknisUrl =
-    "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+    "https://banper.kemenparekraf.go.id/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const TemplateUrl =
-    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+
   useEffect(() => {
     document.title = "Tentang";
   });
@@ -161,7 +162,6 @@ function Modal({ open, setOpen, cancelButtonRef }) {
 
     setCheck((current) => !current);
   };
-
 
   return (
     <>
