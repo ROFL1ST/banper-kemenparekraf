@@ -95,18 +95,10 @@ export default function MenuProvinsi({
   );
 }
 
-function Provinsi({
-  data,
-  menu,
-  getData,
-  setKotaId,
-  setProvinsiId,
-  setLoading,
-}) {
+function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
   const [menu2, setMenu2] = useState(false);
   const [kota, setKota] = useState([]);
   const [load, setLoad] = useState(true);
-
   const getKota = async () => {
     try {
       await getApi(`master/kota?ProvinsiID=${data.Id}`).then((val) => {
@@ -124,7 +116,7 @@ function Provinsi({
 
   return (
     <>
-      <Transition
+      {/* <Transition
         show={menu}
         as={Fragment}
         enter="transition-all ease-in duration-100"
@@ -134,67 +126,61 @@ function Provinsi({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95 -translate-y-1"
       >
-        <div className="flex flex-col space-y-2 space-x-3 ">
-          <div className={"cursor-pointer flex items-center space-x-1"}>
-            <input
-              type="checkbox"
-              onChange={(e) => {
-                if (e.target.checked) {
-                  setProvinsiId((val) => [...val, data.Id]);
-                  setMenu2(true);
-                  setLoading(true);
-                } else {
-                  setProvinsiId((prevState) =>
-                    prevState.filter((prevItem) => prevItem !== data.Id)
-                  );
-                  setMenu2(false);
-                  setLoading(true);
-                }
-              }}
-              defaultChecked={false}
-              required
-              className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
-            />
-            <div className="inline-flex items-center justify-between w-full">
-              <p>{data.NamaProvinsi}</p>
-              {menu2 ? (
-                <ChevronUpIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
-              ) : (
-                <ChevronDownIcon
-                  className="ml-2 -mr-1 h-5 w-5 "
-                  aria-hidden="true"
-                />
-              )}
-            </div>
-          </div>
-          {!load ? (
-            kota.map((i, key) => (
-              <Kota
-                getData={getData}
-                key={key}
-                data={i}
-                menu2={menu2}
-                setKotaId={setKotaId}
-                setLoading={setLoading}
+       
+      </Transition> */}
+      <div
+        className={`${menu ? "flex" : "hidden"} flex-col space-y-2 space-x-3 `}
+      >
+        <div className={"cursor-pointer flex items-center space-x-1"}>
+          <input
+            type="checkbox"
+            onChange={(e) => {
+              if (e.target.checked) {
+                setProvinsiId((val) => [...val, data.Id]);
+                setMenu2(true);
+              } else {
+                setProvinsiId((prevState) =>
+                  prevState.filter((prevItem) => prevItem !== data.Id)
+                );
+                setMenu2(false);
+              }
+            }}
+            defaultChecked={false}
+            required
+            className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
+          />
+          <div className="inline-flex items-center justify-between w-full">
+            <p>{data.NamaProvinsi}</p>
+            {menu2 ? (
+              <ChevronUpIcon
+                className="ml-2 -mr-1 h-5 w-5 "
+                aria-hidden="true"
               />
-            ))
-          ) : (
-            <></>
-          )}
+            ) : (
+              <ChevronDownIcon
+                className="ml-2 -mr-1 h-5 w-5 "
+                aria-hidden="true"
+              />
+            )}
+          </div>
         </div>
-      </Transition>
+        {!load ? (
+          kota.map((i, key) => (
+            <Kota key={key} data={i} menu2={menu2} setKotaId={setKotaId} />
+          ))
+        ) : (
+          <></>
+        )}
+      </div>
     </>
   );
 }
 
-function Kota({ data, menu2, setKotaId, setLoading }) {
+function Kota({ data, menu2: kota, setKotaId }) {
   return (
     <>
-      <Transition
-        show={menu2}
+      {/* <Transition
+        show={kota}
         as={Fragment}
         enter="transition-all ease-in duration-100"
         enterFrom="transform opacity-0 scale-95 translate-y-1"
@@ -203,31 +189,29 @@ function Kota({ data, menu2, setKotaId, setLoading }) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95 -translate-y-1"
       >
-        <div className="flex flex-col space-y-2 pl-3 ">
-          <div className={"cursor-pointer flex items-center space-x-1"}>
-            <input
-              type="checkbox"
-              defaultChecked={false}
-              onChange={(e) => {
-                if (e.target.checked) {
-                  setKotaId((val) => [...val, data.Id]);
-                  setLoading(true);
-                } else {
-                  setKotaId((prevState) =>
-                    prevState.filter((prevItem) => prevItem !== data.Id)
-                  );
-                  setLoading(true);
-                }
-              }}
-              required
-              className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
-            />
-            <div className="inline-flex items-center justify-between w-full">
-              <p>{data.NamaKota}</p>
-            </div>
+              </Transition> */}
+      <div className={` flex-col space-y-2 pl-3 ${kota ? "flex" : "hidden"}`}>
+        <div className={"cursor-pointer flex items-center space-x-1"}>
+          <input
+            type="checkbox"
+            defaultChecked={false}
+            onChange={(e) => {
+              if (e.target.checked) {
+                setKotaId((val) => [...val, data.Id]);
+              } else {
+                setKotaId((prevState) =>
+                  prevState.filter((prevItem) => prevItem !== data.Id)
+                );
+              }
+            }}
+            required
+            className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
+          />
+          <div className="inline-flex items-center justify-between w-full">
+            <p>{data.NamaKota}</p>
           </div>
         </div>
-      </Transition>
+      </div>
     </>
   );
 }

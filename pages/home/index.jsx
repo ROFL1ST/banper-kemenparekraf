@@ -114,14 +114,26 @@ export default function Dashboard() {
         )}
         <div className={`xl:px-20 lg:px-20 px-5 mt-10`}>
           <Section text={"mekanisme pendaftaran"} />
-          <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
+          {/* <p className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10">
             1. Mendaftar akun di situs https:// banper.kemenparekraf.go.id 2.
             Mengunggah (upload) proposal ke situs 3. Mengikuti ketentuan sesuai
             petunjuk teknis dan menggunakan template yang disediakan 4.
             Mengirimkan proposal pada rentang waktu yang telah ditentukan
-          </p>
+          </p> */}
+          <ul className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10 flex flex-col">
+            <li>
+              1. Mendaftar akun di situs https:// banper.kemenparekraf.go.id
+            </li>
+            <li>2. Mengunggah (upload) proposal ke situs</li>
+            <li>
+              3. Mengikuti ketentuan sesuai petunjuk teknis dan menggunakan
+              template yang disediakan
+            </li>
+            <li>
+              4. Mengirimkan proposal pada rentang waktu yang telah ditentukan
+            </li>
+          </ul>
           <Section text={"Berita"} />
-
           {data.loading ? (
             <>
               <div className="grid  lg:grid-cols-2  items-center xl:gap-x-5 lg:gap-x-5 xl:space-y-0 lg:space-y-5 space-y-5 mt-10 2xl:w-full  lg:w-full">
