@@ -45,7 +45,7 @@ export default function Tentang() {
         <div>
           <div className="relative lg:flex hidden bottom-24 mx-24">
             <div
-              className="w-full lg:h-72 2xl:h-96 rounded-2xl absolute shadow-md"
+              className="w-full lg:h-72 2xl:h-96 rounded-2xl absolute bg-cover shadow-md"
               style={{
                 backgroundImage:
                   "url(https://cdn.pixabay.com/photo/2016/12/08/21/21/skyscrapers-1893201_960_720.jpg)",
