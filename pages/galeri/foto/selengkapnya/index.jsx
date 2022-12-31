@@ -309,6 +309,7 @@ function Modal({ foto, open2, setOpen2, cancelButtonRef }) {
 }
 
 function CardModal({ img, tgl, summary, place }) {
+  console.log(summary.length);
   return (
     <>
       <div className="my-auto items-center flex flex-col justify-center">

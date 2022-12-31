@@ -120,19 +120,21 @@ export default function Dashboard() {
             petunjuk teknis dan menggunakan template yang disediakan 4.
             Mengirimkan proposal pada rentang waktu yang telah ditentukan
           </p> */}
-          <ul className="text-center xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10 flex flex-col">
-            <li>
-              1. Mendaftar akun di situs https:// banper.kemenparekraf.go.id
-            </li>
-            <li>2. Mengunggah (upload) proposal ke situs</li>
-            <li>
-              3. Mengikuti ketentuan sesuai petunjuk teknis dan menggunakan
-              template yang disediakan
-            </li>
-            <li>
-              4. Mengirimkan proposal pada rentang waktu yang telah ditentukan
-            </li>
-          </ul>
+          <div className="items-center flex justify-center">
+            <ul className="text-left  xl:px-24 lg:px-24 md:px-14 sm:px-12 px-5 lg:text-sm my-10 flex flex-col">
+              <li>
+                1. Mendaftar akun di situs https:// banper.kemenparekraf.go.id
+              </li>
+              <li>2. Mengunggah (upload) proposal ke situs</li>
+              <li>
+                3. Mengikuti ketentuan sesuai petunjuk teknis dan menggunakan
+                template yang disediakan
+              </li>
+              <li>
+                4. Mengirimkan proposal pada rentang waktu yang telah ditentukan
+              </li>
+            </ul>
+          </div>
           <Section text={"Berita"} />
           {data.loading ? (
             <>
