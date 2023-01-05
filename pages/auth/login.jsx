@@ -297,18 +297,16 @@ function Modal({ open, setOpen, cancelButtonRef }) {
                           as="h3"
                           className="text-lg md:text-sm leading-6 pb-3 font-medium text-gray-900"
                         >
-                          Terms Of Service
+                          Pengumuman
                         </Dialog.Title>
                         <div className="mt-2">
                           <p className="text-sm md:text-xs text-gray-500 justify-start text-start ">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Modi dignissimos dolor illum a recusandae
-                            soluta error architecto? Placeat architecto vel enim
-                            deleniti reprehenderit repudiandae, consequatur
-                            natus delectus odit sed, vero distinctio officiis
-                            necessitatibus. Corrupti, ut quo aperiam officia
-                            ullam enim corporis recusandae, ad culpa illum,
-                            tenetur maiores saepe consectetur exercitationem!
+                            sebelum mendaftar, kami sarankan anda untuk
+                            mempelajari petunjuk teknis dan templat proposal
+                            program ini. Dengan mencentang ceklis di bawah dan
+                            klik lanjutkan, maka petunjuk teknis dan templat
+                            proposal akan diunduh ke perangkat anda. setelahnya,
+                            anda akan langsung diarahkan menuju pendaftaran akun
                           </p>
                         </div>
                       </div>

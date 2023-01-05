@@ -408,22 +408,20 @@ function Modal({ open, setOpen, cancelButtonRef }) {
                   <div className="bg-white px-4 lg:px-1  pt-5 pb-4 ">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
-                        <Dialog.Title
+                      <Dialog.Title
                           as="h3"
                           className="text-lg md:text-sm leading-6 pb-3 font-medium text-gray-900"
                         >
-                          Terms Of Service
+                          Pengumuman
                         </Dialog.Title>
                         <div className="mt-2">
                           <p className="text-sm md:text-xs text-gray-500 justify-start text-start ">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Modi dignissimos dolor illum a recusandae
-                            soluta error architecto? Placeat architecto vel enim
-                            deleniti reprehenderit repudiandae, consequatur
-                            natus delectus odit sed, vero distinctio officiis
-                            necessitatibus. Corrupti, ut quo aperiam officia
-                            ullam enim corporis recusandae, ad culpa illum,
-                            tenetur maiores saepe consectetur exercitationem!
+                            sebelum mendaftar, kami sarankan anda untuk
+                            mempelajari petunjuk teknis dan templat proposal
+                            program ini. Dengan mencentang ceklis di bawah dan
+                            klik lanjutkan, maka petunjuk teknis dan templat
+                            proposal akan diunduh ke perangkat anda. setelahnya,
+                            anda akan langsung diarahkan menuju pendaftaran akun
                           </p>
                         </div>
                       </div>
