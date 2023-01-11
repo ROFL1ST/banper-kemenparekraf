@@ -16,7 +16,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import Galeri from "./component/Galeri";
 import Router, { useRouter } from "next/router";
-
+import FaqBackground from "../assets/faq.jpg";
 export default function Dashboard() {
   // token
   const [token, setToken] = useState();
@@ -203,13 +203,7 @@ export default function Dashboard() {
                   <></>
                 )}
               </div>
-              <div
-                className="xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[42rem] lg:h-[45rem] h-[29rem] bg-gray-100  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
-                style={{
-                  backgroundImage:
-                    "url(https://www.fitforworksg.com/wp-content/uploads/2021/07/pexels-ivan-samkov-4458554-scaled.jpg)",
-                }}
-              ></div>
+              <div className="faqBg xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[42rem] lg:h-[45rem] h-[29rem]  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
             </div>
             <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-20 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
               <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">
@@ -408,7 +402,7 @@ function Modal({ open, setOpen, cancelButtonRef }) {
                   <div className="bg-white px-4 lg:px-1  pt-5 pb-4 ">
                     <div className="sm:flex sm:items-start">
                       <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-center">
-                      <Dialog.Title
+                        <Dialog.Title
                           as="h3"
                           className="text-lg md:text-sm leading-6 pb-3 font-medium text-gray-900"
                         >
@@ -416,11 +410,11 @@ function Modal({ open, setOpen, cancelButtonRef }) {
                         </Dialog.Title>
                         <div className="mt-2">
                           <p className="text-sm md:text-xs text-gray-500 justify-start text-start ">
-                            sebelum mendaftar, kami sarankan anda untuk
+                            Sebelum mendaftar, kami sarankan anda untuk
                             mempelajari petunjuk teknis dan templat proposal
                             program ini. Dengan mencentang ceklis di bawah dan
                             klik lanjutkan, maka petunjuk teknis dan templat
-                            proposal akan diunduh ke perangkat anda. setelahnya,
+                            proposal akan diunduh ke perangkat anda. Setelahnya,
                             anda akan langsung diarahkan menuju pendaftaran akun
                           </p>
                         </div>

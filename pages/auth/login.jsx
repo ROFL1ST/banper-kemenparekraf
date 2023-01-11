@@ -301,11 +301,11 @@ function Modal({ open, setOpen, cancelButtonRef }) {
                         </Dialog.Title>
                         <div className="mt-2">
                           <p className="text-sm md:text-xs text-gray-500 justify-start text-start ">
-                            sebelum mendaftar, kami sarankan anda untuk
+                            Sebelum mendaftar, kami sarankan anda untuk
                             mempelajari petunjuk teknis dan templat proposal
                             program ini. Dengan mencentang ceklis di bawah dan
                             klik lanjutkan, maka petunjuk teknis dan templat
-                            proposal akan diunduh ke perangkat anda. setelahnya,
+                            proposal akan diunduh ke perangkat anda. Setelahnya,
                             anda akan langsung diarahkan menuju pendaftaran akun
                           </p>
                         </div>
