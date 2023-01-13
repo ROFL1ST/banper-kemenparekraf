@@ -149,7 +149,10 @@ function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
             required
             className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
           />
-          <div className="inline-flex items-center justify-between w-full">
+          <div
+            className="inline-flex items-center justify-between w-full"
+            onClick={() => setMenu2(!menu2)}
+          >
             <p>{data.NamaProvinsi}</p>
             {menu2 ? (
               <ChevronUpIcon
