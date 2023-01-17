@@ -25,19 +25,9 @@ export default function Footer() {
           </p>
           <p className="text-gray-500 pt-10">
             Gedung Sapta Pesona Jalan Medan Merdeka Barat No.17 Jakarta 10110
-            Email : info@kotakreatif.id
+            Email : banper@kemenparekraf.go.id
           </p>
-          <p className="text-gray-500 pt-5">
-            Berikan Feedback :{" "}
-            <a
-              href=""
-              onClick={() => {
-                window.open("mailto:banper@kemenparekraf.go.id");
-              }}
-            >
-              banper@kemenparekraf.go.id
-            </a>
-          </p>
+          
         </div>
         <div className="text-left xl:w-1/4 lg:w-1/4 xl:mt-0 lg:mt-0 mt-10  mb-10">
           <h1 className="mb-5 font-bold">Hubungi Kami</h1>
