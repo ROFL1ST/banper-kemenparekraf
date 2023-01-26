@@ -176,9 +176,9 @@ function CardVideo({ data }) {
           style={{ backgroundImage: `url(${data.thumbnail})` }}
         >
           <div
-            className={` rounded-lg   bg-black xl:p-28 md:p-20 sm:p-36 p-20   ${
+            className={` rounded-lg   bg-black xl:p-28 md:p-20 sm:p-36 p-20 cursor-pointer  ${
               isHovering
-                ? "hover:bg-gradient-to-t hover:from-black bg-black bg-opacity-25 transition ease-in-out hover:-translate-y-0.5"
+                ? "hover:bg-gradient-to-t hover:from-black bg-black bg-opacity-25 transition ease-in-out "
                 : "bg-black bg-opacity-25 transition ease-in-out "
             }`}
           >
@@ -222,7 +222,7 @@ function CardVideo({ data }) {
                         </div>
                       </>
                     )}
-                    <p className="text-blue-300">video</p>
+                    {/* <p className="text-blue-300">video</p> */}
                   </div>
                 </Transition.Child>
               </Transition>
@@ -239,7 +239,7 @@ function CardVideo({ data }) {
                   </div>
                 </>
               )}
-              <p className="text-blue-300">video</p>
+              {/* <p className="text-blue-300">video</p> */}
             </div>
           </div>
         </div>

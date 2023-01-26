@@ -12,9 +12,13 @@ import parse from "html-react-parser";
 export default function Detail() {
   const loadingLength = [1, 2, 3, 4, 5];
   const [nama, setNama] = React.useState("");
-
+  console.log(nama);
   React.useEffect(() => {
-    document.title = nama ?? "Video";
+    if (nama != "") {
+      document.title = nama;
+    } else {
+      document.title = "Video";
+    }
   });
   var router = useRouter();
 
