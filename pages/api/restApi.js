@@ -1,6 +1,6 @@
 import * as axios from "axios";
 const DOWNLOAD_URL = "https://banper.kemenparekraf.go.id/dashboard/";
-//const BASE_URL = "http://128.199.242.242/api/";
+// const BASE_URL = "http://128.199.242.242/api/";
 const BASE_URL = "https://banper.kemenparekraf.go.id/api/";
 
 export function getPropose(path_url, token) {

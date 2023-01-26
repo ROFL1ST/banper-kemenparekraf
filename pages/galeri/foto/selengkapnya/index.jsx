@@ -398,7 +398,7 @@ function Sidebar({ setSort, sort, getData, setImages }) {
               show={false}
               handleFilters={(filters) => handleFilters(filters, "")}
             />
-            <MenuSubsector getData={getData} type={"Subsector"} show={true} />
+            <MenuSubsector getData={getData} type={"Subsektor"} show={true} />
           </div>
         </div>
         {/* Filter */}

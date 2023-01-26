@@ -120,7 +120,7 @@ export default function Berita() {
             />
             <MenuSubsector
               getData={getData}
-              type={"Subsector"}
+              type={"Subsektor"}
               show={true}
               setLoading={setLoading}
             />
@@ -498,7 +498,7 @@ function Sidebar({ setSide, side, getData }) {
               show={false}
               handleFilters={(filters) => handleFilters(filters, "")}
             />
-            <MenuSubsector getData={getData} type={"Subsector"} show={true} />
+            <MenuSubsector getData={getData} type={"Subsektor"} show={true} />
           </div>
         </div>
         {/* Filter */}

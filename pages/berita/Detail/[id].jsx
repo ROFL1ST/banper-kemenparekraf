@@ -15,7 +15,11 @@ import Link from "next/link";
 export default function DetailPage() {
   const [loading, setLoading] = React.useState(true);
   const [items, setItem] = React.useState([]);
-  const [detail, setDetail] = React.useState({ data: {}, loading2: true });
+  const [detail, setDetail] = React.useState({
+    data: {},
+    loading2: true,
+    noData: false,
+  });
   var router = useRouter();
 
   const { id } = router.query;
@@ -24,9 +28,12 @@ export default function DetailPage() {
     try {
       let respond = await getApi(`news/${id}`).then((result) => result);
       setDetail((s) => ({ ...s, data: respond.data.data[0], loading2: false }));
+      if (respond.data.display_message != undefined) {
+        setDetail({ ...s, loading2: false });
+      }
     } catch (error) {
       // setLoading(false);
-      setDetail((s) => ({ ...s, loading2: false }));
+      setDetail((s) => ({ ...s, loading2: false}));
       console.log(error);
     }
   };
@@ -39,7 +46,7 @@ export default function DetailPage() {
       console.log(error);
     }
   };
-  const { data, loading2 } = detail;
+  const { data, loading2, noData } = detail;
 
   React.useEffect(() => {
     document.title = data?.Judul ?? "Detail";
@@ -65,138 +72,150 @@ export default function DetailPage() {
     const shuffle = (arr) => [...arr].sort(() => Math.random() - 0.5);
     setRandom(shuffle(items));
     setLoading(false);
-
-  
   }, [items]);
 
   return (
     <>
       <Navbar />
       <div className="items-center flex h-full flex-col pb-10 pt-32 2xl:w-2/3 lg:w-11/12 mx-auto">
-        <Banner data={data} loading2={loading2} />
-        {/* Content */}
-        <div className="relative pt-10 lg:pt-16 flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
-          <div className="content-left xl:w-11/12 lg:w-11/12 flex flex-col">
-            {/* detail text */}
-            <div className="xl:w-11/12 lg:w-11/12 w-full text-base pb-10">
-              {/* {reactElement} */}
-              {data && !loading2 ? (
-                <Isi loading={loading2} data={data.isi}></Isi>
-              ) : (
-                <div className="space-y-2  animate-pulse">
-                  <div className="text-xs font-bold h-4  bg-gray-300 rounded-full"></div>
-                  <div className="text-xs font-bold h-4 w-3/4 bg-gray-300 rounded-full"></div>
-                  <div className="text-xs font-bold h-4  bg-gray-300 rounded-full"></div>
-                  <div className="text-xs font-bold h-4 w-1/4 bg-gray-300 rounded-full"></div>
+        {!noData ? (
+          <>
+            <Banner data={data} loading2={loading2} />
+            {/* Content */}
+            <div className="relative pt-10 lg:pt-16 flex xl:justify-between lg:justify-between justify-center lg:w-full md:w-5/6 w-4/5 ">
+              <div className="content-left xl:w-11/12 lg:w-11/12 flex flex-col">
+                {/* detail text */}
+                <div className="xl:w-11/12 lg:w-11/12 w-full text-base pb-10">
+                  {/* {reactElement} */}
+                  {data && !loading2 ? (
+                    <Isi loading={loading2} data={data.isi}></Isi>
+                  ) : (
+                    <div className="space-y-2  animate-pulse">
+                      <div className="text-xs font-bold h-4  bg-gray-300 rounded-full"></div>
+                      <div className="text-xs font-bold h-4 w-3/4 bg-gray-300 rounded-full"></div>
+                      <div className="text-xs font-bold h-4  bg-gray-300 rounded-full"></div>
+                      <div className="text-xs font-bold h-4 w-1/4 bg-gray-300 rounded-full"></div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
-            {/* detail text */}
-          </div>
-          <div className="content-right w-1/4 xl:flex lg:flex hidden flex-col ">
-            <div className="space-y-5">
-              {loading ? (
-                <>
-                  <Small_Card_Loading />
-                  <Small_Card_Loading />
-                  <Small_Card_Loading />
-                </>
-              ) : random.length != 0 ? (
-                random
-                  .filter((random) => random.Id != id)
-                  .slice(0, 3)
-                  .map((i, key) => (
-                    <div
-                      onClick={() => {
-                        // getData();
-                        setDetail((s) => ({ ...s, loading2: true }));
-
-                     
-                      }}
-                      key={key}
-                    >
-                      <News_small_card data={i} key={key}></News_small_card>
-                    </div>
-                  ))
-              ) : (
-                <></>
-              )}
-            </div>
-          </div>
-        </div>
-        {/* Content */}
-        {/* bottom content */}
-        <div className="flex flex-col justify-center pt-20 items-center mx-auto lg:w-full w-4/5">
-          <h1 className="font-bold text-blue-900 text-3xl underline underline-offset-8 decoration-yellow-500">
-            Berita Terkait
-          </h1>
-
-          {!loading2 && data ? (
-            <div
-              className={`pt-16   pb-16 w-full ${
-                items
-                  .filter((items) => items.Id != id)
-                  .filter((items) => items.subsektorId == data.subsektorId)
-                  .length != 0
-                  ? "grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4"
-                  : ""
-              }`}
-            >
-              {!loading2 && data ? (
-                items
-                  .filter((items) => items.Id != id)
-                  .filter((items) => items.subsektorId == data.subsektorId)
-                  .length != 0 ? (
-                  items
-                    .filter((items) => items.Id != id)
-                    .filter((items) => items.subsektorId == data.subsektorId)
-                    .slice(0, 4)
-                    .map((i, key) => (
-                      <div
-                        onClick={() => {
-                          // getData();
-                          setDetail((s) => ({ ...s, loading2: true }));
-
-                      
-                        }}
-                        key={key}
-                      >
-                        <Card data={i} />
-                      </div>
-                    ))
-                ) : (
-                  <>
-                    <div className=" relative justify-center mx-auto items-center flex flex-col mt-10 pb-20">
-                      <img
-                        src={empty.src}
-                        className="lg:h-96 h-72 w-auto"
-                        alt=""
-                      />
-                      <p className="font-bold">Berita Terkait Tidak Tersedia</p>
-                    </div>
-                  </>
-                )
-              ) : (
-                <>
-                  <DetailCardLoading />
-                  <DetailCardLoading />
-                  <DetailCardLoading />
-                  <DetailCardLoading />
-                </>
-              )}
-            </div>
-          ) : (
-            <>
-              <div className="grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pt-16   pb-16 w-full">
-                <DetailCardLoading />
-                <DetailCardLoading />
-                <DetailCardLoading />
-                <DetailCardLoading />
+                {/* detail text */}
               </div>
-            </>
-          )}
-        </div>
-        {/* bottom content */}
+              <div className="content-right w-1/4 xl:flex lg:flex hidden flex-col ">
+                <div className="space-y-5">
+                  {loading ? (
+                    <>
+                      <Small_Card_Loading />
+                      <Small_Card_Loading />
+                      <Small_Card_Loading />
+                    </>
+                  ) : random.length != 0 ? (
+                    random
+                      .filter((random) => random.Id != id)
+                      .slice(0, 3)
+                      .map((i, key) => (
+                        <div
+                          onClick={() => {
+                            // getData();
+                            setDetail((s) => ({ ...s, loading2: true }));
+                          }}
+                          key={key}
+                        >
+                          <News_small_card data={i} key={key}></News_small_card>
+                        </div>
+                      ))
+                  ) : (
+                    <></>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/* Content */}
+            {/* bottom content */}
+            <div className="flex flex-col justify-center pt-20 items-center mx-auto lg:w-full w-4/5">
+              <h1 className="font-bold text-blue-900 text-3xl underline underline-offset-8 decoration-yellow-500">
+                Berita Terkait
+              </h1>
+
+              {!loading2 && data ? (
+                <div
+                  className={`pt-16   pb-16 w-full ${
+                    items
+                      .filter((items) => items.Id != id)
+                      .filter((items) => items.subsektorId == data.subsektorId)
+                      .length != 0
+                      ? "grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4"
+                      : ""
+                  }`}
+                >
+                  {!loading2 && data ? (
+                    items
+                      .filter((items) => items.Id != id)
+                      .filter((items) => items.subsektorId == data.subsektorId)
+                      .length != 0 ? (
+                      items
+                        .filter((items) => items.Id != id)
+                        .filter(
+                          (items) => items.subsektorId == data.subsektorId
+                        )
+                        .slice(0, 4)
+                        .map((i, key) => (
+                          <div
+                            onClick={() => {
+                              // getData();
+                              setDetail((s) => ({ ...s, loading2: true }));
+                            }}
+                            key={key}
+                          >
+                            <Card data={i} />
+                          </div>
+                        ))
+                    ) : (
+                      <>
+                        <div className=" relative justify-center mx-auto items-center flex flex-col mt-10 pb-20">
+                          <img
+                            src={empty.src}
+                            className="lg:h-96 h-72 w-auto"
+                            alt=""
+                          />
+                          <p className="font-bold">
+                            Berita Terkait Tidak Tersedia
+                          </p>
+                        </div>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <DetailCardLoading />
+                      <DetailCardLoading />
+                      <DetailCardLoading />
+                      <DetailCardLoading />
+                    </>
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div className="grid lg:grid-cols-4 grid-cols-1 lg:gap-x-1 lg:gap-y-0 gap-y-4 gap-x-4 pt-16   pb-16 w-full">
+                    <DetailCardLoading />
+                    <DetailCardLoading />
+                    <DetailCardLoading />
+                    <DetailCardLoading />
+                  </div>
+                </>
+              )}
+            </div>
+            {/* bottom content */}
+          </>
+        ) : (
+          <>
+            <div className="h-screen w-full items-center justify-center flex">
+              <div className="flex flex-col items-center justify-center">
+                {" "}
+                <img src={empty.src} className="lg:h-96 h-72 w-auto" alt="" />
+                <p className="font-bold">Berita Tidak Tersedia</p>
+              </div>
+            </div>
+          </>
+        )}
       </div>
       <Footer />
     </>
