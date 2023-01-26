@@ -19,7 +19,7 @@ export default function Detail() {
   var router = useRouter();
 
   const { id } = router.query;
-  console.log(router.query.id)
+  console.log(router.query.id);
   //   data detail
   const [loading, setLoading] = React.useState(true);
   const [video, setVideo] = React.useState();
@@ -69,7 +69,7 @@ export default function Detail() {
       ac.abort();
     };
   }, [router]);
-  
+
   return (
     <>
       <Navbar />
@@ -121,10 +121,13 @@ function Video({ data, setNama, nama }) {
   });
 
   React.useEffect(() => {
-    setNama(data.NamaKota.toLowerCase());
+    if (data.NamaKota != null) {
+      setNama(data.NamaKota.toLowerCase());
+    } else {
+      setNama("");
+    }
   }, [data]);
 
-  
   return (
     <>
       <div className="left  xl:w-3/4 lg:w-4/6 w-full h-full flex flex-col pb-20">

@@ -179,11 +179,8 @@ export default function Dashboard() {
         </div>
         {/* faq */}
         <div
-          className="h-full w-full bg-gray-200 bg-cover bg-bottom "
-          style={{
-            backgroundImage:
-              "url(https://cdn.pixabay.com/photo/2016/11/18/17/20/living-room-1835923_960_720.jpg)",
-          }}
+          className="h-full w-full bg-gray-200 bg-cover bg-bottom bg1"
+         
         >
           <div
             id="faq"

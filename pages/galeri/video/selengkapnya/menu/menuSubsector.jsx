@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getApi } from "../../../../api/restApi";
 import { changeState } from "../../../../../redux/actions";
 
-export default function MenuSubsector({ type, show, getData, setImages }) {
+export default function MenuSubsector({ type, show, getData }) {
   const [menu1, setMenu1] = useState(show);
   const [subsector, setSubsector] = useState([]);
   const [subsectorId, setSubsectorId] = useState([]);

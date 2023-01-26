@@ -43,8 +43,8 @@ export default function Foto() {
   return (
     <>
       <div
-        style={{ backgroundImage: `url(${bg.src})` }}
-        className="w-full bg-no-repeat bg-cover bg-bottom"
+        // style={{ backgroundImage: `url(${bg.src})` }}
+        className="w-full bg-no-repeat bg-cover bg-bottom fotoBg"
       >
         <div className="bg-black h-full w-full bg-opacity-25 md:pl-7 2xl:py-52 lg:py-10 py-16 ">
           <div className="xl:hidden lg:hidden w-11/12 mx-auto py-5">

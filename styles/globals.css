@@ -184,3 +184,17 @@ body {
 .faqBg{
   background-image: url(../pages/assets/faq.jpg);
 }
+
+.bg1{
+  background-image: url(../pages/assets/bg2.jpg);
+}
+
+.fotoBg{
+  background-image: url(../pages/assets/bg3.jpg);
+
+}
+
+.videoBg{
+  background-image: url(../pages/assets/bg4.jpg);
+
+}
