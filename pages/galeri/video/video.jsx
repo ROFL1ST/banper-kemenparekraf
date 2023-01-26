@@ -11,7 +11,7 @@ import { Link } from "@mui/material";
 import Loading from "./loading";
 import { getGaleri, PutViews } from "../../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
-import bg from "../../assets/video.png";
+import bg from "../../assets/bg4.jpg";
 export default function Video() {
   const swiperRef2 = useRef();
   const [videoData, setVideoData] = useState({ data: {}, loading: true });
@@ -43,8 +43,8 @@ export default function Video() {
   return (
     <>
       <div
-        className="w-full h-full  bg-no-repeat bg-cover bg-bottom rounded-b-3xl videoBg"
-        // style={{ backgroundImage: `url(${bg.src})` }}
+        className="w-full h-full  bg-no-repeat bg-cover bg-bottom rounded-b-3xl "
+        style={{ backgroundImage: `url(${bg.src})` }}
       >
         <div className="bg-black bg-opacity-20 h-full w-full 2xl:py-40 lg:py-16 py-16 md:p-0 p-5 rounded-b-3xl">
           <h1 className="text-6xl font-semibold text-white text-center">

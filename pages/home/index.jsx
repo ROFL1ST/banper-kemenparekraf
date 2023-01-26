@@ -16,7 +16,8 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import Galeri from "./component/Galeri";
 import Router, { useRouter } from "next/router";
-import FaqBackground from "../assets/faq.jpg";
+import FaqBackground from "../assets/bg2.jpg";
+import images from "../assets/faq.jpg";
 export default function Dashboard() {
   // token
   const [token, setToken] = useState();
@@ -179,8 +180,8 @@ export default function Dashboard() {
         </div>
         {/* faq */}
         <div
-          className="h-full w-full bg-gray-200 bg-cover bg-bottom bg1"
-         
+          className="h-full w-full bg-gray-200 bg-cover bg-bottom"
+          style={{ backgroundImage: `url(${FaqBackground.src})` }}
         >
           <div
             id="faq"
@@ -200,7 +201,10 @@ export default function Dashboard() {
                   <></>
                 )}
               </div>
-              <div className="faqBg xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[42rem] lg:h-[45rem] h-[29rem]  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"></div>
+              <div
+                style={{ backgroundImage: `url(${images.src})` }}
+                className=" xl:w-1/3 lg:w-1/3 md:w-3/4 w-3/4 2xl:h-[42rem] lg:h-[45rem] h-[29rem]  bg-cover bg-center rounded-tr-[7rem] rounded-br-2xl rounded-bl-[7rem]"
+              ></div>
             </div>
             <div className="flex xl:flex-row lg:flex-row md:flex-row sm:flex-row  flex-col justify-center gap-y-5 gap-x-5 mt-20 xl:px-0 lg:px-0 md:px-0 sm:px-16 px-16">
               <button className="text-white bg-[#336ba9] px-5 py-1.5 rounded-full">

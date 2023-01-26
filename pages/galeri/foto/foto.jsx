@@ -12,7 +12,7 @@ import { Link } from "@mui/material";
 import Loading from "./loading";
 import { getGaleri } from "../../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
-import bg from "../../assets/galeri.png";
+import bg from "../../assets/bg3.jpg";
 export default function Foto() {
   const swiperRef = useRef();
 
@@ -43,8 +43,8 @@ export default function Foto() {
   return (
     <>
       <div
-        // style={{ backgroundImage: `url(${bg.src})` }}
-        className="w-full bg-no-repeat bg-cover bg-bottom fotoBg"
+        style={{ backgroundImage: `url(${bg.src})` }}
+        className="w-full bg-no-repeat bg-cover bg-bottom "
       >
         <div className="bg-black h-full w-full bg-opacity-25 md:pl-7 2xl:py-52 lg:py-10 py-16 ">
           <div className="xl:hidden lg:hidden w-11/12 mx-auto py-5">
