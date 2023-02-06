@@ -8,7 +8,7 @@ html{
 }
 body {
   font-family: "Open Sans", sans-serif;
-  
+  /* background: re; */
 }
 
 /* Foto */
@@ -21,14 +21,21 @@ body {
 }
 
 .swiper-image{
-  width: 18% !important;
-
+  width: 15% !important;
+ 
+  
+}
+.bg{
+  background-image: url("../pages/assets/galeri.png");
+}
+.bg2{
+  background-image: url("../pages/assets/video.png");
 }
 @media (max-width: 1080px) {
 
 
   .swiper-image{
-    width: 25% !important;
+    width: 23% !important;
   
   }
   .mySwiper{
@@ -77,7 +84,7 @@ body {
   }
 
   .swiper-image{
-    width: 70% !important;
+    width: 60% !important;
   
   }
   .mySwiper{
@@ -113,13 +120,13 @@ body {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #142b51;
+  background: #1d4481;
   border-radius: 100vh;
   border: 3px solid #f6f7ed;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #1d4481;
+  background: #142b51;
 }
 
 /* ::-webkit-scrollbar {
@@ -159,3 +166,20 @@ body {
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
 }
+.scroll-content {
+  padding-bottom: 0 !important;
+}
+
+
+
+/* .ceklist::before{
+  content: "\2714";
+  font-size: 1.5em;
+  color: #fff;
+  position: absolute;
+  right: 1px;
+  top: -5px;
+} */
+
+
+

@@ -1,9 +1,13 @@
 import React from "react";
 import Footer from "../components/footer";
-import Modal from "../components/modal";
 import Navbar from "../components/navbar";
 import Foto from "./foto/foto";
 import Video from "./video/video";
+import { Dialog, Transition } from "@headlessui/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import axios from "axios";
+import Feedback from "../components/feedback";
 
 export default function Berita() {
   const [open, setOpen] = React.useState(false);
@@ -14,18 +18,16 @@ export default function Berita() {
 
   return (
     <>
-      <Navbar open={open} setOpen={setOpen} />
+      <Navbar  />
 
       <div className="pt-24 pb-16">
         <Foto />
         <Video />
       </div>
       <Footer />
-      <Modal
-          open={open}
-          setOpen={setOpen}
-          cancelButtonRef={cancelButtonRef}
-        ></Modal>
+      <Feedback/>
+    
     </>
   );
 }
+

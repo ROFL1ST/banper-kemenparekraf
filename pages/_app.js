@@ -1,7 +1,24 @@
-import '../styles/globals.css'
+import "../styles/globals.css";
+import { store } from "../redux/store";
+import { Provider } from "react-redux";
+import Head from "next/head";
+import React from "react";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+ 
+  return (
+    <>
+      <Provider store={store}>
+        <Head>
+          <link
+            rel="shortcut icon"
+            href="https://banper.kemenparekraf.go.id/index.png"
+          ></link>
+        </Head>
+        <Component {...pageProps} />
+      </Provider>
+    </>
+  );
 }
 
-export default MyApp
+export default MyApp;

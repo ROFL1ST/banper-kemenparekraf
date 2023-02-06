@@ -1,16 +1,17 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, Fragment } from "react";
 import {
   ArrowLeftCircleIcon,
   ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 import { Pagination } from "swiper";
 import { Link } from "@mui/material";
-import CardVideo from "./cardVideo";
 import Loading from "./loading";
-import { getGaleri } from "../../api/restApi";
-
+import { getGaleri, PutViews } from "../../api/restApi";
+import { Dialog, Transition } from "@headlessui/react";
+import bg from "../../assets/bg4.jpg";
 export default function Video() {
   const swiperRef2 = useRef();
   const [videoData, setVideoData] = useState({ data: {}, loading: true });
@@ -29,7 +30,6 @@ export default function Video() {
       setVideoData((s) => ({ ...s, loading: false }));
     }
   };
-  console.log(videoData.data);
 
   useEffect(() => {
     const ac = new AbortController();
@@ -43,19 +43,17 @@ export default function Video() {
   return (
     <>
       <div
-        className="w-full h-full bg-no-repeat bg-cover bg-bottom rounded-b-3xl"
-        style={{
-          backgroundImage:
-            "url(https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80)",
-        }}
+        className="w-full h-full  bg-no-repeat bg-cover bg-bottom rounded-b-3xl "
+        style={{ backgroundImage: `url(${bg.src})` }}
       >
-        <div className="bg-black bg-opacity-50 h-full w-full 2xl:py-20 lg:py-16 py-16 md:p-0 p-5 rounded-b-3xl">
+        <div className="bg-black bg-opacity-20 h-full w-full 2xl:py-40 lg:py-16 py-16 md:p-0 p-5 rounded-b-3xl">
           <h1 className="text-6xl font-semibold text-white text-center">
             Video
           </h1>
           <p className="text-white text-center my-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-            repudiandae officia veritatis dignissimos fugit nihil error
+            Video kegiatan pelaku ekonomi kreatif di seluruh Indonesia, baik
+            yang sudah pernah menerima Banper Infrastruktur Ekraf ataupun yang
+            belum.
           </p>
           <div className="flex justify-center space-x-3 mb-7">
             <button onClick={() => swiperRef2.current.slidePrev()}>
@@ -96,11 +94,15 @@ export default function Video() {
               }}
             >
               {data && !loading ? (
-                videoData.data.map((i, key) => (
-                  <SwiperSlide key={key}>
-                    <CardVideo data={i} />
-                  </SwiperSlide>
-                ))
+                videoData.data.length != 0 ? (
+                  videoData.data.map((i, key) => (
+                    <SwiperSlide key={key}>
+                      <CardVideo data={i} />
+                    </SwiperSlide>
+                  ))
+                ) : (
+                  <></>
+                )
               ) : (
                 <>
                   <SwiperSlide>
@@ -131,6 +133,132 @@ export default function Video() {
           </div>
         </div>
       </div>
+    </>
+  );
+}
+
+function CardVideo({ data }) {
+  const viewss = async () => {
+    // const url = `http://128.199.242.242/api/video/${data.id}`;
+    try {
+      let respond = await PutViews(`video/${data.id}`).then((result) => result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const [kota, setKota] = useState({});
+  const [load, setLoad] = useState(true);
+  async function detail() {
+    try {
+      await getGaleri(`video/${data.id}`).then((result) => {
+        setKota(result.data.data[0]);
+        setLoad(false);
+      });
+    } catch (error) {
+      console.log(error);
+      setLoad(false);
+    }
+  }
+
+  useEffect(() => {
+    detail();
+  }, []);
+
+  // hover
+  const [isHovering, setIsHovering] = useState(false);
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+  return (
+    <>
+      <Link href={`/galeri/video/Detail/${data.id}`}>
+        <div
+          onClick={() => {
+            viewss();
+          }}
+          onMouseOver={handleMouseOver}
+          onMouseOut={handleMouseOut}
+          className="my-auto items-center"
+        >
+          <div
+            className=" rounded-lg mx-auto max-h-96 min-w-full bg-no-repeat bg-cover "
+            style={{ backgroundImage: `url(${data.thumbnail})` }}
+          >
+            <div
+              className={` rounded-lg   xbg-black xl:p-28 md:p-20 sm:p-36 p-20   ${
+                isHovering
+                  ? "hover:bg-gradient-to-t hover:from-black bg-black bg-opacity-25 transition ease-in-out "
+                  : "bg-black bg-opacity-25 transition ease-in-out "
+              }`}
+            >
+              <div className="mx-auto flex justify-center items-center ">
+                <div className="bg-white bg-opacity-25 rounded-full xl:p-5 p-2 border-white border flex justify-center items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="lg:w-10 lg:h-10 w-5 h-5 text-white"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              {isHovering && (
+                <Transition show={isHovering} appear={true}>
+                  <Transition.Child
+                    enter="transition-opacity ease-linear duration-300 "
+                    enterFrom="opacity-0 "
+                    enterTo="opacity-100"
+                    leave="transition-opacity ease-linear duration-300"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <div className="absolute justify-start lg:flex hidden flex-col bottom-10 left-10 ">
+                      {!load && kota ? (
+                        <p className="uppercase font-bold text-white xl:text-base lg:text-base md:text-sm text-sm truncate">
+                          {kota.NamaKota}
+                        </p>
+                      ) : (
+                        <>
+                          <div className="animate-pulse">
+                            <div className="text-xs font-bold h-2 w-1/4 bg-gray-500 rounded-full"></div>
+                          </div>
+                        </>
+                      )}
+                      {/* <p className="text-blue-300">video</p> */}
+                    </div>
+                  </Transition.Child>
+                </Transition>
+              )}
+              <div className="lg:hidden absolute justify-start flex flex-col bottom-5 left-5 ">
+                {!load && kota ? (
+                  <p className="uppercase font-bold text-white xl:text-base lg:text-base md:text-sm text-sm truncate">
+                    {kota.NamaKota}
+                  </p>
+                ) : (
+                  <>
+                    <div className="animate-pulse">
+                      <div className="text-xs font-bold h-2 w-1/4 bg-gray-500 rounded-full"></div>
+                    </div>
+                  </>
+                )}
+                {/* <p className="text-blue-300">video</p> */}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Link>
     </>
   );
 }

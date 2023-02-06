@@ -1,69 +1,13 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import MenuBerita from "./menuBerita";
-import MenuProvinsi from "./menuProvinsi";
-import MenuSubsector from "./menuSubsector";
 
-export default function Menu({ getData, setLoading, data }) {
-  const { query } = useRouter();
-  const { sort, type } = query;
+import MenuBerita from "./menuBerita";
+
+export default function MenuSort({ getData, setLoading, data }) {
 
   return (
     <div className="pt-28">
-      <div className="h-full w-full bg-white shadow-sm py-5">
+      <div className="h-full w-full bg-white shadow-sm py-5 drop-shadow-md">
         <div className="flex space-x-10 justify-center">
-          <Link href={`/berita?type=berita&sort=${sort}`}>
-            <button
-              onClick={() => {
-                setLoading(true)
-              }}
-              className={`${
-                type === undefined || type === "berita"
-                  ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
-                  : "text-xl"
-              }`}
-            >
-              Berita
-            </button>
-          </Link>
-          <Link href={`/berita?type=subsector&sort=${sort}&sub_id=1`}>
-            <button
-              onClick={() => {
-                setLoading(true)
-              }}
-              className={`${
-                type === "subsector"
-                  ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
-                  : "text-xl"
-              }`}
-            >
-              Subsector
-            </button>
-          </Link>
-          <Link href={`/berita?type=provinsi&sort=${sort}`}>
-            <button
-              onClick={() => {
-                setLoading(true)
-              }}
-              className={`${
-                type === "provinsi"
-                  ? "text-xl text-blue-900 font-semibold underline underline-offset-8"
-                  : "text-xl"
-              }`}
-            >
-              Provinsi
-            </button>
-          </Link>
-        </div>
-        <div>
-          {" "}
-          {type === "berita" ? (
-            <MenuBerita getData={getData} data={data} setLoading={setLoading} />
-          ) : type === "subsector" ? (
-            <MenuSubsector getData={getData} setLoading={setLoading} />
-          ) : (
-            <MenuProvinsi />
-          )}
+          <MenuBerita getData={getData} data={data} setLoading={setLoading} />
         </div>
       </div>
     </div>
