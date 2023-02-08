@@ -94,7 +94,6 @@ export default function EditProfile() {
     try {
       await getApi("master/kategori").then((result) => {
         setKategori(result.data.data);
-        setLoading(false);
       });
     } catch (error) {
       console.log(error);
@@ -107,6 +106,7 @@ export default function EditProfile() {
       await getApi("master/kota").then((result) => {
         setKota(result.data.data);
         // setLoad(false);
+        setLoading(false);
         
       });
     } catch (error) {
