@@ -250,20 +250,24 @@ export default function Direktori() {
                         ))}
                       </tbody>
                     </table>
-                    <p
-                      className="flex justify-center underline text-blue-900 items-center mt-10 cursor-pointer"
-                      onClick={() => {
-                        getData(
-                          state.subsektor_id?.toString(),
-                          state.provinsi_id,
-                          state.kota_id,
-                          setLimit(limit + 12)
-                        );
-                        setLoad(true);
-                      }}
-                    >
-                      More
-                    </p>
+                    {list.length >= 12 ? (
+                      <p
+                        className="flex justify-center underline text-blue-900 items-center mt-10 cursor-pointer"
+                        onClick={() => {
+                          getData(
+                            state.subsektor_id?.toString(),
+                            state.provinsi_id,
+                            state.kota_id,
+                            setLimit(limit + 12)
+                          );
+                          setLoad(true);
+                        }}
+                      >
+                        More
+                      </p>
+                    ) : (
+                      <></>
+                    )}
                   </>
                 ) : (
                   <>

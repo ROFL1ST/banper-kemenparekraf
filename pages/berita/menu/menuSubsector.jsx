@@ -179,6 +179,15 @@ function Subsektor({
 }
 
 function SubSubsektor({ data, menu2, setSubsectorId }) {
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    if (!menu2) {
+      setChecked(false);
+      setSubsectorId((prevState) =>
+        prevState.filter((prevItem) => prevItem !== data.Id)
+      );
+    }
+  }, [menu2]);
   return (
     <>
       {/* <Transition
@@ -197,10 +206,14 @@ function SubSubsektor({ data, menu2, setSubsectorId }) {
           <input
             type="checkbox"
             defaultChecked={false}
+            checked={checked}
             onChange={(e) => {
               if (e.target.checked) {
+                setChecked(true);
                 setSubsectorId((val) => [...val, data.Id]);
               } else {
+                setChecked(false);
+
                 setSubsectorId((prevState) =>
                   prevState.filter((prevItem) => prevItem !== data.Id)
                 );

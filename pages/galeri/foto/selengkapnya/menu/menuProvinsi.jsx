@@ -198,10 +198,10 @@ function Kota({ data, menu2: kota, setKotaId }) {
             checked={checked}
             onChange={(e) => {
               if (e.target.checked) {
-                setChecked(true)
+                setChecked(true);
                 setKotaId((val) => [...val, data.Id]);
               } else {
-                setChecked(false)
+                setChecked(false);
                 setKotaId((prevState) =>
                   prevState.filter((prevItem) => prevItem !== data.Id)
                 );

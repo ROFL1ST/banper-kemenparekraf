@@ -140,7 +140,6 @@ export default function EditProfile() {
       setValue("subsektorId", user[0].SubsektorId[0].Id);
       setValue("SubsektorPendukung", user[0].SubsektorPendukung);
       setValue("SubsektorPendukungid", user[0].SubsektorPendukungid);
-
       setValue("password", "");
     }
   }, [user[0]]);
