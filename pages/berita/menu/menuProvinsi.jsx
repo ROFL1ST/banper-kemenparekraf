@@ -1,13 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { getApi } from "../../api/restApi";
-import { useEffect, useRef, useState, Fragment } from "react";
-
+import { useEffect, useState } from "react";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
-import { Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeState } from "../../../redux/actions";
+import { log } from "logrocket";
 
 export default function MenuProvinsi({
   type,
@@ -116,18 +116,6 @@ function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
 
   return (
     <>
-      {/* <Transition
-        show={menu}
-        as={Fragment}
-        enter="transition-all ease-in duration-100"
-        enterFrom="transform opacity-0 scale-95 translate-y-1"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95 -translate-y-1"
-      >
-       
-      </Transition> */}
       <div
         className={`${menu ? "flex" : "hidden"} flex-col space-y-2 space-x-3 `}
       >
@@ -180,28 +168,28 @@ function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
 }
 
 function Kota({ data, menu2: kota, setKotaId }) {
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    if (!kota) {
+      setChecked(false);
+      setKotaId((prevState) =>
+        prevState.filter((prevItem) => prevItem !== data.Id)
+      );
+    }
+  }, [kota]);
   return (
     <>
-      {/* <Transition
-        show={kota}
-        as={Fragment}
-        enter="transition-all ease-in duration-100"
-        enterFrom="transform opacity-0 scale-95 translate-y-1"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95 -translate-y-1"
-      >
-              </Transition> */}
       <div className={` flex-col space-y-2 pl-3 ${kota ? "flex" : "hidden"}`}>
         <div className={"cursor-pointer flex items-center space-x-1"}>
           <input
             type="checkbox"
-            defaultChecked={false}
+            checked={checked}
             onChange={(e) => {
               if (e.target.checked) {
+                setChecked(true);
                 setKotaId((val) => [...val, data.Id]);
               } else {
+                setChecked(false);
                 setKotaId((prevState) =>
                   prevState.filter((prevItem) => prevItem !== data.Id)
                 );
