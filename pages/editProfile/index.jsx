@@ -28,7 +28,6 @@ export default function EditProfile() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        setLoading(false);
       });
     } catch (error) {
       console.log(error);
@@ -95,20 +94,7 @@ export default function EditProfile() {
     try {
       await getApi("master/kategori").then((result) => {
         setKategori(result.data.data);
-        // setLoading(false);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //   sub
-  const [sub, setSub] = useState([]);
-  const getSub = async () => {
-    try {
-      await getApi("master/subsektor").then((result) => {
-        setSub(result.data.data);
-        setLoad(false);
+        setLoading(false);
       });
     } catch (error) {
       console.log(error);
@@ -120,7 +106,8 @@ export default function EditProfile() {
     try {
       await getApi("master/kota").then((result) => {
         setKota(result.data.data);
-        setLoad(false);
+        // setLoad(false);
+        
       });
     } catch (error) {
       console.log(error);
@@ -128,9 +115,8 @@ export default function EditProfile() {
   };
 
   useEffect(() => {
-    getKateg();
-    getSub();
     getKota();
+    getKateg();
   }, []);
   // console.log(user.length);
   const {
