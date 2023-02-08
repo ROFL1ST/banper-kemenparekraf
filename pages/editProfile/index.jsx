@@ -107,7 +107,6 @@ export default function EditProfile() {
         setKota(result.data.data);
         // setLoad(false);
         setLoading(false);
-        
       });
     } catch (error) {
       console.log(error);
@@ -118,20 +117,14 @@ export default function EditProfile() {
     getKota();
     getKateg();
   }, []);
-  // console.log(user.length);
+  console.log(user[0]);
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      Subsektor: "",
-      subsektorId: "",
-      SubsektorPendukung: "",
-      password: "",
-    },
-  });
+  } = useForm({});
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -140,6 +133,17 @@ export default function EditProfile() {
 
     setError({ ...s, status: false });
   };
+
+  useEffect(() => {
+    if (user[0] != undefined) {
+      setValue("Subsektor", user[0].Subsektor);
+      setValue("subsektorId", user[0].SubsektorId[0].Id);
+      setValue("SubsektorPendukung", user[0].SubsektorPendukung);
+      setValue("SubsektorPendukungid", user[0].SubsektorPendukungid);
+
+      setValue("password", "");
+    }
+  }, [user[0]]);
   return (
     <>
       <Navbar />

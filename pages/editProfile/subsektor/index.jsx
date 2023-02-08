@@ -167,6 +167,7 @@ export default function Subsektor() {
                         EmailPJ: user[0].EmailPJ,
                         PhonePJ: user[0].PhonePJ,
                         KotaID: user[0].KotaID,
+                        isPenerima: user[0].isPenerima,
                         Subsektor: selectedUtama,
                         subsektorId: selectedKlasifikasi,
                         SubsektorPendukung: selectedPendukung
@@ -557,7 +558,7 @@ function SubPen({ setSelectedPendukung, setSelectedPendukungKlasifikasi }) {
         }
 
         // klasifikasi
-      } 
+      }
     }
     setLoading(false);
   }, [user[0]]);
