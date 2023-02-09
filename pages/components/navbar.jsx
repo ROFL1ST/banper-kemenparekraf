@@ -14,7 +14,7 @@ export default function Navbar({ click }) {
   const juknisUrl =
     "https://banper.kemenparekraf.go.id/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const templateUrl =
-    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2023.zip";
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const [menu1, setMenu1] = React.useState(false);
   const [menu2, setMenu2] = React.useState(false);
