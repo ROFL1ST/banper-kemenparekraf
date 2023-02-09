@@ -9,7 +9,7 @@ function Downloader({ setOpen, setCheck }) {
   const juknisUrl =
     "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const TemplateUrl =
-    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_202.zip";
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
 
   const handleClick = (url, filename) => {
     axios
