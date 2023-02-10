@@ -72,18 +72,20 @@ export default function MenuSubsector({ type, show, getData, setImages }) {
           </div>
         </div>
         {!load ? (
-          subsector.map((i, key) => (
-            <Subsektor
-              subsectorId={subsectorId}
-              setSubsectorId={setSubsectorId}
-              getData={getData}
-              menu={menu1}
-              data={i}
-              key={key}
-              subsector={subsector}
-              load={load}
-            />
-          ))
+          subsector
+            .filter((subsector) => subsector.parentId == 0)
+            .map((i, key) => (
+              <Subsektor
+                subsectorId={subsectorId}
+                setSubsectorId={setSubsectorId}
+                getData={getData}
+                menu={menu1}
+                data={i}
+                key={key}
+                subsector={subsector}
+                load={load}
+              />
+            ))
         ) : (
           <></>
         )}
