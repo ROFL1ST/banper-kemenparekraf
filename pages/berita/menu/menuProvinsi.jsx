@@ -99,6 +99,7 @@ function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
   const [menu2, setMenu2] = useState(false);
   const [kota, setKota] = useState([]);
   const [load, setLoad] = useState(true);
+  const [checked, setChecked] = useState(false);
   const getKota = async () => {
     try {
       await getApi(`master/kota?ProvinsiID=${data.Id}`).then((val) => {
@@ -124,16 +125,18 @@ function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
             type="checkbox"
             onChange={(e) => {
               if (e.target.checked) {
+                setChecked(true);
                 setProvinsiId((val) => [...val, data.Id]);
                 setMenu2(true);
               } else {
+                setChecked(false);
                 setProvinsiId((prevState) =>
                   prevState.filter((prevItem) => prevItem !== data.Id)
                 );
                 setMenu2(false);
               }
             }}
-            defaultChecked={false}
+            checked={checked}
             required
             className={`form-check-input appearance-none h-4 w-4 lg:h-3.5 lg:w-3.5 border border-gray-300 rounded-sm bg-white checked:bg-gray-600 checked:border-black focus:outline-none transition duration-200 align-top bg-no-repeat bg-center bg-contain float-left  cursor-pointer mr-3`}
           />
@@ -157,7 +160,13 @@ function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
         </div>
         {!load ? (
           kota.map((i, key) => (
-            <Kota key={key} data={i} menu2={menu2} setKotaId={setKotaId} />
+            <Kota
+              key={key}
+              data={i}
+              provinsiChecked={checked}
+              menu2={menu2}
+              setKotaId={setKotaId}
+            />
           ))
         ) : (
           <></>
@@ -167,9 +176,13 @@ function Provinsi({ data, menu, setProvinsiId, setKotaId }) {
   );
 }
 
-function Kota({ data, menu2: kota, setKotaId }) {
+function Kota({ data, menu2: kota, setKotaId, provinsiChecked }) {
   const [checked, setChecked] = useState(false);
   useEffect(() => {
+    if (provinsiChecked) {
+      setChecked(true);
+      setKotaId((val) => [...val, data.Id]);
+    }
     if (!kota) {
       setChecked(false);
       setKotaId((prevState) =>
