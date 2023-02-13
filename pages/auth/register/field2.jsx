@@ -285,10 +285,9 @@ export default function Field2() {
                     id=""
                     {...register("isPenerima", { required: true })}
                   >
-                    <option value={""} defaultValue={true}>
+                    <option defaultValue={true}>
                       Pilih Jawaban
                     </option>
-
                     <option value="Sudah">Sudah</option>
                     <option value="Belum">Belum</option>
                   </select>

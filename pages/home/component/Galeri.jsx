@@ -51,7 +51,7 @@ export default function Galeri() {
     <>
       {!loading ? (
         images.length != 0 && videos.length != 0 ? (
-          <div className="grid xl:grid-cols-4 mb-10 gap-4 mt-10">
+          <div className="xl:grid flex flex-col xl:grid-cols-4 mb-10 gap-4 mt-10">
             {/* foto */}
             {images?.map((i, key) => (
               <Foto key={key} foto={key} data={i} />

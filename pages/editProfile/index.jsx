@@ -28,7 +28,6 @@ export default function EditProfile() {
     try {
       await getPropose("user", value).then((result) => {
         setUser(result.data.data);
-        setLoading(false);
       });
     } catch (error) {
       console.log(error);
@@ -95,20 +94,6 @@ export default function EditProfile() {
     try {
       await getApi("master/kategori").then((result) => {
         setKategori(result.data.data);
-        // setLoading(false);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //   sub
-  const [sub, setSub] = useState([]);
-  const getSub = async () => {
-    try {
-      await getApi("master/subsektor").then((result) => {
-        setSub(result.data.data);
-        setLoad(false);
       });
     } catch (error) {
       console.log(error);
@@ -120,7 +105,8 @@ export default function EditProfile() {
     try {
       await getApi("master/kota").then((result) => {
         setKota(result.data.data);
-        setLoad(false);
+        // setLoad(false);
+        setLoading(false);
       });
     } catch (error) {
       console.log(error);
@@ -128,24 +114,17 @@ export default function EditProfile() {
   };
 
   useEffect(() => {
-    getKateg();
-    getSub();
     getKota();
+    getKateg();
   }, []);
-  // console.log(user.length);
+  console.log(user[0]);
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      Subsektor: "",
-      subsektorId: "",
-      SubsektorPendukung: "",
-      password: "",
-    },
-  });
+  } = useForm({});
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -154,6 +133,16 @@ export default function EditProfile() {
 
     setError({ ...s, status: false });
   };
+
+  useEffect(() => {
+    if (user[0] != undefined) {
+      setValue("Subsektor", user[0].Subsektor);
+      setValue("subsektorId", user[0].SubsektorId[0].Id);
+      setValue("SubsektorPendukung", user[0].SubsektorPendukung);
+      setValue("SubsektorPendukungid", user[0].SubsektorPendukungid);
+      setValue("password", "");
+    }
+  }, [user[0]]);
   return (
     <>
       <Navbar />

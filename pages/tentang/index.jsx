@@ -34,7 +34,7 @@ export default function Tentang() {
   const juknisUrl =
     "https://banper.kemenparekraf.go.id/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const TemplateUrl =
-    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2023.zip";
 
   useEffect(() => {
     document.title = "Tentang";
@@ -270,7 +270,7 @@ function Downloader({ setOpen, setCheck }) {
   const juknisUrl =
     "http://128.199.242.242/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
   const TemplateUrl =
-    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2022.zip";
+    "http://128.199.242.242/dashboard/assets/Dokumen_Banper_TA_2023.zip";
 
   const handleClick = (url, filename) => {
     axios
