@@ -162,6 +162,7 @@ export default function SubmitDoc() {
 }
 
 function PercentBox({ percent, have, all }) {
+  const percentage = Math.floor(percent)
   return (
     <>
       <div className="border border-blue-900 bg-blue-400 bg-opacity-20 rounded-xl px-10 py-8 flex lg:flex-row flex-col   justify-between">
@@ -170,7 +171,7 @@ function PercentBox({ percent, have, all }) {
         </h1>
         <div className="flex flex-col lg:w-3/5 w-full">
           <div className="flex justify-end ">
-            <h1>{percent}%</h1>
+            <h1>{percentage}%</h1>
           </div>
           <Progress_bar bgcolor={"#142b51"} height={15} progress={percent} />
         </div>

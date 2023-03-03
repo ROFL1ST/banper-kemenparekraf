@@ -144,6 +144,7 @@ export function postDoc(path_url, token, data, method) {
       });
   });
 }
+
 function login(path_url, param) {
   console.log(param);
   return new Promise((resolve, reject) => {

@@ -33,7 +33,7 @@ export default function DetailPage() {
       }
     } catch (error) {
       // setLoading(false);
-      setDetail((s) => ({ ...s, loading2: false}));
+      setDetail((s) => ({ ...s, loading2: false }));
       console.log(error);
     }
   };

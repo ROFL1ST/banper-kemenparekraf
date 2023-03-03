@@ -20,7 +20,7 @@ export default function Footer() {
             <Link href={"/tentang"}>
               <span className="text-red-500 text-sm underline underline-offset-2 decoration-red-500 cursor-pointer">
                 Baca selengkapnya
-              </span>
+              </span> 
             </Link>
           </p>
           <p className="text-gray-500 pt-10">

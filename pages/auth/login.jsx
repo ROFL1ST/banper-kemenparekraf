@@ -20,7 +20,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 });
 const schema = yup
   .object({
-    email: yup.string().email(),
+    email: yup.string().email().required(),
     password: yup.string().required(),
   })
   .required();
