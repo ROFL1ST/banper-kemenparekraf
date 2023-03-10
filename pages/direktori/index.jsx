@@ -57,7 +57,7 @@ export default function Direktori() {
           kota_id !== undefined && `kotaId=${kota_id}`
         }&orderBy=order by u.NamaKomunitas&${
           selectedChoice.name === "Sortir A-Z" ? "asc" : "desc"
-        }& Trcount ${selectedChoice2.name == "Terbanyak" ? "asc" : "desc"}`
+        }& Trcount  ${selectedChoice2.name  == "Terbanyak" ? "asc" : "desc"}`
       ).then((result) => {
         setList(result.data.data);
         setLoad(false);
