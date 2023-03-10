@@ -55,7 +55,7 @@ export default function Direktori() {
           provinsi_id !== undefined && `ProvinsiID=${provinsi_id}`
         }&${
           kota_id !== undefined && `kotaId=${kota_id}`
-        }&orderBy=order by u.NamaKomunitas ${
+        }&orderBy=order by TRIM(u.NamaKomunitas) ${
           selectedChoice.name === "Sortir A-Z" ? "asc" : "desc"
         }, Trcount ${selectedChoice2.name == "Terbanyak" ? "asc" : "desc"}`
       ).then((result) => {
