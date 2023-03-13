@@ -148,7 +148,7 @@ export default function Berita() {
               >
                 <option value="Pilih">Semua</option>
                 <option value="admin">Pengumuman</option>
-                <option value="user">UMKM</option>
+                <option value="user">Pelaku Ekraf</option>
               </select>
             </div>
             <div
