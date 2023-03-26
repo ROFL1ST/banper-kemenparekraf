@@ -137,7 +137,7 @@ export default function EditProfile() {
   useEffect(() => {
     if (user[0] != undefined) {
       setValue("Subsektor", user[0].Subsektor);
-      setValue("subsektorId", user[0].SubsektorId[0].Id);
+      setValue("subsektorId", user[0]?.SubsektorId[0]?.Id);
       setValue("SubsektorPendukung", user[0].SubsektorPendukung);
       setValue("SubsektorPendukungid", user[0].SubsektorPendukungid);
       setValue("password", "");
