@@ -14,8 +14,8 @@ import Link from "next/link";
 import parse from "html-react-parser";
 import { getDown, getApi, download } from "../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
-import {BrowserView, MobileView} from 'react-device-detect';
-
+import {BrowserView, MobileView, isBrowser, isMobile} from 'react-device-detect';
+const bannerHome =  isMobile ? buildingMobile : buildingWeb;
 import Galeri from "./component/Galeri";
 import Router, { useRouter } from "next/router";
 import FaqBackground from "../assets/bg2.jpg";
@@ -81,24 +81,13 @@ export default function Dashboard() {
     <>
       <div className="overflow-x-hidden">
         <Navbar />
-          <BrowserView>
             <div
               className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
-              style={{ backgroundImage: `url(${buildingWeb.src})` }}
+              style={{ backgroundImage: `url(${bannerHome.src})` }}
             >
               <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
               </div>
             </div>
-          </BrowserView>
-          <MobileView>
-            <div
-              className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
-              style={{ backgroundImage: `url(${buildingMobile.src})` }}
-            >
-              <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
-              </div>
-            </div>
-          </MobileView>
         {token ? (
           <button
             onClick={() => {
