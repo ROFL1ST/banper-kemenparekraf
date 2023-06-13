@@ -6,7 +6,7 @@ import Navbar from "../components/navbar";
 import { useEffect, useState, useRef, Fragment } from "react";
 import Section from "../components/section";
 import Feedback from "../components/feedback";
-import building from "../assets/building.png";
+import building from "../assets/home_web.jpg";
 import empty from "../assets/Empty-amico.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import Link from "next/link";
