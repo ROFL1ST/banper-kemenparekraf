@@ -8,6 +8,7 @@ import Section from "../components/section";
 import Feedback from "../components/feedback";
 import buildingWeb from "../assets/home_web.jpg";
 import buildingMobile from "../assets/home_mobile.jpg";
+import building from "../assets/building.png";
 import empty from "../assets/Empty-amico.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import Link from "next/link";
@@ -82,7 +83,7 @@ export default function Dashboard() {
             <MediaQuery minDeviceWidth={1224}>
               <div
                 className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
-                style={{ backgroundImage: `url(${buildingWeb.src})` }}
+                style={{ backgroundImage: `url(${building.src})` }}
               >
                 <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
                 </div>
@@ -91,7 +92,7 @@ export default function Dashboard() {
             <MediaQuery maxDeviceWidth={1224}>
               <div
                 className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
-                style={{ backgroundImage: `url(${buildingMobile.src})` }}
+                style={{ backgroundImage: `url(${building.src})` }}
               >
                 <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
                 </div>
