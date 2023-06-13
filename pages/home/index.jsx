@@ -6,13 +6,15 @@ import Navbar from "../components/navbar";
 import { useEffect, useState, useRef, Fragment } from "react";
 import Section from "../components/section";
 import Feedback from "../components/feedback";
-import building from "../assets/home_web.jpg";
+import buildingWeb from "../assets/home_web.jpg";
+import buildingMobile from "../assets/home_mobile.jpg";
 import empty from "../assets/Empty-amico.png";
 import CardBeritaLoading from "./component/CardBeritaLoading";
 import Link from "next/link";
 import parse from "html-react-parser";
 import { getDown, getApi, download } from "../api/restApi";
 import { Dialog, Transition } from "@headlessui/react";
+import {BrowserView, MobileView} from 'react-device-detect';
 
 import Galeri from "./component/Galeri";
 import Router, { useRouter } from "next/router";
@@ -79,14 +81,24 @@ export default function Dashboard() {
     <>
       <div className="overflow-x-hidden">
         <Navbar />
-        <div
-          className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
-          style={{ backgroundImage: `url(${building.src})` }}
-        >
-          <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
-          </div>
-        </div>
-
+          <BrowserView>
+            <div
+              className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
+              style={{ backgroundImage: `url(${buildingWeb.src})` }}
+            >
+              <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
+              </div>
+            </div>
+          </BrowserView>
+          <MobileView>
+            <div
+              className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
+              style={{ backgroundImage: `url(${buildingMobile.src})` }}
+            >
+              <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
+              </div>
+            </div>
+          </MobileView>
         {token ? (
           <button
             onClick={() => {
