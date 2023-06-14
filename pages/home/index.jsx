@@ -86,13 +86,6 @@ export default function Dashboard() {
                 style={{ backgroundImage: `url(${buildingWeb.src})` }}
               >
                 <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
-                  <h1 className="xl:text-4xl lg:text-4xl md:text-2xl text-3xl font-bold">
-                    Banper Infrastruktur Ekraf
-                  </h1>
-                  <p className="mt-7 mb-3">
-                    Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan
-                    Sarana Ruang Kreatif
-                  </p>
                 </div>
               </div>
             </MediaQuery>
@@ -102,13 +95,6 @@ export default function Dashboard() {
                 style={{ backgroundImage: `url(${buildingMobile.src})` }}
               >
                 <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
-                  <h1 className="xl:text-4xl lg:text-4xl md:text-2xl text-3xl font-bold">
-                    Banper Infrastruktur Ekraf
-                  </h1>
-                  <p className="mt-7 mb-3">
-                    Fasilitasi Revitalisasi Infrastruktur Fisik Ruang Kreatif dan
-                    Sarana Ruang Kreatif
-                  </p>
                 </div>
               </div>
             </MediaQuery>
