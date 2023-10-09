@@ -95,7 +95,7 @@ function Foto({ data, foto }) {
   return (
     <>
       <div
-        style={{ backgroundImage: `url(${data.images[0].images})` }}
+        style={{ backgroundImage: `url(${data?.images[0]?.images})` }}
         className={`${
           foto === 0 && "col-span-2"
         } bg-gray-300 xl:h-80 h-72 lg:w-full bg-cover bg-center`}
