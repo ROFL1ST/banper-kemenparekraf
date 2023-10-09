@@ -21,7 +21,6 @@ export default function Berita() {
       <Navbar  />
 
       <div className="pt-24 pb-16">
-        <Foto />
         <Video />
       </div>
       <Footer />
