@@ -160,7 +160,7 @@ function FotoCard({ data }) {
         }}
         className="lg:h-96 2xl:min-h-[30rem]  h-96 rounded-2xl w-full bg-cover bg-center shadow-2xl"
         style={{
-          backgroundImage: `url(${data.images[0].images})`,
+          backgroundImage: `url(${data?.images[0]?.images})`,
         }}
       >
         <div className="w-full h-full bg-black bg-opacity-25 px-5 py-5 rounded-2xl flex flex-col justify-end">
