@@ -180,6 +180,7 @@ export default function Dashboard() {
           )}
 
           <Section text={"Galeri"} />
+          <Galeri />
         </div>
         {/* faq */}
         <div
