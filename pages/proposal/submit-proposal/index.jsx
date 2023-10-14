@@ -52,9 +52,6 @@ export default function Add() {
               msg: "",
             }));
           }, 3000);
-          setTimeout(() => {
-            setOpen(true);
-          }, 100);
         } else {
           Router.push("/proposal");
         }
