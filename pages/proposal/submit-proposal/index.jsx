@@ -4,6 +4,7 @@ import Background from "../../components/background";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Section from "../../components/section";
+import Snackbar from "@mui/material/Snackbar";
 import { useForm } from "react-hook-form";
 import Router, { useRouter } from "next/router";
 
@@ -13,6 +14,7 @@ export default function Add() {
   const [loading, setLoading] = React.useState(false);
   const [token, setToken] = React.useState("");
   const [error, setError] = React.useState({ status: false, msg: "" });
+  const [open, setOpen] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -22,7 +24,13 @@ export default function Add() {
       jenis_bantuan: 1,
     },
   });
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
 
+    setOpen(false);
+  };
   const onSubmit = async (values) => {
     setLoading(true);
     try {
@@ -41,6 +49,9 @@ export default function Add() {
               msg: "",
             }));
           }, 3000);
+          setTimeout(() => {
+            setOpen(true);
+          }, 100);
         } else {
           Router.push("/proposal");
         }
@@ -159,6 +170,15 @@ export default function Add() {
         </div>
       </div>
       <Footer />
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          sx={{ width: "100%", fontSize: "larger" }}
+        >
+          {error.msg}
+        </Alert>
+      </Snackbar>
     </>
   );
 }
