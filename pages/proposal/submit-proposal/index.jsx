@@ -5,11 +5,14 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import Section from "../../components/section";
 import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import { useForm } from "react-hook-form";
 import Router, { useRouter } from "next/router";
 
 import { getApi, getPropose, PostFeed } from "../../api/restApi";
-
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 export default function Add() {
   const [loading, setLoading] = React.useState(false);
   const [token, setToken] = React.useState("");
