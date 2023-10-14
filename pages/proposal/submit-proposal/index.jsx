@@ -40,7 +40,7 @@ export default function Add() {
       await PostFeed("proposal", token, values, "post").then((result) => {
         
         if (result.data.message != "Success") {
-          setError((s) => ({
+          /*setError((s) => ({
             ...s,
             status: true,
             msg: result.data.display_message,
@@ -51,7 +51,15 @@ export default function Add() {
               status: false,
               msg: "",
             }));
-          }, 3000);
+          }, 3000);*/
+          setTimeout(() => {
+            setError((s) => ({
+              ...s,
+              status: false,
+              msg: result.data.display_message,
+            }));
+            setOpen(true);
+          }, 100);
         } else {
           Router.push("/proposal");
         }
