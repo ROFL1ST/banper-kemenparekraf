@@ -90,7 +90,7 @@ export default function Dashboard() {
             <MediaQuery maxDeviceWidth={1224}>
               <div
                 className="xl:pt-48 lg:pt-48 md:pt-32 pt-32 w-screen h-[90vh] bg-cover bg-center text-white xl:px-20 lg:px-20 md:px-16 sm:px-14 px-12 capitalize rounded-b-2xl"
-                style={{ backgroundImage: `url('https://banper.kemenparekraf.go.id/api/master/statis?id=2)` }}
+                style={{ backgroundImage: `url('https://banper.kemenparekraf.go.id/api/master/statis?id=2')` }}
               >
                 <div className="xl:w-1/2 lg:w-1/2 md:w-3/4">
                 </div>
