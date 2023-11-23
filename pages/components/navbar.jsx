@@ -11,10 +11,8 @@ import { getDown } from "../api/restApi";
 
 export default function Navbar({ click }) {
   const [open, setOpen] = React.useState(false);
-  const juknisUrl =
-    "https://banper.kemenparekraf.go.id/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
-  const templateUrl =
-    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2023.zip";
+  const juknisUrl   = "https://banper.kemenparekraf.go.id/api/master/statis?id=3";
+  const templateUrl = "https://banper.kemenparekraf.go.id/api/master/statis?id=4";
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   const [menu1, setMenu1] = React.useState(false);
   const [menu2, setMenu2] = React.useState(false);
