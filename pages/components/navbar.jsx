@@ -827,9 +827,9 @@ function Downloader({ setOpen, setCheck }) {
   const { pathname } = useRouter();
 
   const juknisUrl =
-    "https://banper.kemenparekraf.go.id/dashboard/assets/juknisPetunjukTeknisBantuanPemerintahTahun2022.pdf";
+    "https://banper.kemenparekraf.go.id/api/master/statis?id=3";
   const templateUrl =
-    "https://banper.kemenparekraf.go.id/dashboard/assets/Dokumen_Banper_TA_2023.zip";
+    "https://banper.kemenparekraf.go.id/api/master/statis?id=4";
 
   return (
     <a
