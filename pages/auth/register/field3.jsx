@@ -102,19 +102,11 @@ export default function Field3() {
                     console.log("selectedUtama");
                     setError(true);
                   } else {
-                    if (selectedPendukung[0] != "" && selectedPendukungKlasifikasi[0] == "") {
-                      console.log("selectedPendukung");
-                      setError(true);
-                    } else if (selectedPendukung[1] != "" && selectedPendukungKlasifikasi[1] == "") {
-                      console.log("selectedPendukungKlasifikasi");
-                      setError(true);
-                    } else {
-                      handleSubmit({
-                        kode: kode,
-                        Subsektor: selectedUtama,
-                        subsektorId: selectedKlasifikasi,
-                      });
-                    }
+                    handleSubmit({
+                      kode: kode,
+                      Subsektor: selectedUtama,
+                      subsektorId: selectedKlasifikasi,
+                    });
                   }
                 }}
                 type={"submit"}
