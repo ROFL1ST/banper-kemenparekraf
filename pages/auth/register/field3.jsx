@@ -106,6 +106,8 @@ export default function Field3() {
                       kode: kode,
                       Subsektor: selectedUtama,
                       subsektorId: selectedKlasifikasi,
+                      SubsektorPendukung: "",
+                      SubsektorPendukungid: ""
                     });
                   }
                 }}
