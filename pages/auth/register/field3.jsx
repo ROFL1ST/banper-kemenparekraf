@@ -93,16 +93,6 @@ export default function Field3() {
               setSelectedUtama={setSelectedUtama}
               setSelectedKlasifikasi={setSelectedKlasifikasi}
             />
-            {/* Utama */}
-            <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-              <SubPen
-                selectedPendukung={selectedPendukung}
-                setSelectedPendukung={setSelectedPendukung}
-                setSelectedPendukungKlasifikasi={
-                  setSelectedPendukungKlasifikasi
-                }
-              />
-            </div>
             <div className="  border-10 border-b-orange-600 ">
               <button
                 disabled={!loading ? false : true}
@@ -111,43 +101,15 @@ export default function Field3() {
                   if (selectedUtama == "" || selectedKlasifikasi == undefined) {
                     setError(true);
                   } else {
-                    if (
-                      selectedPendukung[0] != "" &&
-                      selectedPendukungKlasifikasi[0] == ""
-                    ) {
-                      // console.log("Tidak Terisi Dengan benar");
+                    if (selectedPendukung[0] != "" && selectedPendukungKlasifikasi[0] == "") {
                       setError(true);
-                    } else if (
-                      selectedPendukung[1] != "" &&
-                      selectedPendukungKlasifikasi[1] == ""
-                    ) {
-                      // console.log("Tidak Terisi Dengan benar 2");
-                      setError(true);
-                    } else if (
-                      selectedPendukung[2] != "" &&
-                      selectedPendukungKlasifikasi[2] == ""
-                    ) {
-                      // console.log("Tidak terisi dengan benar 3");
+                    } else if (selectedPendukung[1] != "" && selectedPendukungKlasifikasi[1] == "") {
                       setError(true);
                     } else {
-                      // console.log(
-                      //   "Terisi dengan benar atau tidak terisi dengan benar"
-                      // );
                       handleSubmit({
                         kode: kode,
                         Subsektor: selectedUtama,
                         subsektorId: selectedKlasifikasi,
-                        SubsektorPendukung: selectedPendukung
-                          .filter(
-                            (selectedPendukung) => selectedPendukung != ""
-                          )
-                          .join(","),
-                        SubsektorPendukungid: selectedPendukungKlasifikasi
-                          .filter(
-                            (selectedPendukungKlasifikasi) =>
-                              selectedPendukungKlasifikasi != ""
-                          )
-                          .join(","),
                       });
                     }
                   }
@@ -274,7 +236,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
         {/* sub2 */}
         <div className="relative flex-grow w-full">
           <label className="leading-7 text-sm text-gray-600">
-            *Subsektor Utama
+            *Fokus
           </label>
           <select
             onChange={handleSelected}
@@ -287,7 +249,7 @@ focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           >
             <option defaultValue={true} value={undefined}>
               {subsub.length == 0 || selectedSubsector == ""
-                ? "Mohon Pilih Subsektor Awal"
+                ? "Mohon Pilih Subsektor Fokus"
                 : "Pilih Sub"}
             </option>
             {!load ? (
