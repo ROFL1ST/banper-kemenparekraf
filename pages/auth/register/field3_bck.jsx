@@ -93,26 +93,61 @@ export default function Field3() {
               setSelectedUtama={setSelectedUtama}
               setSelectedKlasifikasi={setSelectedKlasifikasi}
             />
+            {/* Utama */}
+            <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+              <SubPen
+                selectedPendukung={selectedPendukung}
+                setSelectedPendukung={setSelectedPendukung}
+                setSelectedPendukungKlasifikasi={
+                  setSelectedPendukungKlasifikasi
+                }
+              />
+            </div>
             <div className="  border-10 border-b-orange-600 ">
               <button
                 disabled={!loading ? false : true}
                 onClick={(e) => {
                   e.preventDefault();
                   if (selectedUtama == "" || selectedKlasifikasi == undefined) {
-                    console.log("selectedUtama");
                     setError(true);
                   } else {
-                    if (selectedPendukung[0] != "" && selectedPendukungKlasifikasi[0] == "") {
-                      console.log("selectedPendukung");
+                    if (
+                      selectedPendukung[0] != "" &&
+                      selectedPendukungKlasifikasi[0] == ""
+                    ) {
+                      // console.log("Tidak Terisi Dengan benar");
                       setError(true);
-                    } else if (selectedPendukung[1] != "" && selectedPendukungKlasifikasi[1] == "") {
-                      console.log("selectedPendukungKlasifikasi");
+                    } else if (
+                      selectedPendukung[1] != "" &&
+                      selectedPendukungKlasifikasi[1] == ""
+                    ) {
+                      // console.log("Tidak Terisi Dengan benar 2");
+                      setError(true);
+                    } else if (
+                      selectedPendukung[2] != "" &&
+                      selectedPendukungKlasifikasi[2] == ""
+                    ) {
+                      // console.log("Tidak terisi dengan benar 3");
                       setError(true);
                     } else {
+                      // console.log(
+                      //   "Terisi dengan benar atau tidak terisi dengan benar"
+                      // );
                       handleSubmit({
                         kode: kode,
                         Subsektor: selectedUtama,
                         subsektorId: selectedKlasifikasi,
+                        SubsektorPendukung: selectedPendukung
+                          .filter(
+                            (selectedPendukung) => selectedPendukung != ""
+                          )
+                          .join(","),
+                        SubsektorPendukungid: selectedPendukungKlasifikasi
+                          .filter(
+                            (selectedPendukungKlasifikasi) =>
+                              selectedPendukungKlasifikasi != ""
+                          )
+                          .join(","),
                       });
                     }
                   }
