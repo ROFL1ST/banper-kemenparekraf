@@ -22,23 +22,14 @@ export default function SubmitDoc() {
     { id: 1, nama: "Dokument 1: " },
     { id: 2, nama: "Dokument 2: " },
     { id: 3, nama: "Dokument 3: " },
-    {
-      id: 4,
-      nama: "Dokument 4: ",
-    },
-    {
-      id: 5,
-      nama: "Dokument 5: ",
-    },
-    {
-      id: 6,
-      nama: "Dokument 6: ",
-    },
-    { id: 7, nama: "Dokument 7: " },
-    {
-      id: 8,
-      nama: "Dokument 8: ",
-    },
+    {id: 4, nama: "Dokument 4: "},
+    {id: 5, nama: "Dokument 5: "},
+    {id: 6, nama: "Dokument 6: "},
+    {id: 7, nama: "Dokument 7: "},
+    {id: 8, nama: "Dokument 8: "},
+    {id: 9, nama: "Dokument 9: "},
+    {id: 10, nama: "Dokument 11: "},
+    {id: 11, nama: "Dokument 11: "},
   ];
   const router = useRouter();
   const { id } = router.query;
@@ -427,6 +418,7 @@ function CardDocument({ data, teks, num, detail, setSucess, setMistake }) {
   var router = useRouter();
   console.log("data", data);
   console.log("teks", teks);
+  console.log("num", num);
   const { id } = router.query;
   const [file, setFile] = React.useState("");
   const [loading, setLoading] = React.useState(false);
