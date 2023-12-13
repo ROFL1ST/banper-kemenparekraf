@@ -151,6 +151,7 @@ function login(path_url, param) {
     var config = {
       method: "post",
       url: BASE_URL + path_url,
+      timeout: 120000, // Set a timeout of 5 seconds
       headers: {},
       data: param,
     };
