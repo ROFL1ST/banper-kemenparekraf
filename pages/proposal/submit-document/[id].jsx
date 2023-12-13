@@ -425,7 +425,8 @@ function CardPengusul() {
 
 function CardDocument({ data, teks, num, detail, setSucess, setMistake }) {
   var router = useRouter();
-
+  console.log("data", data);
+  console.log("teks", teks);
   const { id } = router.query;
   const [file, setFile] = React.useState("");
   const [loading, setLoading] = React.useState(false);
