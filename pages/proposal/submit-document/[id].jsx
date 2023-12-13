@@ -30,6 +30,15 @@ export default function SubmitDoc() {
     {id: 9, nama: "Dokument 9: "},
     {id: 10, nama: "Dokument 11: "},
     {id: 11, nama: "Dokument 11: "},
+    {id: 12, nama: "Dokument 12: "},
+    {id: 13, nama: "Dokument 13: "},
+    {id: 14, nama: "Dokument 14: "},
+    {id: 15, nama: "Dokument 15: "},
+    {id: 16, nama: "Dokument 16: "},
+    {id: 17, nama: "Dokument 17: "},
+    {id: 18, nama: "Dokument 18: "},
+    {id: 19, nama: "Dokument 19: "},
+    {id: 20, nama: "Dokument 20: "},
   ];
   const router = useRouter();
   const { id } = router.query;
