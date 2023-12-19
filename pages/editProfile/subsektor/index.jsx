@@ -115,17 +115,6 @@ export default function Subsektor() {
               setSelectedKlasifikasi={setSelectedKlasifikasi}
             />
             {/* Utama */}
-
-            <div className="flex lg:w-2/3 w-full sm:flex-row  flex-col mx-auto px-8 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-              <SubPen
-                selectedPendukung={selectedPendukung}
-                setSelectedPendukung={setSelectedPendukung}
-                setSelectedPendukungKlasifikasi={
-                  setSelectedPendukungKlasifikasi
-                }
-                setWarn={setWarn}
-              />
-            </div>
             <div className="  border-10 border-b-orange-600 ">
               <button
                 onClick={(e) => {
@@ -133,56 +122,24 @@ export default function Subsektor() {
                   if (selectedUtama == "" || selectedKlasifikasi == undefined) {
                     setError(true);
                   } else {
-                    if (
-                      selectedPendukung[0] != "" &&
-                      selectedPendukungKlasifikasi[0] == ""
-                    ) {
-                      // console.log("Tidak Terisi Dengan benar");
-                      setError(true);
-                    } else if (
-                      selectedPendukung[1] != "" &&
-                      selectedPendukungKlasifikasi[1] == ""
-                    ) {
-                      // console.log("Tidak Terisi Dengan benar 2");
-                      setError(true);
-                    } else if (
-                      selectedPendukung[2] != "" &&
-                      selectedPendukungKlasifikasi[2] == ""
-                    ) {
-                      // console.log("Tidak terisi dengan benar 3");
-                      setError(true);
-                    } else {
-                      // console.log(
-                      //   "Terisi dengan benar atau tidak terisi dengan benar"
-                      // );
-                      handleSubmit({
-                        NamaKomunitas: user[0].NamaKomunitas,
-                        Kategori: user[0].Kategori,
-                        AlamatAkta: user[0].AlamatAkta,
-                        Alamat: user[0].Alamat,
-                        Email: user[0].Email,
-                        PhoneNumber: user[0].PhoneNumber,
-                        Nama: user[0].Nama,
-                        password: "",
-                        EmailPJ: user[0].EmailPJ,
-                        PhonePJ: user[0].PhonePJ,
-                        KotaID: user[0].KotaID,
-                        isPenerima: user[0].isPenerima,
-                        Subsektor: selectedUtama,
-                        subsektorId: selectedKlasifikasi,
-                        SubsektorPendukung: selectedPendukung
-                          .filter(
-                            (selectedPendukung) => selectedPendukung != ""
-                          )
-                          .join(","),
-                        SubsektorPendukungid: selectedPendukungKlasifikasi
-                          .filter(
-                            (selectedPendukungKlasifikasi) =>
-                              selectedPendukungKlasifikasi != ""
-                          )
-                          .join(","),
-                      });
-                    }
+                    handleSubmit({
+                      NamaKomunitas: user[0].NamaKomunitas,
+                      Kategori: user[0].Kategori,
+                      AlamatAkta: user[0].AlamatAkta,
+                      Alamat: user[0].Alamat,
+                      Email: user[0].Email,
+                      PhoneNumber: user[0].PhoneNumber,
+                      Nama: user[0].Nama,
+                      password: "",
+                      EmailPJ: user[0].EmailPJ,
+                      PhonePJ: user[0].PhonePJ,
+                      KotaID: user[0].KotaID,
+                      isPenerima: user[0].isPenerima,
+                      Subsektor: selectedUtama,
+                      subsektorId: selectedKlasifikasi,
+                      SubsektorPendukung: "",
+                      SubsektorPendukungid: "",
+                    });
                   }
                 }}
                 type={"submit"}
