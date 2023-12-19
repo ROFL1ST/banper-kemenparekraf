@@ -28,7 +28,7 @@ export default function SubmitDoc() {
     {id: 7, nama: "Dokument 7: "},
     {id: 8, nama: "Dokument 8: "},
     {id: 9, nama: "Dokument 9: "},
-    {id: 10, nama: "Dokument 11: "},
+    {id: 10, nama: "Dokument 10: "},
     {id: 11, nama: "Dokument 11: "},
     {id: 12, nama: "Dokument 12: "},
     {id: 13, nama: "Dokument 13: "},
