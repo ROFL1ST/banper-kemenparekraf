@@ -54,8 +54,6 @@ export default function Proposal() {
         setLoad(false);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
-            console.log("get list Failed");
-            console.log("get list Failed", result.data.data)
             setList(result.data.data);
             return;
           } else {
@@ -65,8 +63,6 @@ export default function Proposal() {
             Router.push("/home");
           }
         } else {
-          console.log("get list dapet");
-          console.log("get list dapet", result.data.data);
           setList(result.data.data);
         }
       });
@@ -367,32 +363,17 @@ function ListPropose(data) {
   // Delete
   const [show, setShow] = React.useState(false);
   async function deletePropose(id, auth) {
-    try {
-      var del = await getDelete(`proposal/${id}`, auth).then( result => result);
-      if(del.data.message === 'Success'){
-        var proposal = await getPropose("proposal?offset=0&limit=10", auth).then(result => result);
-        if (proposal.data.message == "Failed") {
-          if (proposal.data.display_message == "Proposal tidak di temukan") {
-            console.log("get list Failed");
-            console.log("get list Failed", proposal.data.data)
-            setList(proposal.data.data);
-            return;
-          } else {
-            setLog(true);
-            localStorage.removeItem("token");
-            sessionStorage.removeItem("token");
-            Router.push("/home");
-          }
-        }else{
-          console.log("get list dapet");
-          console.log("get list dapet", proposal.data.data);
-          setList(proposal.data.data);
-        }
+    return new Promise(async (resolve, reject) => {
+      try {
+        await getDelete(`proposal/${id}`, auth).then((result) => {
+          setShow(true);
+          resolve(result);
+        });
+      } catch (error) {
+        console.log(error);
+        reject(error);
       }
-      setShow(true);
-    } catch (error) {
-      console.log(error);
-    }
+    });
   }
 
   // detail
@@ -589,13 +570,13 @@ function DeletePop({
                         Decline
                       </button>
                       <button
-                        onClick={(async) => {
+                        onClick={ async () => {
                           if (localStorage.getItem("token") != null) {
-                            deletePropose(id, localStorage.getItem("token"));
-                            //getList(localStorage.getItem("token"));
+                            await deletePropose(id, localStorage.getItem("token"));
+                            getList(localStorage.getItem("token"));
                           } else if (sessionStorage.getItem("token") != null) {
-                            deletePropose(id, sessionStorage.getItem("token"));
-                            //getList(sessionStorage.getItem("token"));
+                            await deletePropose(id, sessionStorage.getItem("token"));
+                            getList(sessionStorage.getItem("token"));
                           } else {
                             alert("You're not real");
                           }
