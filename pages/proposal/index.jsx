@@ -369,6 +369,7 @@ function ListPropose(data) {
   async function deletePropose(id, auth) {
     try {
       await getDelete(`proposal/${id}`, auth).then((result) => {
+        console.log("delete")
         setShow(true);
       });
     } catch (error) {
@@ -570,7 +571,7 @@ function DeletePop({
                         Decline
                       </button>
                       <button
-                        onClick={() => {
+                        onClick={(async) => {
                           if (localStorage.getItem("token") != null) {
                             deletePropose(id, localStorage.getItem("token"));
                             getList(localStorage.getItem("token"));
