@@ -54,6 +54,8 @@ export default function Proposal() {
         setLoad(false);
         if (result.data.message == "Failed") {
           if (result.data.display_message == "Proposal tidak di temukan") {
+            console.log("get list Failed");
+            console.log("get list Failed", result.data.data)
             setList(result.data.data);
             return;
           } else {
@@ -63,6 +65,8 @@ export default function Proposal() {
             Router.push("/home");
           }
         } else {
+          console.log("get list dapet");
+          console.log("get list dapet", result.data.data);
           setList(result.data.data);
         }
       });
