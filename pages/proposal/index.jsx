@@ -368,10 +368,28 @@ function ListPropose(data) {
   const [show, setShow] = React.useState(false);
   async function deletePropose(id, auth) {
     try {
-      await getDelete(`proposal/${id}`, auth).then((result) => {
-        console.log("delete")
-        setShow(true);
-      });
+      var del = await getDelete(`proposal/${id}`, auth).then( result => result);
+      if(del.data.message === 'Success'){
+        var proposal = await getPropose("proposal?offset=0&limit=10", auth).then(result => result);
+        if (proposal.data.message == "Failed") {
+          if (result.data.display_message == "Proposal tidak di temukan") {
+            console.log("get list Failed");
+            console.log("get list Failed", result.data.data)
+            setList(result.data.data);
+            return;
+          } else {
+            setLog(true);
+            localStorage.removeItem("token");
+            sessionStorage.removeItem("token");
+            Router.push("/home");
+          }
+        }else{
+          console.log("get list dapet");
+          console.log("get list dapet", result.data.data);
+          setList(result.data.data);
+        }
+      }
+      setShow(true);
     } catch (error) {
       console.log(error);
     }
@@ -574,10 +592,10 @@ function DeletePop({
                         onClick={(async) => {
                           if (localStorage.getItem("token") != null) {
                             deletePropose(id, localStorage.getItem("token"));
-                            getList(localStorage.getItem("token"));
+                            //getList(localStorage.getItem("token"));
                           } else if (sessionStorage.getItem("token") != null) {
                             deletePropose(id, sessionStorage.getItem("token"));
-                            getList(sessionStorage.getItem("token"));
+                            //getList(sessionStorage.getItem("token"));
                           } else {
                             alert("You're not real");
                           }
