@@ -486,17 +486,16 @@ function CardDocument({ data, teks, num, detail, setSucess, setMistake }) {
 
   const handleSubmit = async (token, values) => {
     const formData = new FormData();
-    setLoading(true);
 
     formData.append("dokumen", values);
     try {
       await postDoc("proposal/upload", token, values, "post").then((result) => {
-        setLoading(false);
-
         if (result.data.message == "Failed") {
           alert(result.data.display_message);
+          setLoading(false);
           setMistake(true);
         } else {
+          setLoading(true);
           setSucess(true);
           if (router.isReady) {
             if (localStorage.getItem("token") != null) {
