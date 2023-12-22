@@ -372,10 +372,10 @@ function ListPropose(data) {
       if(del.data.message === 'Success'){
         var proposal = await getPropose("proposal?offset=0&limit=10", auth).then(result => result);
         if (proposal.data.message == "Failed") {
-          if (result.data.display_message == "Proposal tidak di temukan") {
+          if (proposal.data.display_message == "Proposal tidak di temukan") {
             console.log("get list Failed");
-            console.log("get list Failed", result.data.data)
-            setList(result.data.data);
+            console.log("get list Failed", proposal.data.data)
+            setList(proposal.data.data);
             return;
           } else {
             setLog(true);
@@ -385,8 +385,8 @@ function ListPropose(data) {
           }
         }else{
           console.log("get list dapet");
-          console.log("get list dapet", result.data.data);
-          setList(result.data.data);
+          console.log("get list dapet", proposal.data.data);
+          setList(proposal.data.data);
         }
       }
       setShow(true);
