@@ -365,6 +365,7 @@ function ListPropose(data) {
   async function deletePropose(id, auth) {
     try {
       await getDelete(`proposal/${id}`, auth).then((result) => {
+        getList(sessionStorage.getItem("token"));
         setShow(true);
       });
     } catch (error) {
@@ -569,10 +570,10 @@ function DeletePop({
                         onClick={() => {
                           if (localStorage.getItem("token") != null) {
                             deletePropose(id, localStorage.getItem("token"));
-                            getList(localStorage.getItem("token"));
+                            //getList(localStorage.getItem("token"));
                           } else if (sessionStorage.getItem("token") != null) {
                             deletePropose(id, sessionStorage.getItem("token"));
-                            getList(sessionStorage.getItem("token"));
+                            //getList(sessionStorage.getItem("token"));
                           } else {
                             alert("You're not real");
                           }
