@@ -493,7 +493,7 @@ function ListPropose(data) {
       </TableCell>
       <TableCell>
         <div className="flex space-x-2">
-          <Link href={`/proposal/submit-document/${data.data.Id}`}  disabled={periodes == true ? true : false}>
+          <Link href={periodes ? `/proposal/submit-document/${data.data.Id}` : ''} >
             <div className="cursor-pointer bg-blue-200 flex justify-center py-2 rounded-md px-5">
               <p className="text-blue-900">Submit Dokumen</p>
             </div>
