@@ -493,10 +493,10 @@ function ListPropose(data) {
       </TableCell>
       <TableCell>
         <div className="flex space-x-2">
-          <Link href={`/proposal/submit-document/${data.data.Id}`}  style={{pointerEvents: (periodes) ? "none" : "auto",}}>
-            <div className="cursor-pointer bg-blue-200 flex justify-center py-2 rounded-md px-5">
-              <p className="text-blue-900">Submit Dokumen</p>
-            </div>
+          <Link href={periodes ? `/proposal/submit-document/${data.data.Id}` : {}}>
+              <a onClick={(event) => !periodes ? event.preventDefault() : null}>
+              Submit Dokumen
+              </a>
           </Link>
           <button
             onClick={() => {
