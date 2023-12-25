@@ -384,7 +384,21 @@ function ListPropose(data) {
   const [have, setHave] = React.useState(0);
   const [all, setAll] = React.useState(0);
   const [loading, setLoading] = React.useState(true);
-
+  const [periodes, setPeriodes] = React.useState(false);
+  const getPeriodes = async () => {
+    try {
+      await getApi("periodes").then((result) => {
+        console.log(result.data.data[0]);
+        if (result.data.message == 'Success') {
+          setPeriodes(true);
+        } else {
+          setPeriodes(false);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   async function Status(token) {
     try {
       await getPropose(
@@ -413,6 +427,7 @@ function ListPropose(data) {
     } else {
       Router.push("/home");
     }
+    getPeriodes();
   }, [data]);
 
   useEffect(() => {
@@ -478,7 +493,7 @@ function ListPropose(data) {
       </TableCell>
       <TableCell>
         <div className="flex space-x-2">
-          <Link href={`/proposal/submit-document/${data.data.Id}`}>
+          <Link href={`/proposal/submit-document/${data.data.Id}`} disabled={periodes == true ? false : true}>
             <div className="cursor-pointer bg-blue-200 flex justify-center py-2 rounded-md px-5">
               <p className="text-blue-900">Submit Dokumen</p>
             </div>
