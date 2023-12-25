@@ -388,7 +388,7 @@ function ListPropose(data) {
   const getPeriodes = async () => {
     try {
       await getApi("periodes").then((result) => {
-        console.log('periodes', result.data.data[0]);
+        console.log('periodes', result.data);
         if (result.data.message == 'Success') {
           setPeriodes(true);
         } else {
