@@ -388,7 +388,7 @@ function ListPropose(data) {
   const getPeriodes = async () => {
     try {
       await getApi("periodes").then((result) => {
-        console.log(result.data.data[0]);
+        console.log('periodes', result.data.data[0]);
         if (result.data.message == 'Success') {
           setPeriodes(true);
         } else {
@@ -427,7 +427,6 @@ function ListPropose(data) {
     } else {
       Router.push("/home");
     }
-    getPeriodes();
   }, [data]);
 
   useEffect(() => {
@@ -438,6 +437,7 @@ function ListPropose(data) {
     setPercent((have.length / all) * 100);
     setHave(have.length);
     setAll(all);
+    getPeriodes();
   }, [doc]);
   return (
     <>
