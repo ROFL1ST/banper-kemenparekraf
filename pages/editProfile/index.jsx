@@ -331,10 +331,8 @@ export default function EditProfile() {
                         </select>
                       </div>
                     </div>
-                    <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
-                      <div className="form-select form-select-sm appearance-none  w-full px-3
-    py-3  text-sm  font-semibold text-gray-700 bg-white bg-clip-padding bg-no-repeat justify-between
-    border border-solid border-gray-300 rounded  transition ease-in-out   m-0 flex gap-x-5 items-center cursor-pointer hover:text-[#4371f1]">
+                    <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                      <div className="relative flex-grow w-full">
                         <label className="leading-7 text-sm text-gray-600">
                           *Nama Komunitas/ Pemerintah Daerah/ Lembaga Adat <br />
                           (sesuai Akta/Legalitas)
@@ -347,6 +345,8 @@ export default function EditProfile() {
                           placeholder="Masukan Nama Komunitas/Pemerintah Daerah/Lembaga"
                         />
                       </div>
+                    </div>
+                    <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                       <div
                         onClick={() => {
                           Router.push("/editProfile/subsektor");
@@ -371,8 +371,6 @@ export default function EditProfile() {
                           />
                         </svg>
                       </div>
-                    </div>
-                    <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                       <div
                         onClick={() => {
                           Router.push("/editProfile/password");
@@ -397,7 +395,6 @@ export default function EditProfile() {
                           />
                         </svg>
                       </div>
-                      <div>&nbsp;</div>
                     </div>
                     <div className="sm:px-0 px-5">
                       <button
