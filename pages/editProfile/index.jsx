@@ -345,6 +345,7 @@ export default function EditProfile() {
                           placeholder="Masukan Nama Komunitas/Pemerintah Daerah/Lembaga"
                         />
                       </div>
+                      <div className="relative flex-grow w-full">&nbsp;</div>
                     </div>
                     <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                       <div
