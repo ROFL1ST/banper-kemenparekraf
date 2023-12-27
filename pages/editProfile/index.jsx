@@ -163,15 +163,14 @@ export default function EditProfile() {
                   <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end pt-10">
                     <div className="relative flex-grow w-full">
                       <label className="leading-7 text-sm text-gray-600">
-                        *Nama Komunitas/ Pemerintah Daerah/ Lembaga Adat <br />
-                        (sesuai Akta/Legalitas)
+                        Nama Pengusul
                       </label>
                       <input
-                        {...register("NamaKomunitas", {
-                          value: i.NamaKomunitas,
+                        {...register("Nama", {
+                          value: i.Nama,
                         })}
                         className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
-                        placeholder="Masukan Nama Komunitas/Pemerintah Daerah/Lembaga"
+                        placeholder="Masukan Nama Pengusul"
                       />
                     </div>
                     <div className="relative flex-grow w-full">
@@ -332,8 +331,20 @@ export default function EditProfile() {
                         </select>
                       </div>
                     </div>
-
-                    <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                    <div className="flex lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
+                      <div className="relative flex-grow w-full">
+                        <label className="leading-7 text-sm text-gray-600">
+                          *Nama Komunitas/ Pemerintah Daerah/ Lembaga Adat <br />
+                          (sesuai Akta/Legalitas)
+                        </label>
+                        <input
+                          {...register("NamaKomunitas", {
+                            value: i.NamaKomunitas,
+                          })}
+                          className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 "
+                          placeholder="Masukan Nama Komunitas/Pemerintah Daerah/Lembaga"
+                        />
+                      </div>
                       <div
                         onClick={() => {
                           Router.push("/editProfile/subsektor");
@@ -358,6 +369,8 @@ export default function EditProfile() {
                           />
                         </svg>
                       </div>
+                    </div>
+                    <div className="flex pb-5 lg:w-2/3 w-full sm:flex-row flex-col mx-auto px-5 sm:space-x-4 sm:space-y-0 space-y-4 sm:px-0 items-end">
                       <div
                         onClick={() => {
                           Router.push("/editProfile/password");
