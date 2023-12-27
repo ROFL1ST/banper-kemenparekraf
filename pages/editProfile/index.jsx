@@ -349,7 +349,7 @@ export default function EditProfile() {
                         onClick={() => {
                           Router.push("/editProfile/subsektor");
                         }}
-                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5 hover:text-[#4371f1]"
+                        className="w-full bg-gray-100 bg-opacity-50 rounded border border-gray-300  focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 mb-5"
                       >
                         Edit Subsektor{" "}
                         <svg
